@@ -2,7 +2,7 @@ language: csharp
 solution: foosballv2s.sln
 install:
   - nuget restore foosballv2s.sln
-  - nuget install NUnit.Runners -Version 3.8.1 -OutputDirectory testrunner
+  - nuget install NUnit.Runners -Version 3.7.0 -OutputDirectory testrunner
 script:
   - xbuild /p:Configuration=Release foosballv2s.sln
-  - mono ./testrunner/NUnit.Runners.3.8.1/tools/nunit-console.exe ./foosballv2s.Tests/bin/Release/foosballv2s.Tests.dll
+  - mono ./testrunner/NUnit.Runners.3.7.0/tools/nunit-console.exe ./foosballv2s.Tests/bin/Release/foosballv2s.Tests.dll

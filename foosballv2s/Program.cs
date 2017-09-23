@@ -7,11 +7,12 @@ namespace foosballv2s
     {
         static void Main(string[] args)
         {
-            String videoName = "\\data\\video_samples\\20170914_121625.mp4";
+            String videoName = "\\data\\video_samples\\20170914_120510.mp4";
             try
             {
                 String projectRootDirectory = Directory.GetParent(Directory.GetCurrentDirectory())
-                    .Parent.Parent.FullName;
+                    .Parent.FullName;
+                //Console.WriteLine(projectRootDirectory + videoName);
                 IVideo videoFile = new VideoFile(projectRootDirectory + videoName);
                 MovementDetector detector = new MovementDetector(videoFile);
                 detector.DetectBall();

@@ -1,0 +1,14 @@
+c:\users\danielius\source\repos\foosballXamarin\foosballXamarin\bin\Debug\foosballXamarin.dll
+c:\users\danielius\source\repos\foosballXamarin\foosballXamarin\bin\Debug\foosballXamarin.pdb
+c:\users\danielius\source\repos\foosballXamarin\foosballXamarin\bin\Debug\foosballXamarin.foosballXamarin.apk
+c:\users\danielius\source\repos\foosballXamarin\foosballXamarin\bin\Debug\foosballXamarin.foosballXamarin-Signed.apk
+c:\users\danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\foosballXamarin.csproj.CoreCompileInputs.cache
+c:\users\danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\foosballXamarin.dll
+c:\users\danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\foosballXamarin.pdb
+c:\users\danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\bin\foosballXamarin.foosballXamarin.apk
+c:\users\danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\res\layout\main.xml
+c:\users\danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\res\values\strings.xml
+c:\users\danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\R.cs.flag
+c:\users\danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\uploadflags.txt
+c:\users\danielius\source\repos\foosballXamarin\foosballXamarin\bin\Debug\foosballXamarin.dll.mdb
+c:\users\danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\assets\foosballXamarin.dll.mdb

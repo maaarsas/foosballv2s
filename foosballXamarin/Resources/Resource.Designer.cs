@@ -44,11 +44,11 @@ namespace foosballXamarin
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f040000
-			public const int button1 = 2130968576;
-			
 			// aapt resource value: 0x7f040001
-			public const int textureView1 = 2130968577;
+			public const int surfaceView = 2130968577;
+			
+			// aapt resource value: 0x7f040000
+			public const int textureView = 2130968576;
 			
 			static Id()
 			{

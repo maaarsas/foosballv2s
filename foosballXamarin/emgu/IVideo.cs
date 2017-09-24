@@ -1,4 +1,6 @@
-﻿namespace foosballXamarin.emgu
+﻿using Emgu.CV;
+
+namespace foosballXamarin.emgu
 {
     interface IVideo
     {

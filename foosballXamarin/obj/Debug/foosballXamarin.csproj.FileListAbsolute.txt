@@ -42,3 +42,4 @@ C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\bin\Debug\System
 C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\bin\Debug\System.Runtime.Serialization.pdb
 C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\bin\Debug\System.IdentityModel.pdb
 C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\bin\Debug\System.Security.pdb
+C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\bin\Debug\System.XML.dll

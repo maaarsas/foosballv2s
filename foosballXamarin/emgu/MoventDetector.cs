@@ -1,5 +1,4 @@
-﻿using Android.Graphics;
-using Android.Util;
+﻿using Android.Util;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
@@ -30,6 +29,8 @@ namespace foosballXamarin
         private Mat frame;
         private Image<Hsv, Byte> hsvFrame;
         private Image<Gray, Byte> thresholded;
+        private Hsv minHsv;
+        private Hsv maxHsv;
         public void SetupBallDetector(byte[] frameInBytes, int frameHeight, int frameWidth)
         {
             // Currently the color is hardcoded here. Needs to be detected somewhere else
@@ -44,8 +45,8 @@ namespace foosballXamarin
             frame = frameImage.Mat;
             Size size = new Size(frame.Width, frame.Height); // the size of the frame
 
-            Hsv minHsv = new Hsv(t1min, t2min, t3min); // minimum color that passes
-            Hsv maxHsv = new Hsv(t1max, t2max, t3max); // maximum color that passes
+            minHsv = new Hsv(t1min, t2min, t3min); // minimum color that passes
+            maxHsv = new Hsv(t1max, t2max, t3max); // maximum color that passes
 
             hsvFrame = new Image<Hsv, byte>(new Image<Gray, Byte>[] {
                 new Image<Gray, Byte>(frame.Width, frame.Height),
@@ -59,7 +60,7 @@ namespace foosballXamarin
             //CvInvoke.NamedWindow("HSV", NamedWindowType.KeepRatio);
             //CvInvoke.NamedWindow("Thresholded", NamedWindowType.KeepRatio);
         }
-        public void DetectBall(byte[] frameInBytes, int frameHeight, int frameWidth)
+        public CircleF[] DetectBall(byte[] frameInBytes, int frameHeight, int frameWidth)
         { 
             //Application.Idle += new EventHandler(delegate (object sender, EventArgs e)
             {
@@ -76,7 +77,7 @@ namespace foosballXamarin
                 // Make some smoothing for better detection results
                 thresholded = thresholded.SmoothGaussian(5);
                 // Find circles in grayscale image and draw them on the frame
-                this.DetectCirclesInImage(thresholded, frame);
+                return this.DetectCirclesInImage(thresholded, frame);
 
                 //CvInvoke.Imshow("Camera", frame); // shows the proccessed frame with circles drawn on it
                 //CvInvoke.Imshow("HSV", hsvFrame);
@@ -119,27 +120,11 @@ namespace foosballXamarin
         /**
          * Using Hough transform to detect circles in a black-white image
          */
-        private void DetectCirclesInImage(Image<Gray, byte> image, Mat outputFrame)
+        private CircleF[] DetectCirclesInImage(Image<Gray, byte> image, Mat outputFrame)
         {
             //CircleF[] circles = CvInvoke.HoughCircles(image, HoughType.Gradient, 1, 
             //    1000, 10, 10, 15, 60);
-            CircleF[] circles = CvInvoke.HoughCircles(image, HoughType.Gradient, 2,
-                image.Height / 4, 50, 20, 15, 60);
-
-            for (int i = 0; i < circles.Length; i++)
-            {
-                PointF center = circles[i].Center;
-                float radius = circles[i].Radius;
-                double area = circles[i].Area;
-
-                //Console.WriteLine("Ball detected");
-                //Console.WriteLine("Center coords: x=" + center.X + ", y=" + center.Y);
-                //Console.WriteLine("Radius: " + radius + ", area: " + area + "\n");
-
-                CvInvoke.Circle(outputFrame, Point.Round(center), (int)radius, new MCvScalar(255, 255, 255),
-                    10, LineType.EightConnected, 0);
-                CvInvoke.Circle(outputFrame, Point.Round(center), 10, new MCvScalar(0, 255, 0), 5, LineType.EightConnected, 0);
-            }
+            return CvInvoke.HoughCircles(image, HoughType.Gradient, 2, image.Height / 4, 50, 20, 15, 60);
         }
     }
 }

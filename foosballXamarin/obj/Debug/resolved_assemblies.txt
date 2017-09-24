@@ -2,6 +2,7 @@ C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\androi
 C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\assets\Emgu.CV.UI.dll
 C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\assets\Emgu.CV.World.dll
 C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\assets\System.Drawing.dll
+C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\assets\System.XML.dll
 C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\assets\ZedGraph.dll
 C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\assets\Java.Interop.dll
 C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\assets\Microsoft.CSharp.dll
@@ -9,12 +10,12 @@ C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\androi
 C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\assets\System.Core.dll
 C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\assets\System.Data.dll
 C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\assets\System.dll
-C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\assets\System.Xml.dll
 C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\assets\System.Xml.Linq.dll
 C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\assets\mscorlib.dll
 C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\assets\System.Windows.Forms.dll
 C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\assets\System.Security.dll
 C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\assets\Mono.Security.dll
+C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\assets\System.Xml.dll
 C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\assets\System.Configuration.dll
 C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\assets\Accessibility.dll
 C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\assets\System.Deployment.dll
@@ -23,6 +24,7 @@ C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\androi
 C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\assets\System.Runtime.Serialization.dll
 C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\assets\System.ServiceModel.Internals.dll
 C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\assets\System.IdentityModel.dll
+C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\assets\System.Data.SqlXml.dll
 C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\assets\System.Runtime.dll
 C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\assets\System.ComponentModel.Composition.dll
 C:\Users\Danielius\source\repos\foosballXamarin\foosballXamarin\obj\Debug\android\assets\System.Threading.dll

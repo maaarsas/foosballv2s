@@ -5,6 +5,7 @@ using Android.Hardware;
 using Android.Views;
 using System;
 using Android.Graphics;
+using Emgu.CV.Structure;
 
 namespace foosballXamarin
 {
@@ -34,29 +35,14 @@ namespace foosballXamarin
             //set the background to transparent
             surfaceView.Holder.SetFormat(Format.Transparent);
             holder = surfaceView.Holder;
-            surfaceView.Touch += onSurfaceViewTouch;
+            surfaceView.Touch += OnSurfaceViewTouch;
 
             movementDetector = new MovementDetector();
         }
 
-        private void onSurfaceViewTouch(object sender, View.TouchEventArgs e)
+        private void OnSurfaceViewTouch(object sender, View.TouchEventArgs e)
         {
-            //define the paintbrush
-            Paint mpaint = new Paint();
-            mpaint.Color = Color.Red;
-            mpaint.SetStyle(Paint.Style.Stroke);
-            mpaint.StrokeWidth = 2f;
-            
-            //draw
-            Canvas canvas = holder.LockCanvas();
-            //clear the paint of last time
-            canvas.DrawColor(Color.Transparent, PorterDuff.Mode.Clear);
-            //draw a new one, set your ball's position to the rect here
-            var x = e.Event.GetX();
-            var y = e.Event.GetY();
-            Rect r = new Rect((int)x, (int)y, (int)x + 100, (int)y + 100);
-            canvas.DrawRect(r, mpaint);
-            holder.UnlockCanvasAndPost(canvas);
+            DrawRectangle(e.Event.GetX(), e.Event.GetY());
         }
 
         public bool OnSurfaceTextureDestroyed(SurfaceTexture surface)
@@ -100,12 +86,32 @@ namespace foosballXamarin
             Console.WriteLine("onPreviewFrame " + textureView.Height + "---" + textureView.Width);
             if (isFirstFrame)
             {
+                isFirstFrame = false;
                 movementDetector.SetupBallDetector(data, textureView.Height, textureView.Width);
             }
             else
             {
-                movementDetector.DetectBall(data, textureView.Height, textureView.Width);
+                CircleF[] circles = movementDetector.DetectBall(data, textureView.Height, textureView.Width);
             }
+        }
+
+        private void DrawRectangle(float x, float y)
+        {
+            //define the paintbrush
+            Paint mpaint = new Paint();
+            mpaint.Color = Color.Red;
+            mpaint.SetStyle(Paint.Style.Stroke);
+            mpaint.StrokeWidth = 2f;
+
+            //draw
+            Canvas canvas = holder.LockCanvas();
+            //clear the paint of last time
+            canvas.DrawColor(Color.Transparent, PorterDuff.Mode.Clear);
+            //draw a new one, set your ball's position to the rect here
+            Rect r = new Rect((int)x, (int)y, (int)x + 100, (int)y + 100);
+            canvas.DrawRect(r, mpaint);
+            holder.UnlockCanvasAndPost(canvas);
+
         }
     }
 }

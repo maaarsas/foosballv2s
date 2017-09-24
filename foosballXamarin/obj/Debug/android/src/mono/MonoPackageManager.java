@@ -108,6 +108,7 @@ class MonoPackageManager_Resources {
 		"Accessibility.dll",
 		"System.Deployment.dll",
 		"System.Runtime.Serialization.Formatters.Soap.dll",
+		"System.Data.SqlXml.dll",
 	};
 	public static final String[] Dependencies = new String[]{
 	};

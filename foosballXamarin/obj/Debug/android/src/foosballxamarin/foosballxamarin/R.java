@@ -11,7 +11,7 @@ public final class R {
     public static final class attr {
     }
     public static final class id {
-        public static final int surfaceview=0x7f040001;
+        public static final int surfaceView=0x7f040001;
         public static final int textureView=0x7f040000;
     }
     public static final class layout {

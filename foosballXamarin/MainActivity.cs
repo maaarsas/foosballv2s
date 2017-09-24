@@ -9,12 +9,14 @@ using Android.Graphics;
 namespace foosballXamarin
 {
     [Activity(Label = "foosballXamarin", MainLauncher = true)]
-    public class MainActivity : Activity, TextureView.ISurfaceTextureListener
+    public class MainActivity : Activity, TextureView.ISurfaceTextureListener, Android.Hardware.Camera.IPreviewCallback
     {
         private Android.Hardware.Camera camera;
         private TextureView textureView;
         private SurfaceView surfaceView;
         private ISurfaceHolder holder;
+
+        private MovementDetector movementDetector;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -32,17 +34,19 @@ namespace foosballXamarin
             //set the background to transparent
             surfaceView.Holder.SetFormat(Format.Transparent);
             holder = surfaceView.Holder;
-            surfaceView.Touch += surfaceViewTouch;
+            surfaceView.Touch += onSurfaceViewTouch;
+
+            movementDetector = new MovementDetector();
         }
 
-        private void surfaceViewTouch(object sender, View.TouchEventArgs e)
+        private void onSurfaceViewTouch(object sender, View.TouchEventArgs e)
         {
             //define the paintbrush
             Paint mpaint = new Paint();
             mpaint.Color = Color.Red;
             mpaint.SetStyle(Paint.Style.Stroke);
             mpaint.StrokeWidth = 2f;
-
+            
             //draw
             Canvas canvas = holder.LockCanvas();
             //clear the paint of last time
@@ -72,6 +76,7 @@ namespace foosballXamarin
                 camera.SetPreviewTexture(surface);
                 camera.SetDisplayOrientation(90);
                 camera.StartPreview();
+                camera.SetPreviewCallback(this);
             }
             catch (Java.IO.IOException ex)
             {
@@ -85,6 +90,22 @@ namespace foosballXamarin
 
         public void OnSurfaceTextureUpdated(SurfaceTexture surface)
         {
+        }
+
+        private bool isFirstFrame = true;
+
+        public void OnPreviewFrame(byte[] data, Android.Hardware.Camera camera)
+        {
+            //throw new NotImplementedException();
+            Console.WriteLine("onPreviewFrame " + textureView.Height + "---" + textureView.Width);
+            if (isFirstFrame)
+            {
+                movementDetector.SetupBallDetector(data, textureView.Height, textureView.Width);
+            }
+            else
+            {
+                movementDetector.DetectBall(data, textureView.Height, textureView.Width);
+            }
         }
     }
 }

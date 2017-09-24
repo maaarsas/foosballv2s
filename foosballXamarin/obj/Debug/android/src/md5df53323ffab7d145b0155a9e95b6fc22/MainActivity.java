@@ -5,7 +5,8 @@ public class MainActivity
 	extends android.app.Activity
 	implements
 		mono.android.IGCUserPeer,
-		android.view.TextureView.SurfaceTextureListener
+		android.view.TextureView.SurfaceTextureListener,
+		android.hardware.Camera.PreviewCallback
 {
 /** @hide */
 	public static final String __md_methods;
@@ -16,6 +17,7 @@ public class MainActivity
 			"n_onSurfaceTextureDestroyed:(Landroid/graphics/SurfaceTexture;)Z:GetOnSurfaceTextureDestroyed_Landroid_graphics_SurfaceTexture_Handler:Android.Views.TextureView/ISurfaceTextureListenerInvoker, Mono.Android, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null\n" +
 			"n_onSurfaceTextureSizeChanged:(Landroid/graphics/SurfaceTexture;II)V:GetOnSurfaceTextureSizeChanged_Landroid_graphics_SurfaceTexture_IIHandler:Android.Views.TextureView/ISurfaceTextureListenerInvoker, Mono.Android, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null\n" +
 			"n_onSurfaceTextureUpdated:(Landroid/graphics/SurfaceTexture;)V:GetOnSurfaceTextureUpdated_Landroid_graphics_SurfaceTexture_Handler:Android.Views.TextureView/ISurfaceTextureListenerInvoker, Mono.Android, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null\n" +
+			"n_onPreviewFrame:([BLandroid/hardware/Camera;)V:GetOnPreviewFrame_arrayBLandroid_hardware_Camera_Handler:Android.Hardware.Camera/IPreviewCallbackInvoker, Mono.Android, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null\n" +
 			"";
 		mono.android.Runtime.register ("foosballXamarin.MainActivity, foosballXamarin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", MainActivity.class, __md_methods);
 	}
@@ -67,6 +69,14 @@ public class MainActivity
 	}
 
 	private native void n_onSurfaceTextureUpdated (android.graphics.SurfaceTexture p0);
+
+
+	public void onPreviewFrame (byte[] p0, android.hardware.Camera p1)
+	{
+		n_onPreviewFrame (p0, p1);
+	}
+
+	private native void n_onPreviewFrame (byte[] p0, android.hardware.Camera p1);
 
 	private java.util.ArrayList refList;
 	public void monodroidAddReference (java.lang.Object obj)

@@ -99,6 +99,15 @@ class MonoPackageManager_Resources {
 	public static final String[] Assemblies = new String[]{
 		/* We need to ensure that "foosballXamarin.dll" comes first in this list. */
 		"foosballXamarin.dll",
+		"Emgu.CV.UI.dll",
+		"Emgu.CV.World.dll",
+		"System.Drawing.dll",
+		"ZedGraph.dll",
+		"System.Windows.Forms.dll",
+		"System.Configuration.dll",
+		"Accessibility.dll",
+		"System.Deployment.dll",
+		"System.Runtime.Serialization.Formatters.Soap.dll",
 	};
 	public static final String[] Dependencies = new String[]{
 	};

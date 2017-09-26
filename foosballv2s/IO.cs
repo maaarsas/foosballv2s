@@ -15,7 +15,7 @@ namespace foosballv2s
             string filePath = @"C:\Users\Radvila\Documents\GitHub\foosballv2s\foosballv2s\GameInfo.txt";
 
             ts = timer.Elapsed;
-            File.AppendAllText(filePath, goalTime + " " + teamName + " score a goal! " + " Total score is " + totalScore + " " + ts + Environment.NewLine);
+            File.AppendAllText(filePath, goalTime + " " + teamName + " scored a goal! " + " Total score is " + totalScore + " " + ts + Environment.NewLine);
             if (totalScore == 8)
             {
                 timer.Reset();

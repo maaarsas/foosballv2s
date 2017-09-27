@@ -7,7 +7,7 @@ namespace foosballv2s
     {
         static void Main(string[] args)
         {
-            String videoName = "\\data\\video_samples\\20170914_121625.mp4";
+            String videoName = "\\foosballv2s\\data\\video_samples\\20170914_121625.mp4";
             try
             {
                 String projectRootDirectory = Directory.GetParent(Directory.GetCurrentDirectory())

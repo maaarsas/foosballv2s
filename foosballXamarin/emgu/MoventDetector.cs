@@ -1,4 +1,5 @@
-﻿using Android.Util;
+﻿using Android.Graphics;
+using Android.Util;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
@@ -40,9 +41,14 @@ namespace foosballXamarin
 
             //VideoCapture capture = new VideoCapture();
             //Mat frame = this.video.GetFrame(); // one frame of a video
-            Image<Bgr, Byte> frameImage = new Image<Bgr, Byte>(frameWidth, frameHeight); //specify the width and height here
-            frameImage.Bytes = frameInBytes; //your byte array
-            frame = frameImage.Mat;
+            //Bitmap bitmap = BitmapFactory.DecodeByteArray(frameInBytes, 0, frameInBytes.Length);
+            //Image<Bgr, Byte> frameImage = new Image<Bgr, Byte>(frameWidth, frameHeight); //specify the width and height here
+            //frameImage.Bytes = frameInBytes; //your byte array
+            //frame = frameImage.Mat;
+            CvInvoke.Imdecode(frameInBytes, ImreadModes.Unchanged, frame);
+            //frame = new Mat();
+            //Bitmap bmp32 = bitmap.Copy(Bitmap.Config.Argb8888, true);
+            frame = new Mat();
             Size size = new Size(frame.Width, frame.Height); // the size of the frame
 
             minHsv = new Hsv(t1min, t2min, t3min); // minimum color that passes
@@ -56,7 +62,7 @@ namespace foosballXamarin
             thresholded = new Image<Gray, byte>(frame.Width, frame.Height); // frame with filtered out colors
 
             // Create a window in which the captured images will be presented
-            CvInvoke.NamedWindow("Camera", NamedWindowType.KeepRatio);
+            //CvInvoke.NamedWindow("Camera", NamedWindowType.KeepRatio);
             //CvInvoke.NamedWindow("HSV", NamedWindowType.KeepRatio);
             //CvInvoke.NamedWindow("Thresholded", NamedWindowType.KeepRatio);
         }
@@ -71,11 +77,11 @@ namespace foosballXamarin
                 }
 
                 // Covert color space to HSV as it is much easier to filter colors in the HSV color-space.
-                CvInvoke.CvtColor(frame, hsvFrame, ColorConversion.Bgr2Hsv);
+                ////CvInvoke.CvtColor(frame, hsvFrame, ColorConversion.Bgr2Hsv);
                 // Filter out other colors than specified
                 this.FilterHsvImageColor(hsvFrame, thresholded, minHsv, maxHsv);
                 // Make some smoothing for better detection results
-                thresholded = thresholded.SmoothGaussian(5);
+                ////thresholded = thresholded.SmoothGaussian(5);
                 // Find circles in grayscale image and draw them on the frame
                 return this.DetectCirclesInImage(thresholded, frame);
 
@@ -126,5 +132,7 @@ namespace foosballXamarin
             //    1000, 10, 10, 15, 60);
             return CvInvoke.HoughCircles(image, HoughType.Gradient, 2, image.Height / 4, 50, 20, 15, 60);
         }
+
+        
     }
 }

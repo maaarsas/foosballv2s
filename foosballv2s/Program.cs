@@ -10,8 +10,7 @@ namespace foosballv2s
             String videoName = "\\data\\video_samples\\20170914_121727.mp4";
             try
             {
-                String projectRootDirectory = Directory.GetParent(Directory.GetCurrentDirectory())
-                    .Parent.FullName;
+                String projectRootDirectory = AppDomain.CurrentDomain.BaseDirectory + "\\..\\..\\";;
                 //Console.WriteLine(projectRootDirectory + videoName);
                 IVideo videoFile = new VideoFile(projectRootDirectory + videoName);
                 MovementDetector detector = new MovementDetector(videoFile);

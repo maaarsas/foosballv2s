@@ -11,8 +11,7 @@ namespace foosballv2s.Test
     [TestFixture]
     public class MovementDetectorTests
     {
-        String projectRootDirectory = Directory.GetParent(Directory.GetCurrentDirectory())
-                    .Parent.FullName;
+        String projectRootDirectory = AppDomain.CurrentDomain.BaseDirectory + "\\..\\..\\";
         
         [Test]
         public void DetectBall_Successful()

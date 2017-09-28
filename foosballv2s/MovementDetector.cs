@@ -105,7 +105,7 @@ namespace foosballv2s
         }
 
         /**
-         * Using Hough transform to detect circles in a black-white image
+         * Using Hough transform to detect circles in a black-white imaggit ce
          */
         private void DetectCirclesInImage(Image<Gray,byte> image, Mat outputFrame)
         {

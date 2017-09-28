@@ -5,4 +5,5 @@ install:
   - nuget install NUnit.Runners -Version 3.7.0 -OutputDirectory testrunner
 script:
   - msbuild /p:Configuration=Release foosballv2s.sln
-  - mono ./testrunner/NUnit.ConsoleRunner.3.7.0/tools/nunit3-console.exe ./foosballv2s.Test/bin/Release/foosballv2s.Test.dll
+  - ls -a1 /home/travis/build/marttis21/foosballv2s/foosballv2s.Test
+  - MONO_LOG_LEVEL=debug mono ./testrunner/NUnit.ConsoleRunner.3.7.0/tools/nunit3-console.exe ./foosballv2s.Test/bin/Release/foosballv2s.Test.dll

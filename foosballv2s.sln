@@ -1,11 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.10
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "foosballv2s", "foosballv2s\foosballv2s.csproj", "{328F8867-7683-4C88-A6D4-6A4B4BFD57ED}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "foosballv2s.Test", "foosballv2s.Test\foosballv2s.Test.csproj", "{817A9FA9-590E-417F-B1AE-2E488BA9851E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{328F8867-7683-4C88-A6D4-6A4B4BFD57ED} = {328F8867-7683-4C88-A6D4-6A4B4BFD57ED}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

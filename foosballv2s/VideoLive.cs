@@ -3,7 +3,7 @@ using System;
 
 namespace foosballv2s
 {
-    class VideoLive : IVideo
+    public class VideoLive : IVideo
     {
         // TODO: Implement the class for getting frames from live stream
         public Mat GetFrame()

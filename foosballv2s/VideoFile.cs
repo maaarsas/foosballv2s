@@ -4,9 +4,9 @@ using System.IO;
 
 namespace foosballv2s
 {
-    class VideoFile : IVideo
+    public class VideoFile : IVideo
     {
-        private VideoCapture capture;
+        public VideoCapture capture { get; }
 
         public VideoFile(String file)
         {

@@ -7,14 +7,16 @@ namespace foosballv2s
     {
         static void Main(string[] args)
         {
-            String videoName = "\\data\\video_samples\\20170914_121625.mp4";
+            String videoName = "\\foosballv2s\\data\\video_samples\\20170914_121625.mp4";
+            String ballImageName = "\\foosballv2s\\data\\ball.jpg";
             try
             {
                 String projectRootDirectory = Directory.GetParent(Directory.GetCurrentDirectory())
                     .Parent.Parent.FullName;
                 IVideo videoFile = new VideoFile(projectRootDirectory + videoName);
+                BallImage ballImage = new BallImage(projectRootDirectory + ballImageName);
                 MovementDetector detector = new MovementDetector(videoFile);
-                detector.DetectBall();
+                detector.DetectBall(ballImage.getColor());
             }
             catch (FileNotFoundException exception)
             {

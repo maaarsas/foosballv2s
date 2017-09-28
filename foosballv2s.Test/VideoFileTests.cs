@@ -17,5 +17,13 @@ namespace foosballv2s.Test
         {
             Assert.Throws<FileNotFoundException>(() => new VideoFile("/bad/path/to/file"));    
         }
+
+        //File not found
+        /*[Test]
+        public void Create_And_Check_Capture_Successful()
+        {
+            VideoFile videoFile = new VideoFile("\\testData\\20170914_121625.mp4");
+            Assert.True(videoFile.capture.IsOpened);
+        }*/
     }
 }

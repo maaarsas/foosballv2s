@@ -6,7 +6,7 @@ namespace foosballv2s
 {
     public class VideoFile : IVideo
     {
-        private VideoCapture capture { get; }
+        public VideoCapture capture { get; }
 
         public VideoFile(String file)
         {

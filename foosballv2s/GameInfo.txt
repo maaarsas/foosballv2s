@@ -1,0 +1,8 @@
+Komanda 1
+vs. 
+Komanda 2
+
+22:57:24 Komanda 1 scored a goal!  Total score is 1 00:00:00.0010566
+22:57:24 Komanda 2 scored a goal!  Total score is 8 00:00:00.0015384
+
+Komanda 2 Laimejo!

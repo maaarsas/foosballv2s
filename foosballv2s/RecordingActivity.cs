@@ -87,7 +87,7 @@ namespace foosballv2s
             if (isFirstFrame)
             {
                 isFirstFrame = false;
-                movementDetector.SetupBallDetector(data, textureView.Height, textureView.Width);
+                movementDetector.SetupBallDetector(data, textureView.Height, textureView.Width, new Hsv(180, 100, 100));
             }
             else
             {

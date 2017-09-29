@@ -1,4 +1,0 @@
-foosballXamarin.MainActivity, foosballXamarin;md5df53323ffab7d145b0155a9e95b6fc22.MainActivity
-foosballXamarin.MainActivity, foosballXamarin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5df53323ffab7d145b0155a9e95b6fc22.MainActivity
-foosballXamarin.MainActivity;md5df53323ffab7d145b0155a9e95b6fc22.MainActivity
-foosballxamarin.MainActivity;md5df53323ffab7d145b0155a9e95b6fc22.MainActivity

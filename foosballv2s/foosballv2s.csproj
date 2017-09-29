@@ -101,7 +101,6 @@
     <AndroidNativeLibrary Include="libs\x86\libcvextern.so">
       <Link>lib\x86\libcvextern.so</Link>
     </AndroidNativeLibrary>
-    <None Include="GettingStarted.Xamarin" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml">
       <SubType>Designer</SubType>

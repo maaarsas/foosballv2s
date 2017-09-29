@@ -7,7 +7,7 @@ using System;
 
 namespace foosballv2s
 {
-    class MovementDetector
+    public class MovementDetector
     {
         private IVideo video;
 

@@ -13,18 +13,16 @@ using Emgu.CV.Structure;
 
 namespace foosballv2s
 {
-    [Activity(Label = "Splash")]
+    [Activity(MainLauncher = true)]
     public class SplashActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             // Start home activity
-            StartActivity(new Intent(this, typeof(MainActivity)));
+            StartActivity(new Intent(this, typeof(MainActivity), ));
             // close splash activity
             Finish();
         }
     }
-}
-
 }

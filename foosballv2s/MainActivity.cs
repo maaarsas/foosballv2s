@@ -13,7 +13,7 @@ using Emgu.CV.Structure;
 
 namespace foosballv2s
 {
-    [Activity(Label = "foosballv2s", MainLauncher = true)]
+    [Activity()]
     public class MainActivity : Activity
     {
         ImageView img;

@@ -41,14 +41,45 @@ namespace foosballv2s
 			}
 		}
 		
+		public partial class Drawable
+		{
+			
+			// aapt resource value: 0x7f020000
+			public const int Loading = 2130837504;
+			
+			// aapt resource value: 0x7f020001
+			public const int NewGame = 2130837505;
+			
+			// aapt resource value: 0x7f020002
+			public const int Process = 2130837506;
+			
+			static Drawable()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Drawable()
+			{
+			}
+		}
+		
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f040001
-			public const int surfaceView = 2130968577;
+			// aapt resource value: 0x7f050000
+			public const int FoosWelcome = 2131034112;
 			
-			// aapt resource value: 0x7f040000
-			public const int textureView = 2130968576;
+			// aapt resource value: 0x7f050004
+			public const int Review = 2131034116;
+			
+			// aapt resource value: 0x7f050003
+			public const int bPrev = 2131034115;
+			
+			// aapt resource value: 0x7f050001
+			public const int buttonNew = 2131034113;
+			
+			// aapt resource value: 0x7f050002
+			public const int orSeparator = 2131034114;
 			
 			static Id()
 			{
@@ -63,8 +94,8 @@ namespace foosballv2s
 		public partial class Layout
 		{
 			
-			// aapt resource value: 0x7f020000
-			public const int Main = 2130837504;
+			// aapt resource value: 0x7f030000
+			public const int Main = 2130903040;
 			
 			static Layout()
 			{
@@ -79,8 +110,11 @@ namespace foosballv2s
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f030000
-			public const int app_name = 2130903040;
+			// aapt resource value: 0x7f040000
+			public const int app_name = 2130968576;
+			
+			// aapt resource value: 0x7f040001
+			public const int openCamera = 2130968577;
 			
 			static String()
 			{

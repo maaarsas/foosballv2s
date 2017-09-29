@@ -1,13 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextureView
-        android:id="@+id/textureView"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent" />
-    <SurfaceView
-        android:id="@+id/surfaceView"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent" />
-</RelativeLayout>
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    android:weightSum="100"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <TextView
+        android:text="Welcome to Foosball Commentator!"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20"
+        android:textColor="#368DEB"
+        android:id="@+id/FoosWelcome"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="25sp" />
+    <Button
+        android:text="New Game"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="15"
+        android:id="@+id/buttonNew"
+        android:background="@drawable/NewGame"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="15sp" />
+    <TextView
+        android:text="Or"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="15"
+        android:id="@+id/orSeparator"
+        android:textStyle="bold"
+        android:textColor="#368DEB"
+        android:textSize="25sp"
+        android:gravity="center" />
+    <Button
+        android:text="Previous settings"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="15"
+        android:id="@+id/bPrev"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="15sp" />
+    <ImageView
+        android:layout_weight="50"
+        android:id="@+id/Review"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+</LinearLayout>

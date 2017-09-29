@@ -1,9 +1,9 @@
-﻿using Emgu.CV;
-using System;
+﻿using System;
+using Emgu.CV;
 
 namespace foosballv2s
 {
-    class VideoLive : IVideo
+    public class VideoLive : IVideo
     {
         // TODO: Implement the class for getting frames from live stream
         public Mat GetFrame()

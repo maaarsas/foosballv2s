@@ -2,7 +2,7 @@
 
 namespace foosballv2s
 {
-    interface IVideo
+    public interface IVideo
     {
         Mat GetFrame();
         void Dispose();

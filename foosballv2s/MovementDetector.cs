@@ -31,12 +31,13 @@ namespace foosballv2s
         private Image<Gray, Byte> thresholded;
         private Hsv minHsv;
         private Hsv maxHsv;
-        public void SetupBallDetector(byte[] frameInBytes, int frameHeight, int frameWidth)
+        
+        public void SetupBallDetector(byte[] frameInBytes, int frameHeight, int frameWidth, Hsv hsvBall)
         {
             // Currently the color is hardcoded here. Needs to be detected somewhere else
             // and passed here as parameters
             //int t1min = 170, t1max = 4, t2min = 120, t2max = 255, t3min = 120, t3max = 255; // color in HSV
-            int t1min = 100, t1max = 4, t2min = 100, t2max = 255, t3min = 60, t3max = 255; // color in HSV
+           double t1min = 170, t1max = 4, t2min = 120, t2max = 255, t3min = 120, t3max = 255; // color in HSV
 
             //VideoCapture capture = new VideoCapture();
             //Mat frame = this.video.GetFrame(); // one frame of a video
@@ -50,6 +51,26 @@ namespace foosballv2s
             frame = new Mat();
             Size size = new Size(frame.Width, frame.Height); // the size of the frame
 
+            t1min = hsvBall.Hue - 5;
+            t1max = hsvBall.Hue + 5;
+            t2min = hsvBall.Satuation - 70;
+            t2max = hsvBall.Satuation + 70;
+            t3min = hsvBall.Value - 15;
+            t3max = hsvBall.Satuation + 70;
+
+            if (t1min < 0)
+                t1min = t1min + 180;
+            if (t1max > 179)
+                t1max = t1max - 180;
+            if (t2min < 0)
+                t2min = 0;
+            if (t2max > 255)
+                t2max = 255;
+            if (t3min < 0)
+                t3min = 0;
+            if (t3max > 255)
+                t3max = 255;
+            
             minHsv = new Hsv(t1min, t2min, t3min); // minimum color that passes
             maxHsv = new Hsv(t1max, t2max, t3max); // maximum color that passes
 

@@ -1,5 +1,5 @@
-﻿using Emgu.CV;
-using System;
+﻿using System;
+using Emgu.CV;
 
 namespace foosballv2s
 {

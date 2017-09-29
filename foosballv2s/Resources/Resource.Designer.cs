@@ -81,6 +81,12 @@ namespace foosballv2s
 			// aapt resource value: 0x7f050002
 			public const int orSeparator = 2131034114;
 			
+			// aapt resource value: 0x7f050006
+			public const int surfaceView = 2131034118;
+			
+			// aapt resource value: 0x7f050005
+			public const int textureView = 2131034117;
+			
 			static Id()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -96,6 +102,9 @@ namespace foosballv2s
 			
 			// aapt resource value: 0x7f030000
 			public const int Main = 2130903040;
+			
+			// aapt resource value: 0x7f030001
+			public const int Recording = 2130903041;
 			
 			static Layout()
 			{

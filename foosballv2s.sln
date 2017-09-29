@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "foosballv2s", "foosballv2s\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "foosballv2s.Test", "foosballv2s.Test\foosballv2s.Test.csproj", "{817A9FA9-590E-417F-B1AE-2E488BA9851E}"
 	ProjectSection(ProjectDependencies) = postProject
-		{328F8867-7683-4C88-A6D4-6A4B4BFD57ED} = {328F8867-7683-4C88-A6D4-6A4B4BFD57ED}
+		{C4788136-773B-4305-8833-472AB9F3491C} = {C4788136-773B-4305-8833-472AB9F3491C}
 	EndProjectSection
 EndProject
 Global

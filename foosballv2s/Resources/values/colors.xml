@@ -4,7 +4,7 @@
     <color name="PrimaryDarker">#0B05A1</color>
     <color name="Secondary">#FFC200</color>
     <color name="SecondaryDarker">#FF9500</color>
-    <!--<color name="White">#FFFFFF</color>-->
+    <color name="White">#FFFFFF</color>
     <!--<color name="Ivory">#FFFFF0</color>-->
     <!--<color name="LightYellow">#FFFFE0</color>-->
     <!--<color name="Yellow">#FFFF00</color>-->
@@ -143,5 +143,5 @@
     <!--<color name="MediumBlue">#0000CD</color>-->
     <!--<color name="DarkBlue">#00008B</color>-->
     <!--<color name="Navy">#000080</color>-->
-    <!--<color name="Black">#000000</color>-->
+    <color name="Black">#000000</color>
 </resources>

@@ -16,29 +16,19 @@ namespace foosballv2s
     [Activity()]
     public class MainActivity : Activity
     {
-        ImageView img;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Main);
-
-            var btnNewGame = FindViewById<Button>(Resource.Id.buttonNew);
-            img = FindViewById<ImageView>(Resource.Id.Review);
-
-            btnNewGame.Click += BtnNewGame_Click;
         }
 
-        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+
+        public void SubmitTeamNames(View view)
         {
-            base.OnActivityResult(requestCode, resultCode, data);
-            Bitmap bmp = (Bitmap)data.Extras.Get("data");
-            img.SetImageBitmap(bmp);
+            //TODO: validate team names with Regex
+            Intent intent = new Intent(this, GetType(BallImageActivity));
+            StartActivity(intent);
         }
 
-        private void BtnNewGame_Click(object sender, EventArgs e)
-        {
-            Intent intent = new Intent(MediaStore.ActionImageCapture);
-            StartActivityForResult(intent, 0);
-        }
     }
 }

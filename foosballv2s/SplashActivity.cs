@@ -20,7 +20,7 @@ namespace foosballv2s
         {
             base.OnCreate(savedInstanceState);
             // Start home activity
-            StartActivity(new Intent(this, typeof(MainActivity), ));
+            StartActivity(new Intent(this, typeof(MainActivity)));
             // close splash activity
             Finish();
         }

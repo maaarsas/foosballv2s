@@ -5,6 +5,7 @@ using Android.Hardware;
 using Android.Views;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Android;
 using Android.Content;
 using Android.Content.PM;
@@ -39,9 +40,9 @@ namespace foosballv2s
         static CameraDevice.StateCallback mCameraStateCB;
         static CameraDevice mCameraDevice;
         static CameraCaptureSession mCaptureSession;
-        bool mSurfaceCreated = true;
+        bool mSurfaceCreated = false;
         bool mIsCameraConfigured = false;
-        private static Surface mCameraSurface = null;
+        static Surface mCameraSurface;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -49,31 +50,23 @@ namespace foosballv2s
             SetContentView(Resource.Layout.BallImage);
 
             mSurfaceView = (SurfaceView) FindViewById(Resource.Id.cameraSurfaceView);
+            mSurfaceView.SetZOrderMediaOverlay(true);
+            mSurfaceView.SetZOrderOnTop(true);
+            mSurfaceView.Holder.SetFormat(Format.Transparent);
             mSurfaceHolder = this.mSurfaceView.Holder;
             mSurfaceHolder.AddCallback(this);
             mHandler = new Handler(this);
             mCameraManager = (CameraManager) this.GetSystemService(Context.CameraService);
-
             try
             {
                 mCameraIDsList = this.mCameraManager.GetCameraIdList();
-                foreach (String id in mCameraIDsList)
-                {
-                    Log.Verbose(TAG, "CameraID: " + id);
-                }
             }
-            catch (CameraAccessException e)
-            {
-                Log.Error("ERROR", e.StackTrace);
-            }
-
+            catch (CameraAccessException e) { }
             mCameraStateCB = new CameraStateCallback();
         }
     
         protected override void OnStart() {
             base.OnStart();
-    
-            //requesting permission
             Permission permissionCheck = ContextCompat.CheckSelfPermission(this, Manifest.Permission.Camera);
             if (permissionCheck != Permission.Granted) {
                 if (ActivityCompat.ShouldShowRequestPermissionRationale(this, Manifest.Permission.Camera)) {
@@ -101,15 +94,11 @@ namespace foosballv2s
                     mCaptureSession.Close();
                     mCaptureSession = null;
                 }
-    
                 mIsCameraConfigured = false;
-            } catch (CameraAccessException e) {
-                // Doesn't matter, cloising device anyway
-                Log.Error("ERROR", e.StackTrace);
-            } catch (IllegalStateException e2) {
-                // Doesn't matter, cloising device anyway
-                Log.Error("ERROR", e2.StackTrace);
-            } finally {
+            } 
+            catch (CameraAccessException e) { } 
+            catch (IllegalStateException e2) { } 
+            finally {
                 if (mCameraDevice != null) {
                     mCameraDevice.Close();
                     mCameraDevice = null;
@@ -122,8 +111,6 @@ namespace foosballv2s
             switch (msg.What) {
                 case MSG_CAMERA_OPENED:
                 case MSG_SURFACE_READY:
-                    // if both surface is created and camera device is opened
-                    // - ready to set up preview and other things
                     if (mSurfaceCreated && (mCameraDevice != null)
                             && !mIsCameraConfigured) {
                         ConfigureCamera();
@@ -135,26 +122,19 @@ namespace foosballv2s
         }
     
         private void ConfigureCamera() {
-            // prepare list of surfaces to be used in capture requests
             List<Surface> sfl = new List<Surface>();
-    
-            sfl.Add(mCameraSurface); // surface for viewfinder preview
-    
-            // configure camera with all the surfaces to be ever used
+            sfl.Add(mCameraSurface); 
             try {
                 mCameraDevice.CreateCaptureSession(sfl,
                         new CaptureSessionListener(), null);
             } catch (CameraAccessException e) {
                 Log.Error("ERROR", e.StackTrace);
             }
-    
             mIsCameraConfigured = true;
         }
     
-   
         public override void OnRequestPermissionsResult(int requestCode, String[] permissions, Permission[] grantResults) {
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-    
             switch (requestCode) {
                 case MY_PERMISSIONS_REQUEST_CAMERA:
                     if (ActivityCompat.CheckSelfPermission(this, Manifest.Permission.Camera) 
@@ -168,14 +148,17 @@ namespace foosballv2s
             }
         }
     
-        public void SurfaceCreated(ISurfaceHolder holder) {
+        public void SurfaceCreated(ISurfaceHolder holder)
+        {
             mCameraSurface = holder.Surface;
+            Log.Debug(TAG, holder.Surface.ToString());
         }
     
         public void SurfaceChanged(ISurfaceHolder holder, Format format, int width, int height) {
             mCameraSurface = holder.Surface;
             mSurfaceCreated = true;
             mHandler.SendEmptyMessage(MSG_SURFACE_READY);
+            Log.Debug(TAG, width + " " + height);
         }
     
         public void SurfaceDestroyed(ISurfaceHolder holder) {
@@ -183,50 +166,33 @@ namespace foosballv2s
         }
     
         private class CaptureSessionListener : CameraCaptureSession.StateCallback {
-            public override void OnConfigureFailed(CameraCaptureSession session) {
-                Log.Debug(TAG, "CaptureSessionConfigure failed");
-            }
+            
+            public override void OnConfigureFailed(CameraCaptureSession session) { }
     
             public override void OnConfigured(CameraCaptureSession session) {
-                Log.Debug(TAG, "CaptureSessionConfigure onConfigured");
                 mCaptureSession = session;
     
                 try {
                     CaptureRequest.Builder previewRequestBuilder = mCameraDevice
                             .CreateCaptureRequest(CameraTemplate.Preview);
                     previewRequestBuilder.AddTarget(mCameraSurface);
+                    Log.Debug(TAG, mCameraSurface.ToString());
                     mCaptureSession.SetRepeatingRequest(previewRequestBuilder.Build(),
                             null, null);
-                    Log.Debug(TAG, mCameraDevice.ToString());
-                    Log.Debug(TAG, previewRequestBuilder.ToString());
-                    Log.Debug(TAG, mCameraSurface.ToString());
-                    Log.Debug(TAG, mCaptureSession.ToString());
-                } catch (CameraAccessException e) {
-                    Log.Debug(TAG, "setting up preview failed");
-                    Log.Error("ERROR", e.StackTrace);
-                }
+                } catch (CameraAccessException e) { }
             }
         }
         class CameraStateCallback : CameraDevice.StateCallback 
         {
-
             public override void OnOpened(CameraDevice camera)
             {
-                Toast.MakeText(Application.Context, "onOpened", ToastLength.Short).Show();
                 mCameraDevice = camera;
                 mHandler.SendEmptyMessage(MSG_CAMERA_OPENED);
             }
             
-            public override void OnDisconnected(CameraDevice camera)
-            {
-                Toast.MakeText(Application.Context, "onDisconected", ToastLength.Short).Show();
-            }
+            public override void OnDisconnected(CameraDevice camera) { }
             
-            public override void OnError(CameraDevice camera, CameraError error)
-            {
-                Toast.MakeText(Application.Context, "onError", ToastLength.Short).Show();
-            }
+            public override void OnError(CameraDevice camera, CameraError error) { }
         }
-
     }
 }

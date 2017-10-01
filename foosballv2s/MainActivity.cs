@@ -10,6 +10,7 @@ using Android.Graphics;
 using Android.Provider;
 using Android.Runtime;
 using Emgu.CV.Structure;
+using Java.Interop;
 
 namespace foosballv2s
 {
@@ -22,11 +23,11 @@ namespace foosballv2s
             SetContentView(Resource.Layout.Main);
         }
 
-
+        [Export("SubmitTeamNames")]
         public void SubmitTeamNames(View view)
         {
             //TODO: validate team names with Regex
-            Intent intent = new Intent(this, GetType(BallImageActivity));
+            Intent intent = new Intent(this, typeof(BallImageActivity));
             StartActivity(intent);
         }
 

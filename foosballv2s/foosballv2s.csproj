@@ -61,6 +61,9 @@
       <HintPath>..\packages\Xamarin.Forms.2.4.0.280\lib\MonoAndroid10\FormsViewGroup.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Mono.Android.Export, Version=1.0.6439.34008, Culture=neutral, PublicKeyToken=84e04ff9cfb79065">
+      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v6.0\Mono.Android.Export.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
@@ -117,6 +120,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BallImageActivity.cs" />
+    <Compile Include="BallImagePreview.cs" />
     <Compile Include="GameTracker.cs" />
     <Compile Include="IO.cs" />
     <Compile Include="IVideo.cs" />
@@ -145,6 +150,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\layout\BallImage.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\Main.axml">
       <SubType>Designer</SubType>
     </AndroidResource>

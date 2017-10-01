@@ -1,11 +1,53 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#00000000"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <SurfaceView
+        android:background="#00000000"
         android:id="@+id/cameraSurfaceView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" >
+    </SurfaceView>
+    <RelativeLayout
+        android:background="#00000000"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:padding="18dp">
+        
+        <TextView
+            android:background="#00000000"
+            android:text="@string/detected_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/text_detected_color"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:background="#00000000"
+            android:src="@drawable/BallDetectionRing"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/drawable_ball_ring" />
+
+
+        <Button
+            android:text="@string/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:id="@+id/submit"
+            android:onClick="SubmitBallPhoto"
+            android:padding="16dp"
+            android:textSize="24sp" />    
+            
+    </RelativeLayout>
     
 </RelativeLayout>

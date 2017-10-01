@@ -23,8 +23,6 @@ using String = System.String;
 
 namespace foosballv2s
 {
-    
-    
     [Activity()]
     public class BallImageActivity : Activity, ISurfaceHolderCallback, Handler.ICallback
     {
@@ -50,9 +48,7 @@ namespace foosballv2s
             SetContentView(Resource.Layout.BallImage);
 
             mSurfaceView = (SurfaceView) FindViewById(Resource.Id.cameraSurfaceView);
-            mSurfaceView.SetZOrderMediaOverlay(true);
-            mSurfaceView.SetZOrderOnTop(true);
-            mSurfaceView.Holder.SetFormat(Format.Transparent);
+            //mSurfaceView.SetZOrderOnTop(true);
             mSurfaceHolder = this.mSurfaceView.Holder;
             mSurfaceHolder.AddCallback(this);
             mHandler = new Handler(this);
@@ -73,12 +69,10 @@ namespace foosballv2s
     
                 } else {
                     ActivityCompat.RequestPermissions(this, new String[]{Manifest.Permission.Camera}, MY_PERMISSIONS_REQUEST_CAMERA);
-                    Toast.MakeText(ApplicationContext, "request permission", ToastLength.Short).Show();
-                }
+                    }
             } else {
-                Toast.MakeText(ApplicationContext, "PERMISSION_ALREADY_GRANTED", ToastLength.Short).Show();
                 try {
-                    mCameraManager.OpenCamera(mCameraIDsList[1], mCameraStateCB, new Handler());
+                    mCameraManager.OpenCamera(mCameraIDsList[0], mCameraStateCB, new Handler());
                 } catch (CameraAccessException e)
                 {
                     Log.Error("ERROR", e.StackTrace);
@@ -140,7 +134,7 @@ namespace foosballv2s
                     if (ActivityCompat.CheckSelfPermission(this, Manifest.Permission.Camera) 
                         == Permission.Granted)
                         try {
-                            mCameraManager.OpenCamera(mCameraIDsList[1], mCameraStateCB, new Handler());
+                            mCameraManager.OpenCamera(mCameraIDsList[0], mCameraStateCB, new Handler());
                         } catch (CameraAccessException e) {
                             Log.Error("ERROR", e.StackTrace);
                         }
@@ -151,14 +145,12 @@ namespace foosballv2s
         public void SurfaceCreated(ISurfaceHolder holder)
         {
             mCameraSurface = holder.Surface;
-            Log.Debug(TAG, holder.Surface.ToString());
         }
     
         public void SurfaceChanged(ISurfaceHolder holder, Format format, int width, int height) {
             mCameraSurface = holder.Surface;
             mSurfaceCreated = true;
             mHandler.SendEmptyMessage(MSG_SURFACE_READY);
-            Log.Debug(TAG, width + " " + height);
         }
     
         public void SurfaceDestroyed(ISurfaceHolder holder) {
@@ -176,9 +168,7 @@ namespace foosballv2s
                     CaptureRequest.Builder previewRequestBuilder = mCameraDevice
                             .CreateCaptureRequest(CameraTemplate.Preview);
                     previewRequestBuilder.AddTarget(mCameraSurface);
-                    Log.Debug(TAG, mCameraSurface.ToString());
-                    mCaptureSession.SetRepeatingRequest(previewRequestBuilder.Build(),
-                            null, null);
+                    mCaptureSession.SetRepeatingRequest(previewRequestBuilder.Build(), null, null);
                 } catch (CameraAccessException e) { }
             }
         }

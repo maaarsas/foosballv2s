@@ -65,16 +65,16 @@
             android:id="@+id/drawable_ball_ring" />
 
         <Button
-            android:text="@string/detect_color"
-            android:style="@style/primaryButtonStyle"
+            android:text="@string/detect_color" 
+            style="@style/primaryButtonStyle"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentLet="true"
+            android:layout_alignParentLeft="true"
             android:id="@+id/submit"
             android:onClick="DetectBallColor" />
 
         <Button
-            android:text="@string/submit"
-            android:style="@style/primaryButtonStyle"
+            android:text="@string/submit" 
+            style="@style/primaryButtonStyle"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:id="@+id/submit"

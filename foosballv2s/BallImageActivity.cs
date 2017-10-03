@@ -10,9 +10,11 @@ using Android;
 using Android.Content;
 using Android.Content.PM;
 using Android.Graphics;
+using Android.Graphics.Drawables;
 using Android.Hardware.Camera2;
 using Android.Hardware.Camera2.Params;
 using Android.Media;
+using Android.Media.Projection;
 using Android.Provider;
 using Android.Runtime;
 using Android.Support.V4.App;
@@ -51,6 +53,9 @@ namespace foosballv2s
         private static Handler mImageHandler;
         private static Surface mImageReaderSurface;
 
+        private int viewWidth = 0;
+        private int viewHeight = 0;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -87,7 +92,25 @@ namespace foosballv2s
             mReader.SetOnImageAvailableListener(imageAvailListener, null);
             mImageReaderSurface = mReader.Surface;
         }
-    
+
+        public void DetectBallColor()
+        {
+            Bitmap b = Bitmap.CreateBitmap(viewWidth, viewHeight, Bitmap.Config.Argb8888); 
+            Canvas c = new Canvas(b);
+            mSurfaceView.Draw(c);
+            BallImage ballImage = new BallImage(b);
+            Hsv hsvColor = ballImage.getColor();
+            Color detectedRGBColor = Color.HSVToColor(new float[]{
+                (float) hsvColor.Hue, 
+                (float) hsvColor.Satuation, 
+                (float) hsvColor.Value
+            });
+            ImageView colorSquare = (ImageView) FindViewById(Resource.Id.text_detected_color);
+            GradientDrawable bgShape = (GradientDrawable) colorSquare.Background;
+            bgShape.SetColor(detectedRGBColor);
+
+        }
+        
         protected override void OnStart() {
             base.OnStart();
             Permission permissionCheck = ContextCompat.CheckSelfPermission(this, Manifest.Permission.Camera);
@@ -177,6 +200,8 @@ namespace foosballv2s
             mCameraSurface = holder.Surface;
             mSurfaceCreated = true;
             mHandler.SendEmptyMessage(MSG_SURFACE_READY);
+            viewWidth = width;
+            viewHeight = height;
         }
     
         public void SurfaceDestroyed(ISurfaceHolder holder) {

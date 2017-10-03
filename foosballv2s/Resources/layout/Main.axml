@@ -46,7 +46,7 @@
         android:gravity="center">
         <Button
             android:text="@string/submit"
-            android:style="@style/primaryButtonStyle"
+            style="@style/primaryButtonStyle"
             android:id="@+id/submit"
             android:onClick="SubmitTeamNames" />
     </RelativeLayout>

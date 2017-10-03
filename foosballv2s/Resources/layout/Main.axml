@@ -46,11 +46,8 @@
         android:gravity="center">
         <Button
             android:text="@string/submit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:style="@style/primaryButtonStyle"
             android:id="@+id/submit"
-            android:onClick="SubmitTeamNames"
-            android:padding="16dp"
-            android:textSize="24sp" />
+            android:onClick="SubmitTeamNames" />
     </RelativeLayout>
 </LinearLayout>

@@ -58,14 +58,11 @@
 
         <Button
             android:text="@string/submit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:style="@style/primaryButtonStyle"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:id="@+id/submit"
-            android:onClick="SubmitBallPhoto"
-            android:padding="16dp"
-            android:textSize="24sp" />    
+            android:onClick="SubmitBallPhoto" />    
             
     </RelativeLayout>
     

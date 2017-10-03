@@ -1091,8 +1091,8 @@ namespace foosballv2s
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f0c004d
-			public const int Black = 2131492941;
+			// aapt resource value: 0x7f0c004e
+			public const int Black = 2131492942;
 			
 			// aapt resource value: 0x7f0c0048
 			public const int Primary = 2131492936;
@@ -1109,32 +1109,32 @@ namespace foosballv2s
 			// aapt resource value: 0x7f0c004c
 			public const int White = 2131492940;
 			
-			// aapt resource value: 0x7f0c004e
-			public const int abc_background_cache_hint_selector_material_dark = 2131492942;
-			
 			// aapt resource value: 0x7f0c004f
-			public const int abc_background_cache_hint_selector_material_light = 2131492943;
+			public const int abc_background_cache_hint_selector_material_dark = 2131492943;
 			
 			// aapt resource value: 0x7f0c0050
-			public const int abc_color_highlight_material = 2131492944;
+			public const int abc_background_cache_hint_selector_material_light = 2131492944;
+			
+			// aapt resource value: 0x7f0c0051
+			public const int abc_color_highlight_material = 2131492945;
 			
 			// aapt resource value: 0x7f0c0004
 			public const int abc_input_method_navigation_guard = 2131492868;
 			
-			// aapt resource value: 0x7f0c0051
-			public const int abc_primary_text_disable_only_material_dark = 2131492945;
-			
 			// aapt resource value: 0x7f0c0052
-			public const int abc_primary_text_disable_only_material_light = 2131492946;
+			public const int abc_primary_text_disable_only_material_dark = 2131492946;
 			
 			// aapt resource value: 0x7f0c0053
-			public const int abc_primary_text_material_dark = 2131492947;
+			public const int abc_primary_text_disable_only_material_light = 2131492947;
 			
 			// aapt resource value: 0x7f0c0054
-			public const int abc_primary_text_material_light = 2131492948;
+			public const int abc_primary_text_material_dark = 2131492948;
 			
 			// aapt resource value: 0x7f0c0055
-			public const int abc_search_url_text = 2131492949;
+			public const int abc_primary_text_material_light = 2131492949;
+			
+			// aapt resource value: 0x7f0c0056
+			public const int abc_search_url_text = 2131492950;
 			
 			// aapt resource value: 0x7f0c0005
 			public const int abc_search_url_text_normal = 2131492869;
@@ -1145,11 +1145,11 @@ namespace foosballv2s
 			// aapt resource value: 0x7f0c0007
 			public const int abc_search_url_text_selected = 2131492871;
 			
-			// aapt resource value: 0x7f0c0056
-			public const int abc_secondary_text_material_dark = 2131492950;
-			
 			// aapt resource value: 0x7f0c0057
-			public const int abc_secondary_text_material_light = 2131492951;
+			public const int abc_secondary_text_material_dark = 2131492951;
+			
+			// aapt resource value: 0x7f0c0058
+			public const int abc_secondary_text_material_light = 2131492952;
 			
 			// aapt resource value: 0x7f0c0008
 			public const int accent_material_dark = 2131492872;
@@ -1349,17 +1349,20 @@ namespace foosballv2s
 			// aapt resource value: 0x7f0c003b
 			public const int switch_thumb_disabled_material_light = 2131492923;
 			
-			// aapt resource value: 0x7f0c0058
-			public const int switch_thumb_material_dark = 2131492952;
-			
 			// aapt resource value: 0x7f0c0059
-			public const int switch_thumb_material_light = 2131492953;
+			public const int switch_thumb_material_dark = 2131492953;
+			
+			// aapt resource value: 0x7f0c005a
+			public const int switch_thumb_material_light = 2131492954;
 			
 			// aapt resource value: 0x7f0c003c
 			public const int switch_thumb_normal_material_dark = 2131492924;
 			
 			// aapt resource value: 0x7f0c003d
 			public const int switch_thumb_normal_material_light = 2131492925;
+			
+			// aapt resource value: 0x7f0c004d
+			public const int text_shadow_black = 2131492941;
 			
 			static Color()
 			{
@@ -2246,14 +2249,14 @@ namespace foosballv2s
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f080076
-			public const int FoosWelcome = 2131230838;
-			
 			// aapt resource value: 0x7f080077
-			public const int TextEnterTeamNames = 2131230839;
+			public const int FoosWelcome = 2131230839;
 			
-			// aapt resource value: 0x7f080093
-			public const int action0 = 2131230867;
+			// aapt resource value: 0x7f080078
+			public const int TextEnterTeamNames = 2131230840;
+			
+			// aapt resource value: 0x7f080094
+			public const int action0 = 2131230868;
 			
 			// aapt resource value: 0x7f08005a
 			public const int action_bar = 2131230810;
@@ -2279,8 +2282,8 @@ namespace foosballv2s
 			// aapt resource value: 0x7f08005b
 			public const int action_context_bar = 2131230811;
 			
-			// aapt resource value: 0x7f080097
-			public const int action_divider = 2131230871;
+			// aapt resource value: 0x7f080098
+			public const int action_divider = 2131230872;
 			
 			// aapt resource value: 0x7f080003
 			public const int action_menu_divider = 2131230723;
@@ -2318,8 +2321,8 @@ namespace foosballv2s
 			// aapt resource value: 0x7f080069
 			public const int cameraSurfaceView = 2131230825;
 			
-			// aapt resource value: 0x7f080094
-			public const int cancel_action = 2131230868;
+			// aapt resource value: 0x7f080095
+			public const int cancel_action = 2131230869;
 			
 			// aapt resource value: 0x7f08002b
 			public const int center = 2131230763;
@@ -2333,8 +2336,8 @@ namespace foosballv2s
 			// aapt resource value: 0x7f080052
 			public const int checkbox = 2131230802;
 			
-			// aapt resource value: 0x7f08009a
-			public const int chronometer = 2131230874;
+			// aapt resource value: 0x7f08009b
+			public const int chronometer = 2131230875;
 			
 			// aapt resource value: 0x7f080033
 			public const int clip_horizontal = 2131230771;
@@ -2360,26 +2363,26 @@ namespace foosballv2s
 			// aapt resource value: 0x7f080040
 			public const int default_activity_button = 2131230784;
 			
-			// aapt resource value: 0x7f08006e
-			public const int design_bottom_sheet = 2131230830;
+			// aapt resource value: 0x7f08006f
+			public const int design_bottom_sheet = 2131230831;
+			
+			// aapt resource value: 0x7f080076
+			public const int design_menu_item_action_area = 2131230838;
 			
 			// aapt resource value: 0x7f080075
-			public const int design_menu_item_action_area = 2131230837;
+			public const int design_menu_item_action_area_stub = 2131230837;
 			
 			// aapt resource value: 0x7f080074
-			public const int design_menu_item_action_area_stub = 2131230836;
+			public const int design_menu_item_text = 2131230836;
 			
 			// aapt resource value: 0x7f080073
-			public const int design_menu_item_text = 2131230835;
-			
-			// aapt resource value: 0x7f080072
-			public const int design_navigation_view = 2131230834;
+			public const int design_navigation_view = 2131230835;
 			
 			// aapt resource value: 0x7f08000e
 			public const int disableHome = 2131230734;
 			
-			// aapt resource value: 0x7f08006b
-			public const int drawable_ball_ring = 2131230827;
+			// aapt resource value: 0x7f08006c
+			public const int drawable_ball_ring = 2131230828;
 			
 			// aapt resource value: 0x7f08005c
 			public const int edit_query = 2131230812;
@@ -2387,8 +2390,8 @@ namespace foosballv2s
 			// aapt resource value: 0x7f08001c
 			public const int end = 2131230748;
 			
-			// aapt resource value: 0x7f08009f
-			public const int end_padder = 2131230879;
+			// aapt resource value: 0x7f0800a0
+			public const int end_padder = 2131230880;
 			
 			// aapt resource value: 0x7f080023
 			public const int enterAlways = 2131230755;
@@ -2432,8 +2435,8 @@ namespace foosballv2s
 			// aapt resource value: 0x7f08003f
 			public const int image = 2131230783;
 			
-			// aapt resource value: 0x7f08009e
-			public const int info = 2131230878;
+			// aapt resource value: 0x7f08009f
+			public const int info = 2131230879;
 			
 			// aapt resource value: 0x7f080000
 			public const int item_touch_helper_previous_elevation = 2131230720;
@@ -2441,11 +2444,11 @@ namespace foosballv2s
 			// aapt resource value: 0x7f08002f
 			public const int left = 2131230767;
 			
-			// aapt resource value: 0x7f080098
-			public const int line1 = 2131230872;
+			// aapt resource value: 0x7f080099
+			public const int line1 = 2131230873;
 			
-			// aapt resource value: 0x7f08009c
-			public const int line3 = 2131230876;
+			// aapt resource value: 0x7f08009d
+			public const int line3 = 2131230877;
 			
 			// aapt resource value: 0x7f08000b
 			public const int listMode = 2131230731;
@@ -2453,8 +2456,8 @@ namespace foosballv2s
 			// aapt resource value: 0x7f080041
 			public const int list_item = 2131230785;
 			
-			// aapt resource value: 0x7f080096
-			public const int media_actions = 2131230870;
+			// aapt resource value: 0x7f080097
+			public const int media_actions = 2131230871;
 			
 			// aapt resource value: 0x7f08001d
 			public const int middle = 2131230749;
@@ -2462,83 +2465,83 @@ namespace foosballv2s
 			// aapt resource value: 0x7f080037
 			public const int mini = 2131230775;
 			
-			// aapt resource value: 0x7f080085
-			public const int mr_art = 2131230853;
-			
-			// aapt resource value: 0x7f08007a
-			public const int mr_chooser_list = 2131230842;
-			
-			// aapt resource value: 0x7f08007d
-			public const int mr_chooser_route_desc = 2131230845;
+			// aapt resource value: 0x7f080086
+			public const int mr_art = 2131230854;
 			
 			// aapt resource value: 0x7f08007b
-			public const int mr_chooser_route_icon = 2131230843;
-			
-			// aapt resource value: 0x7f08007c
-			public const int mr_chooser_route_name = 2131230844;
-			
-			// aapt resource value: 0x7f080082
-			public const int mr_close = 2131230850;
-			
-			// aapt resource value: 0x7f080088
-			public const int mr_control_divider = 2131230856;
-			
-			// aapt resource value: 0x7f08008e
-			public const int mr_control_play_pause = 2131230862;
-			
-			// aapt resource value: 0x7f080091
-			public const int mr_control_subtitle = 2131230865;
-			
-			// aapt resource value: 0x7f080090
-			public const int mr_control_title = 2131230864;
-			
-			// aapt resource value: 0x7f08008f
-			public const int mr_control_title_container = 2131230863;
-			
-			// aapt resource value: 0x7f080083
-			public const int mr_custom_control = 2131230851;
-			
-			// aapt resource value: 0x7f080084
-			public const int mr_default_control = 2131230852;
-			
-			// aapt resource value: 0x7f08007f
-			public const int mr_dialog_area = 2131230847;
+			public const int mr_chooser_list = 2131230843;
 			
 			// aapt resource value: 0x7f08007e
-			public const int mr_expandable_area = 2131230846;
+			public const int mr_chooser_route_desc = 2131230846;
 			
-			// aapt resource value: 0x7f080092
-			public const int mr_group_expand_collapse = 2131230866;
+			// aapt resource value: 0x7f08007c
+			public const int mr_chooser_route_icon = 2131230844;
 			
-			// aapt resource value: 0x7f080086
-			public const int mr_media_main_control = 2131230854;
+			// aapt resource value: 0x7f08007d
+			public const int mr_chooser_route_name = 2131230845;
 			
-			// aapt resource value: 0x7f080081
-			public const int mr_name = 2131230849;
-			
-			// aapt resource value: 0x7f080087
-			public const int mr_playback_control = 2131230855;
-			
-			// aapt resource value: 0x7f080080
-			public const int mr_title_bar = 2131230848;
+			// aapt resource value: 0x7f080083
+			public const int mr_close = 2131230851;
 			
 			// aapt resource value: 0x7f080089
-			public const int mr_volume_control = 2131230857;
+			public const int mr_control_divider = 2131230857;
+			
+			// aapt resource value: 0x7f08008f
+			public const int mr_control_play_pause = 2131230863;
+			
+			// aapt resource value: 0x7f080092
+			public const int mr_control_subtitle = 2131230866;
+			
+			// aapt resource value: 0x7f080091
+			public const int mr_control_title = 2131230865;
+			
+			// aapt resource value: 0x7f080090
+			public const int mr_control_title_container = 2131230864;
+			
+			// aapt resource value: 0x7f080084
+			public const int mr_custom_control = 2131230852;
+			
+			// aapt resource value: 0x7f080085
+			public const int mr_default_control = 2131230853;
+			
+			// aapt resource value: 0x7f080080
+			public const int mr_dialog_area = 2131230848;
+			
+			// aapt resource value: 0x7f08007f
+			public const int mr_expandable_area = 2131230847;
+			
+			// aapt resource value: 0x7f080093
+			public const int mr_group_expand_collapse = 2131230867;
+			
+			// aapt resource value: 0x7f080087
+			public const int mr_media_main_control = 2131230855;
+			
+			// aapt resource value: 0x7f080082
+			public const int mr_name = 2131230850;
+			
+			// aapt resource value: 0x7f080088
+			public const int mr_playback_control = 2131230856;
+			
+			// aapt resource value: 0x7f080081
+			public const int mr_title_bar = 2131230849;
 			
 			// aapt resource value: 0x7f08008a
-			public const int mr_volume_group_list = 2131230858;
+			public const int mr_volume_control = 2131230858;
 			
-			// aapt resource value: 0x7f08008c
-			public const int mr_volume_item_icon = 2131230860;
+			// aapt resource value: 0x7f08008b
+			public const int mr_volume_group_list = 2131230859;
 			
 			// aapt resource value: 0x7f08008d
-			public const int mr_volume_slider = 2131230861;
+			public const int mr_volume_item_icon = 2131230861;
+			
+			// aapt resource value: 0x7f08008e
+			public const int mr_volume_slider = 2131230862;
 			
 			// aapt resource value: 0x7f080016
 			public const int multiply = 2131230742;
 			
-			// aapt resource value: 0x7f080071
-			public const int navigation_header_container = 2131230833;
+			// aapt resource value: 0x7f080072
+			public const int navigation_header_container = 2131230834;
 			
 			// aapt resource value: 0x7f080021
 			public const int never = 2131230753;
@@ -2557,6 +2560,9 @@ namespace foosballv2s
 			
 			// aapt resource value: 0x7f080029
 			public const int pin = 2131230761;
+			
+			// aapt resource value: 0x7f08006a
+			public const int point_camera_to_ball = 2131230826;
 			
 			// aapt resource value: 0x7f080006
 			public const int progress_circular = 2131230726;
@@ -2633,11 +2639,11 @@ namespace foosballv2s
 			// aapt resource value: 0x7f080013
 			public const int showTitle = 2131230739;
 			
-			// aapt resource value: 0x7f080070
-			public const int snackbar_action = 2131230832;
+			// aapt resource value: 0x7f080071
+			public const int snackbar_action = 2131230833;
 			
-			// aapt resource value: 0x7f08006f
-			public const int snackbar_text = 2131230831;
+			// aapt resource value: 0x7f080070
+			public const int snackbar_text = 2131230832;
 			
 			// aapt resource value: 0x7f080027
 			public const int snap = 2131230759;
@@ -2660,44 +2666,44 @@ namespace foosballv2s
 			// aapt resource value: 0x7f080031
 			public const int start = 2131230769;
 			
-			// aapt resource value: 0x7f080095
-			public const int status_bar_latest_event_content = 2131230869;
+			// aapt resource value: 0x7f080096
+			public const int status_bar_latest_event_content = 2131230870;
 			
-			// aapt resource value: 0x7f08006c
-			public const int submit = 2131230828;
+			// aapt resource value: 0x7f08006d
+			public const int submit = 2131230829;
 			
 			// aapt resource value: 0x7f080065
 			public const int submit_area = 2131230821;
 			
-			// aapt resource value: 0x7f0800a1
-			public const int surfaceView = 2131230881;
+			// aapt resource value: 0x7f0800a2
+			public const int surfaceView = 2131230882;
 			
 			// aapt resource value: 0x7f08000d
 			public const int tabMode = 2131230733;
 			
-			// aapt resource value: 0x7f080078
-			public const int team1Name = 2131230840;
-			
 			// aapt resource value: 0x7f080079
-			public const int team2Name = 2131230841;
+			public const int team1Name = 2131230841;
 			
-			// aapt resource value: 0x7f08009d
-			public const int text = 2131230877;
+			// aapt resource value: 0x7f08007a
+			public const int team2Name = 2131230842;
 			
-			// aapt resource value: 0x7f08009b
-			public const int text2 = 2131230875;
+			// aapt resource value: 0x7f08009e
+			public const int text = 2131230878;
+			
+			// aapt resource value: 0x7f08009c
+			public const int text2 = 2131230876;
 			
 			// aapt resource value: 0x7f08004d
 			public const int textSpacerNoButtons = 2131230797;
 			
-			// aapt resource value: 0x7f08006a
-			public const int text_detected_color = 2131230826;
+			// aapt resource value: 0x7f08006b
+			public const int text_detected_color = 2131230827;
 			
-			// aapt resource value: 0x7f0800a0
-			public const int textureView = 2131230880;
+			// aapt resource value: 0x7f0800a1
+			public const int textureView = 2131230881;
 			
-			// aapt resource value: 0x7f080099
-			public const int time = 2131230873;
+			// aapt resource value: 0x7f08009a
+			public const int time = 2131230874;
 			
 			// aapt resource value: 0x7f080043
 			public const int title = 2131230787;
@@ -2711,8 +2717,8 @@ namespace foosballv2s
 			// aapt resource value: 0x7f080047
 			public const int topPanel = 2131230791;
 			
-			// aapt resource value: 0x7f08006d
-			public const int touch_outside = 2131230829;
+			// aapt resource value: 0x7f08006e
+			public const int touch_outside = 2131230830;
 			
 			// aapt resource value: 0x7f080009
 			public const int up = 2131230729;
@@ -2723,8 +2729,8 @@ namespace foosballv2s
 			// aapt resource value: 0x7f08000a
 			public const int view_offset_helper = 2131230730;
 			
-			// aapt resource value: 0x7f08008b
-			public const int volume_item_container = 2131230859;
+			// aapt resource value: 0x7f08008c
+			public const int volume_item_container = 2131230860;
 			
 			// aapt resource value: 0x7f080022
 			public const int withText = 2131230754;
@@ -3135,6 +3141,9 @@ namespace foosballv2s
 			
 			// aapt resource value: 0x7f090027
 			public const int openCamera = 2131296295;
+			
+			// aapt resource value: 0x7f09002e
+			public const int point_camera_to_ball = 2131296302;
 			
 			// aapt resource value: 0x7f09002b
 			public const int second_team_name = 2131296299;

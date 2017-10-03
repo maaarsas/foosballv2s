@@ -38,12 +38,21 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/point_camera_to_ball"
             android:layout_alignParentLeft="true"
+            android:layout_marginRight="10dp"
             android:id="@+id/text_detected_color"
             android:shadowColor="@color/text_shadow_black"
             android:shadowDx="0"
             android:shadowDy="0"
             android:shadowRadius="3"
             android:textSize="20sp" />
+
+        <ImageView
+            android:src="@drawable/ColorSquare"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/text_detected_color"
+            android:id="@+id/color_square" />
 
         <ImageView
             android:background="#00000000"

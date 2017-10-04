@@ -22,6 +22,7 @@ using Android.Support.V4.Content;
 using Android.Util;
 using Emgu.CV;
 using Emgu.CV.Structure;
+using Java.Interop;
 using Java.Lang;
 using Java.Nio;
 using Byte = System.Byte;
@@ -48,10 +49,6 @@ namespace foosballv2s
         bool mSurfaceCreated = false;
         bool mIsCameraConfigured = false;
         static Surface mCameraSurface;
-        private static ImageReader mReader;
-        private static SimpleImageListener mListener = null;
-        private static Handler mImageHandler;
-        private static Surface mImageReaderSurface;
 
         private int viewWidth = 0;
         private int viewHeight = 0;
@@ -79,21 +76,10 @@ namespace foosballv2s
             
             
             mCameraStateCB = new CameraStateCallback();
-            
-            mImageHandler = new Handler();
-            
-            
-            mReader = ImageReader.NewInstance(jpegSizes[0].Width, jpegSizes[0].Height, ImageFormatType.Jpeg, 1);
-            Log.Debug(TAG, mReader.ToString());
-            Log.Debug(TAG, (new SimpleImageListener()).ToString());
-            Log.Debug(TAG, mReader.ToString());
-            ImageReader.IOnImageAvailableListener imageAvailListener = new SimpleImageListener();
-            mReader.SetOnImageAvailableListener(imageAvailListener, null);
-            mReader.SetOnImageAvailableListener(imageAvailListener, null);
-            mImageReaderSurface = mReader.Surface;
         }
 
-        public void DetectBallColor()
+        [Export("DetectBallColor")]
+        public void DetectBallColor(View view)
         {
             Bitmap b = Bitmap.CreateBitmap(viewWidth, viewHeight, Bitmap.Config.Argb8888); 
             Canvas c = new Canvas(b);
@@ -105,10 +91,19 @@ namespace foosballv2s
                 (float) hsvColor.Satuation, 
                 (float) hsvColor.Value
             });
+            Log.Debug(TAG + "ddd",
+                detectedRGBColor.R.ToString() + detectedRGBColor.G.ToString() + detectedRGBColor.B.ToString());
             ImageView colorSquare = (ImageView) FindViewById(Resource.Id.text_detected_color);
             GradientDrawable bgShape = (GradientDrawable) colorSquare.Background;
             bgShape.SetColor(detectedRGBColor);
 
+        }
+
+        [Export("SubmitBallPhoto")]
+        public void SubmitBallPhoto(View view)
+        {
+            Intent intent = new Intent(this, typeof(RecordingActivity));
+            StartActivity(intent);
         }
         
         protected override void OnStart() {
@@ -166,7 +161,7 @@ namespace foosballv2s
         }
     
         private void ConfigureCamera() {
-            List<Surface> surfaceList = new List<Surface> {mCameraSurface, mImageReaderSurface};
+            List<Surface> surfaceList = new List<Surface> {mCameraSurface};
             try {
                 mCameraDevice.CreateCaptureSession(surfaceList,
                         new CaptureSessionListener(), null);
@@ -221,7 +216,6 @@ namespace foosballv2s
                     CaptureRequest.Builder previewRequestBuilder = mCameraDevice
                             .CreateCaptureRequest(CameraTemplate.Preview);
                     previewRequestBuilder.AddTarget(mCameraSurface);
-                    previewRequestBuilder.AddTarget(mImageReaderSurface);
                     mCaptureSession.SetRepeatingRequest(previewRequestBuilder.Build(), null, null);
                 } catch (CameraAccessException e) { }
             }
@@ -237,24 +231,6 @@ namespace foosballv2s
             public override void OnDisconnected(CameraDevice camera) { }
             
             public override void OnError(CameraDevice camera, CameraError error) { }
-        }
-        
-        class SimpleImageListener : Java.Lang.Object, ImageReader.IOnImageAvailableListener {
-            
-            public void OnImageAvailable(ImageReader reader)
-            {
-                Image image = reader.AcquireLatestImage();
-                ByteBuffer buffer = image.GetPlanes()[0].Buffer;
-                byte[] bytes = new byte[buffer.Capacity()];
-                buffer.Get(bytes);
-                Bitmap bitmapImage = BitmapFactory.DecodeByteArray(bytes, 0, bytes.Length, null);
-
-                BallImage ballImage = new BallImage(bitmapImage);
-                Hsv hsvColor = ballImage.getColor();
-
-                Log.Debug(TAG + "ddd", hsvColor.Hue.ToString() + " "  + hsvColor.Satuation.ToString() + " " + hsvColor.Value.ToString());
-                image.Close();
-            }
         }
     }
 }

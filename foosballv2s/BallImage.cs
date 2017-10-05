@@ -1,35 +1,47 @@
 ﻿using System;
+using Android.Graphics;
 using Emgu.CV;
 using Emgu.CV.Structure;
-using System.Drawing;
+using Emgu.CV.Structure;
+using Emgu.Util;
 
 namespace foosballv2s
 {
     public class BallImage
     {
-        private Image<Hsv, Byte> image;
-
-        public BallImage(String file)
+        private Bitmap image;
+        
+        public BallImage(Bitmap bitmapImage)
         {
-            this.image = new Image<Hsv, Byte>(file);
+            this.image = bitmapImage;
         }
 
         public Hsv getColor()
         {
-            Bitmap bitmap = this.image.ToBitmap();
+            Bitmap bitmap = this.image;
+           
+            int a = 0, r = 0, g = 0, b = 0;
+            int pixelCount = 0;
+            for (int i = (bitmap.Width / 2) - 20; i < (bitmap.Width / 2) + 20; i += 4)
+            {
+                for (int j = (bitmap.Height / 2) - 20; j < (bitmap.Height / 2) + 20; j += 4)
+                {
+                    int pixel = bitmap.GetPixel(i, j);
+                    a += Color.GetAlphaComponent(pixel);
+                    r += Color.GetRedComponent(pixel);
+                    g += Color.GetGreenComponent(pixel);
+                    b += Color.GetBlueComponent(pixel);
+                    pixelCount++;
+                }
+            }
 
-            Color colorAvg;
-            Color color1 = bitmap.GetPixel(bitmap.Width / 2, bitmap.Height / 2);            //spalva is centro
-            Color color2 = bitmap.GetPixel(bitmap.Width / 2 + 10, bitmap.Height / 2 + 10);  //spalva aplink centra
-            Color color3 = bitmap.GetPixel(bitmap.Width / 2 - 10, bitmap.Height / 2 - 10);
-            Color color4 = bitmap.GetPixel(bitmap.Width / 2 + 10, bitmap.Height / 2 - 10);
-            Color color5 = bitmap.GetPixel(bitmap.Width / 2 - 10, bitmap.Height / 2 + 10);
+            // calculate averages
+            a /= pixelCount;
+            r /= pixelCount;
+            g /= pixelCount;
+            b /= pixelCount;
 
-            int r = (color1.R + color2.R + color3.R + color4.R + color5.R) / 5; //gaunama vidutinė spalva
-            int g = (color1.G + color2.G + color3.G + color4.G + color5.G) / 5;
-            int b = (color1.B + color2.B + color3.B + color4.B + color5.B) / 5;
-
-            colorAvg = Color.FromArgb(r, g, b);
+            Color colorAvg = Color.Argb(a, r, g, b);
 
             Hsv hsv = new Hsv(colorAvg.GetHue() / 2,    //color.GetHue() [0;360] -> Hue [0;180]
                 colorAvg.GetSaturation() * 255,         //color.GetSaturation() [0;1] -> Saturation [0;255]

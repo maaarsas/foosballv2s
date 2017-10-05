@@ -9,7 +9,7 @@ using Emgu.CV.Structure;
 
 namespace foosballv2s
 {
-    [Activity(Label = "foosballv2s")]
+    [Activity()]
     public class RecordingActivity : Activity, TextureView.ISurfaceTextureListener, Android.Hardware.Camera.IPreviewCallback
     {
         private Android.Hardware.Camera camera;

@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">foosballv2s</string>
-  <string name="openCamera">Open Camera</string>
+    <string name="app_name">Foosball Commentator</string>
+    <string name="openCamera">Open Camera</string>
+    <string name="welcome_text">Welcome to Foosball Commentator</string>
+    <string name="enter_team_names">Enter the names of both teams</string>
+    <string name="first_team_name">First team name</string>
+    <string name="second_team_name">Second team name</string>
+    <string name="submit">Submit</string>
+    <string name="detected_color">Detected color</string>
+    <string name="detect_color">Detect color</string>
+    <string name="detect_again">Detect again</string>
+    <string name="point_camera_to_ball">The color of the ball is needed. Please point the camera to the ball.</string>
 </resources>

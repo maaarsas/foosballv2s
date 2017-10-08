@@ -15,7 +15,7 @@ using Console = System.Console;
 namespace foosballv2s
 {
     [Activity()]
-    public class RecordingActivity : Activity, TextureView.ISurfaceTextureListener, Camera.IPreviewCallback
+    public class RecordingActivity : Activity, TextureView.ISurfaceTextureListener, Camera.IPreviewCallback, CameraViewListener;
     {
         private Camera camera;
         private TextureView textureView;
@@ -66,6 +66,7 @@ namespace foosballv2s
 
             try
             {
+                camera.GetParameters().PreviewFormat = ImageFormatType.Rgb565;
                 camera.SetPreviewTexture(surface);
                 camera.SetDisplayOrientation(90);
                 camera.StartPreview();
@@ -111,6 +112,10 @@ namespace foosballv2s
 
         public void OnPreviewFrame(byte[] data, Camera camera)
         {
+            //Bitmap frameBitmap = BitmapFactory.DecodeByteArray(data, 0, data.Length);
+            //Image<Bgr, System.Byte> buffer1 = new Image<Bgr, byte>(frameBitmap);
+            //Mat frame = new Mat();
+           // CvInvoke.CvtColor(data, image, Emgu.CV.CvEnum.ColorConversion.Yuv420Sp2Bgr);
             CircleF[] circles = movementDetector.DetectBall(data, textureView.Height, textureView.Width);
             Log.Debug("Camtest" + "-circle", circles.ToString());
         }

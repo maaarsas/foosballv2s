@@ -97,8 +97,10 @@ namespace foosballv2s
                 {
                     Console.WriteLine("Error. A frame is empty. Skipping");
                 }
-
-                hsvFrame.Bytes = frameBytes;
+                
+                CvInvoke.Imdecode(frameBytes, ImreadModes.Unchanged, frame);
+                hsvFrame = frame.ToImage<Hsv, byte>();
+                //hsvFrame.Bytes = frameBytes;
                 // Covert color space to HSV as it is much easier to filter colors in the HSV color-space.
                 ////CvInvoke.CvtColor(frame, hsvFrame, ColorConversion.Bgr2Hsv);
                 // Filter out other colors than specified

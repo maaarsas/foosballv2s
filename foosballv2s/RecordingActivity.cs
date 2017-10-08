@@ -1,18 +1,23 @@
-﻿using Android.App;
+﻿using System.IO;
+using Android.App;
 using Android.Widget;
 using Android.OS;
-using Android.Hardware;
 using Android.Views;
-using System;
 using Android.Graphics;
+using Android.Util;
+using Emgu.CV;
 using Emgu.CV.Structure;
+using Java.IO;
+using Java.Lang;
+using Camera = Android.Hardware.Camera;
+using Console = System.Console;
 
 namespace foosballv2s
 {
     [Activity()]
-    public class RecordingActivity : Activity, TextureView.ISurfaceTextureListener, Android.Hardware.Camera.IPreviewCallback
+    public class RecordingActivity : Activity, TextureView.ISurfaceTextureListener, Camera.IPreviewCallback
     {
-        private Android.Hardware.Camera camera;
+        private Camera camera;
         private TextureView textureView;
         private SurfaceView surfaceView;
         private ISurfaceHolder holder;
@@ -47,15 +52,17 @@ namespace foosballv2s
 
         public bool OnSurfaceTextureDestroyed(SurfaceTexture surface)
         {
-            camera.StopPreview();
-            camera.Release();
-
-            return true;
+            if (camera != null) {
+                camera.StopPreview();
+                camera.Release();
+                camera = null;
+            }
+            return false;
         }
 
         public void OnSurfaceTextureAvailable(SurfaceTexture surface, int width, int height)
         {
-            camera = Android.Hardware.Camera.Open();
+            camera = Camera.Open();
 
             try
             {
@@ -68,6 +75,10 @@ namespace foosballv2s
             {
                 Console.WriteLine(ex.Message);
             }
+            Camera.Parameters tmp = camera.GetParameters();
+            tmp.SetPreviewSize(tmp.SupportedPreviewSizes[0].Width, tmp.SupportedPreviewSizes[0].Height);
+            camera.SetParameters(tmp);
+            movementDetector.SetupBallDetector(textureView.Height, textureView.Width, new Hsv(180, 100, 100));
         }
 
         public void OnSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height)
@@ -76,23 +87,7 @@ namespace foosballv2s
 
         public void OnSurfaceTextureUpdated(SurfaceTexture surface)
         {
-        }
-
-        private bool isFirstFrame = true;
-
-        public void OnPreviewFrame(byte[] data, Android.Hardware.Camera camera)
-        {
-            //throw new NotImplementedException();
-            Console.WriteLine("onPreviewFrame " + textureView.Height + "---" + textureView.Width);
-            if (isFirstFrame)
-            {
-                isFirstFrame = false;
-                movementDetector.SetupBallDetector(data, textureView.Height, textureView.Width, new Hsv(180, 100, 100));
-            }
-            else
-            {
-                CircleF[] circles = movementDetector.DetectBall(data, textureView.Height, textureView.Width);
-            }
+           
         }
 
         private void DrawRectangle(float x, float y)
@@ -112,6 +107,12 @@ namespace foosballv2s
             canvas.DrawRect(r, mpaint);
             holder.UnlockCanvasAndPost(canvas);
 
+        }
+
+        public void OnPreviewFrame(byte[] data, Camera camera)
+        {
+            CircleF[] circles = movementDetector.DetectBall(data, textureView.Height, textureView.Width);
+            Log.Debug("Camtest" + "-circle", circles.ToString());
         }
     }
 }

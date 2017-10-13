@@ -85,8 +85,9 @@ namespace foosballv2s
                 Console.WriteLine(ex.Message);
             }
             Camera.Parameters tmp = camera.GetParameters();
-            //Size bestSize = GetBestPreviewSize(textureView.Width);
-            //tmp.SetPreviewSize((int) bestSize.Width, (int) bestSize.Height);
+            Size bestSize = ActivityHelper.GetBestPreviewSize(camera, textureView.Width, textureView.Height);
+            tmp.SetPreviewSize((int) bestSize.Width, (int) bestSize.Height);
+            tmp.FocusMode = Camera.Parameters.FocusModeContinuousPicture;
             camera.SetParameters(tmp);
             movementDetector.SetupBallDetector(textureView.Height, textureView.Width, game.BallColor);
             Log.Debug("camtest-setup", game.BallColor.ToString());
@@ -158,21 +159,6 @@ namespace foosballv2s
         {
             Bitmap bitmap = BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length);
             return bitmap;
-        }
-
-        private Size GetBestPreviewSize(int maxWidth)
-        {
-            Camera.Parameters parameters = camera.GetParameters();
-            Size bestSize = new Size();
-            
-            int i = 0;
-            do
-            {
-                bestSize.Width = parameters.SupportedPreviewSizes[i].Width;
-                bestSize.Height = parameters.SupportedPreviewSizes[i].Height;
-                i++;
-            } while (parameters.SupportedPreviewSizes[i].Width <= maxWidth);
-            return bestSize;
         }
     }
 }

@@ -88,23 +88,22 @@ namespace foosballv2s
             //CvInvoke.NamedWindow("HSV", NamedWindowType.KeepRatio);
             //CvInvoke.NamedWindow("Thresholded", NamedWindowType.KeepRatio);
         }
-        public CircleF[] DetectBall(byte[] frameBytes, int frameHeight, int frameWidth)
+        public CircleF[] DetectBall(Image<Hsv, System.Byte> inputFrame, int frameHeight, int frameWidth)
         { 
             //Application.Idle += new EventHandler(delegate (object sender, EventArgs e)
             {
                 //frame = this.video.GetFrame(); // Get one frame
-                if (frame == null)
+                if (inputFrame == null)
                 {
                     Console.WriteLine("Error. A frame is empty. Skipping");
+                    return null;
                 }
-                
-                CvInvoke.Imdecode(frameBytes, ImreadModes.Unchanged, frame);
-                hsvFrame = frame.ToImage<Hsv, byte>();
+                hsvFrame = inputFrame;
                 //hsvFrame.Bytes = frameBytes;
                 // Covert color space to HSV as it is much easier to filter colors in the HSV color-space.
                 ////CvInvoke.CvtColor(frame, hsvFrame, ColorConversion.Bgr2Hsv);
                 // Filter out other colors than specified
-                this.FilterHsvImageColor(hsvFrame, thresholded, minHsv, maxHsv);
+                this.FilterHsvImageColor(hsvFrame, minHsv, maxHsv);
                 // Make some smoothing for better detection results
                 ////thresholded = thresholded.SmoothGaussian(5);
                 // Find circles in grayscale image and draw them on the frame
@@ -127,7 +126,7 @@ namespace foosballv2s
         /**
          * Filter out colors which are out of range in Hsv image.
          */
-        private void FilterHsvImageColor(Image<Hsv, byte> hsvImage, Image<Gray, byte> resultImage, Hsv minHsv, Hsv maxHsv)
+        private void FilterHsvImageColor(Image<Hsv, byte> hsvImage, Hsv minHsv, Hsv maxHsv)
         {
             // Dealing with colors that are close to 0 or 180 by their hue (especially red)
             if (minHsv.Hue > maxHsv.Hue)
@@ -136,7 +135,7 @@ namespace foosballv2s
                 Hsv partialMin = new Hsv(0, minHsv.Satuation, minHsv.Value);
                 Image<Gray, Byte> thresholdedFirst = hsvImage.InRange(minHsv, partialMax);
                 Image<Gray, Byte> thresholdedSecond = hsvImage.InRange(partialMin, maxHsv);
-                CvInvoke.AddWeighted(thresholdedFirst, 1.0, thresholdedSecond, 1.0, 0.0, resultImage);
+                CvInvoke.AddWeighted(thresholdedFirst, 1.0, thresholdedSecond, 1.0, 0.0, thresholded);
                 //CvInvoke.GaussianBlur(thresholded, thresholded, new Size(9, 9), 2, 2);
                 thresholdedFirst.Dispose();
                 thresholdedSecond.Dispose();
@@ -144,7 +143,7 @@ namespace foosballv2s
             }
             else // Otherwise just filter out colors that are out of the given range
             {
-                resultImage = hsvImage.InRange(minHsv, maxHsv);
+                thresholded = hsvImage.InRange(minHsv, maxHsv);
             }
         }
         

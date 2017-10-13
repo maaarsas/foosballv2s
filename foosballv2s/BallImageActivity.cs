@@ -24,13 +24,17 @@ using Emgu.CV.Structure;
 using Java.Interop;
 using Java.Lang;
 using Java.Nio;
+using Xamarin.Forms;
+using Button = Android.Widget.Button;
 using Byte = System.Byte;
 using Camera = Android.Hardware.Camera;
 using CameraError = Android.Hardware.Camera2.CameraError;
+using Color = Android.Graphics.Color;
 using File = Java.IO.File;
 using FileMode = Xamarin.Forms.Internals.FileMode;
 using Stream = Android.Media.Stream;
 using String = System.String;
+using View = Android.Views.View;
 
 namespace foosballv2s
 {
@@ -44,21 +48,27 @@ namespace foosballv2s
 
         private int viewWidth = 0;
         private int viewHeight = 0;
+        private Game game;
+
 
         private bool colorDetected = false;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.BallImage);
            
             textureView = (TextureView) FindViewById(Resource.Id.cameraSurfaceView);
             textureView.SurfaceTextureListener = this;
+            
+            game = DependencyService.Get<Game>();
         }
 
         [Export("DetectBallColor")]
         public void DetectBallColor(View view)
         {
+            // TODO: Disallow the button click when a detection is already in progress
             Bitmap b = textureView.Bitmap;
             
             BallImage ballImage = new BallImage(b);
@@ -70,6 +80,7 @@ namespace foosballv2s
                 (float) hsvColor.Value / 255
             });
 
+            game.BallColor = hsvColor;
             colorDetected = true;
             
             ImageView colorSquare = (ImageView) FindViewById(Resource.Id.color_square);

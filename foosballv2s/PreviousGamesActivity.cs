@@ -22,10 +22,10 @@ namespace foosballv2s
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.PreviousGames);
 
-            string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal)
+            string path = (String)System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal)
                 + "/previousnames.json";
 
-            string jsonObj = File.ReadAllText("path");
+            string jsonObj = File.ReadAllText(path);
 
             List<String> names = new List<String>();
             names = JsonConvert.DeserializeObject<List<String>>(jsonObj);

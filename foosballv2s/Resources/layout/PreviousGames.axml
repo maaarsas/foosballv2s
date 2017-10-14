@@ -5,13 +5,4 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="18dp">
-  <TextView
-        android:text="@string/welcome_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/FoosWelcome"
-        android:gravity="center"
-        android:paddingBottom="36dp"
-        android:textStyle="bold"
-        android:textSize="28sp" />
 </LinearLayout>

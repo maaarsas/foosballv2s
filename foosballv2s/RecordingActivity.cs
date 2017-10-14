@@ -126,8 +126,8 @@ namespace foosballv2s
 
         public void OnPreviewFrame(byte[] data, Camera camera)
         {
-            byte[] jpegData = ConvertYuvToJpeg(data, camera);
-            Bitmap frameBitmap = BytesToBitmap(jpegData);
+            //byte[] jpegData = ConvertYuvToJpeg(data, camera);
+            //Bitmap frameBitmap = BytesToBitmap(jpegData);
 
             //ImageView testImage = (ImageView) FindViewById(Resource.Id.test_image_view);
             //testImage.SetImageBitmap(frameBitmap);

@@ -22,6 +22,7 @@ namespace foosballv2s
     [Activity()]
     public class RecordingActivity : Activity, TextureView.ISurfaceTextureListener, Camera.IPreviewCallback
     {
+        private const string TAG = "CamTest";
         private Camera camera;
         private TextureView textureView;
         private SurfaceView surfaceView;
@@ -82,11 +83,13 @@ namespace foosballv2s
             }
             catch (Java.IO.IOException ex)
             {
-                Console.WriteLine(ex.Message);
+                Log.Error(TAG, ex.Message);
             }
+            Log.Debug("camtest-setup", game.BallColor.ToString());
             Camera.Parameters tmp = camera.GetParameters();
             Size bestSize = ActivityHelper.GetBestPreviewSize(camera, textureView.Width, textureView.Height);
             tmp.SetPreviewSize((int) bestSize.Width, (int) bestSize.Height);
+            //tmp.PreviewFormat = ImageFormatType.Yv12;
             tmp.FocusMode = Camera.Parameters.FocusModeContinuousPicture;
             camera.SetParameters(tmp);
             movementDetector.SetupBallDetector(textureView.Height, textureView.Width, game.BallColor);
@@ -123,22 +126,31 @@ namespace foosballv2s
 
         public void OnPreviewFrame(byte[] data, Camera camera)
         {
-            byte[] jpegData = ConvertYuvToJpeg (data, camera);
+            byte[] jpegData = ConvertYuvToJpeg(data, camera);
             Bitmap frameBitmap = BytesToBitmap(jpegData);
-            Image<Hsv, System.Byte> hsvFrame = new Image<Hsv, byte>(frameBitmap);
-            Bitmap bitmap = hsvFrame.Bitmap;
+
+            //ImageView testImage = (ImageView) FindViewById(Resource.Id.test_image_view);
+            //testImage.SetImageBitmap(frameBitmap);
+            //var previewFormat = camera.GetParameters().PreviewFormat;
+
+            //Log.Debug("CamTest", data.Length.ToString() + camera.GetParameters().PreviewSize.Width);
+
+            /*Image<Hsv, System.Byte> hsvFrame = new Image<Hsv, byte>(frameBitmap);
+            Bitmap bitmap = hsvFrame.Bitmap;*/
             
-            CircleF[] circles = movementDetector.DetectBall(hsvFrame, textureView.Height, textureView.Width);
+            //testImage.SetImageBitmap(bitmap);
+
+            /*CircleF[] circles = movementDetector.DetectBall(hsvFrame, textureView.Height, textureView.Width);
             
             // testing
             foreach (CircleF circle in circles)
             {
                 DrawRectangle(circle.Center.X, circle.Center.Y); 
                 Log.Debug("Camtest" + "-circle", circle.Center.ToString());
-            }
-            
+            }*/
+
             //
-           
+
         }
 
         private byte[] ConvertYuvToJpeg(byte[] yuvData, Android.Hardware.Camera camera)
@@ -148,7 +160,7 @@ namespace foosballv2s
             int height = cameraParameters.PreviewSize.Height;
             YuvImage yuv = new YuvImage(yuvData, cameraParameters.PreviewFormat, width, height, null);   
             MemoryStream ms = new MemoryStream();
-            int quality = 100;   // adjust this as needed
+            int quality = 50;   // adjust this as needed
             yuv.CompressToJpeg(new Rect(0, 0, width, height), quality, ms);
             byte[] jpegData = ms.ToArray();
 
@@ -157,8 +169,12 @@ namespace foosballv2s
 
         public static Bitmap BytesToBitmap(byte[] imageBytes)
         {
+            int rotationAngle = 90;
+            
             Bitmap bitmap = BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length);
-            return bitmap;
+            Matrix matrix = new Matrix();
+            matrix.PostRotate(rotationAngle);
+            return Bitmap.CreateBitmap(bitmap, 0, 0, bitmap.Width, bitmap.Height, matrix, true);
         }
     }
 }

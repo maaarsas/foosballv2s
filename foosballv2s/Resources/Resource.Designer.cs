@@ -2696,6 +2696,9 @@ namespace foosballv2s
 			// aapt resource value: 0x7f08007c
 			public const int team2Name = 2131230844;
 			
+			// aapt resource value: 0x7f0800a5
+			public const int test_image_view = 2131230885;
+			
 			// aapt resource value: 0x7f0800a0
 			public const int text = 2131230880;
 			

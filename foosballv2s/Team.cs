@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace foosballv2s
 {
-    class Team
+    public class Team
     {
-        public string teamName { get; set; }
-        public int totalScore { get; set; }
+        public string TeamName { get; set; }
+        public int TotalScore { get; set; }
     }
 }

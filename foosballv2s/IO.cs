@@ -27,7 +27,7 @@ namespace foosballv2s
         {
             string filePath = @"C:\Users\Radvila\Documents\GitHub\foosballv2s\foosballv2s\GameInfo.txt";
 
-            File.AppendAllText(filePath, team1.teamName + Environment.NewLine + "vs. " + Environment.NewLine + team2.teamName + Environment.NewLine + Environment.NewLine);
+            File.AppendAllText(filePath, team1.TeamName + Environment.NewLine + "vs. " + Environment.NewLine + team2.TeamName + Environment.NewLine + Environment.NewLine);
         }
 
         public void ReadTeamNames(Team team1, Team team2)
@@ -38,8 +38,8 @@ namespace foosballv2s
 
             string[] entries = teamNames.Split(' ');
 
-            team1.teamName = File.ReadLines(filePath).First();
-            team2.teamName = File.ReadLines(filePath).Skip(2).Take(1).First();
+            team1.TeamName = File.ReadLines(filePath).First();
+            team2.TeamName = File.ReadLines(filePath).Skip(2).Take(1).First();
         }
     }
 }

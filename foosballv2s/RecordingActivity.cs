@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Android.App;
+using Android.Content.PM;
 using Android.Widget;
 using Android.OS;
 using Android.Views;
@@ -8,6 +9,7 @@ using Android.Graphics;
 using Android.Util;
 using Emgu.CV;
 using Emgu.CV.Structure;
+using Java.Interop;
 using Java.IO;
 using Java.Lang;
 using Xamarin.Forms;
@@ -19,7 +21,10 @@ using View = Android.Views.View;
 
 namespace foosballv2s
 {
-    [Activity()]
+    [Activity(
+        ConfigurationChanges = ConfigChanges.Orientation,
+        ScreenOrientation = ScreenOrientation.Landscape
+    )]
     public class RecordingActivity : Activity, TextureView.ISurfaceTextureListener, Camera.IPreviewCallback
     {
         private const string TAG = "CamTest";
@@ -28,6 +33,9 @@ namespace foosballv2s
         private SurfaceView surfaceView;
         private ISurfaceHolder holder;
         private MovementDetector movementDetector;
+
+        private TextView team1ScoreView;
+        private TextView team2ScoreView;
 
         private Game game;
 
@@ -52,6 +60,42 @@ namespace foosballv2s
 
             movementDetector = new MovementDetector();
             game = DependencyService.Get<Game>();
+            
+            this.Window.AddFlags(WindowManagerFlags.Fullscreen);
+            
+            // set up displayed texts on the screen
+            TextView team1NameView = (TextView) FindViewById(Resource.Id.team1_name);
+            team1NameView.Text = game.Team1.TeamName;
+            
+            TextView team2NameView = (TextView) FindViewById(Resource.Id.team2_name);
+            team2NameView.Text = game.Team2.TeamName;
+
+            team1ScoreView = (TextView) FindViewById(Resource.Id.team1_score);
+            team2ScoreView = (TextView) FindViewById(Resource.Id.team2_score);
+        }
+
+        [Export("Team1Goal")]
+        public void Team1Goal(View view)
+        {
+            game.Team1Score++;
+            team1ScoreView.Text = game.Team1Score.ToString();
+            CheckGameEnd(game);
+        }
+        
+        [Export("Team2Goal")]
+        public void Team2Goal(View view)
+        {
+            game.Team2Score++;
+            team2ScoreView.Text = game.Team2Score.ToString();
+            CheckGameEnd(game);
+        }
+
+        private void CheckGameEnd(Game game)
+        {
+            if (game.HasEnded)
+            {
+                
+            }
         }
 
         private void OnSurfaceViewTouch(object sender, View.TouchEventArgs e)

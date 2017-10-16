@@ -21,14 +21,8 @@ namespace foosballv2s
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.PreviousGames);
-
-            string path = (String)System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal)
-                + "/previousnames.json";
-
-            string jsonObj = File.ReadAllText(path);
-
-            List<String> names = new List<String>();
-            names = JsonConvert.DeserializeObject<List<String>>(jsonObj);
+            
+            //need to sim a game to get info
         }
     }
 }

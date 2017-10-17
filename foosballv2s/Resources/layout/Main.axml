@@ -31,7 +31,7 @@
         android:layout_below="@id/TextEnterTeamNames"
         android:layout_marginBottom="18dp"
         android:hint="@string/first_team_name"
-        android:textSize="24sp"/>
+        android:textSize="24sp" />
     <EditText
         android:id="@+id/team2Name"
         android:layout_width="match_parent"
@@ -39,7 +39,7 @@
         android:layout_below="@id/team1Name"
         android:layout_marginBottom="38dp"
         android:hint="@string/second_team_name"
-        android:textSize="24sp"/>
+        android:textSize="24sp" />
     <RelativeLayout
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"

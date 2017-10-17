@@ -19,6 +19,9 @@ namespace foosballv2s
     [Activity(MainLauncher = true)]
     public class MainActivity : Activity
     {
+        private EditText mteam1Name;
+        private EditText mteam2Name;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -32,10 +35,23 @@ namespace foosballv2s
         [Export("SubmitTeamNames")]
         public void SubmitTeamNames(View view)
         {
-            //TODO: validate team names with Regex
-            Intent intent = new Intent(this, typeof(BallImageActivity));
-            StartActivity(intent);
+            Validator v = new Validator();
+            mteam1Name = (EditText)FindViewById(Resource.Id.team1Name);
+            mteam2Name = (EditText)FindViewById(Resource.Id.team2Name);
+            if (!v.Validate(mteam1Name.Text) || !v.Validate(mteam2Name.Text))
+            {
+                SetContentView(Resource.Layout.Main);
+                //change hint text that team name format is not correct
+            }
+            else
+            {
+                Team team1 = new Team();
+                Team team2 = new Team();
+                team1.teamName = mteam1Name.Text;
+                team2.teamName = mteam2Name.Text;
+                Intent intent = new Intent(this, typeof(BallImageActivity));
+                StartActivity(intent);
+            }          
         }
-
     }
 }

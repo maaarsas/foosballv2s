@@ -140,6 +140,7 @@
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Team.cs" />
+    <Compile Include="Validator.cs" />
     <Compile Include="VideoFile.cs" />
     <Compile Include="VideoLive.cs" />
   </ItemGroup>
@@ -175,6 +176,9 @@
     <Folder Include="Resources\mipmap-xhdpi\" />
     <Folder Include="Resources\mipmap-xxhdpi\" />
     <Folder Include="Resources\mipmap-xxxhdpi\" />
+    <Folder Include="lib\armeabi-v7a\" />
+    <Folder Include="lib\armeabi\" />
+    <Folder Include="lib\x86\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Loading.xml" />

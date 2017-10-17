@@ -124,6 +124,7 @@
     <Compile Include="BallImage.cs" />
     <Compile Include="BallImageActivity.cs" />
     <Compile Include="BallImagePreview.cs" />
+    <Compile Include="SLSupp.cs" />
     <Compile Include="GameTracker.cs" />
     <Compile Include="IO.cs" />
     <Compile Include="IVideo.cs" />

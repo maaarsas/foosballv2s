@@ -105,7 +105,7 @@ namespace foosballv2s
                 // Filter out other colors than specified
                 this.FilterHsvImageColor(hsvFrame, minHsv, maxHsv);
                 // Make some smoothing for better detection results
-                ////thresholded = thresholded.SmoothGaussian(5);
+                thresholded = thresholded.SmoothGaussian(5);
                 // Find circles in grayscale image and draw them on the frame
                 return this.DetectCirclesInImage(thresholded, frame);
 
@@ -136,7 +136,6 @@ namespace foosballv2s
                 Image<Gray, Byte> thresholdedFirst = hsvImage.InRange(minHsv, partialMax);
                 Image<Gray, Byte> thresholdedSecond = hsvImage.InRange(partialMin, maxHsv);
                 CvInvoke.AddWeighted(thresholdedFirst, 1.0, thresholdedSecond, 1.0, 0.0, thresholded);
-                //CvInvoke.GaussianBlur(thresholded, thresholded, new Size(9, 9), 2, 2);
                 thresholdedFirst.Dispose();
                 thresholdedSecond.Dispose();
 

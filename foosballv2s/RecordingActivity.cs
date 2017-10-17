@@ -1,11 +1,13 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
+using System.Reflection.Emit;
 using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.Widget;
 using Android.OS;
 using Android.Views;
 using Android.Graphics;
+using RS = Android.Renderscripts;
 using Android.Util;
 using Emgu.CV;
 using Emgu.CV.Structure;
@@ -16,7 +18,9 @@ using Xamarin.Forms;
 using Camera = Android.Hardware.Camera;
 using Color = Android.Graphics.Color;
 using Console = System.Console;
+using Element = Xamarin.Forms.Element;
 using Size = Xamarin.Forms.Size;
+using Type = System.Type;
 using View = Android.Views.View;
 
 namespace foosballv2s
@@ -116,12 +120,9 @@ namespace foosballv2s
         public void OnSurfaceTextureAvailable(SurfaceTexture surface, int width, int height)
         {
             camera = Camera.Open();
-
             try
             {
-                //camera.GetParameters().PreviewFormat = ImageFormatType.Rgb565;
                 camera.SetPreviewTexture(surface);
-                camera.SetDisplayOrientation(90);
                 camera.StartPreview();
                 camera.SetPreviewCallback(this);
             }
@@ -129,24 +130,32 @@ namespace foosballv2s
             {
                 Log.Error(TAG, ex.Message);
             }
-            Log.Debug("camtest-setup", game.BallColor.ToString());
             Camera.Parameters tmp = camera.GetParameters();
             Size bestSize = ActivityHelper.GetBestPreviewSize(camera, textureView.Width, textureView.Height);
             tmp.SetPreviewSize((int) bestSize.Width, (int) bestSize.Height);
-            //tmp.PreviewFormat = ImageFormatType.Yv12;
             tmp.FocusMode = Camera.Parameters.FocusModeContinuousPicture;
             camera.SetParameters(tmp);
-            movementDetector.SetupBallDetector(textureView.Height, textureView.Width, game.BallColor);
-            Log.Debug("camtest-setup", game.BallColor.ToString());
+            movementDetector.SetupBallDetector(textureView.Width, textureView.Height, game.BallColor);
         }
 
-        public void OnSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height)
-        {
-        }
+        public void OnSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) { }
 
         public void OnSurfaceTextureUpdated(SurfaceTexture surface)
         {
-           
+            Bitmap frameBitmap = textureView.Bitmap;
+            
+            Image<Hsv, System.Byte> hsvFrame = new Image<Hsv, byte>(frameBitmap);
+            Bitmap bitmap = hsvFrame.Bitmap;
+
+            CircleF[] circles = movementDetector.DetectBall(hsvFrame, textureView.Height, textureView.Width);
+            
+            // testing
+            foreach (CircleF circle in circles)
+            {
+                DrawCircle(circle.Center.X, circle.Center.Y, circle.Radius); 
+                Log.Debug("Camtest" + "-circle", circle.Center.ToString());
+            }
+            frameBitmap.Recycle();
         }
 
         private void DrawRectangle(float x, float y)
@@ -167,58 +176,27 @@ namespace foosballv2s
             holder.UnlockCanvasAndPost(canvas);
 
         }
+        
+        private void DrawCircle(float x, float y, float radius)
+        {
+            //define the paintbrush
+            Paint mpaint = new Paint();
+            mpaint.Color = Color.Red;
+            mpaint.SetStyle(Paint.Style.Stroke);
+            mpaint.StrokeWidth = 5f;
+
+            //draw
+            Canvas canvas = holder.LockCanvas();
+            //clear the paint of last time
+            canvas.DrawColor(Color.Transparent, PorterDuff.Mode.Clear);
+            //draw a new one, set your ball's position to the rect here
+            canvas.DrawCircle(x, y, radius, mpaint);
+            holder.UnlockCanvasAndPost(canvas);
+
+        }
 
         public void OnPreviewFrame(byte[] data, Camera camera)
         {
-            //byte[] jpegData = ConvertYuvToJpeg(data, camera);
-            //Bitmap frameBitmap = BytesToBitmap(jpegData);
-
-            //ImageView testImage = (ImageView) FindViewById(Resource.Id.test_image_view);
-            //testImage.SetImageBitmap(frameBitmap);
-            //var previewFormat = camera.GetParameters().PreviewFormat;
-
-            //Log.Debug("CamTest", data.Length.ToString() + camera.GetParameters().PreviewSize.Width);
-
-            /*Image<Hsv, System.Byte> hsvFrame = new Image<Hsv, byte>(frameBitmap);
-            Bitmap bitmap = hsvFrame.Bitmap;*/
-            
-            //testImage.SetImageBitmap(bitmap);
-
-            /*CircleF[] circles = movementDetector.DetectBall(hsvFrame, textureView.Height, textureView.Width);
-            
-            // testing
-            foreach (CircleF circle in circles)
-            {
-                DrawRectangle(circle.Center.X, circle.Center.Y); 
-                Log.Debug("Camtest" + "-circle", circle.Center.ToString());
-            }*/
-
-            //
-
-        }
-
-        private byte[] ConvertYuvToJpeg(byte[] yuvData, Android.Hardware.Camera camera)
-        {
-            Camera.Parameters cameraParameters = camera.GetParameters();
-            int width = cameraParameters.PreviewSize.Width;
-            int height = cameraParameters.PreviewSize.Height;
-            YuvImage yuv = new YuvImage(yuvData, cameraParameters.PreviewFormat, width, height, null);   
-            MemoryStream ms = new MemoryStream();
-            int quality = 50;   // adjust this as needed
-            yuv.CompressToJpeg(new Rect(0, 0, width, height), quality, ms);
-            byte[] jpegData = ms.ToArray();
-
-            return jpegData;
-        }
-
-        public static Bitmap BytesToBitmap(byte[] imageBytes)
-        {
-            int rotationAngle = 90;
-            
-            Bitmap bitmap = BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length);
-            Matrix matrix = new Matrix();
-            matrix.PostRotate(rotationAngle);
-            return Bitmap.CreateBitmap(bitmap, 0, 0, bitmap.Width, bitmap.Height, matrix, true);
         }
     }
 }

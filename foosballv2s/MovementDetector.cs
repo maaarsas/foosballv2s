@@ -3,7 +3,9 @@ using Android.Util;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
+using Emgu.CV.Util;
 using System;
+using Android.Support.V7.Util;
 
 namespace foosballv2s
 {
@@ -32,7 +34,7 @@ namespace foosballv2s
         private Hsv minHsv;
         private Hsv maxHsv;
         
-        public void SetupBallDetector(byte[] frameInBytes, int frameHeight, int frameWidth, Hsv hsvBall)
+        public void SetupBallDetector(int frameHeight, int frameWidth, Hsv hsvBall)
         {
             // Currently the color is hardcoded here. Needs to be detected somewhere else
             // and passed here as parameters
@@ -45,7 +47,7 @@ namespace foosballv2s
             //Image<Bgr, Byte> frameImage = new Image<Bgr, Byte>(frameWidth, frameHeight); //specify the width and height here
             //frameImage.Bytes = frameInBytes; //your byte array
             //frame = frameImage.Mat;
-            CvInvoke.Imdecode(frameInBytes, ImreadModes.Unchanged, frame);
+            //CvInvoke.Imdecode(frameInBytes, ImreadModes.Unchanged, frame);
             //frame = new Mat();
             //Bitmap bmp32 = bitmap.Copy(Bitmap.Config.Argb8888, true);
             frame = new Mat();
@@ -86,20 +88,22 @@ namespace foosballv2s
             //CvInvoke.NamedWindow("HSV", NamedWindowType.KeepRatio);
             //CvInvoke.NamedWindow("Thresholded", NamedWindowType.KeepRatio);
         }
-        public CircleF[] DetectBall(byte[] frameInBytes, int frameHeight, int frameWidth)
+        public CircleF[] DetectBall(Image<Hsv, System.Byte> inputFrame, int frameHeight, int frameWidth)
         { 
             //Application.Idle += new EventHandler(delegate (object sender, EventArgs e)
             {
                 //frame = this.video.GetFrame(); // Get one frame
-                if (frame == null)
+                if (inputFrame == null)
                 {
                     Console.WriteLine("Error. A frame is empty. Skipping");
+                    return null;
                 }
-
+                hsvFrame = inputFrame;
+                //hsvFrame.Bytes = frameBytes;
                 // Covert color space to HSV as it is much easier to filter colors in the HSV color-space.
                 ////CvInvoke.CvtColor(frame, hsvFrame, ColorConversion.Bgr2Hsv);
                 // Filter out other colors than specified
-                this.FilterHsvImageColor(hsvFrame, thresholded, minHsv, maxHsv);
+                this.FilterHsvImageColor(hsvFrame, minHsv, maxHsv);
                 // Make some smoothing for better detection results
                 ////thresholded = thresholded.SmoothGaussian(5);
                 // Find circles in grayscale image and draw them on the frame
@@ -122,7 +126,7 @@ namespace foosballv2s
         /**
          * Filter out colors which are out of range in Hsv image.
          */
-        private void FilterHsvImageColor(Image<Hsv, byte> hsvImage, Image<Gray, byte> resultImage, Hsv minHsv, Hsv maxHsv)
+        private void FilterHsvImageColor(Image<Hsv, byte> hsvImage, Hsv minHsv, Hsv maxHsv)
         {
             // Dealing with colors that are close to 0 or 180 by their hue (especially red)
             if (minHsv.Hue > maxHsv.Hue)
@@ -131,7 +135,7 @@ namespace foosballv2s
                 Hsv partialMin = new Hsv(0, minHsv.Satuation, minHsv.Value);
                 Image<Gray, Byte> thresholdedFirst = hsvImage.InRange(minHsv, partialMax);
                 Image<Gray, Byte> thresholdedSecond = hsvImage.InRange(partialMin, maxHsv);
-                CvInvoke.AddWeighted(thresholdedFirst, 1.0, thresholdedSecond, 1.0, 0.0, resultImage);
+                CvInvoke.AddWeighted(thresholdedFirst, 1.0, thresholdedSecond, 1.0, 0.0, thresholded);
                 //CvInvoke.GaussianBlur(thresholded, thresholded, new Size(9, 9), 2, 2);
                 thresholdedFirst.Dispose();
                 thresholdedSecond.Dispose();
@@ -139,7 +143,7 @@ namespace foosballv2s
             }
             else // Otherwise just filter out colors that are out of the given range
             {
-                resultImage = hsvImage.InRange(minHsv, maxHsv);
+                thresholded = hsvImage.InRange(minHsv, maxHsv);
             }
         }
         
@@ -150,8 +154,7 @@ namespace foosballv2s
         {
             //CircleF[] circles = CvInvoke.HoughCircles(image, HoughType.Gradient, 1, 
             //    1000, 10, 10, 15, 60);
-            //return CvInvoke.HoughCircles(image, HoughType.Gradient, 2, image.Height / 4, 50, 20, 15, 60);
-            return new CircleF[] { };
+            return CvInvoke.HoughCircles(image, HoughType.Gradient, 2, image.Height / 4, 50, 20, 15, 60);
         }
 
         

@@ -129,7 +129,6 @@
     <Compile Include="ActivityHelper.cs" />
     <Compile Include="BallImage.cs" />
     <Compile Include="BallImageActivity.cs" />
-    <Compile Include="BallImagePreview.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameTracker.cs" />
     <Compile Include="IO.cs" />

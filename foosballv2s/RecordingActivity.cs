@@ -31,7 +31,6 @@ namespace foosballv2s
     )]
     public class RecordingActivity : Activity, TextureView.ISurfaceTextureListener, Camera.IPreviewCallback
     {
-        private const string TAG = "CamTest";
         private Camera camera;
         private TextureView textureView;
         private SurfaceView surfaceView;
@@ -126,10 +125,8 @@ namespace foosballv2s
                 camera.StartPreview();
                 camera.SetPreviewCallback(this);
             }
-            catch (Java.IO.IOException ex)
-            {
-                Log.Error(TAG, ex.Message);
-            }
+            catch (Java.IO.IOException ex) { }
+
             Camera.Parameters tmp = camera.GetParameters();
             Size bestSize = ActivityHelper.GetBestPreviewSize(camera, textureView.Width, textureView.Height);
             tmp.SetPreviewSize((int) bestSize.Width, (int) bestSize.Height);

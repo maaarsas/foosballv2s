@@ -24,7 +24,7 @@
         android:paddingBottom="18dp"
         android:textStyle="bold"
         android:textSize="18sp" />
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/team1Name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
         android:layout_marginBottom="18dp"
         android:hint="@string/first_team_name"
         android:textSize="24sp" />
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/team2Name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,5 +49,10 @@
             style="@style/primaryButtonStyle"
             android:id="@+id/submit"
             android:onClick="SubmitTeamNames" />
+        <Button
+            android:text="@string/prev"
+            style="@style/primaryButtonStyle"
+            android:id="@+id/prev"
+            android:layout_below="@id/submit" />
     </RelativeLayout>
 </LinearLayout>

@@ -54,12 +54,12 @@ namespace foosballv2s
             maxHsv = new Hsv(t1max, t2max, t3max); // maximum color that passes
 
             hsvFrame = new Image<Hsv, byte>(new Image<Gray, Byte>[] {
-                new Image<Gray, Byte>(frame.Width, frame.Height),
-                new Image<Gray, Byte>(frame.Width, frame.Height),
-                new Image<Gray, Byte>(frame.Width, frame.Height),
+                new Image<Gray, Byte>(frameWidth, frameHeight),
+                new Image<Gray, Byte>(frameWidth, frameHeight),
+                new Image<Gray, Byte>(frameWidth, frameHeight),
                 
             }); // frame converted to HSV
-            thresholded = new Image<Gray, byte>(frame.Width, frame.Height); // frame with filtered out colors
+            thresholded = new Image<Gray, byte>(frameWidth, frameHeight); // frame with filtered out colors
         }
         
         public CircleF[] DetectBall(Image<Hsv, System.Byte> inputFrame, int frameHeight, int frameWidth)

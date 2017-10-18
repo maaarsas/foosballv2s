@@ -1,10 +1,10 @@
 ﻿using Android.App;
 using Android.Widget;
 using Android.OS;
-using Android.Hardware;
 using Android.Views;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using Android;
 using Android.Content;
@@ -13,7 +13,6 @@ using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Hardware.Camera2;
 using Android.Hardware.Camera2.Params;
-using Android.Media;
 using Android.Media.Projection;
 using Android.Provider;
 using Android.Runtime;
@@ -25,79 +24,82 @@ using Emgu.CV.Structure;
 using Java.Interop;
 using Java.Lang;
 using Java.Nio;
+using Xamarin.Forms;
+using Button = Android.Widget.Button;
 using Byte = System.Byte;
+using Camera = Android.Hardware.Camera;
 using CameraError = Android.Hardware.Camera2.CameraError;
+using Color = Android.Graphics.Color;
+using File = Java.IO.File;
+using FileMode = Xamarin.Forms.Internals.FileMode;
+using Stream = Android.Media.Stream;
 using String = System.String;
+using View = Android.Views.View;
 
 namespace foosballv2s
 {
-    [Activity()]
-    public class BallImageActivity : Activity, ISurfaceHolderCallback, Handler.ICallback
+    [Activity(
+        ConfigurationChanges = ConfigChanges.Orientation,
+        ScreenOrientation = ScreenOrientation.Portrait
+    )]
+    public class BallImageActivity : Activity, TextureView.ISurfaceTextureListener
     {
         const String TAG = "CamTest";
-        const int MY_PERMISSIONS_REQUEST_CAMERA = 1242;
-        private const int MSG_CAMERA_OPENED = 1;
-        private const int MSG_SURFACE_READY = 2;
-        private static Handler mHandler;
-        SurfaceView mSurfaceView;
-        ISurfaceHolder mSurfaceHolder;
-        CameraManager mCameraManager;
-        String[] mCameraIDsList;
-        static CameraDevice.StateCallback mCameraStateCB;
-        static CameraDevice mCameraDevice;
-        static CameraCaptureSession mCaptureSession;
-        bool mSurfaceCreated = false;
-        bool mIsCameraConfigured = false;
-        static Surface mCameraSurface;
+        
+        private Camera mCamera;
+        private TextureView textureView;
 
         private int viewWidth = 0;
         private int viewHeight = 0;
+        private Game game;
+
+
+        private bool colorDetected = false;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.BallImage);
-
-            mSurfaceView = (SurfaceView) FindViewById(Resource.Id.cameraSurfaceView);
-            //mSurfaceView.SetZOrderOnTop(true);
-            mSurfaceHolder = this.mSurfaceView.Holder;
-            mSurfaceHolder.AddCallback(this);
-            mHandler = new Handler(this);
-            mCameraManager = (CameraManager) this.GetSystemService(Context.CameraService);
-            try
-            {
-                mCameraIDsList = this.mCameraManager.GetCameraIdList();
-            }
-            catch (CameraAccessException e) { }
-            CameraCharacteristics characteristics = mCameraManager.GetCameraCharacteristics(mCameraIDsList[0]);
-            StreamConfigurationMap streamConfigs =
-                (StreamConfigurationMap) characteristics.Get(CameraCharacteristics.ScalerStreamConfigurationMap);
-            Size[] jpegSizes = streamConfigs.GetOutputSizes((int) ImageFormatType.Jpeg);
+           
+            textureView = (TextureView) FindViewById(Resource.Id.cameraSurfaceView);
+            textureView.SurfaceTextureListener = this;
             
+            game = DependencyService.Get<Game>();
             
-            mCameraStateCB = new CameraStateCallback();
+            this.Window.AddFlags(WindowManagerFlags.Fullscreen);
         }
 
         [Export("DetectBallColor")]
         public void DetectBallColor(View view)
         {
-            Bitmap b = Bitmap.CreateBitmap(viewWidth, viewHeight, Bitmap.Config.Argb8888); 
-            Canvas c = new Canvas(b);
-            mSurfaceView.Draw(c);
+            // TODO: Disallow the button click when a detection is already in progress
+            Bitmap b = textureView.Bitmap;
+            
             BallImage ballImage = new BallImage(b);
             Hsv hsvColor = ballImage.getColor();
+            
             Color detectedRGBColor = Color.HSVToColor(new float[]{
-                (float) hsvColor.Hue, 
-                (float) hsvColor.Satuation, 
-                (float) hsvColor.Value
+                (float) hsvColor.Hue * 2, 
+                (float) hsvColor.Satuation / 255, 
+                (float) hsvColor.Value / 255
             });
-            Log.Debug(TAG + "ddd",
-                detectedRGBColor.R.ToString() + detectedRGBColor.G.ToString() + detectedRGBColor.B.ToString());
-            ImageView colorSquare = (ImageView) FindViewById(Resource.Id.text_detected_color);
-            GradientDrawable bgShape = (GradientDrawable) colorSquare.Background;
-            bgShape.SetColor(detectedRGBColor);
 
+            game.BallColor = hsvColor;
+            colorDetected = true;
+            
+            ImageView colorSquare = (ImageView) FindViewById(Resource.Id.color_square);
+            colorSquare.SetBackgroundColor(detectedRGBColor);
+            
+            // color detection button text is changed
+            Button detectButton = (Button) FindViewById(Resource.Id.detect_button);
+            detectButton.Text = GetString(Resource.String.detect_again);
+            
+            // submit button is only shown when the color is detected
+            Button submitButton = (Button) FindViewById(Resource.Id.submit);
+            submitButton.Visibility = ViewStates.Visible;
         }
+        
 
         [Export("SubmitBallPhoto")]
         public void SubmitBallPhoto(View view)
@@ -105,132 +107,45 @@ namespace foosballv2s
             Intent intent = new Intent(this, typeof(RecordingActivity));
             StartActivity(intent);
         }
+       
         
-        protected override void OnStart() {
-            base.OnStart();
-            Permission permissionCheck = ContextCompat.CheckSelfPermission(this, Manifest.Permission.Camera);
-            if (permissionCheck != Permission.Granted) {
-                if (ActivityCompat.ShouldShowRequestPermissionRationale(this, Manifest.Permission.Camera)) {
-    
-                } else {
-                    ActivityCompat.RequestPermissions(this, new String[]{Manifest.Permission.Camera}, MY_PERMISSIONS_REQUEST_CAMERA);
-                    }
-            } else {
-                try {
-                    mCameraManager.OpenCamera(mCameraIDsList[0], mCameraStateCB, new Handler());
-                } catch (CameraAccessException e)
-                {
-                    Log.Error("ERROR", e.StackTrace);
-                }
-            }
-        }
-    
-        protected override void OnStop() {
-            base.OnStop();
+        public void OnSurfaceTextureAvailable(SurfaceTexture surfacetexture, int i, int j) {
+            mCamera = Camera.Open();
             try {
-                if (mCaptureSession != null) {
-                    mCaptureSession.StopRepeating();
-                    mCaptureSession.Close();
-                    mCaptureSession = null;
-                }
-                mIsCameraConfigured = false;
-            } 
-            catch (CameraAccessException e) { } 
-            catch (IllegalStateException e2) { } 
-            finally {
-                if (mCameraDevice != null) {
-                    mCameraDevice.Close();
-                    mCameraDevice = null;
-                    mCaptureSession = null;
-                }
+                mCamera.SetPreviewTexture(surfacetexture);
+            } catch (IOException e) {
+                Log.Error(TAG + "-ERROR", e.StackTrace);
+            }
+            Camera.Parameters tmp = mCamera.GetParameters();
+            Xamarin.Forms.Size bestSize = ActivityHelper.GetBestPreviewSize(mCamera, textureView.Width, textureView.Height);
+            tmp.SetPreviewSize((int) bestSize.Width, (int) bestSize.Height);
+            tmp.FocusMode = Camera.Parameters.FocusModeContinuousPicture;
+            mCamera.SetParameters(tmp);
+            mCamera.SetDisplayOrientation(90);
+            mCamera.StartPreview();
+
+        }
+
+        public bool OnSurfaceTextureDestroyed(SurfaceTexture surfacetexture) {
+            if (mCamera != null) {
+                mCamera.StopPreview();
+                mCamera.Release();
+                mCamera = null;
+            }
+            return false;
+        }
+
+        public void OnSurfaceTextureSizeChanged(SurfaceTexture surfacetexture, int i, int j) {
+            if (mCamera != null) {
+                Camera.Parameters tmp = mCamera.GetParameters();
+                tmp.SetPreviewSize(tmp.SupportedPreviewSizes[0].Width, tmp.SupportedPreviewSizes[0].Height);
+                mCamera.SetParameters(tmp);
+                mCamera.StartPreview();
             }
         }
-    
-        public bool HandleMessage(Message msg) {
-            switch (msg.What) {
-                case MSG_CAMERA_OPENED:
-                case MSG_SURFACE_READY:
-                    if (mSurfaceCreated && (mCameraDevice != null)
-                            && !mIsCameraConfigured) {
-                        ConfigureCamera();
-                    }
-                    break;
-            }
-    
-            return true;
+
+        public void OnSurfaceTextureUpdated(SurfaceTexture surfacetexture) {
         }
-    
-        private void ConfigureCamera() {
-            List<Surface> surfaceList = new List<Surface> {mCameraSurface};
-            try {
-                mCameraDevice.CreateCaptureSession(surfaceList,
-                        new CaptureSessionListener(), null);
-            } catch (CameraAccessException e) {
-                Log.Error("ERROR", e.StackTrace);
-            }
-            mIsCameraConfigured = true;
-        }
-    
-        public override void OnRequestPermissionsResult(int requestCode, String[] permissions, Permission[] grantResults) {
-            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-            switch (requestCode) {
-                case MY_PERMISSIONS_REQUEST_CAMERA:
-                    if (ActivityCompat.CheckSelfPermission(this, Manifest.Permission.Camera) 
-                        == Permission.Granted)
-                        try {
-                            mCameraManager.OpenCamera(mCameraIDsList[0], mCameraStateCB, new Handler());
-                        } catch (CameraAccessException e) {
-                            Log.Error("ERROR", e.StackTrace);
-                        }
-                    break;
-            }
-        }
-    
-        public void SurfaceCreated(ISurfaceHolder holder)
-        {
-            mCameraSurface = holder.Surface;
-        }
-    
-        public void SurfaceChanged(ISurfaceHolder holder, Format format, int width, int height) {
-            mCameraSurface = holder.Surface;
-            mSurfaceCreated = true;
-            mHandler.SendEmptyMessage(MSG_SURFACE_READY);
-            viewWidth = width;
-            viewHeight = height;
-        }
-    
-        public void SurfaceDestroyed(ISurfaceHolder holder) {
-            mSurfaceCreated = false;
-        }
-    
-        private class CaptureSessionListener : CameraCaptureSession.StateCallback {
-            
-            public override void OnConfigureFailed(CameraCaptureSession session) { }
-    
-            public override void OnConfigured(CameraCaptureSession session) {
-                
-                mCaptureSession = session;
-    
-                try
-                {
-                    CaptureRequest.Builder previewRequestBuilder = mCameraDevice
-                            .CreateCaptureRequest(CameraTemplate.Preview);
-                    previewRequestBuilder.AddTarget(mCameraSurface);
-                    mCaptureSession.SetRepeatingRequest(previewRequestBuilder.Build(), null, null);
-                } catch (CameraAccessException e) { }
-            }
-        }
-        class CameraStateCallback : CameraDevice.StateCallback 
-        {
-            public override void OnOpened(CameraDevice camera)
-            {
-                mCameraDevice = camera;
-                mHandler.SendEmptyMessage(MSG_CAMERA_OPENED);
-            }
-            
-            public override void OnDisconnected(CameraDevice camera) { }
-            
-            public override void OnError(CameraDevice camera, CameraError error) { }
-        }
+
     }
 }

@@ -15,19 +15,19 @@ namespace foosballv2s
             TimeSpan ts = new TimeSpan();
             timer.Start();
 
-            team2.totalScore = 7;
+            team2.TotalScore = 7;
 
             while (true)
             {
                 if (/*team1 goal*/true)
                 {
-                    team1.totalScore++;
-                    r.Write(string.Format("{0:HH:mm:ss}", DateTime.Now), teamName: team1.teamName, totalScore: team1.totalScore, ts: ts, timer: timer);
+                    team1.TotalScore++;
+                    r.Write(string.Format("{0:HH:mm:ss}", DateTime.Now), teamName: team1.TeamName, totalScore: team1.TotalScore, ts: ts, timer: timer);
                 }
                 if (/*team2 goal*/true)
                 {
-                    team2.totalScore++;
-                    r.Write(string.Format("{0:HH:mm:ss}", DateTime.Now), teamName: team2.teamName, totalScore: team2.totalScore, ts: ts, timer: timer);
+                    team2.TotalScore++;
+                    r.Write(string.Format("{0:HH:mm:ss}", DateTime.Now), teamName: team2.TeamName, totalScore: team2.TotalScore, ts: ts, timer: timer);
                 }
                 if (/*stop*/ true)
                 {

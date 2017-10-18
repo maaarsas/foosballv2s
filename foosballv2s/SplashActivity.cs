@@ -13,7 +13,7 @@ using Emgu.CV.Structure;
 
 namespace foosballv2s
 {
-    [Activity(MainLauncher = true)]
+    [Activity(MainLauncher = true, Theme = "@style/SplashTheme")]
     public class SplashActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)

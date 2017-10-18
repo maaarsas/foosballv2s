@@ -45,14 +45,6 @@ namespace foosballv2s
             Hsv hsv = new Hsv(colorAvg.GetHue() / 2,    //color.GetHue() [0;360] -> Hue [0;180]
                 colorAvg.GetSaturation() * 255,         //color.GetSaturation() [0;1] -> Saturation [0;255]
                 colorAvg.GetBrightness() * 255);        //color.GetBrightness() [0;1] -> Brightness [0;255]
-
-            /*Console.WriteLine("RGB:     " + color1.R + " " + color1.G + " " + color1.B);
-            Console.WriteLine("RGB vid: " + r + " " + g + " " + b);
-            Console.WriteLine("HSVvid [0;180], [0;255], [0;255]: "
-                + hsv.Hue + " "
-                + hsv.Satuation + " "
-                + hsv.Value);*/
-
             return hsv;
         }
     }

@@ -23,6 +23,9 @@ namespace foosballv2s
         )]
     public class MainActivity : Activity
     {
+        private EditText mteam1Name;
+        private EditText mteam2Name;
+
         private Game game;
         
         protected override void OnCreate(Bundle savedInstanceState)
@@ -40,6 +43,24 @@ namespace foosballv2s
         [Export("SubmitTeamNames")]
         public void SubmitTeamNames(View view)
         {
+            Validator v = new Validator();
+            mteam1Name = (EditText)FindViewById(Resource.Id.team1Name);
+            mteam2Name = (EditText)FindViewById(Resource.Id.team2Name);
+            if (!v.Validate(mteam1Name.Text) || !v.Validate(mteam2Name.Text))
+            {
+                SetContentView(Resource.Layout.Main);
+                //change hint text that team name format is not correct
+            }
+            else
+            {
+                Team team1 = new Team();
+                Team team2 = new Team();
+                team1.teamName = mteam1Name.Text;
+                team2.teamName = mteam2Name.Text;
+                Intent intent = new Intent(this, typeof(BallImageActivity));
+                StartActivity(intent);
+            }         
+            
             EditText mteam1Name = (EditText)FindViewById(Resource.Id.team1Name);
             EditText mteam2Name = (EditText)FindViewById(Resource.Id.team2Name);
 
@@ -49,6 +70,5 @@ namespace foosballv2s
             Intent intent = new Intent(this, typeof(BallImageActivity));
             StartActivity(intent);
         }
-
     }
 }

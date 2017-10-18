@@ -22,11 +22,11 @@ namespace foosballv2s
         public void Write(string goalTime, string teamName, int totalScore, TimeSpan ts, Stopwatch timer)
         {
             ts = timer.Elapsed;
-            File.AppendAllText(filePath, goalTime + " " + teamName + " scored a goal! " + " Total score is " + totalScore + " " + ts + Environment.NewLine);
+            File.AppendAllText(path, goalTime + " " + teamName + " scored a goal! " + " Total score is " + totalScore + " " + ts + Environment.NewLine);
             if (totalScore == 8)
             {
                 timer.Reset();
-                File.AppendAllText(filePath, Environment.NewLine + teamName + " Laimejo!" + Environment.NewLine);
+                File.AppendAllText(path, Environment.NewLine + teamName + " Laimejo!" + Environment.NewLine);
             }
         }
 

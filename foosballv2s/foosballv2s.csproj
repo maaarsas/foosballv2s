@@ -137,7 +137,7 @@
     <Compile Include="IVideo.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MovementDetector.cs" />
-    <Compile Include="PreviousGamesActivity.cs" />
+    <Compile Include="ColorPickerActivity.cs" />
     <Compile Include="RecordingActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -161,6 +161,9 @@
     <None Include="Properties\AndroidManifest.xml">
       <SubType>Designer</SubType>
     </None>
+    <AndroidResource Include="Resources\layout\ColorPicker.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ColorSquare.xml" />

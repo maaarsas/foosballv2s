@@ -7,17 +7,20 @@ using System.IO;
 using System.Diagnostics;
 using Newtonsoft.Json;
 using Android.Widget;
+using Color = Android.Graphics.Color;
 
 namespace foosballv2s
 {
     class IO
     {
-        private String path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/previousnames.json";
+        private string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/previousnames.json";
+        private string path_color = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/previouscolors.json";
         private Array dataRead;
         private List<String> names = new List<String>();
-        private String team1name, team2name;
-        private String data;
-        SLSupp instance = new SLSupp();
+        private string team1name, team2name;
+        private string data, colordata;
+        private SLSupp instance = new SLSupp();
+        private List<Color> colorlist = new List<Color>();
 
         public void Write(string goalTime, string teamName, int totalScore, TimeSpan ts, Stopwatch timer)
         {
@@ -48,6 +51,7 @@ namespace foosballv2s
         }*/
 
         public Array Read_Deserialize() {
+
             if (!System.IO.File.Exists(path))
             {
                 System.IO.FileStream fs = System.IO.File.Create(path);
@@ -76,6 +80,33 @@ namespace foosballv2s
 
             data = JsonConvert.SerializeObject(names);
             File.WriteAllText(path, data);
+        }
+
+        public void Write_Serialize_Color(Color color)
+        {
+            instance.CheckColor(colorlist, color);
+
+            colordata = JsonConvert.SerializeObject(colorlist);
+
+            File.WriteAllText(path_color, colordata);
+
+            Console.WriteLine("This is cancer" + colordata);
+        }
+
+        public List<Color> Read_Deserialize_Color()
+        {
+            if (!System.IO.File.Exists(path_color))
+            {
+                System.IO.FileStream fs = System.IO.File.Create(path_color);
+                fs.Dispose();
+            }
+            else
+            {
+                var colordata = File.ReadAllText(path_color);
+                colorlist = JsonConvert.DeserializeObject<List<Color>>(colordata);
+            }
+
+            return colorlist;
         }
     }
 }

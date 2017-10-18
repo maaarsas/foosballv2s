@@ -48,11 +48,13 @@ namespace foosballv2s
         
         private Camera mCamera;
         private TextureView textureView;
+        private Color detectedRGBColor;
 
         private int viewWidth = 0;
         private int viewHeight = 0;
         private Game game;
 
+        private IO instance = new IO();
 
         private bool colorDetected = false;
 
@@ -79,7 +81,7 @@ namespace foosballv2s
             BallImage ballImage = new BallImage(b);
             Hsv hsvColor = ballImage.getColor();
             
-            Color detectedRGBColor = Color.HSVToColor(new float[]{
+            detectedRGBColor = Color.HSVToColor(new float[]{
                 (float) hsvColor.Hue * 2, 
                 (float) hsvColor.Satuation / 255, 
                 (float) hsvColor.Value / 255
@@ -104,6 +106,8 @@ namespace foosballv2s
         [Export("SubmitBallPhoto")]
         public void SubmitBallPhoto(View view)
         {
+            instance.Write_Serialize_Color(detectedRGBColor);
+
             Intent intent = new Intent(this, typeof(RecordingActivity));
             StartActivity(intent);
         }

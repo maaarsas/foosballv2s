@@ -38,7 +38,10 @@ using View = Android.Views.View;
 
 namespace foosballv2s
 {
-    [Activity()]
+    [Activity(
+        ConfigurationChanges = ConfigChanges.Orientation,
+        ScreenOrientation = ScreenOrientation.Portrait
+    )]
     public class BallImageActivity : Activity, TextureView.ISurfaceTextureListener
     {
         const String TAG = "CamTest";
@@ -63,6 +66,8 @@ namespace foosballv2s
             textureView.SurfaceTextureListener = this;
             
             game = DependencyService.Get<Game>();
+            
+            this.Window.AddFlags(WindowManagerFlags.Fullscreen);
         }
 
         [Export("DetectBallColor")]

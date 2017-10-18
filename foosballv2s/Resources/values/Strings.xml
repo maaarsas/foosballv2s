@@ -11,4 +11,7 @@
     <string name="detect_color">Detect color</string>
     <string name="detect_again">Detect again</string>
     <string name="point_camera_to_ball">The color of the ball is needed. Please point the camera to the ball.</string>
+    <string name="team1_goal">Team 1 goal</string>
+    <string name="team2_goal">Team 2 goal</string>
+    <string name="wrong_team_names">Entered team names are wrong (probably contain disallowed symbols)</string>
 </resources>

@@ -16,7 +16,7 @@
         <item name="android:textColor">@color/Black</item>
     </style>
     <style name="SplashTheme" parent="AppTheme">
-        <item name="@android:windowBackground">@drawable/splash_background</item>
+        <item name="@android:background">@drawable/splash_background</item>
     </style>
     <style name="primaryButtonStyle">
         <item name="android:layout_width">wrap_content</item>

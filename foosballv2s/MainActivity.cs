@@ -71,7 +71,8 @@ namespace foosballv2s
             EditText mteam2Name = (EditText)FindViewById(Resource.Id.team2Name);
             if (!v.Validate(mteam1Name.Text) || !v.Validate(mteam2Name.Text))
             {
-                Toast.MakeText(this, Resource.String.wrong_team_names, ToastLength.Short);
+                Toast toast = Toast.MakeText(ApplicationContext, Resource.String.wrong_team_names, ToastLength.Short);
+                toast.Show();
                 return;
             }   
             game.Team1.TeamName = mteam1Name.Text;

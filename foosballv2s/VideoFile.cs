@@ -8,6 +8,7 @@ namespace foosballv2s
 {
     public class VideoFile : IVideo
     {
+        public bool IsOpened { get; set; } = false;
         public VideoCapture capture { get; }
 
         public VideoFile(String file)
@@ -17,6 +18,7 @@ namespace foosballv2s
             {
                 throw new FileNotFoundException(file);
             }
+            IsOpened = true;
         }
 
         public Mat GetFrame()

@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,7 +19,7 @@ namespace foosballv2s.Test
             VideoFile videoFile =
                 new VideoFile(projectRootDirectory + "\\testData\\20170914_121625.mp4");
             MovementDetector movementDetector = new MovementDetector(videoFile);
-            Assert.True(true);
+            Assert.True(movementDetector.Video.IsOpened);
         }
     }
 }

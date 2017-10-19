@@ -36,12 +36,57 @@
     <Reference Include="Emgu.CV.UI, Version=3.2.0.2721, Culture=neutral, PublicKeyToken=7281126722ab4438">
       <HintPath>..\packages\Emgu.CV.3.2.0.2721\lib\net35\Emgu.CV.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Emgu.CV.World, Version=3.2.0.2721, Culture=neutral, PublicKeyToken=7281126722ab4438" />
-    <Reference Include="Emgu.CV.World, Version=3.2.0.2721, Culture=neutral, PublicKeyToken=7281126722ab4438">
-      <HintPath>..\packages\Emgu.CV.3.2.0.2721\lib\net35\Emgu.CV.World.dll</HintPath>
+    <!--<Reference Include="Emgu.CV.World, Version=3.2.0.2721, Culture=neutral, PublicKeyToken=7281126722ab4438">-->
+      <!--<HintPath>..\packages\Emgu.CV.3.2.0.2721\lib\net35\Emgu.CV.World.dll</HintPath>-->
+    <!--</Reference>-->
+    <Reference Include="Emgu.CV.World.Android, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <HintPath>..\packages\Emgu.CV.3.2.0.2721\lib\net35\Emgu.CV.World.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Android" />
+    <Reference Include="Java.Interop, Version=0.1.0.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065">
+      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v1.0\Java.Interop.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=3.7.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb">
       <HintPath>..\packages\NUnit.3.7.0\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.mocks, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
+      <HintPath>..\packages\NUnit.Mocks.2.6.4\lib\nunit.mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.Animated.Vector.Drawable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Xamarin.Android.Support.Animated.Vector.Drawable.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.Animated.Vector.Drawable.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.Design, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Xamarin.Android.Support.Design.23.3.0\lib\MonoAndroid43\Xamarin.Android.Support.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v4, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Xamarin.Android.Support.v4.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.AppCompat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.AppCompat.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.CardView, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.CardView.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.CardView.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.MediaRouter, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.MediaRouter.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.MediaRouter.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.RecyclerView, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.RecyclerView.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v7.RecyclerView.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.Vector.Drawable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.Vector.Drawable.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Xamarin.Forms.2.4.0.280\lib\MonoAndroid10\Xamarin.Forms.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Xamarin.Forms.2.4.0.280\lib\MonoAndroid10\Xamarin.Forms.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform.Android, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Xamarin.Forms.2.4.0.280\lib\MonoAndroid10\Xamarin.Forms.Platform.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Xaml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Xamarin.Forms.2.4.0.280\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -52,11 +97,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityHelperTests.cs" />
+    <Compile Include="BallImageTests.cs" />
     <Compile Include="MovementDetectorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VideoFileTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidNativeLibrary Include="libs\armeabi\libcvextern.so">
+      <Link>lib\armeabi\libcvextern.so</Link>
+    </AndroidNativeLibrary>
+    <AndroidNativeLibrary Include="libs\armeabi-v7a\libcvextern.so">
+      <Link>lib\armeabi-v7a\libcvextern.so</Link>
+    </AndroidNativeLibrary>
+    <AndroidNativeLibrary Include="libs\x86\libcvextern.so">
+      <Link>lib\x86\libcvextern.so</Link>
+    </AndroidNativeLibrary>
     <ProjectReference Include="..\foosballv2s\foosballv2s.csproj">
       <Project>{328f8867-7683-4c88-a6d4-6a4b4bfd57ed}</Project>
       <Name>foosballv2s</Name>

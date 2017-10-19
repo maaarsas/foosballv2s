@@ -22,8 +22,8 @@ namespace foosballv2s.Test
             new int[] {1280, 720}
         };
         
-//        [TestCase(480, 720, )]
-//        [TestCase(720, 1080,  )]
+        [TestCase(480, 320, 480, 320)]
+        [TestCase(720, 460, 720, 480)]
         public void GetBestPreviewSizeTest(int previewWidth, int previewHeight, int expectedWidth, int expectedHeight)
         {
             var cameraParameters = new DynamicMock(typeof(Camera.Parameters));

@@ -24,6 +24,15 @@ namespace foosballv2s
         private Image<Gray, Byte> thresholded;
         private Hsv minHsv;
         private Hsv maxHsv;
+
+        public IVideo Video { get; set; }
+        
+        public MovementDetector() {}
+        
+        public MovementDetector(IVideo video) 
+        {
+            this.Video = video;
+        }
         
         public void SetupBallDetector(int frameHeight, int frameWidth, Hsv hsvBall)
         {

@@ -34,7 +34,10 @@ namespace foosballv2s.Test
             }
             cameraParameters.SetReturnValue("SupportedPreviewSizes", testPreviewSizes);
 
-            Size returnedSize = ActivityHelper.GetBestPreviewSize(cameraParameters, previewWidth, previewHeight);
+            Xamarin.Forms.Size returnedSize = ActivityHelper.GetBestPreviewSize(
+                (Camera.Parameters) cameraParameters.MockInstance, 
+                previewWidth, previewHeight);
+            
             Assert.True(returnedSize.Width == expectedWidth && returnedSize.Height == expectedHeight);
         }
     }

@@ -20,13 +20,11 @@ namespace foosballv2s
 
         public Validator()
         {
-            this.input = input;
-            this.pattern = @"^[0\w].{2,19}$";
+            this.pattern = @"^[0\w][A-Za-z\d]{2,19}$";
         }
 
         public Validator(string pattern)
         {
-            this.input = input;
             this.pattern = pattern;
         }
 

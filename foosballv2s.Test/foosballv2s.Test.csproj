@@ -36,12 +36,13 @@
     <Reference Include="Emgu.CV.UI, Version=3.2.0.2721, Culture=neutral, PublicKeyToken=7281126722ab4438">
       <HintPath>..\packages\Emgu.CV.3.2.0.2721\lib\net35\Emgu.CV.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Emgu.CV.World, Version=3.2.0.2721, Culture=neutral, PublicKeyToken=7281126722ab4438">
-    <HintPath>..\packages\Emgu.CV.3.2.0.2721\lib\net35\Emgu.CV.World.dll</HintPath>
-    </Reference>
-    <!--<Reference Include="Emgu.CV.World.Android, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">-->
-      <!--<HintPath>..\packages\Emgu.CV.3.2.0.2721\lib\net35\Emgu.CV.World.Android.dll</HintPath>-->
+    <!--<Reference Include="Emgu.CV.World, Version=3.2.0.2721, Culture=neutral, PublicKeyToken=7281126722ab4438">-->
+      <!--<HintPath>..\packages\Emgu.CV.3.2.0.2721\lib\net35\Emgu.CV.World.dll</HintPath>-->
     <!--</Reference>-->
+    <Reference Include="Emgu.CV.World.Android, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <HintPath>..\packages\Emgu.CV.3.2.0.2721\lib\net35\Emgu.CV.World.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Android" />
     <Reference Include="Java.Interop, Version=0.1.0.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065">
       <HintPath>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v1.0\Java.Interop.dll</HintPath>
     </Reference>
@@ -96,11 +97,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityHelperTests.cs" />
+    <Compile Include="BallImageTests.cs" />
     <Compile Include="MovementDetectorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VideoFileTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidNativeLibrary Include="libs\armeabi\libcvextern.so">
+      <Link>lib\armeabi\libcvextern.so</Link>
+    </AndroidNativeLibrary>
+    <AndroidNativeLibrary Include="libs\armeabi-v7a\libcvextern.so">
+      <Link>lib\armeabi-v7a\libcvextern.so</Link>
+    </AndroidNativeLibrary>
+    <AndroidNativeLibrary Include="libs\x86\libcvextern.so">
+      <Link>lib\x86\libcvextern.so</Link>
+    </AndroidNativeLibrary>
     <ProjectReference Include="..\foosballv2s\foosballv2s.csproj">
       <Project>{328f8867-7683-4c88-a6d4-6a4b4bfd57ed}</Project>
       <Name>foosballv2s</Name>

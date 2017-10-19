@@ -5,10 +5,9 @@ namespace foosballv2s
 {
     public static class ActivityHelper
     {
-        public static Size GetBestPreviewSize(Camera camera, int previewWidth, int previewHeight)
+        public static Size GetBestPreviewSize(Camera.Parameters parameters, int previewWidth, int previewHeight)
         {
             double targetRatio = (double) previewHeight / previewWidth;
-            Camera.Parameters parameters = camera.GetParameters();
             Size bestSize = new Size();
             
             int i = 0;

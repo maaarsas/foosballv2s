@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="18dp">
+    <TextView
+        android:text="@string/welcome_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/FoosWelcome"
+        android:gravity="center"
+        android:paddingBottom="36dp"
+        android:textStyle="bold"
+        android:textSize="28sp" />
+    <TextView
+        android:text="@string/enter_team_names"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/FoosWelcome"
+        android:id="@+id/TextEnterTeamNames"
+        android:gravity="center"
+        android:paddingBottom="18dp"
+        android:textStyle="bold"
+        android:textSize="18sp" />
+    <AutoCompleteTextView
+        android:id="@+id/team1Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/TextEnterTeamNames"
+        android:layout_marginBottom="18dp"
+        android:hint="@string/first_team_name"
+        android:textSize="24sp" />
+    <AutoCompleteTextView
+        android:id="@+id/team2Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/team1Name"
+        android:layout_marginBottom="38dp"
+        android:hint="@string/second_team_name"
+        android:textSize="24sp" />
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:gravity="center">
+        <Button
+            android:text="@string/submit"
+            style="@style/primaryButtonStyle"
+            android:id="@+id/submit"
+            android:onClick="SubmitTeamNames" />
+        <Button
+            android:text="@string/prev"
+            style="@style/primaryButtonStyle"
+            android:id="@+id/prev"
+            android:layout_below="@id/submit" />
+    </RelativeLayout>
+</LinearLayout>

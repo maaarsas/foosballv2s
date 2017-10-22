@@ -51,12 +51,6 @@
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Emgu.CV.UI, Version=3.2.0.2721, Culture=neutral, PublicKeyToken=7281126722ab4438">
-      <HintPath>..\packages\Emgu.CV.3.2.0.2721\lib\net35\Emgu.CV.UI.dll</HintPath>
-    </Reference>
-    <!--<Reference Include="Emgu.CV.World, Version=3.2.0.2721, Culture=neutral, PublicKeyToken=7281126722ab4438">-->
-    <!--<HintPath>..\packages\Emgu.CV.3.2.0.2721\lib\net35\Emgu.CV.World.dll</HintPath>-->
-    <!--</Reference>-->
     <Reference Include="Emgu.CV.World.Android, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\Emgu.CV.3.2.0.2721\lib\net35\Emgu.CV.World.Android.dll</HintPath>
     </Reference>
@@ -72,14 +66,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
-    <Reference Include="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <HintPath>C:\Windows\Microsoft.NET\Framework\v4.0.30319\System.Drawing.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml, Version=2.0.5.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
       <HintPath>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v1.0\System.Xml.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-      <HintPath>C:\Windows\Microsoft.NET\Framework\v4.0.30319\System.XML.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Xamarin.Android.Support.Animated.Vector.Drawable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
@@ -117,13 +105,6 @@
     </Reference>
     <Reference Include="Xamarin.Forms.Xaml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\Xamarin.Forms.2.4.0.280\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
-    </Reference>
-    <Reference Include="ZedGraph, Version=5.1.5.28844, Culture=neutral, PublicKeyToken=02a83cbd123fcd60">
-      <HintPath>..\packages\ZedGraph.5.1.5\lib\ZedGraph.dll</HintPath>
-    </Reference>
-    <Reference Include="ZedGraph, Version=5.1.5.28844, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\ZedGraph.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

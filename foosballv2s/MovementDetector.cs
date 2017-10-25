@@ -39,12 +39,12 @@ namespace foosballv2s
             //double t1min = 170, t1max = 4, t2min = 120, t2max = 255, t3min = 120, t3max = 255; // color in HSV
             double t1min, t1max, t2min, t2max, t3min, t3max;
 
-            t1min = hsvBall.Hue - 5;
-            t1max = hsvBall.Hue + 5;
+            t1min = hsvBall.Hue - 8;
+            t1max = hsvBall.Hue + 8;
             t2min = hsvBall.Satuation - 70;
-            t2max = hsvBall.Satuation + 70;
-            t3min = hsvBall.Value - 15;
-            t3max = hsvBall.Satuation + 70;
+            t2max = hsvBall.Satuation + 100;
+            t3min = hsvBall.Value - 70;
+            t3max = hsvBall.Value + 100;
 
             if (t1min < 0)
                 t1min = t1min + 180;
@@ -117,7 +117,7 @@ namespace foosballv2s
         {
             //CircleF[] circles = CvInvoke.HoughCircles(image, HoughType.Gradient, 1, 
             //    1000, 10, 10, 15, 60);
-            return CvInvoke.HoughCircles(image, HoughType.Gradient, 2, image.Height / 4, 50, 20, 15, 60);
+            return CvInvoke.HoughCircles(image, HoughType.Gradient, 2, image.Height / 4, 50, 40, 15, 50);
         }
 
         

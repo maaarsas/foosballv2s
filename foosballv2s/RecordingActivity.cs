@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Reflection.Emit;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -42,6 +43,8 @@ namespace foosballv2s
 
         private Game game;
 
+        private bool textureSetup;
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -75,6 +78,8 @@ namespace foosballv2s
 
             team1ScoreView = (TextView) FindViewById(Resource.Id.team1_score);
             team2ScoreView = (TextView) FindViewById(Resource.Id.team2_score);
+
+            Task.Run(async () => FeedMovementDetector());
         }
 
         [Export("Team1Goal")]
@@ -133,27 +138,12 @@ namespace foosballv2s
             tmp.FocusMode = Camera.Parameters.FocusModeContinuousPicture;
             camera.SetParameters(tmp);
             movementDetector.SetupBallDetector(textureView.Width, textureView.Height, game.BallColor);
+            this.textureSetup = true;
         }
 
         public void OnSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) { }
 
-        public void OnSurfaceTextureUpdated(SurfaceTexture surface)
-        {
-            Bitmap frameBitmap = textureView.Bitmap;
-            
-            Image<Hsv, System.Byte> hsvFrame = new Image<Hsv, byte>(frameBitmap);
-            Bitmap bitmap = hsvFrame.Bitmap;
-
-            CircleF[] circles = movementDetector.DetectBall(hsvFrame, textureView.Height, textureView.Width);
-            
-            // testing
-            foreach (CircleF circle in circles)
-            {
-                DrawCircle(circle.Center.X, circle.Center.Y, circle.Radius); 
-                Log.Debug("Camtest" + "-circle", circle.Center.ToString());
-            }
-            frameBitmap.Recycle();
-        }
+        public void OnSurfaceTextureUpdated(SurfaceTexture surface) { }
 
         private void DrawRectangle(float x, float y)
         {
@@ -194,6 +184,29 @@ namespace foosballv2s
 
         public void OnPreviewFrame(byte[] data, Camera camera)
         {
+        }
+
+        private void FeedMovementDetector()
+        {
+            while (true)
+            {
+                if (this.textureSetup)
+                {
+                    Bitmap frameBitmap = textureView.Bitmap;
+                                                 
+                    Image<Hsv, System.Byte> hsvFrame = new Image<Hsv, byte>(frameBitmap);
+                    Bitmap bitmap = hsvFrame.Bitmap;
+                    
+                    CircleF[] circles = movementDetector.DetectBall(hsvFrame, textureView.Height, textureView.Width);
+                    
+                    foreach (CircleF circle in circles)
+                    {
+                        DrawCircle(circle.Center.X, circle.Center.Y, circle.Radius); 
+                    }
+                    frameBitmap.Recycle();
+                }
+            }
+           
         }
     }
 }

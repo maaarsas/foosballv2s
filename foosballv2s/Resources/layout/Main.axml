@@ -48,8 +48,7 @@
             android:text="@string/submit"
             style="@style/primaryButtonStyle"
             android:id="@+id/submit"
-            android:onClick="SubmitTeamNames"
-            android:layout_width="262.5dp" />
+            android:onClick="SubmitTeamNames" />
         <Button
             android:text="@string/prev"
             style="@style/primaryButtonStyle"

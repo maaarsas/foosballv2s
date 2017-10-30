@@ -5,6 +5,7 @@ namespace foosballv2s
 {
     public class VideoLive : IVideo
     {
+        public bool IsOpened { get; set; }
         // TODO: Implement the class for getting frames from live stream
         public Mat GetFrame()
         {

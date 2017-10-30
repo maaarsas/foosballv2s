@@ -56,6 +56,7 @@ namespace foosballv2s
         public void SubmitTeamNames(View view)
         {
             Validator v = new Validator();
+
             Intent intent = new Intent(this, typeof(BallImageActivity));
 
             team1text = (AutoCompleteTextView)FindViewById<AutoCompleteTextView>(Resource.Id.team1Name);

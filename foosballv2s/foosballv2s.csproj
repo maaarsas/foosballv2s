@@ -127,6 +127,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Statistics.cs" />
     <Compile Include="ActivityHelper.cs" />
     <Compile Include="BallImage.cs" />
     <Compile Include="BallImageActivity.cs" />

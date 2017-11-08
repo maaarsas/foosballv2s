@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/FoosWelcome"
         android:gravity="center"
-        android:paddingBottom="36dp"
+        android:paddingBottom="24dp"
         android:textStyle="bold"
         android:textSize="28sp" />
     <TextView
@@ -57,6 +57,14 @@
             style="@style/primaryButtonStyle"
             android:id="@+id/prev"
             android:layout_below="@id/submit"
+            android:layout_width="match_parent"
+            android:layout_marginRight="40dp"
+            android:layout_marginStart="40dp" />
+        <Button
+            android:text="@string/stats"
+            style="@style/primaryButtonStyle"
+            android:id="@+id/stats"
+            android:layout_below="@id/prev"
             android:layout_width="match_parent"
             android:layout_marginRight="40dp"
             android:layout_marginStart="40dp" />

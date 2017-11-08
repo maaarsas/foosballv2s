@@ -3,7 +3,7 @@ using Color = Android.Graphics.Color;
 
 namespace foosballv2s
 {
-    class SLSupp
+    class SLSupp : IComparer
     {
         public List<string> PreSaveCheck(string team1name, string team2name, List<string> names)
         {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using foosballv2s.WebService.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace foosballv2s.WebService.Controllers
@@ -6,6 +7,13 @@ namespace foosballv2s.WebService.Controllers
     [Route("api/[controller]")]
     public class TeamController : Controller
     {
+        private readonly WebServiceDbContext _context;
+
+        public TeamController(WebServiceDbContext context)
+        {
+            _context = context;
+        }
+        
         // GET api/team/
         [HttpGet]
         public IEnumerable<string> Get()

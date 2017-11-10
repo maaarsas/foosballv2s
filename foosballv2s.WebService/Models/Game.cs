@@ -6,7 +6,7 @@ namespace foosballv2s.WebService.Models
     {
         public const int MAX_SCORE = 7;
 
-        public int id;
+        public int Id { get; set; }
         
         private int team1Score = 0;
         private int team2Score = 0;

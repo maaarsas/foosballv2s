@@ -9,10 +9,9 @@ namespace foosballv2s.WebService.Controllers
     [Route("api/[controller]")]
     public class GameController : Controller
     {
-        
-        private readonly GameContext _context;
+        private readonly WebServiceDbContext _context;
 
-        public GameController(GameContext context)
+        public GameController(WebServiceDbContext context)
         {
             _context = context;
         }

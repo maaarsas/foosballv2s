@@ -25,8 +25,7 @@ namespace foosballv2s.WebService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<GameContext>(opt => opt.UseSqlServer("WebService.DbConnectionString"));
-            services.AddDbContext<TeamContext>(opt => opt.UseInMemoryDatabase("WebService.DbConnectionString"));
+            services.AddDbContext<WebServiceDbContext>(opt => opt.UseSqlServer("WebService.DbConnectionString"));
             services.AddMvc();
         }
 

@@ -1,17 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
-using System.ComponentModel.DataAnnotations.Schema;
-using Emgu.CV.Fuzzy;
-using Emgu.CV.Structure;
-using Javax.Security.Auth;
-using Xamarin.Forms;
 
-[assembly: Dependency(typeof(foosballv2s.Game))]
 namespace foosballv2s
 {
     public class Game
@@ -22,8 +10,6 @@ namespace foosballv2s
         
         private int team1Score = 0;
         private int team2Score = 0;
-
-        public Hsv BallColor { get; set; }
 
         public int Team1Id { get; set; }
         

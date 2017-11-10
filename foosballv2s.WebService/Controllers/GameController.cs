@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Data.Common;
+using System.Linq;
+using foosballv2s.WebService.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace foosballv2s.WebService.Controllers
@@ -6,11 +9,20 @@ namespace foosballv2s.WebService.Controllers
     [Route("api/[controller]")]
     public class GameController : Controller
     {
+        
+        private readonly GameContext _context;
+
+        public GameController(GameContext context)
+        {
+            _context = context;
+        }
+
         // GET api/game/
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Game> Get()
         {
-            return new string[] {"value1", "value2"};
+            List<Game> games = _context.Games.ToList();
+            return games;
         }
 
         // GET api/game/5

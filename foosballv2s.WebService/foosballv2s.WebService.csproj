@@ -1,6 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <connectionStrings>
+      <add name="WebService.DbConnectionString"
+           connectionString="Data Source=mssql4.gear.host;Initial Catalog=foosballv2s;User ID=foosballv2s;Password=Oq3u-!XnZi2O" providerName="System.Data.SqlClient" />
+    </connectionStrings>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="wwwroot\" />

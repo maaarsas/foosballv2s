@@ -1,49 +1,74 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using foosballv2s.WebService.Models;
 using Microsoft.AspNetCore.Mvc;
+using SQLitePCL;
 
 namespace foosballv2s.WebService.Controllers
 {
     [Route("api/[controller]")]
     public class TeamController : Controller
     {
-        private readonly WebServiceDbContext _context;
+        private readonly ITeamRepository _repository;
 
-        public TeamController(WebServiceDbContext context)
+        public TeamController(ITeamRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
         
         // GET api/team/
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Team> Get()
         {
-            return new string[] {"value1", "value2"};
+            return _repository.GetAll();
         }
 
         // GET api/team/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            Team team = _repository.Get(id);
+            if (team == null)
+            {
+                return NotFound();
+            }
+            return new ObjectResult(team);
         }
 
         // POST api/team
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] Team team)
         {
+            if (team == null)
+            {
+                return new BadRequestResult();
+            }
+            Team updatedTeam =_repository.Add(team);
+            return new ObjectResult(updatedTeam);
         }
 
         // PUT api/team/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] Team team)
         {
+            if (team == null)
+            {
+                return BadRequest();
+            }
+            _repository.Update(id, team);
+            return new NoContentResult();
         }
 
         // DELETE api/team/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            if (_repository.Remove(id))
+            {    
+                return new NoContentResult();
+            }
+            return NotFound();
         }
     }
 }

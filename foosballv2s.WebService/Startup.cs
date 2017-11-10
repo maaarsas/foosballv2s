@@ -25,6 +25,8 @@ namespace foosballv2s.WebService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped(typeof(IGameRepository), typeof(GameRepository));
+            services.AddScoped(typeof(ITeamRepository), typeof(TeamRepository));
             services.AddDbContext<WebServiceDbContext>(opt => opt.UseSqlServer(
                 //Configuration.GetConnectionString("DbConnectionString")
                 "Server=mssql1.gear.host;Database=foosballv2s;User ID=foosballv2s;Password=Ew7f-_w63PCx;"

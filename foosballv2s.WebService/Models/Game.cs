@@ -11,12 +11,8 @@ namespace foosballv2s.WebService.Models
         
         private int team1Score = 0;
         private int team2Score = 0;
-
-        public int Team1Id { get; set; }
         
         public Team Team1 { get; set; } = new Team();
-        
-        public int Team2Id { get; set; }
         
         public Team Team2 { get; set; } = new Team();
         

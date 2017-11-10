@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace foosballv2s
+﻿namespace foosballv2s.WebService.Models
 {
     public class Team
     {

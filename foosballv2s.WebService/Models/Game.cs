@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace foosballv2s.WebService.Models
 {
@@ -47,7 +48,11 @@ namespace foosballv2s.WebService.Models
             }
         }
 
+        [NotMapped]
         public Boolean HasEnded { get; private set; } = false;
+        
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
 
         private void CheckGameEnd()
         {

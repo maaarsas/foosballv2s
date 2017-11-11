@@ -7,9 +7,9 @@ namespace foosballv2s.WebService.Models
 {
     public class GameRepository : IGameRepository
     {
-        private readonly WebServiceDbContext _context;
+        private readonly IWebServiceDbContext _context;
 
-        public GameRepository(WebServiceDbContext context)
+        public GameRepository(IWebServiceDbContext context)
         {
             _context = context;
         }

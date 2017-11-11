@@ -8,9 +8,9 @@ namespace foosballv2s.WebService.Models
 {
     public class TeamRepository : ITeamRepository
     {
-        private readonly WebServiceDbContext _context;
+        private readonly IWebServiceDbContext _context;
 
-        public TeamRepository(WebServiceDbContext context)
+        public TeamRepository(IWebServiceDbContext context)
         {
             _context = context;
         }
@@ -56,6 +56,11 @@ namespace foosballv2s.WebService.Models
                 throw new ArgumentNullException("team");
             }
             Team teamToUpdate = Get(id);
+
+            if (teamToUpdate == null)
+            {
+                return false;
+            }
             
             teamToUpdate.TeamName = team.TeamName;
             

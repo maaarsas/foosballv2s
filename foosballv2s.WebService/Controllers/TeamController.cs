@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Linq;
 using foosballv2s.WebService.Models;
 using Microsoft.AspNetCore.Mvc;
-using SQLitePCL;
 
 namespace foosballv2s.WebService.Controllers
 {
@@ -52,7 +51,7 @@ namespace foosballv2s.WebService.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Team team)
         {
-            if (team == null)
+            if (team == null || id != team.Id)
             {
                 return BadRequest();
             }

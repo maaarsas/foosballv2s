@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data.Entity;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace foosballv2s.WebService.Test
 {
-    public class TestDbSet<T> : DbSet<T>, IQueryable, IEnumerable<T>
+  public class TestDbSet<T> : DbSet<T>, IQueryable, IEnumerable<T>
         where T : class
     {
         ObservableCollection<T> _data;
@@ -18,37 +20,27 @@ namespace foosballv2s.WebService.Test
             _query = _data.AsQueryable();
         }
         
-        public override T Add(T item)
+        public override EntityEntry<T> Add(T item)
         {
             _data.Add(item);
-            return item;
+            return null;
         }
 
-        public override T Remove(T item)
+        public override EntityEntry<T> Remove(T item)
         {
             _data.Remove(item);
-            return item;
+            return null;
         }
 
-        public override T Attach(T item)
+        public override EntityEntry<T> Attach(T item)
         {
             _data.Add(item);
-            return item;
+            return null;
         }
-
-        public override T Create()
+        
+        public override LocalView<T> Local
         {
-            return Activator.CreateInstance<T>();
-        }
-
-        public override TDerivedEntity Create<TDerivedEntity>()
-        {
-            return Activator.CreateInstance<TDerivedEntity>();
-        }
-
-        public override ObservableCollection<T> Local
-        {
-            get { return new ObservableCollection<T>(_data); }
+            get { return new LocalView<T>(this); }
         }
 
         Type IQueryable.ElementType
@@ -74,6 +66,14 @@ namespace foosballv2s.WebService.Test
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
             return _data.GetEnumerator();
+        }
+        
+        protected EntityEntry<T> Update(T currentItem, T item)
+        {
+            var itemIndex = _data.IndexOf(currentItem);
+            _data.RemoveAt(itemIndex);
+            _data.Insert(itemIndex, item);
+            return null;
         }
     }
 }

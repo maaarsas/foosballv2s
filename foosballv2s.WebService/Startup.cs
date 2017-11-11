@@ -31,6 +31,7 @@ namespace foosballv2s.WebService
                 //Configuration.GetConnectionString("DbConnectionString")
                 "Server=mssql1.gear.host;Database=foosballv2s;User ID=foosballv2s;Password=Ew7f-_w63PCx;"
             ));
+            services.AddScoped<IWebServiceDbContext>(provider => provider.GetService<WebServiceDbContext>());
             services.AddMvc();
         }
 

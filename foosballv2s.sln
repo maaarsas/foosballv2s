@@ -12,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "foosballv2s.Test", "foosbal
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "foosballv2s.WebService", "foosballv2s.WebService\foosballv2s.WebService.csproj", "{66E8CEDA-7517-4807-8109-CE62F9A95544}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "foosballv2s.WebService.Test", "foosballv2s.WebService.Test\foosballv2s.WebService.Test.csproj", "{B8F12836-98B3-4656-B3CD-6BF94248FBE0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "foosballv2s.WebService.Test", "foosballv2s.WebService.Test\foosballv2s.WebService.Test.csproj", "{E6BF22A6-B545-4166-AAA1-FC1CDA7B7092}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,14 +50,14 @@ Global
 		{66E8CEDA-7517-4807-8109-CE62F9A95544}.Release|Any CPU.Build.0 = Release|Any CPU
 		{66E8CEDA-7517-4807-8109-CE62F9A95544}.Release|x86.ActiveCfg = Release|x86
 		{66E8CEDA-7517-4807-8109-CE62F9A95544}.Release|x86.Build.0 = Release|x86
-		{B8F12836-98B3-4656-B3CD-6BF94248FBE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B8F12836-98B3-4656-B3CD-6BF94248FBE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B8F12836-98B3-4656-B3CD-6BF94248FBE0}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{B8F12836-98B3-4656-B3CD-6BF94248FBE0}.Debug|x86.Build.0 = Debug|Any CPU
-		{B8F12836-98B3-4656-B3CD-6BF94248FBE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B8F12836-98B3-4656-B3CD-6BF94248FBE0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B8F12836-98B3-4656-B3CD-6BF94248FBE0}.Release|x86.ActiveCfg = Release|Any CPU
-		{B8F12836-98B3-4656-B3CD-6BF94248FBE0}.Release|x86.Build.0 = Release|Any CPU
+		{E6BF22A6-B545-4166-AAA1-FC1CDA7B7092}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6BF22A6-B545-4166-AAA1-FC1CDA7B7092}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6BF22A6-B545-4166-AAA1-FC1CDA7B7092}.Debug|x86.ActiveCfg = Debug|x86
+		{E6BF22A6-B545-4166-AAA1-FC1CDA7B7092}.Debug|x86.Build.0 = Debug|x86
+		{E6BF22A6-B545-4166-AAA1-FC1CDA7B7092}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6BF22A6-B545-4166-AAA1-FC1CDA7B7092}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6BF22A6-B545-4166-AAA1-FC1CDA7B7092}.Release|x86.ActiveCfg = Release|x86
+		{E6BF22A6-B545-4166-AAA1-FC1CDA7B7092}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

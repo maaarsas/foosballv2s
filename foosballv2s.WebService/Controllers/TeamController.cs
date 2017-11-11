@@ -55,8 +55,11 @@ namespace foosballv2s.WebService.Controllers
             {
                 return BadRequest();
             }
-            _repository.Update(id, team);
-            return new NoContentResult();
+            if (_repository.Update(id, team))
+            {
+                return new NoContentResult();
+            }
+            return NotFound();
         }
 
         // DELETE api/team/5

@@ -55,6 +55,11 @@ namespace foosballv2s.WebService.Models
             }
             Game gameToUpdate = Get(id);
             
+            if (gameToUpdate == null)
+            {
+                return false;
+            }
+            
             gameToUpdate.Team1 = game.Team1;
             gameToUpdate.Team2 = game.Team2;
             gameToUpdate.Team1Score = game.Team1Score;

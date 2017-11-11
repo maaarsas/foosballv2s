@@ -50,12 +50,15 @@ namespace foosballv2s.WebService.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Game game)
         {
-            if (game == null)
+            if (game == null || id != game.Id)
             {
                 return BadRequest();
             }
-            _repository.Update(id, game);
-            return new NoContentResult();
+            if (_repository.Update(id, game))
+            {
+                return new NoContentResult();
+            }
+            return NotFound();
         }
 
         // DELETE api/game/5

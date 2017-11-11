@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
-using System.ComponentModel.DataAnnotations.Schema;
 using Emgu.CV.Fuzzy;
 using Emgu.CV.Structure;
 using Javax.Security.Auth;

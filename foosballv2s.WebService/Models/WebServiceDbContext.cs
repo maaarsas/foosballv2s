@@ -2,7 +2,7 @@
 
 namespace foosballv2s.WebService.Models
 {
-    public class WebServiceDbContext : DbContext
+    public class WebServiceDbContext : DbContext, IWebServiceDbContext
     {
         public WebServiceDbContext(DbContextOptions<WebServiceDbContext> options)
             : base(options)

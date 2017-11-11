@@ -8,7 +8,7 @@ namespace foosballv2s.WebService.Test
     {
         public override Team Find(params object[] keyValues)
         {
-            return this.SingleOrDefault(product => product.Id == (int)keyValues.Single());
+            return this.SingleOrDefault(team => team.Id == (int)keyValues.Single());
         }
     }
 }

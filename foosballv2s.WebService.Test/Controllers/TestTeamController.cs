@@ -21,9 +21,6 @@ namespace foosballv2s.WebService.Test
     [TestFixture]
     public class TestTeamController
     {
-        private IList<Team> teams = new List<Team>();
-        
-        
         [Test]
         public void PostTeam_ShouldReturnSameTeam()
         {
@@ -137,7 +134,7 @@ namespace foosballv2s.WebService.Test
             Assert.AreEqual((int) HttpStatusCode.NotFound, result.StatusCode);
         }
 
-        private static Team[] GetDemoTeams()
+        public static Team[] GetDemoTeams()
         {
             return new Team[]
             {
@@ -147,7 +144,7 @@ namespace foosballv2s.WebService.Test
             };
         }
         
-        private static Team[] GetWrongDemoTeams()
+        public static Team[] GetWrongDemoTeams()
         {
             return new Team[]
             {

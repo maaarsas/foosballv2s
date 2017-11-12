@@ -7,6 +7,7 @@ using Android.Content.PM;
 using Java.Interop;
 using Xamarin.Forms;
 using View = Android.Views.View;
+using System.Collections.Generic;
 
 namespace foosballv2s
 {
@@ -33,6 +34,12 @@ namespace foosballv2s
             
             t1 = (AutoCompleteTextView)FindViewById<AutoCompleteTextView>(Resource.Id.team1Name);
             t2 = (AutoCompleteTextView)FindViewById<AutoCompleteTextView>(Resource.Id.team2Name);
+
+            //test
+
+            
+
+            //test end
 
             ArrayAdapter adapter = new ArrayAdapter(this, Resource.Layout.support_simple_spinner_dropdown_item, instance.Read_Deserialize());
 
@@ -72,6 +79,13 @@ namespace foosballv2s
             game.Team2.TeamName = team2text.Text;
 
             instance.Write_Serialize(team1text, team2text);
+
+            StartActivity(intent);
+        }
+
+        private void BtnStats_Click(object sender, EventArgs e)
+        {
+            Intent intent = new Intent(this, typeof(StatsActivity));
 
             StartActivity(intent);
         }

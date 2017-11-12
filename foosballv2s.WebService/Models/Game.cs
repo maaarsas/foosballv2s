@@ -1,33 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
-using Emgu.CV.Fuzzy;
-using Emgu.CV.Structure;
-using Javax.Security.Auth;
-using Xamarin.Forms;
+using System.ComponentModel.DataAnnotations.Schema;
 
-[assembly: Dependency(typeof(foosballv2s.Game))]
-namespace foosballv2s
+namespace foosballv2s.WebService.Models
 {
     public class Game
     {
         public const int MAX_SCORE = 7;
 
-        public int id;
+        public int Id { get; set; }
         
         private int team1Score = 0;
         private int team2Score = 0;
-
-        public Hsv BallColor { get; set; }
-
-        public int Team1Id { get; set; }
         
         public Team Team1 { get; set; } = new Team();
-        
-        public int Team2Id { get; set; }
         
         public Team Team2 { get; set; } = new Team();
         
@@ -59,7 +44,11 @@ namespace foosballv2s
             }
         }
 
+        [NotMapped]
         public Boolean HasEnded { get; private set; } = false;
+        
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
 
         private void CheckGameEnd()
         {

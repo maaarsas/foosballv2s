@@ -45,7 +45,6 @@ namespace foosballv2s
 
             SetContentView(Resource.Layout.Main);
             
-            DependencyService.Register<Game>();
             game = DependencyService.Get<Game>();
             teamRepository = DependencyService.Get<TeamRepository>();
             

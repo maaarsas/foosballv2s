@@ -25,7 +25,7 @@ namespace foosballv2s
         {
             base.OnCreate(savedInstanceState);
 
-            Forms.Init(this, savedInstanceState);
+            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
             SetContentView(Resource.Layout.Main);
             
@@ -34,13 +34,7 @@ namespace foosballv2s
             
             t1 = (AutoCompleteTextView)FindViewById<AutoCompleteTextView>(Resource.Id.team1Name);
             t2 = (AutoCompleteTextView)FindViewById<AutoCompleteTextView>(Resource.Id.team2Name);
-
-            //test
-
             
-
-            //test end
-
             ArrayAdapter adapter = new ArrayAdapter(this, Resource.Layout.support_simple_spinner_dropdown_item, instance.Read_Deserialize());
 
             t1.Adapter = adapter;

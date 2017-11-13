@@ -4,9 +4,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Org.Apache.Http.Client.Params;
 using Org.Json;
+using Xamarin.Forms;
 
 namespace foosballv2s.Source.Services.FoosballWebService
 {
+    [assembly: Dependency(typeof(foosballv2s.Source.Services.FoosballWebService.IWebServiceClient))]
     public class FoosballWebServiceClient : IWebServiceClient
     {
         private string webServiceUri = "http://18.194.122.53:5000/api";

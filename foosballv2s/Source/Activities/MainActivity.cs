@@ -35,6 +35,7 @@ namespace foosballv2s
         private AutoCompleteTextView firstTeamTextView, secondTeamTextView;
         private IO instance = new IO();
         private Game game;
+        private TeamRepository teamRepository;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -46,6 +47,7 @@ namespace foosballv2s
             
             DependencyService.Register<Game>();
             game = DependencyService.Get<Game>();
+            teamRepository = DependencyService.Get<TeamRepository>();
             
             firstTeamTextView = (AutoCompleteTextView) FindViewById<AutoCompleteTextView>(Resource.Id.team1Name);
             secondTeamTextView = (AutoCompleteTextView) FindViewById<AutoCompleteTextView>(Resource.Id.team2Name);
@@ -72,8 +74,6 @@ namespace foosballv2s
         {
             ProgressDialog dialog = ProgressDialog.Show(this, "", 
                 Resources.GetString(Resource.String.checking_teams), true);
-            
-            TeamRepository repository = new TeamRepository(new FoosballWebServiceClient());
 
             Team team1 = ((TeamAdapter) firstTeamTextView.Adapter).SelectedTeam;
             Team team2 = ((TeamAdapter) secondTeamTextView.Adapter).SelectedTeam;
@@ -82,13 +82,13 @@ namespace foosballv2s
             if (team1 == null)
             {
                 team1 = new Team {TeamName = firstTeamTextView.Text};
-                team1 = await repository.Create(team1);
+                team1 = await teamRepository.Create(team1);
             }
             // second team is not selected from the list, so it is a new one, create it
             if (team2 == null)
             {
                 team2 = new Team {TeamName = secondTeamTextView.Text};
-                team2 = await repository.Create(team2);
+                team2 = await teamRepository.Create(team2);
             }
             
             dialog.Dismiss();
@@ -125,8 +125,7 @@ namespace foosballv2s
             ProgressDialog dialog = ProgressDialog.Show(this, "", 
                 Resources.GetString(Resource.String.retrieving_teams), true);
             
-            TeamRepository repository = new TeamRepository(new FoosballWebServiceClient());
-            Team[] teams = await repository.GetAll();
+            Team[] teams = await teamRepository.GetAll();
             
             dialog.Dismiss();
             

@@ -20,7 +20,7 @@ namespace foosballv2s.Source
         {
             base.OnCreate();
             DependencyService.Register<Game>();
-            DependencyService.Register<IWebServiceClient>();
+            DependencyService.Register<FoosballWebServiceClient>();
             DependencyService.Register<TeamRepository>();
             DependencyService.Register<GameRepository>();
         }

@@ -67,10 +67,10 @@ namespace foosballv2s.Adapters
             }
             protected override Filter.FilterResults PerformFiltering (Java.Lang.ICharSequence constraint)
             {
-                teamAdapter.SelectedTeam = null;
                 FilterResults results = new FilterResults();
                 if (constraint != null) {
                     
+                    teamAdapter.SelectedTeam = null;
                     var searchFor = constraint.ToString();
                     var matchList = new List<Team>();
                     

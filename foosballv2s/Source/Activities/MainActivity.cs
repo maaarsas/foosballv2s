@@ -53,11 +53,16 @@ namespace foosballv2s
             firstTeamTextView.ItemClick += AutoCompleteTextView_ItemClicked;
             secondTeamTextView.ItemClick += AutoCompleteTextView_ItemClicked;
             
-            SetupTeamDropdownList();
             var btnP = FindViewById<Android.Widget.Button>(Resource.Id.prev);
             btnP.Click += BtnPrev_Click;
             
             //Window.SetBackgroundDrawable(Android.Resource.Id.);
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+            SetupTeamDropdownList();
         }
 
         private void BtnPrev_Click(object sender, EventArgs e)

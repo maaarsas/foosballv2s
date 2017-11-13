@@ -30,7 +30,7 @@ namespace foosballv2s
     public class MainActivity : Activity
     {
         private AutoCompleteTextView t1, t2, team1text, team2text;
-        privateIO instance = new IO();
+        private IO instance = new IO();
         private ArrayAdapter<Team> teamAdapter;
         private Game game;
 

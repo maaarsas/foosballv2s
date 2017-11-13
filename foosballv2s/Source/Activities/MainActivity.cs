@@ -104,7 +104,7 @@ namespace foosballv2s
 
         private async void FetchAllTeams()
         {
-            ProgressDialog dialog = ProgressDialog.Show(ApplicationContext, "", 
+            ProgressDialog dialog = ProgressDialog.Show(this, "", 
                 Resources.GetString(Resource.String.retrieving_teams), true);
             
             TeamRepository repository = new TeamRepository(new FoosballWebServiceClient());

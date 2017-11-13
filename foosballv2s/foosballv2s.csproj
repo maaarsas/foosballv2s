@@ -111,20 +111,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameStats.cs" />
-    <Compile Include="Statistics.cs" />
-    <Compile Include="ActivityHelper.cs" />
-    <Compile Include="BallImage.cs" />
-    <Compile Include="BallImageActivity.cs" />
-    <Compile Include="SLSupp.cs" />
-    <Compile Include="Game.cs" />
-    <Compile Include="GameTracker.cs" />
-    <Compile Include="IO.cs" />
-    <Compile Include="IVideo.cs" />
-    <Compile Include="MainActivity.cs" />
-    <Compile Include="MovementDetector.cs" />
-    <Compile Include="ColorPickerActivity.cs" />
-    <Compile Include="RecordingActivity.cs" />
+    <Compile Include="Source\Activities\Adapters\StatsListAdapter.cs" />
+    <Compile Include="Source\Activities\ColorPickerActivity.cs" />
+    <Compile Include="Source\Activities\StatsActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\Activities\Adapters\TeamAdapter.cs" />
@@ -136,6 +125,7 @@
     <Compile Include="Source\Activities\RecordingActivity.cs" />
     <Compile Include="Source\Activities\SplashActivity.cs" />
     <Compile Include="Source\Entities\Game.cs" />
+    <Compile Include="Source\Entities\GameStats.cs" />
     <Compile Include="Source\Entities\Team.cs" />
     <Compile Include="Source\Services\FileIO\GameTracker.cs" />
     <Compile Include="Source\Services\FileIO\IO.cs" />
@@ -150,8 +140,6 @@
     <Compile Include="Source\Services\GameRecognition\VideoFile.cs" />
     <Compile Include="Source\Services\GameRecognition\VideoLive.cs" />
     <Compile Include="Source\Validators\Validator.cs" />
-      <Compile Include="StatsActivity.cs" />
-      <Compile Include="StatsListAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidNativeLibrary Include="libs\armeabi\libcvextern.so">

@@ -9,20 +9,19 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Newtonsoft.Json;
-using System.IO;
 
 namespace foosballv2s
 {
-    [Activity(Label = "PreviousGamesActivity")]
-    public class PreviousGamesActivity : Activity
+    [Activity(Label = "ColorPickActivity")]
+    public class ColorPickActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.PreviousGames);
-            
-            //need to sim a game to get info
+            SetContentView(Resource.Layout.ColorChoice);
+
+
+            // Create your application here
         }
     }
 }

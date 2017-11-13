@@ -12,6 +12,7 @@ namespace foosballv2s.Adapters
         Filter filter;
         public List<Team> teams;
         public List<Team> matchTeams;
+        public Team SelectedTeam { get; set; }
 
         public TeamAdapter(Context context, List<Team> teams) : base(context, 0, teams)
         {
@@ -66,6 +67,7 @@ namespace foosballv2s.Adapters
             }
             protected override Filter.FilterResults PerformFiltering (Java.Lang.ICharSequence constraint)
             {
+                teamAdapter.SelectedTeam = null;
                 FilterResults results = new FilterResults();
                 if (constraint != null) {
                     

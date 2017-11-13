@@ -179,6 +179,7 @@
     <Folder Include="lib\armeabi-v7a\" />
     <Folder Include="lib\armeabi\" />
     <Folder Include="lib\x86\" />
+    <Folder Include="Source\Activities\Views" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Loading.xml" />

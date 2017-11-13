@@ -20,6 +20,9 @@ using Java.Interop;
 using Xamarin.Forms;
 using View = Android.Views.View;
 using System.Collections.Generic;
+using Android.Text;
+using foosballv2s.Views;
+using Java.Lang;
 
 namespace foosballv2s
 {
@@ -29,9 +32,8 @@ namespace foosballv2s
         )]
     public class MainActivity : Activity
     {
-        private AutoCompleteTextView t1, t2, team1text, team2text;
+        private AutoCompleteTextView firstTeamTextView, secondTeamTextView;
         private IO instance = new IO();
-        private ArrayAdapter<Team> teamAdapter;
         private Game game;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -45,11 +47,11 @@ namespace foosballv2s
             DependencyService.Register<Game>();
             game = DependencyService.Get<Game>();
             
-            t1 = (AutoCompleteTextView) FindViewById<AutoCompleteTextView>(Resource.Id.team1Name);
-            t2 = (AutoCompleteTextView) FindViewById<AutoCompleteTextView>(Resource.Id.team2Name);
+            firstTeamTextView = (AutoCompleteTextView) FindViewById<AutoCompleteTextView>(Resource.Id.team1Name);
+            secondTeamTextView = (AutoCompleteTextView) FindViewById<AutoCompleteTextView>(Resource.Id.team2Name);
             
-            t1.ItemClick += AutoCompleteTextView_ItemClicked;
-            t2.ItemClick += AutoCompleteTextView_ItemClicked;
+            firstTeamTextView.ItemClick += AutoCompleteTextView_ItemClicked;
+            secondTeamTextView.ItemClick += AutoCompleteTextView_ItemClicked;
             
             SetupTeamDropdownList();
             var btnP = FindViewById<Android.Widget.Button>(Resource.Id.prev);
@@ -66,26 +68,42 @@ namespace foosballv2s
         }
 
         [Export("SubmitTeamNames")]
-        public void SubmitTeamNames(View view)
+        public async void SubmitTeamNames(View view)
         {
-            Validator v = new Validator();
+            ProgressDialog dialog = ProgressDialog.Show(this, "", 
+                Resources.GetString(Resource.String.checking_teams), true);
+            
+            TeamRepository repository = new TeamRepository(new FoosballWebServiceClient());
 
-            Intent intent = new Intent(this, typeof(BallImageActivity));
+            Team team1 = ((TeamAdapter) firstTeamTextView.Adapter).SelectedTeam;
+            Team team2 = ((TeamAdapter) secondTeamTextView.Adapter).SelectedTeam;
 
-            team1text = (AutoCompleteTextView)FindViewById<AutoCompleteTextView>(Resource.Id.team1Name);
-            team2text = (AutoCompleteTextView)FindViewById<AutoCompleteTextView>(Resource.Id.team2Name);
-
-            if (!v.Validate(team1text.Text) || !v.Validate(team2text.Text))
+            // first team is not selected from the list, so it is a new one, create it
+            if (team1 == null)
+            {
+                team1 = new Team {TeamName = firstTeamTextView.Text};
+                team1 = await repository.Create(team1);
+            }
+            // second team is not selected from the list, so it is a new one, create it
+            if (team2 == null)
+            {
+                team2 = new Team {TeamName = secondTeamTextView.Text};
+                team2 = await repository.Create(team2);
+            }
+            
+            dialog.Dismiss();
+            
+            // if even after creation teams do not exist, means there is an error in the names
+            if (team1 == null || team2 == null)
             {
                 Toast.MakeText(this, Resource.String.wrong_team_names, ToastLength.Short);
                 return;
             }
 
-            game.Team1.TeamName = team1text.Text;
-            game.Team2.TeamName = team2text.Text;
+            game.Team1 = team1;
+            game.Team2 = team2;
 
-            instance.Write_Serialize(team1text, team2text);
-
+            Intent intent = new Intent(this, typeof(BallImageActivity));
             StartActivity(intent);
         }
 
@@ -112,17 +130,20 @@ namespace foosballv2s
             
             dialog.Dismiss();
             
-            teamAdapter = new TeamAdapter(this, new List<Team>(teams));
+            TeamAdapter teamAdapter1 = new TeamAdapter(this, new List<Team>(teams));
+            TeamAdapter teamAdapter2 = new TeamAdapter(this, new List<Team>(teams));
 
-            t1.Adapter = teamAdapter;
-            t2.Adapter = teamAdapter;
+            firstTeamTextView.Adapter = teamAdapter1;
+            secondTeamTextView.Adapter = teamAdapter2;
             
         }
         
         private void AutoCompleteTextView_ItemClicked(object sender, AdapterView<TeamAdapter>.ItemClickEventArgs e)
         {
             AutoCompleteTextView view = (AutoCompleteTextView) sender;
+            TeamAdapter teamAdapter = (TeamAdapter) view.Adapter;
             var team = teamAdapter.GetItem(e.Position);
+            teamAdapter.SelectedTeam = team;
             view.Text = team.TeamName;
         }
     }

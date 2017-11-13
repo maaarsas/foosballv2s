@@ -21,7 +21,6 @@ using Xamarin.Forms;
 using View = Android.Views.View;
 using System.Collections.Generic;
 using Android.Text;
-using foosballv2s.Views;
 using Java.Lang;
 
 namespace foosballv2s

@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Xamarin.Forms;
 
+[assembly: Dependency(typeof(foosballv2s.Source.Services.FoosballWebService.Repository.TeamRepository))]
 namespace foosballv2s.Source.Services.FoosballWebService.Repository
 {
-    [assembly: Dependency(typeof(foosballv2s.Source.Services.FoosballWebService.Repository.TeamRepository))]
     public class TeamRepository
     {
         private readonly string endpointUrl = "/team";

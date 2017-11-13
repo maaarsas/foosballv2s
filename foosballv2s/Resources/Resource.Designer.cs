@@ -3163,6 +3163,9 @@ namespace foosballv2s
 			// aapt resource value: 0x7f090025
 			public const int character_counter_pattern = 2131296293;
 			
+			// aapt resource value: 0x7f090037
+			public const int checking_teams = 2131296311;
+			
 			// aapt resource value: 0x7f090030
 			public const int detect_again = 2131296304;
 			

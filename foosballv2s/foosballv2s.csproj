@@ -67,7 +67,7 @@
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
     <Reference Include="System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <HintPath>..\..\..\..\..\..\..\..\Library\Frameworks\Mono.framework\Versions\5.4.1\lib\mono\4.7-api\System.Net.Http.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Library\Frameworks\Mono.framework\External\xbuild-frameworks\MonoAndroid\v1.0\System.Net.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml, Version=2.0.5.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
       <HintPath>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v1.0\System.Xml.dll</HintPath>
@@ -113,6 +113,7 @@
   <ItemGroup>
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\Activities\Adapters\TeamAdapter.cs" />
     <Compile Include="Source\Activities\BallImageActivity.cs" />
     <Compile Include="Source\Activities\Helpers\ActivityHelper.cs" />
     <Compile Include="Source\Activities\Helpers\ConfigHelper.cs" />
@@ -126,6 +127,9 @@
     <Compile Include="Source\Services\FileIO\IO.cs" />
     <Compile Include="Source\Services\FileIO\SLSupp.cs" />
     <Compile Include="Source\Services\FoosballWebService\FoosballWebServiceClient.cs" />
+    <Compile Include="Source\Services\FoosballWebService\IWebServiceClient.cs" />
+    <Compile Include="Source\Services\FoosballWebService\Repository\GameRepository.cs" />
+    <Compile Include="Source\Services\FoosballWebService\Repository\TeamRepository.cs" />
     <Compile Include="Source\Services\GameRecognition\BallImage.cs" />
     <Compile Include="Source\Services\GameRecognition\IVideo.cs" />
     <Compile Include="Source\Services\GameRecognition\MovementDetector.cs" />
@@ -200,6 +204,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config\config.json" />
+    <AndroidResource Include="Resources\layout\item_team.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" />

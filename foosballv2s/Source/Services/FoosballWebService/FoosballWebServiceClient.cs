@@ -7,8 +7,10 @@ using Org.Json;
 
 namespace foosballv2s.Source.Services.FoosballWebService
 {
-    public class FoosballWebServiceClient
+    public class FoosballWebServiceClient : IWebServiceClient
     {
+        private string webServiceUri = "http://18.194.122.53:5000/api";
+        private readonly string emptyJson = "{}";
         private HttpClient client;
 
         public FoosballWebServiceClient()
@@ -17,30 +19,39 @@ namespace foosballv2s.Source.Services.FoosballWebService
             client.MaxResponseContentBufferSize = 256000;
         }
 
-        public async Task<string> GetAsync(Uri uri)
+        public async Task<string> GetAsync(string endPointUri)
         {
+            var uri = GetFullUri(endPointUri);
             var response = await client.GetAsync(uri);
             return await GetResponseReturn(response);
         }
         
-        public async Task<string> PostAsync(Uri uri, string json)
+        public async Task<string> PostAsync(string endPointUri, string json)
         {
+            var uri = GetFullUri(endPointUri);
             var jsonParams = new StringContent (json, Encoding.UTF8, "application/json");
             var response = await client.PostAsync(uri, jsonParams);
             return await GetResponseReturn(response);
         }
         
-        public async Task<string> PutAsync(Uri uri, string json)
+        public async Task<string> PutAsync(string endPointUri, string json)
         {
+            var uri = GetFullUri(endPointUri);
             var jsonParams = new StringContent (json, Encoding.UTF8, "application/json");
             var response = await client.PutAsync(uri, jsonParams);
             return await GetResponseReturn(response);
         }
         
-        public async Task<string> DeleteAsync(Uri uri)
+        public async Task<string> DeleteAsync(string endPointUri)
         {
+            var uri = GetFullUri(endPointUri);
             var response = await client.DeleteAsync(uri);
             return await GetResponseReturn(response);
+        }
+
+        private Uri GetFullUri(string endpointUri)
+        {
+            return new Uri(webServiceUri + endpointUri);
         }
 
         private async Task<string> GetResponseReturn(HttpResponseMessage response)
@@ -50,7 +61,7 @@ namespace foosballv2s.Source.Services.FoosballWebService
                 var content = await response.Content.ReadAsStringAsync();
                 return content;
             }
-            return null;
+            return emptyJson;
         }
     }
 }

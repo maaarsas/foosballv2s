@@ -2,6 +2,7 @@
 using System.Linq;
 using foosballv2s.WebService.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 namespace foosballv2s.WebService.Controllers
 {
@@ -43,6 +44,10 @@ namespace foosballv2s.WebService.Controllers
                 return new BadRequestResult();
             }
             Game updatedGame =_repository.Add(game);
+            if (updatedGame == null)
+            {
+                return NotFound();
+            }
             return new ObjectResult(updatedGame);
         }
 

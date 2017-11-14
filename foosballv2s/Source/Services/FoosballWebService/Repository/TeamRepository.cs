@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Xamarin.Forms;
 
+[assembly: Dependency(typeof(foosballv2s.Source.Services.FoosballWebService.Repository.TeamRepository))]
 namespace foosballv2s.Source.Services.FoosballWebService.Repository
 {
     public class TeamRepository
@@ -9,9 +11,9 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
         private readonly string endpointUrl = "/team";
         private IWebServiceClient client;
 
-        public TeamRepository(IWebServiceClient client)
+        public TeamRepository()
         {
-            this.client = client;
+            client = DependencyService.Get<IWebServiceClient>();
         }
        
         public async Task<Team[]> GetAll()

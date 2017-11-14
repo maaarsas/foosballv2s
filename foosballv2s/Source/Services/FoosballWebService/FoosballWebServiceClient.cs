@@ -4,7 +4,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Org.Apache.Http.Client.Params;
 using Org.Json;
+using Xamarin.Forms;
 
+[assembly: Dependency(typeof(foosballv2s.Source.Services.FoosballWebService.FoosballWebServiceClient))]
 namespace foosballv2s.Source.Services.FoosballWebService
 {
     public class FoosballWebServiceClient : IWebServiceClient

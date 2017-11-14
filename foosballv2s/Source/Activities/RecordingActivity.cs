@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Reflection.Emit;
+using System.Threading;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
@@ -12,6 +14,7 @@ using RS = Android.Renderscripts;
 using Android.Util;
 using Emgu.CV;
 using Emgu.CV.Structure;
+using foosballv2s.Source.Services.FoosballWebService.Repository;
 using Java.Interop;
 using Java.IO;
 using Java.Lang;
@@ -42,6 +45,7 @@ namespace foosballv2s
         private TextView team2ScoreView;
 
         private Game game;
+        private GameRepository gameRepository;
 
         private bool textureSetup;
 
@@ -65,7 +69,11 @@ namespace foosballv2s
             surfaceView.Touch += OnSurfaceViewTouch;
 
             movementDetector = new MovementDetector();
+            
             game = DependencyService.Get<Game>();
+            gameRepository = DependencyService.Get<GameRepository>();
+
+            game.Start();
             
             this.Window.AddFlags(WindowManagerFlags.Fullscreen);
             
@@ -80,6 +88,7 @@ namespace foosballv2s
             team2ScoreView = (TextView) FindViewById(Resource.Id.team2_score);
 
             Task.Run(async () => FeedMovementDetector());
+            var clockTimer = new Timer(new TimerCallback(UpdateGameTimer), null,  TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(1));
         }
 
         [Export("Team1Goal")]
@@ -102,8 +111,45 @@ namespace foosballv2s
         {
             if (game.HasEnded)
             {
-                
+                SaveGame(game);
+                ShowGameEndScreen();
             }
+        }
+
+        private async void SaveGame(Game game)
+        {
+            ProgressDialog dialog = ProgressDialog.Show(this, "", 
+                Resources.GetString(Resource.String.saving_game), true);
+
+            await gameRepository.Create(game);
+            
+            dialog.Dismiss();
+        }
+
+        private void ShowGameEndScreen()
+        {
+            // set up the text of winning team
+            TextView winningTeamTextView = (TextView) FindViewById(Resource.Id.game_end_team_won);
+            string winningTeamText = Resources.GetString(Resource.String.game_end_team_won);
+            winningTeamTextView.Text = System.String.Format(winningTeamText, game.WinningTeam.TeamName);
+            
+            // set up the text of the result
+            TextView resultTextView = (TextView) FindViewById(Resource.Id.game_end_result);
+            string resultText = Resources.GetString(Resource.String.game_end_result);
+            resultTextView.Text = System.String.Format(resultText, 
+                game.Team1.TeamName, game.Team2.TeamName, game.Team1Score, game.Team2Score);
+            
+            // show game end layout
+            LinearLayout gameEndLayout = (LinearLayout) FindViewById(Resource.Id.game_end_layout);
+            gameEndLayout.Visibility = ViewStates.Visible;
+        }
+
+        [Export("GameEndOkClick")]
+        public void GameEndOkClick(View view)
+        {
+            Intent intent = new Intent(this, typeof(MainActivity));
+            StartActivity(intent);
+            Finish();
         }
 
         private void OnSurfaceViewTouch(object sender, View.TouchEventArgs e)
@@ -207,6 +253,19 @@ namespace foosballv2s
                 }
             }
            
+        }
+
+        private void UpdateGameTimer(object stateInfo)
+        {
+            if (!game.HasEnded)
+            {
+                string timeString = GameTimeHelper.GetTimeString(game.StartTime, game.EndTime);
+                RunOnUiThread(() =>
+                {
+                    TextView timeTextView = (TextView) FindViewById(Resource.Id.game_time);
+                    timeTextView.Text = timeString;
+                });
+            }
         }
     }
 }

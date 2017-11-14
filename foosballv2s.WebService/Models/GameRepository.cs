@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace foosballv2s.WebService.Models
@@ -30,8 +31,17 @@ namespace foosballv2s.WebService.Models
             {
                 throw new ArgumentNullException("game");
             }
+            _context.Teams.Attach(game.Team1);
+            _context.Teams.Attach(game.Team2);
             _context.Games.Add(game);
-            _context.SaveChanges();
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (SqlException e) // happens when, for example, non existing teams are provided
+            {
+                return null;
+            }
             return game;
         }
 

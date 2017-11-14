@@ -59,9 +59,9 @@ namespace foosballv2s
                 CheckGameEnd();
             }
         }
-        
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+
+        public DateTime? StartTime { get; set; } = null;
+        public DateTime? EndTime { get; set; } = null;
 
         public Team WinningTeam { get; set; }
         public Boolean HasEnded { get; private set; } = false;

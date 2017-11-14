@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using Android.App;
 using Emgu.CV.Fuzzy;
 using Emgu.CV.Structure;
 using Javax.Security.Auth;
@@ -58,16 +59,22 @@ namespace foosballv2s
                 CheckGameEnd();
             }
         }
+        
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
 
         public Team WinningTeam { get; set; }
         public Boolean HasEnded { get; private set; } = false;
 
-        private void CheckGameEnd()
+        public void Start()
         {
-            if (Team1Score == MAX_SCORE || Team2Score == MAX_SCORE)
-            {
-                HasEnded = true;
-            }
+            StartTime = DateTime.Now;
+        }
+
+        public void End()
+        {
+            EndTime = DateTime.Now;
+            HasEnded = true;
 
             if (Team1Score == MAX_SCORE)
             {
@@ -76,6 +83,14 @@ namespace foosballv2s
             else if (Team2Score == MAX_SCORE)
             {
                 WinningTeam = Team2;
+            }
+        }
+        
+        private void CheckGameEnd()
+        {
+            if (Team1Score == MAX_SCORE || Team2Score == MAX_SCORE)
+            {
+                End();
             }
         }
     }

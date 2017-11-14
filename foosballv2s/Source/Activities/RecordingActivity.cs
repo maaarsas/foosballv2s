@@ -70,6 +70,8 @@ namespace foosballv2s
             
             game = DependencyService.Get<Game>();
             gameRepository = DependencyService.Get<GameRepository>();
+
+            game.Start();
             
             this.Window.AddFlags(WindowManagerFlags.Fullscreen);
             
@@ -126,12 +128,12 @@ namespace foosballv2s
             // set up the text of winning team
             TextView winningTeamTextView = (TextView) FindViewById(Resource.Id.game_end_team_won);
             string winningTeamText = Resources.GetString(Resource.String.game_end_team_won);
-            winningTeamTextView.Text = String.Format(winningTeamText, game.WinningTeam.TeamName);
+            winningTeamTextView.Text = System.String.Format(winningTeamText, game.WinningTeam.TeamName);
             
             // set up the text of the result
             TextView resultTextView = (TextView) FindViewById(Resource.Id.game_end_result);
             string resultText = Resources.GetString(Resource.String.game_end_result);
-            winningTeamTextView.Text = String.Format(resultText, 
+            resultTextView.Text = System.String.Format(resultText, 
                 game.Team1.TeamName, game.Team2.TeamName, game.Team1Score, game.Team2Score);
             
             // show game end layout

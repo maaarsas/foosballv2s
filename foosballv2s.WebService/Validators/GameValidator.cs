@@ -35,7 +35,8 @@ namespace foosballv2s.WebService.Validators
             var score2 = game.Team2Score;
             
             if (score1 < 0 || score2 > Game.MAX_SCORE || score2 < 0 || score2 > Game.MAX_SCORE
-                || (score1 == Game.MAX_SCORE && score2 == Game.MAX_SCORE))
+                || (score1 == Game.MAX_SCORE && score2 == Game.MAX_SCORE)
+                || (score1 != Game.MAX_SCORE && score2 != Game.MAX_SCORE))
             {
                 return false;
             }
@@ -46,7 +47,7 @@ namespace foosballv2s.WebService.Validators
         {
             var startTime = game.StartTime;
             var endTime = game.EndTime;
-            var currentTime = new DateTime();
+            var currentTime = DateTime.Now;
 
             if (startTime > endTime || startTime > currentTime || endTime > currentTime)
             {

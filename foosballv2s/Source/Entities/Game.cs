@@ -59,6 +59,7 @@ namespace foosballv2s
             }
         }
 
+        public Team WinningTeam { get; set; }
         public Boolean HasEnded { get; private set; } = false;
 
         private void CheckGameEnd()
@@ -66,6 +67,15 @@ namespace foosballv2s
             if (Team1Score == MAX_SCORE || Team2Score == MAX_SCORE)
             {
                 HasEnded = true;
+            }
+
+            if (Team1Score == MAX_SCORE)
+            {
+                WinningTeam = Team1;
+            }
+            else if (Team2Score == MAX_SCORE)
+            {
+                WinningTeam = Team2;
             }
         }
     }

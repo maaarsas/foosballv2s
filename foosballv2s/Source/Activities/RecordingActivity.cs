@@ -12,6 +12,7 @@ using RS = Android.Renderscripts;
 using Android.Util;
 using Emgu.CV;
 using Emgu.CV.Structure;
+using foosballv2s.Source.Services.FoosballWebService.Repository;
 using Java.Interop;
 using Java.IO;
 using Java.Lang;
@@ -42,6 +43,7 @@ namespace foosballv2s
         private TextView team2ScoreView;
 
         private Game game;
+        private GameRepository gameRepository;
 
         private bool textureSetup;
 
@@ -65,7 +67,9 @@ namespace foosballv2s
             surfaceView.Touch += OnSurfaceViewTouch;
 
             movementDetector = new MovementDetector();
+            
             game = DependencyService.Get<Game>();
+            gameRepository = DependencyService.Get<GameRepository>();
             
             this.Window.AddFlags(WindowManagerFlags.Fullscreen);
             
@@ -102,8 +106,37 @@ namespace foosballv2s
         {
             if (game.HasEnded)
             {
-                
+                SaveGame(game);
+                ShowGameEndScreen();
             }
+        }
+
+        private async void SaveGame(Game game)
+        {
+            ProgressDialog dialog = ProgressDialog.Show(this, "", 
+                Resources.GetString(Resource.String.saving_game), true);
+
+            await gameRepository.Create(game);
+            
+            dialog.Dismiss();
+        }
+
+        private void ShowGameEndScreen()
+        {
+            // set up the text of winning team
+            TextView winningTeamTextView = (TextView) FindViewById(Resource.Id.game_end_team_won);
+            string winningTeamText = Resources.GetString(Resource.String.game_end_team_won);
+            winningTeamTextView.Text = String.Format(winningTeamText, game.WinningTeam.TeamName);
+            
+            // set up the text of the result
+            TextView resultTextView = (TextView) FindViewById(Resource.Id.game_end_result);
+            string resultText = Resources.GetString(Resource.String.game_end_result);
+            winningTeamTextView.Text = String.Format(resultText, 
+                game.Team1.TeamName, game.Team2.TeamName, game.Team1Score, game.Team2Score);
+            
+            // show game end layout
+            LinearLayout gameEndLayout = (LinearLayout) FindViewById(Resource.Id.game_end_layout);
+            gameEndLayout.Visibility = ViewStates.Visible;
         }
 
         private void OnSurfaceViewTouch(object sender, View.TouchEventArgs e)

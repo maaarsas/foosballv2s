@@ -18,4 +18,8 @@
     <string name="stats">Stats</string>
     <string name="retrieving_teams">Loading teams. Please wait.</string>
     <string name="checking_teams">Please wait while your selected teams are being checked</string>
+    <string name="ok">Ok</string>
+    <string name="game_end_team_won">Team {0} has won this game!</string>
+    <string name="game_end_result">Result: {0} {2} - {3} {1}</string>
+    <string name="saving_game">Your game is being saved.</string>
 </resources>

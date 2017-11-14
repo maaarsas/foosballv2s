@@ -7,36 +7,24 @@ using foosballv2s.WebService.Models;
 
 namespace foosballv2s.WebService.Validators
 {
-    public class TeamValidator : IValidator
+    public class TeamValidator : AbstractValidator
     {
         public string NamePattern { get; } = @"^[0\w][A-Za-z\d]{2,19}$";
         private Team team;
-        private bool errorsExist = false;
 
         public TeamValidator(Team team)
         {
             this.team = team;
+            RegisterValidationFunc(ValidateName);
         }
 
-        public bool Validate()
+        private bool ValidateName()
         {
-            errorsExist = false;
-            
-            ValidateName();
-
-            if (errorsExist)
+            if (!Regex.IsMatch(team.TeamName, NamePattern))
             {
                 return false;
             }
             return true;
-        }
-
-        private void ValidateName()
-        {
-            if (!Regex.IsMatch(team.TeamName, NamePattern))
-            {
-                errorsExist = true;
-            }
         }
     }
 }

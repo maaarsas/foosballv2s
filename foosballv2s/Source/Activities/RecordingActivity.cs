@@ -86,6 +86,7 @@ namespace foosballv2s
             team2ScoreView = (TextView) FindViewById(Resource.Id.team2_score);
 
             Task.Run(async () => FeedMovementDetector());
+            Task.Run(async () => UpdateGameTimer());
         }
 
         [Export("Team1Goal")]
@@ -139,6 +140,14 @@ namespace foosballv2s
             // show game end layout
             LinearLayout gameEndLayout = (LinearLayout) FindViewById(Resource.Id.game_end_layout);
             gameEndLayout.Visibility = ViewStates.Visible;
+        }
+
+        [Export("GameEndOkClick")]
+        public void GameEndOkClick(View view)
+        {
+            Intent intent = new Intent(this, typeof(MainActivity));
+            StartActivity(intent);
+            Finish();
         }
 
         private void OnSurfaceViewTouch(object sender, View.TouchEventArgs e)
@@ -242,6 +251,14 @@ namespace foosballv2s
                 }
             }
            
+        }
+
+        private void UpdateGameTimer()
+        {
+            string timeString = GameTimeHelper.GetTimeString(game.StartTime, game.EndTime);
+            TextView timeTextView = (TextView) FindViewById(Resource.Id.game_time);
+            timeTextView.Text = timeString;
+            Task.Delay(1000);
         }
     }
 }

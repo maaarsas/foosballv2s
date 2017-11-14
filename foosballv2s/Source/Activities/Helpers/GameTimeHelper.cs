@@ -8,7 +8,7 @@ namespace foosballv2s
         {
             DateTime fromTime = startTime ?? DateTime.Now;
             DateTime toTime = endTime ?? DateTime.Now;
-            int secondsSpan = (toTime - fromTime).Seconds;
+            TimeSpan secondsSpan = (toTime - fromTime);
             string timeString = secondsSpan.ToString(@"mm\:ss");
             return timeString;
         }

@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Reflection.Emit;
+using System.Threading;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
@@ -86,7 +88,7 @@ namespace foosballv2s
             team2ScoreView = (TextView) FindViewById(Resource.Id.team2_score);
 
             Task.Run(async () => FeedMovementDetector());
-            Task.Run(async () => UpdateGameTimer());
+            var clockTimer = new Timer(new TimerCallback(UpdateGameTimer), null,  TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(1));
         }
 
         [Export("Team1Goal")]
@@ -253,12 +255,17 @@ namespace foosballv2s
            
         }
 
-        private void UpdateGameTimer()
+        private void UpdateGameTimer(object stateInfo)
         {
-            string timeString = GameTimeHelper.GetTimeString(game.StartTime, game.EndTime);
-            TextView timeTextView = (TextView) FindViewById(Resource.Id.game_time);
-            timeTextView.Text = timeString;
-            Task.Delay(1000);
+            if (!game.HasEnded)
+            {
+                string timeString = GameTimeHelper.GetTimeString(game.StartTime, game.EndTime);
+                RunOnUiThread(() =>
+                {
+                    TextView timeTextView = (TextView) FindViewById(Resource.Id.game_time);
+                    timeTextView.Text = timeString;
+                });
+            }
         }
     }
 }

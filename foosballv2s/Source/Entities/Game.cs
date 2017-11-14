@@ -24,11 +24,11 @@ namespace foosballv2s
 
         public Hsv BallColor { get; set; }
 
-        public int Team1Id { get; set; }
+        //public int Team1Id { get; set; }
         
         public Team Team1 { get; set; } = new Team();
         
-        public int Team2Id { get; set; }
+        //public int Team2Id { get; set; }
         
         public Team Team2 { get; set; } = new Team();
         

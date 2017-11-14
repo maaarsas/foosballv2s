@@ -16,4 +16,5 @@
     <string name="team2_goal">Team 2 goal</string>
     <string name="wrong_team_names">Entered team names are wrong (probably contain disallowed symbols)</string>
     <string name="stats">Stats</string>
+    <string name="retrieving_teams">Loading teams. Please wait.</string>
 </resources>

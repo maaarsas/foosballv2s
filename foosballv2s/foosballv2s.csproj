@@ -113,6 +113,7 @@
   <ItemGroup>
     <Compile Include="Source\Activities\Adapters\StatsListAdapter.cs" />
     <Compile Include="Source\Activities\ColorPickerActivity.cs" />
+    <Compile Include="Source\Activities\Filters\TeamFilter.cs" />
     <Compile Include="Source\Activities\StatsActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

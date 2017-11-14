@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using foosballv2s.WebService.Validators;
 
 namespace foosballv2s.WebService.Models
 {
@@ -32,6 +33,12 @@ namespace foosballv2s.WebService.Models
             {
                 throw new ArgumentNullException("team");
             }
+
+            IValidator validator = new TeamValidator(team);
+            if (!validator.Validate())
+            {
+                return null;
+            }
             _context.Teams.Add(team);
             _context.SaveChanges();
             return team;
@@ -55,6 +62,13 @@ namespace foosballv2s.WebService.Models
             {
                 throw new ArgumentNullException("team");
             }
+            
+            IValidator validator = new TeamValidator(team);
+            if (!validator.Validate())
+            {
+                return false;
+            }
+            
             Team teamToUpdate = Get(id);
 
             if (teamToUpdate == null)

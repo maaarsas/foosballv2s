@@ -141,7 +141,6 @@
     <Compile Include="Source\Services\GameRecognition\MovementDetector.cs" />
     <Compile Include="Source\Services\GameRecognition\VideoFile.cs" />
     <Compile Include="Source\Services\GameRecognition\VideoLive.cs" />
-    <Compile Include="Source\Validators\Validator.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidNativeLibrary Include="libs\armeabi\libcvextern.so">

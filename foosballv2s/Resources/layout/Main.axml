@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/TextEnterTeamNames"
         android:layout_marginBottom="18dp"
-        android:completionThreshold="0"
+        android:completionThreshold="1"
         android:hint="@string/first_team_name"
         android:textSize="24sp" />
     <AutoCompleteTextView
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/team1Name"
         android:layout_marginBottom="38dp"
-        android:completionThreshold="0"
+        android:completionThreshold="1"
         android:hint="@string/second_team_name"
         android:textSize="24sp" />
     <RelativeLayout

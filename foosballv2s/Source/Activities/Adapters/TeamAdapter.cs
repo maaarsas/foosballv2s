@@ -13,6 +13,7 @@ namespace foosballv2s.Adapters
         public List<Team> teams;
         public List<Team> matchTeams;
         public Team SelectedTeam { get; set; }
+        public bool IgnoreFilter { get; set; }
 
         public TeamAdapter(Context context, List<Team> teams) : base(context, 0, teams)
         {
@@ -69,8 +70,16 @@ namespace foosballv2s.Adapters
             {
                 FilterResults results = new FilterResults();
                 if (constraint != null) {
+
+                    if (teamAdapter.IgnoreFilter)
+                    {
+                        teamAdapter.IgnoreFilter = false;
+                    }
+                    else
+                    {
+                       teamAdapter.SelectedTeam = null; 
+                    }
                     
-                    teamAdapter.SelectedTeam = null;
                     var searchFor = constraint.ToString();
                     var matchList = new List<Team>();
                     

@@ -146,6 +146,7 @@ namespace foosballv2s
             TeamAdapter teamAdapter = (TeamAdapter) view.Adapter;
             var team = teamAdapter.GetItem(e.Position);
             teamAdapter.SelectedTeam = team;
+            teamAdapter.IgnoreFilter = true;
             view.Text = team.TeamName;
         }
     }

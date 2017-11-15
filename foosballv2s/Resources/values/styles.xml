@@ -9,7 +9,10 @@
         <item name="android:windowBackground">@color/Primary</item>
         <item name="android:colorBackground">@color/Primary</item>
         <item name="android:textColor">@color/White</item>
-        <item name="windowNoTitle">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="windowActionBar">false</item>
     </style>
     <style name="BrandButtonStyle" parent="Widget.AppCompat.Button.Colored">
         <item name="android:colorButtonNormal">@color/Secondary</item>

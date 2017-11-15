@@ -51,12 +51,6 @@
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Emgu.CV.UI, Version=3.2.0.2721, Culture=neutral, PublicKeyToken=7281126722ab4438">
-      <HintPath>..\packages\Emgu.CV.3.2.0.2721\lib\net35\Emgu.CV.UI.dll</HintPath>
-    </Reference>
-    <!--<Reference Include="Emgu.CV.World, Version=3.2.0.2721, Culture=neutral, PublicKeyToken=7281126722ab4438">-->
-    <!--<HintPath>..\packages\Emgu.CV.3.2.0.2721\lib\net35\Emgu.CV.World.dll</HintPath>-->
-    <!--</Reference>-->
     <Reference Include="Emgu.CV.World.Android, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\Emgu.CV.3.2.0.2721\lib\net35\Emgu.CV.World.Android.dll</HintPath>
     </Reference>
@@ -72,14 +66,11 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
-    <Reference Include="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <HintPath>C:\Windows\Microsoft.NET\Framework\v4.0.30319\System.Drawing.dll</HintPath>
+    <Reference Include="System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\..\..\..\..\..\..\..\Library\Frameworks\Mono.framework\External\xbuild-frameworks\MonoAndroid\v1.0\System.Net.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml, Version=2.0.5.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
       <HintPath>C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v1.0\System.Xml.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-      <HintPath>C:\Windows\Microsoft.NET\Framework\v4.0.30319\System.XML.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Xamarin.Android.Support.Animated.Vector.Drawable, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
@@ -118,33 +109,42 @@
     <Reference Include="Xamarin.Forms.Xaml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\Xamarin.Forms.2.4.0.280\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
-    <Reference Include="ZedGraph, Version=5.1.5.28844, Culture=neutral, PublicKeyToken=02a83cbd123fcd60">
-      <HintPath>..\packages\ZedGraph.5.1.5\lib\ZedGraph.dll</HintPath>
-    </Reference>
-    <Reference Include="ZedGraph, Version=5.1.5.28844, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\ZedGraph.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActivityHelper.cs" />
-    <Compile Include="BallImage.cs" />
-    <Compile Include="BallImageActivity.cs" />
-    <Compile Include="SLSupp.cs" />
-    <Compile Include="Game.cs" />
-    <Compile Include="GameTracker.cs" />
-    <Compile Include="IO.cs" />
-    <Compile Include="IVideo.cs" />
-    <Compile Include="MainActivity.cs" />
-    <Compile Include="MovementDetector.cs" />
-    <Compile Include="PreviousGamesActivity.cs" />
-    <Compile Include="RecordingActivity.cs" />
+    <Compile Include="Source\Activities\Adapters\GameAdapter.cs" />
+    <Compile Include="Source\Activities\Adapters\TeamAdapter.cs" />
+    <Compile Include="Source\Activities\ColorPickerActivity.cs" />
+    <Compile Include="Source\Activities\Filters\TeamFilter.cs" />
+    <Compile Include="Source\Activities\GamesActivity.cs" />
+    <Compile Include="Source\Activities\Helpers\GameTimeHelper.cs" />
+    <Compile Include="Source\Activities\Helpers\NavigationHelper.cs" />
+    <Compile Include="Source\Activities\Listeners\NavigationItemClickListener.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Team.cs" />
-    <Compile Include="Validator.cs" />
-    <Compile Include="VideoFile.cs" />
-    <Compile Include="VideoLive.cs" />
+    <Compile Include="Source\Activities\Adapters\TeamAutoCompleteAdapter.cs" />
+    <Compile Include="Source\Activities\BallImageActivity.cs" />
+    <Compile Include="Source\Activities\Helpers\ActivityHelper.cs" />
+    <Compile Include="Source\Activities\Helpers\ConfigHelper.cs" />
+    <Compile Include="Source\Activities\MainActivity.cs" />
+    <Compile Include="Source\Activities\PreviousGamesActivity.cs" />
+    <Compile Include="Source\Activities\RecordingActivity.cs" />
+    <Compile Include="Source\Activities\SplashActivity.cs" />
+    <Compile Include="Source\Activities\TeamsActivity.cs" />
+    <Compile Include="Source\Activities\TournamentsActivity.cs" />
+    <Compile Include="Source\Entities\Game.cs" />
+    <Compile Include="Source\Entities\Team.cs" />
+    <Compile Include="Source\MyApplication.cs" />
+    <Compile Include="Source\Services\FileIO\IO.cs" />
+    <Compile Include="Source\Services\FileIO\SLSupp.cs" />
+    <Compile Include="Source\Services\FoosballWebService\FoosballWebServiceClient.cs" />
+    <Compile Include="Source\Services\FoosballWebService\IWebServiceClient.cs" />
+    <Compile Include="Source\Services\FoosballWebService\Repository\GameRepository.cs" />
+    <Compile Include="Source\Services\FoosballWebService\Repository\TeamRepository.cs" />
+    <Compile Include="Source\Services\GameRecognition\BallImage.cs" />
+    <Compile Include="Source\Services\GameRecognition\IVideo.cs" />
+    <Compile Include="Source\Services\GameRecognition\MovementDetector.cs" />
+    <Compile Include="Source\Services\GameRecognition\VideoFile.cs" />
+    <Compile Include="Source\Services\GameRecognition\VideoLive.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidNativeLibrary Include="libs\armeabi\libcvextern.so">
@@ -156,11 +156,22 @@
     <AndroidNativeLibrary Include="libs\x86\libcvextern.so">
       <Link>lib\x86\libcvextern.so</Link>
     </AndroidNativeLibrary>
-    <None Include="app.config" />
+    <AndroidResource Include="Resources\layout\Games.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Teams.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Tournaments.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <None Include="packages.config" />
     <None Include="Properties\AndroidManifest.xml">
       <SubType>Designer</SubType>
     </None>
+    <AndroidResource Include="Resources\layout\ColorPicker.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ColorSquare.xml" />
@@ -179,6 +190,7 @@
     <Folder Include="lib\armeabi-v7a\" />
     <Folder Include="lib\armeabi\" />
     <Folder Include="lib\x86\" />
+    <Folder Include="Source\Activities\Views\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Loading.xml" />
@@ -198,9 +210,6 @@
     <AndroidResource Include="Resources\values\styles.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SplashActivity.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\mipmap-hdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\mipmap-mdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\mipmap-xhdpi\ic_launcher.png" />
@@ -211,9 +220,15 @@
     <AndroidResource Include="Resources\drawable\BallDetectionRing.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\PreviousGames.axml">
+    <AndroidResource Include="Resources\layout\StatsRow.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config\config.json" />
+    <AndroidResource Include="Resources\layout\item_team.axml" />
+    <AndroidResource Include="Resources\menu\navigation.xml" />
+    <AndroidResource Include="Resources\layout\Toolbar.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" />

@@ -6,6 +6,8 @@
     <color name="SecondaryDarker">#FF9500</color>
     <color name="White">#FFFFFF</color>
     <color name="text_shadow_black">#80000000</color>
+    <color name="winning_background">#FFC200</color>
+    <color name="losing_background">#0F7BDB</color>
     <!--<color name="Ivory">#FFFFF0</color>-->
     <!--<color name="LightYellow">#FFFFE0</color>-->
     <!--<color name="Yellow">#FFFF00</color>-->

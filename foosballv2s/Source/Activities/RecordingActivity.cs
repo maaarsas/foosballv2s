@@ -181,8 +181,9 @@ namespace foosballv2s
             catch (Java.IO.IOException ex) { }
 
             Camera.Parameters tmp = camera.GetParameters();
-            Size bestSize = ActivityHelper.GetBestPreviewSize(camera.GetParameters(), textureView.Width, textureView.Height);
-            tmp.SetPreviewSize((int) bestSize.Width, (int) bestSize.Height);
+            Camera.Size size = tmp.PreviewSize;
+
+            tmp.SetPreviewSize((int) size.Width, (int) size.Height);
             tmp.FocusMode = Camera.Parameters.FocusModeContinuousPicture;
             camera.SetParameters(tmp);
             movementDetector.SetupBallDetector(textureView.Width, textureView.Height, game.BallColor);

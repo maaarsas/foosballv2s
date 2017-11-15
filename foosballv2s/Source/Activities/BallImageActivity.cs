@@ -1,43 +1,30 @@
-﻿using Android.App;
-using Android.Widget;
-using Android.OS;
-using Android.Views;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
-using Android;
+﻿using System.IO;
+using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.Graphics;
-using Android.Graphics.Drawables;
-using Android.Hardware.Camera2;
-using Android.Hardware.Camera2.Params;
-using Android.Media.Projection;
-using Android.Provider;
-using Android.Runtime;
-using Android.Support.V4.App;
-using Android.Support.V4.Content;
+using Android.OS;
 using Android.Util;
-using Emgu.CV;
+using Android.Views;
+using Android.Widget;
 using Emgu.CV.Structure;
+using foosballv2s.Source.Activities.Helpers;
+using foosballv2s.Source.Entities;
+using foosballv2s.Source.Services.FileIO;
+using foosballv2s.Source.Services.GameRecognition;
 using Java.Interop;
-using Java.Lang;
-using Java.Nio;
 using Xamarin.Forms;
 using Button = Android.Widget.Button;
-using Byte = System.Byte;
 using Camera = Android.Hardware.Camera;
-using CameraError = Android.Hardware.Camera2.CameraError;
 using Color = Android.Graphics.Color;
-using File = Java.IO.File;
-using FileMode = Xamarin.Forms.Internals.FileMode;
-using Stream = Android.Media.Stream;
 using String = System.String;
 using View = Android.Views.View;
 
-namespace foosballv2s
+namespace foosballv2s.Source.Activities
 {
+    /// <summary>
+    /// An activity for getting a ball color from a picture
+    /// </summary>
     [Activity(
         ConfigurationChanges = ConfigChanges.Orientation,
         ScreenOrientation = ScreenOrientation.Portrait
@@ -72,6 +59,10 @@ namespace foosballv2s
             this.Window.AddFlags(WindowManagerFlags.Fullscreen);
         }
 
+        /// <summary>
+        /// From the current camera picture parses the ball color
+        /// </summary>
+        /// <param name="view"></param>
         [Export("DetectBallColor")]
         public void DetectBallColor(View view)
         {
@@ -102,7 +93,10 @@ namespace foosballv2s
             submitButton.Visibility = ViewStates.Visible;
         }
         
-
+        /// <summary>
+        /// Submits the chosen ball color and goes to recording activity
+        /// </summary>
+        /// <param name="view"></param>
         [Export("SubmitBallPhoto")]
         public void SubmitBallPhoto(View view)
         {
@@ -112,7 +106,12 @@ namespace foosballv2s
             StartActivity(intent);
         }
        
-        
+        /// <summary>
+        /// Sets up the camera when the surface view is available
+        /// </summary>
+        /// <param name="surfacetexture"></param>
+        /// <param name="i"></param>
+        /// <param name="j"></param>
         public void OnSurfaceTextureAvailable(SurfaceTexture surfacetexture, int i, int j) {
             mCamera = Camera.Open();
             try {
@@ -131,6 +130,11 @@ namespace foosballv2s
 
         }
 
+        /// <summary>
+        /// Stops the camera when the surface view is destroyed
+        /// </summary>
+        /// <param name="surfacetexture"></param>
+        /// <returns></returns>
         public bool OnSurfaceTextureDestroyed(SurfaceTexture surfacetexture) {
             if (mCamera != null) {
                 mCamera.StopPreview();
@@ -140,6 +144,12 @@ namespace foosballv2s
             return false;
         }
 
+        /// <summary>
+        /// Sets up the preview size when the surface view size changes
+        /// </summary>
+        /// <param name="surfacetexture"></param>
+        /// <param name="i"></param>
+        /// <param name="j"></param>
         public void OnSurfaceTextureSizeChanged(SurfaceTexture surfacetexture, int i, int j) {
             if (mCamera != null) {
                 Camera.Parameters tmp = mCamera.GetParameters();
@@ -149,6 +159,9 @@ namespace foosballv2s
             }
         }
 
+        /// <summary>
+        /// </summary>
+        /// <param name="surfacetexture"></param>
         public void OnSurfaceTextureUpdated(SurfaceTexture surfacetexture) {
         }
 

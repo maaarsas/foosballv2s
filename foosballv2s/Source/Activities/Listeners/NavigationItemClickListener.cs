@@ -1,14 +1,15 @@
-﻿using System;
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.Support.Design.Internal;
 using Android.Support.Design.Widget;
 using Android.Support.V4.Widget;
 using Android.Views;
-using Android.Widget;
 
-namespace foosballv2s.Listeners
+namespace foosballv2s.Source.Activities.Listeners
 {
+    /// <summary>
+    /// A listener for reacting to navigation item's click events
+    /// </summary>
     public class NavigationItemClickListener : Java.Lang.Object, NavigationView.IOnNavigationItemSelectedListener
     {
         private Activity currentActivity;

@@ -1,34 +1,31 @@
 ﻿using System;
-using System.IO;
-using System.Reflection.Emit;
 using System.Threading;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
-using Android.Widget;
+using Android.Graphics;
 using Android.OS;
 using Android.Views;
-using Android.Graphics;
-using RS = Android.Renderscripts;
-using Android.Util;
+using Android.Widget;
 using Emgu.CV;
 using Emgu.CV.Structure;
+using foosballv2s.Source.Activities.Helpers;
+using foosballv2s.Source.Entities;
 using foosballv2s.Source.Services.FoosballWebService.Repository;
+using foosballv2s.Source.Services.GameRecognition;
 using Java.Interop;
-using Java.IO;
-using Java.Lang;
 using Xamarin.Forms;
 using Camera = Android.Hardware.Camera;
 using Color = Android.Graphics.Color;
-using Console = System.Console;
-using Element = Xamarin.Forms.Element;
 using Size = Xamarin.Forms.Size;
-using Type = System.Type;
 using View = Android.Views.View;
 
-namespace foosballv2s
+namespace foosballv2s.Source.Activities
 {
+    /// <summary>
+    /// An activity for the game recording, score calculating and recognition
+    /// </summary>
     [Activity(
         ConfigurationChanges = ConfigChanges.Orientation,
         ScreenOrientation = ScreenOrientation.Landscape
@@ -92,6 +89,10 @@ namespace foosballv2s
             var clockTimer = new Timer(new TimerCallback(UpdateGameTimer), null,  TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(1));
         }
 
+        /// <summary>
+        /// Called on the first team's goal
+        /// </summary>
+        /// <param name="view"></param>
         [Export("Team1Goal")]
         public void Team1Goal(View view)
         {
@@ -100,6 +101,10 @@ namespace foosballv2s
             CheckGameEnd(game);
         }
         
+        /// <summary>
+        /// Called on the second team's goal
+        /// </summary>
+        /// <param name="view"></param>
         [Export("Team2Goal")]
         public void Team2Goal(View view)
         {
@@ -108,6 +113,10 @@ namespace foosballv2s
             CheckGameEnd(game);
         }
 
+        /// <summary>
+        /// Checks if the maximum score is and the end of the game is reached
+        /// </summary>
+        /// <param name="game"></param>
         private void CheckGameEnd(Game game)
         {
             if (game.HasEnded)
@@ -117,6 +126,10 @@ namespace foosballv2s
             }
         }
 
+        /// <summary>
+        /// Saves the game asynchronously
+        /// </summary>
+        /// <param name="game"></param>
         private async void SaveGame(Game game)
         {
             ProgressDialog dialog = ProgressDialog.Show(this, "", 
@@ -128,6 +141,9 @@ namespace foosballv2s
             dialog.Dismiss();
         }
 
+        /// <summary>
+        /// Prepares the shows the end of the game view
+        /// </summary>
         private void ShowGameEndScreen()
         {
             // set up the text of winning team
@@ -146,6 +162,10 @@ namespace foosballv2s
             gameEndLayout.Visibility = ViewStates.Visible;
         }
 
+        /// <summary>
+        /// Called when the Ok button is clicked in the end of the game view
+        /// </summary>
+        /// <param name="view"></param>
         [Export("GameEndOkClick")]
         public void GameEndOkClick(View view)
         {
@@ -154,11 +174,22 @@ namespace foosballv2s
             Finish();
         }
 
+        /// <summary>
+        /// Draws a rectangle onto the touched place
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnSurfaceViewTouch(object sender, View.TouchEventArgs e)
         {
             DrawRectangle(e.Event.GetX(), e.Event.GetY());
         }
 
+        /// <summary>
+        /// Called when the surface view is destroed
+        /// Closes the camera
+        /// </summary>
+        /// <param name="surface"></param>
+        /// <returns></returns>
         public bool OnSurfaceTextureDestroyed(SurfaceTexture surface)
         {
             if (camera != null) {
@@ -169,6 +200,13 @@ namespace foosballv2s
             return false;
         }
 
+        /// <summary>
+        /// Called when the surface view is available
+        /// Opens and setups the camera
+        /// </summary>
+        /// <param name="surface"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
         public void OnSurfaceTextureAvailable(SurfaceTexture surface, int width, int height)
         {
             camera = Camera.Open();
@@ -194,6 +232,11 @@ namespace foosballv2s
 
         public void OnSurfaceTextureUpdated(SurfaceTexture surface) { }
 
+        /// <summary>
+        /// Draws a rectangle onto the screen
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         private void DrawRectangle(float x, float y)
         {
             //define the paintbrush
@@ -213,6 +256,12 @@ namespace foosballv2s
 
         }
         
+        /// <summary>
+        /// Draws a circle onto the screen
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="radius"></param>
         private void DrawCircle(float x, float y, float radius)
         {
             //define the paintbrush
@@ -235,6 +284,9 @@ namespace foosballv2s
         {
         }
 
+        /// <summary>
+        /// Passes the camera frames to the movement detector and draws the detected ball circles
+        /// </summary>
         private void FeedMovementDetector()
         {
             while (!game.HasEnded)
@@ -259,6 +311,10 @@ namespace foosballv2s
            
         }
 
+        /// <summary>
+        /// Updates the game timer
+        /// </summary>
+        /// <param name="stateInfo"></param>
         private void UpdateGameTimer(object stateInfo)
         {
             if (!game.HasEnded)

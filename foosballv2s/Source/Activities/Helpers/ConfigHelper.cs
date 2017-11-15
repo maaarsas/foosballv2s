@@ -1,6 +1,4 @@
-﻿using Org.Json;
-
-namespace foosballv2s
+﻿namespace foosballv2s.Source.Activities.Helpers
 {
     public class ConfigHelper
     {

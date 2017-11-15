@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Color = Android.Graphics.Color;
 
-namespace foosballv2s
+namespace foosballv2s.Source.Services.FileIO
 {
     class SLSupp
     {

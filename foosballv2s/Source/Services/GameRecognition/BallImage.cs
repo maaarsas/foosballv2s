@@ -1,11 +1,11 @@
-﻿using System;
-using Android.Graphics;
-using Emgu.CV;
+﻿using Android.Graphics;
 using Emgu.CV.Structure;
-using Emgu.Util;
 
-namespace foosballv2s
+namespace foosballv2s.Source.Services.GameRecognition
 {
+    /// <summary>
+    /// A class for working with image files and getting a ball color from it
+    /// </summary>
     public class BallImage
     {
         private Bitmap image;
@@ -15,6 +15,10 @@ namespace foosballv2s
             this.image = bitmapImage;
         }
 
+        /// <summary>
+        /// Gets a ball color from a picture
+        /// </summary>
+        /// <returns></returns>
         public Hsv getColor()
         {
             Bitmap bitmap = this.image;

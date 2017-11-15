@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿using System.Collections.Generic;
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Support.V7.App;
-using Android.Views;
-using Android.Widget;
 using foosballv2s.Source.Activities.Adapters;
+using foosballv2s.Source.Activities.Helpers;
+using foosballv2s.Source.Entities;
 using foosballv2s.Source.Services.FoosballWebService.Repository;
 using Xamarin.Forms;
 using ListView = Android.Widget.ListView;
 
-namespace foosballv2s
+namespace foosballv2s.Source.Activities
 {
+    /// <summary>
+    /// An activity for displaying a history of games
+    /// </summary>
     [Activity(ParentActivity=typeof(MainActivity))]
     public class GamesActivity : AppCompatActivity
     {
@@ -37,6 +34,9 @@ namespace foosballv2s
             FetchGames();
         }
 
+        /// <summary>
+        /// Retrieves a list of games from a web service and populates a list
+        /// </summary>
         private async void FetchGames()
         {
             ProgressDialog dialog = ProgressDialog.Show(this, "", 

@@ -7,6 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace foosballv2s.WebService.Models
 {
+    /// <summary>
+    /// A class for CRUD game data 
+    /// </summary>
     public class GameRepository : IGameRepository
     {
         private readonly IWebServiceDbContext _context;
@@ -16,6 +19,10 @@ namespace foosballv2s.WebService.Models
             _context = context;
         }
         
+        /// <summary>
+        /// Gets all game from the storage
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Game> GetAll()
         {
             return _context.Games
@@ -25,11 +32,22 @@ namespace foosballv2s.WebService.Models
                 .ToList();
         }
 
+        /// <summary>
+        /// Gets a game by a id from the storage
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Game Get(int id)
         {
             return _context.Games.Find(id);
         }
 
+        /// <summary>
+        /// Creates a game in the storage
+        /// </summary>
+        /// <param name="game"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public Game Add(Game game)
         {
             if (game == null)
@@ -50,6 +68,11 @@ namespace foosballv2s.WebService.Models
             return game;
         }
 
+        /// <summary>
+        /// Deletes a game
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public bool Remove(int id)
         {
             Game game = Get(id);
@@ -62,6 +85,13 @@ namespace foosballv2s.WebService.Models
             return true;
         }
 
+        /// <summary>
+        /// Updates a game by an id in the storage
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="game"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public bool Update(int id, Game game)
         {
             if (game == null)

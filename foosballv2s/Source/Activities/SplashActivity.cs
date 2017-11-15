@@ -1,18 +1,12 @@
 using Android.App;
-using Android.Widget;
-using Android.OS;
-using Android.Hardware;
-using Android.Views;
-using System;
-using Android;
 using Android.Content;
-using Android.Graphics;
-using Android.Provider;
-using Android.Runtime;
-using Emgu.CV.Structure;
+using Android.OS;
 
-namespace foosballv2s
+namespace foosballv2s.Source.Activities
 {
+    /// <summary>
+    /// Shows a splash screen on the launch of the app
+    /// </summary>
     [Activity(MainLauncher = true, Theme = "@style/SplashTheme")]
     public class SplashActivity : Activity
     {

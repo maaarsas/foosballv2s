@@ -1,9 +1,18 @@
 ﻿using System;
 
-namespace foosballv2s
+namespace foosballv2s.Source.Activities.Helpers
 {
+    /// <summary>
+    /// Game timer manipulation and setup class
+    /// </summary>
     public class GameTimeHelper
     {
+        /// <summary>
+        /// Forms a timer string from the given start and end times
+        /// </summary>
+        /// <param name="startTime"></param>
+        /// <param name="endTime"></param>
+        /// <returns></returns>
         public static string GetTimeString(DateTime? startTime, DateTime? endTime)
         {
             DateTime fromTime = startTime ?? DateTime.Now;

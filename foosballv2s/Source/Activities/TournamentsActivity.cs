@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
+﻿using Android.App;
 using Android.OS;
-using Android.Runtime;
 using Android.Support.V7.App;
-using Android.Views;
-using Android.Widget;
+using foosballv2s.Source.Activities.Helpers;
 
-namespace foosballv2s
+namespace foosballv2s.Source.Activities
 {
+    /// <summary>
+    /// An activity for displaying all tournaments
+    /// </summary>
     [Activity(ParentActivity=typeof(MainActivity))]
     public class TournamentsActivity : AppCompatActivity
     {

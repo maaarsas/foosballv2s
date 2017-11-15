@@ -1,11 +1,7 @@
 ﻿using NUnit.Framework;
-using NUnit.Mocks;
-using System;
-using System.Collections.Generic;
 using Android.Graphics;
-using Android.Util;
 using Emgu.CV.Structure;
-using Camera = Android.Hardware.Camera;
+using foosballv2s.Source.Services.GameRecognition;
 
 namespace foosballv2s.Test
 {

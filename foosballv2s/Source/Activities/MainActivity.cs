@@ -1,31 +1,25 @@
-﻿using Android.App;
-using Android.Widget;
-using Android.OS;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using Android.App;
 using Android.Content;
 using Android.Content.PM;
-using Android.Graphics;
-using Android.Graphics.Drawables;
-using Android.Provider;
-using Android.Runtime;
-using Emgu.CV.Structure;
-using Java.Interop;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.IO;
-using foosballv2s.Adapters;
-using foosballv2s.Source.Services.FoosballWebService;
+using Android.OS;
+using Android.Support.V7.App;
+using Android.Widget;
+using foosballv2s.Source.Activities.Adapters;
+using foosballv2s.Source.Activities.Helpers;
+using foosballv2s.Source.Entities;
+using foosballv2s.Source.Services.FileIO;
 using foosballv2s.Source.Services.FoosballWebService.Repository;
 using Java.Interop;
 using Xamarin.Forms;
 using View = Android.Views.View;
-using System.Collections.Generic;
-using Android.Support.V7.App;
-using Android.Text;
-using Java.Lang;
 
-namespace foosballv2s
+namespace foosballv2s.Source.Activities
 {
+    /// <summary>
+    /// Main activity for choosing the teams for the game
+    /// </summary>
     [Activity(
         ConfigurationChanges = ConfigChanges.Orientation,
         ScreenOrientation = ScreenOrientation.Portrait
@@ -68,6 +62,11 @@ namespace foosballv2s
             SetupTeamDropdownList();
         }
 
+        /// <summary>
+        /// A function that is called when the "Previous settings" button is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnPrev_Click(object sender, EventArgs e)
         {
             Intent intent = new Intent(this, typeof(ColorPickerActivity));
@@ -75,6 +74,11 @@ namespace foosballv2s
             StartActivity(intent);
         }
 
+        /// <summary>
+        /// Called when submit is clicked
+        /// Checks the teams and starts the game
+        /// </summary>
+        /// <param name="view"></param>
         [Export("SubmitTeamNames")]
         public async void SubmitTeamNames(View view)
         {
@@ -113,12 +117,17 @@ namespace foosballv2s
             StartActivity(intent);
         }
 
+        /// <summary>
+        /// Sets up a auto complete drop down list with teams from the web service
+        /// </summary>
         private void SetupTeamDropdownList()
         {
-            
             FetchAllTeams();
         }
 
+        /// <summary>
+        /// Retrievies teams and populates the dropdown list
+        /// </summary>
         private async void FetchAllTeams()
         {
             ProgressDialog dialog = ProgressDialog.Show(this, "", 
@@ -136,6 +145,11 @@ namespace foosballv2s
             
         }
         
+        /// <summary>
+        /// An event when the dropdown list team is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AutoCompleteTextView_ItemClicked(object sender, AdapterView<TeamAutoCompleteAdapter>.ItemClickEventArgs e)
         {
             AutoCompleteTextView view = (AutoCompleteTextView) sender;

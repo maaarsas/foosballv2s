@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
-using Android.App;
 using Android.Content;
-using Android.Content.Res;
-using Android.Graphics;
-using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using foosballv2s.Source.Activities.Helpers;
+using foosballv2s.Source.Entities;
 
 namespace foosballv2s.Source.Activities.Adapters
 {
+    /// <summary>
+    /// This class populates a one row in the game list with needed values
+    /// </summary>
     class GameAdapter : ArrayAdapter<Game>
     {
         List<Game> gList;
@@ -35,6 +31,11 @@ namespace foosballv2s.Source.Activities.Adapters
             return position;
         }
         
+        /// <summary>
+        /// Gets the item from the game list by position number
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
         public Game GetItem(int position)
         {
             return gList.ElementAt(position);
@@ -67,15 +68,23 @@ namespace foosballv2s.Source.Activities.Adapters
             return row;
         }
 
+        /// <summary>
+        /// Sets the background of the team name to seperate winning and losing teams
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name="textView"></param>
+        /// <param name="teamScore"></param>
         private void SetTeamBackgroundColor(ViewGroup parent, TextView textView, int teamScore)
         {
             if (teamScore == Game.MAX_SCORE)
             {
                 textView.SetBackgroundColor(parent.Resources.GetColor(Resource.Color.winning_background));
+                textView.SetTextColor(parent.Resources.GetColor(Resource.Color.Black));
             }
             else
             {
                 textView.SetBackgroundColor(parent.Resources.GetColor(Resource.Color.losing_background));
+                textView.SetTextColor(parent.Resources.GetColor(Resource.Color.White));
             }
         }
     }

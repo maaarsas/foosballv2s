@@ -114,7 +114,9 @@
     <Compile Include="Source\Activities\Adapters\StatsListAdapter.cs" />
     <Compile Include="Source\Activities\ColorPickerActivity.cs" />
     <Compile Include="Source\Activities\Filters\TeamFilter.cs" />
+    <Compile Include="Source\Activities\GamesActivity.cs" />
     <Compile Include="Source\Activities\Helpers\GameTimeHelper.cs" />
+    <Compile Include="Source\Activities\Listeners\NavigationItemClickListener.cs" />
     <Compile Include="Source\Activities\StatsActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -126,6 +128,8 @@
     <Compile Include="Source\Activities\PreviousGamesActivity.cs" />
     <Compile Include="Source\Activities\RecordingActivity.cs" />
     <Compile Include="Source\Activities\SplashActivity.cs" />
+    <Compile Include="Source\Activities\TeamsActivity.cs" />
+    <Compile Include="Source\Activities\TournamentsActivity.cs" />
     <Compile Include="Source\Entities\Game.cs" />
     <Compile Include="Source\Entities\GameStats.cs" />
     <Compile Include="Source\Entities\Team.cs" />

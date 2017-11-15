@@ -16,10 +16,12 @@
             <include
                 android:id="@+id/toolbar_container"
                 layout="@layout/Toolbar"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:id="@+id/listView">
                 <LinearLayout
                     android:orientation="horizontal"
@@ -36,7 +38,7 @@
                     <TextView
                         android:text="Name"
                         style="@android:style/TextAppearance.Medium"
-                        android:layout_weight="25"
+                        android:layout_weight="35"
                         android:layout_height="40dp"
                         android:id="@+id/team1nameWindow"
                         android:layout_width="0dp"
@@ -46,28 +48,13 @@
                         style="@android:style/TextAppearance.Medium"
                         android:layout_weight="15"
                         android:layout_height="40dp"
-                        android:id="@+id/team1scoreWindow"
-                        android:layout_width="0dp"
-                        android:gravity="center" />
-                    <TextView
-                        android:text=""
-                        android:layout_weight="5"
-                        android:layout_height="40dp"
-                        android:id="@+id/space"
-                        android:layout_width="0dp"
-                        android:gravity="center" />
-                    <TextView
-                        android:text="Score"
-                        style="@android:style/TextAppearance.Medium"
-                        android:layout_weight="15"
-                        android:layout_height="40dp"
-                        android:id="@+id/team2scoreWindon"
+                        android:id="@+id/scoreWindow"
                         android:layout_width="0dp"
                         android:gravity="center" />
                     <TextView
                         android:text="Name"
                         style="@android:style/TextAppearance.Medium"
-                        android:layout_weight="25"
+                        android:layout_weight="35"
                         android:layout_height="40dp"
                         android:id="@+id/team2nameWindow"
                         android:layout_width="0dp"

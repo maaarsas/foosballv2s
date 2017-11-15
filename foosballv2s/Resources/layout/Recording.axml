@@ -102,6 +102,19 @@
                 android:id="@+id/team1_goal"
                 android:onClick="Team1Goal" />
 
+        <TextView
+                android:background="#00000000"
+                android:id="@+id/game_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:shadowColor="@color/text_shadow_black"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="3"
+                android:textSize="32sp" />
+
         <Button
                 android:text="@string/team2_goal"
                 style="@style/primaryButtonStyle"
@@ -117,4 +130,50 @@
         android:id="@+id/test_image_view"
         android:layout_height="100dp"
         android:layout_width="match_parent" />
+    
+    <LinearLayout
+        android:id="@+id/game_end_layout"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:visibility="invisible"
+        android:background="#A0000000">
+        
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:background="#00000000"
+            android:gravity="center">
+
+            <TextView
+                android:background="#00000000"
+                android:id="@+id/game_end_team_won"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:shadowColor="@color/text_shadow_black"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="3"
+                android:textSize="32sp" />
+
+            <TextView
+                android:background="#00000000"
+                android:id="@+id/game_end_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:shadowColor="@color/text_shadow_black"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="3"
+                android:textSize="18sp" />
+            <Button
+                android:text="@string/ok"
+                style="@style/primaryButtonStyle"
+                android:id="@+id/game_end_ok_button"
+                android:onClick="GameEndOkClick" />
+
+        </LinearLayout>
+        
+    </LinearLayout>
 </RelativeLayout>

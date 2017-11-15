@@ -15,4 +15,22 @@
     <string name="team1_goal">Team 1 goal</string>
     <string name="team2_goal">Team 2 goal</string>
     <string name="wrong_team_names">Entered team names are wrong (probably contain disallowed symbols)</string>
+    <string name="stats">Stats</string>
+    <string name="retrieving_teams">Loading teams. Please wait.</string>
+    <string name="checking_teams">Please wait while your selected teams are being checked</string>
+    <string name="ok">Ok</string>
+    <string name="game_end_team_won">Team {0} has won this game!</string>
+    <string name="game_end_result">Result: {0} {2} - {3} {1}</string>
+    <string name="saving_game">Your game is being saved.</string>
+    
+    <!--Navigation-->
+    <string name="nav_new_game">New game</string>
+    <string name="nav_teams">Teams</string>
+    <string name="nav_games">Games</string>
+    <string name="nav_tournaments">Tournaments</string>
+    <string name="open_drawer">Open</string>
+    <string name="close_drawer">Close</string>
+    
+    <!--Games-->
+    <string name="retrieving_games">Loading games. Please wait.</string>
 </resources>

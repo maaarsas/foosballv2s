@@ -55,6 +55,9 @@ namespace foosballv2s
             
             var btnP = FindViewById<Android.Widget.Button>(Resource.Id.prev);
             btnP.Click += BtnPrev_Click;
+
+            var btnS = FindViewById<Android.Widget.Button>(Resource.Id.stats);
+            btnS.Click += BtnStats_Click;
             
             //Window.SetBackgroundDrawable(Android.Resource.Id.);
         }
@@ -150,6 +153,4 @@ namespace foosballv2s
             view.Text = team.TeamName;
         }
     }
-    
-  
 }

@@ -26,6 +26,7 @@ using Element = Xamarin.Forms.Element;
 using Size = Xamarin.Forms.Size;
 using Type = System.Type;
 using View = Android.Views.View;
+using foosballv2s.Source.Entities;
 
 namespace foosballv2s
 {
@@ -46,6 +47,8 @@ namespace foosballv2s
 
         private Game game;
         private GameRepository gameRepository;
+
+        private GameStats currentstats;
 
         private bool textureSetup;
 
@@ -111,6 +114,7 @@ namespace foosballv2s
         {
             if (game.HasEnded)
             {
+                SendToStats(game);
                 SaveGame(game);
                 ShowGameEndScreen();
             }
@@ -121,9 +125,25 @@ namespace foosballv2s
             ProgressDialog dialog = ProgressDialog.Show(this, "", 
                 Resources.GetString(Resource.String.saving_game), true);
 
+
             await gameRepository.Create(game);
             
             dialog.Dismiss();
+        }
+
+        private void SendToStats(Game game)
+        {
+            Stats stats = new Stats();
+            currentstats = new GameStats()
+            {
+                team1name = game.Team1.TeamName,
+                team2name = game.Team2.TeamName,
+                team1score = game.Team1Score,
+                team2score = game.Team2Score,
+                victory = stats.victor(game.Team1Score, game.Team2Score)
+            };
+
+            stats.toStats(currentstats);
         }
 
         private void ShowGameEndScreen()

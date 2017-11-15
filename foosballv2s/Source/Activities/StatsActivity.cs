@@ -16,7 +16,8 @@ namespace foosballv2s
     public class StatsActivity : Activity
     {
         private ListView statsListView;
-        private List<GameStats> gamesList;
+        private List<GameStats> gamesList = new List<GameStats>();
+        private IO stats = new IO();
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -25,8 +26,14 @@ namespace foosballv2s
 
             statsListView = FindViewById<ListView>(Resource.Id.StatisticsList);
 
-            StatsListAdapter statsAdapter = new StatsListAdapter(this, gamesList);
+            //StatsListAdapter statsAdapter = new StatsListAdapter(this, gamesList);
 
+            //list element for testing purposes, color hardcoded to #64DD17 to test if possible to mark the victor
+            //gamesList.Add(new GameStats() {team1name = "scrubs", team2name = "noobs", team1score = 7, team2score = 3, victory = true});
+
+            gamesList = stats.Read_Deserialize_Stats();
+
+            StatsListAdapter statsAdapter = new StatsListAdapter(this, gamesList);
             statsListView.Adapter = statsAdapter;
         }
     }

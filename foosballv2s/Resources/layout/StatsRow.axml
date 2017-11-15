@@ -5,52 +5,40 @@
     android:orientation="horizontal"
     android:weightSum="100">
     <TextView
-        android:text="V1?"
-        android:layout_weight="5"
-        android:layout_height="40dp"
-        android:layout_width="wrap_content"
-        android:gravity="center"
-        android:id="@+id/Vic1" />
-    <TextView
         android:text="Team 1"
-        android:layout_weight="25"
-        android:layout_height="40dp"
+        android:layout_weight="30"
+        android:layout_height="50dp"
         android:id="@+id/statsTeam1"
-        android:layout_width="wrap_content"
-        android:gravity="center" />
+        android:layout_width="0dp"
+        android:gravity="center"
+        android:background ="#64DD17"/>
     <TextView
         android:text="T1Score"
         android:layout_weight="15"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:id="@+id/scoreTeam1"
         android:layout_width="wrap_content"
         android:gravity="center" />
     <TextView
         android:text="-"
-        android:layout_weight="10"
-        android:layout_height="40dp"
+        android:layout_weight ="10"
+        android:layout_height="50dp"
         android:id="@+id/scoreSeparator"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:gravity="center" />
     <TextView
         android:text="T2Score"
         android:layout_weight="15"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:id="@+id/scoreTeam2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:gravity="center" />
     <TextView
         android:text="Team 2"
-        android:layout_weight="25"
-        android:layout_height="40dp"
+        android:layout_weight="30"
+        android:layout_height="50dp"
         android:id="@+id/statsTeam2"
-        android:layout_width="wrap_content"
-        android:gravity="center" />
-    <TextView
-        android:text="V2?"
-        android:layout_weight="5"
-        android:layout_height="40dp"
+        android:layout_width="0dp"
         android:gravity="center"
-        android:layout_width="wrap_content"
-        android:id="@+id/Vic2" />
+        android:background ="#0F7BDB"/>
 </LinearLayout>

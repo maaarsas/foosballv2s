@@ -15,12 +15,14 @@ namespace foosballv2s
     {
         private string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/previousnames.json";
         private string path_color = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/previouscolors.json";
+        private string path_stats = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/stats.json";
         private Array dataRead;
         private List<String> names = new List<String>();
         private string team1name, team2name;
         private string data, colordata;
         private SLSupp instance = new SLSupp();
         private List<Color> colorlist = new List<Color>();
+        private List<GameStats> stats = new List<GameStats>();
 
         public void Write(string goalTime, string teamName, int totalScore, TimeSpan ts, Stopwatch timer)
         {
@@ -90,7 +92,6 @@ namespace foosballv2s
 
             File.WriteAllText(path_color, colordata);
 
-            Console.WriteLine("This is cancer" + colordata);
         }
 
         public List<Color> Read_Deserialize_Color()
@@ -107,6 +108,33 @@ namespace foosballv2s
             }
 
             return colorlist;
+        }
+
+        public void Write_Serialize_Stats(List<GameStats> stats)
+        {
+            if (!System.IO.File.Exists(path_stats))
+            {
+                System.IO.FileStream fs = System.IO.File.Create(path_stats);
+                fs.Dispose();
+            }
+
+            string statsString = JsonConvert.SerializeObject(stats);
+
+            File.WriteAllText(path_stats, statsString);
+        }
+
+        public List<GameStats> Read_Deserialize_Stats()
+        {
+            if (!System.IO.File.Exists(path_stats))
+            {
+                System.IO.FileStream fs = System.IO.File.Create(path_stats);
+                fs.Dispose();
+            }
+            string statsString = File.ReadAllText(path_stats);
+
+            stats = JsonConvert.DeserializeObject<List<GameStats>>(statsString);
+
+            return stats;
         }
     }
 }

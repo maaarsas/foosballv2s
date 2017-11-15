@@ -26,12 +26,9 @@ namespace foosballv2s
 
             statsListView = FindViewById<ListView>(Resource.Id.StatisticsList);
 
-            //StatsListAdapter statsAdapter = new StatsListAdapter(this, gamesList);
-
             //list element for testing purposes, color hardcoded to #64DD17 to test if possible to mark the victor
-            //gamesList.Add(new GameStats() {team1name = "scrubs", team2name = "noobs", team1score = 7, team2score = 3, victory = true});
-
-            gamesList = stats.Read_Deserialize_Stats();
+            gamesList.Add(new GameStats() {team1name = "scrubs", team2name = "noobs", team1score = 7, team2score = 3, victory = true});
+            gamesList.Add(new GameStats() { team1name = "dar vieni", team2name = "hackerman", team1score = 7, team2score = 0, victory = true });
 
             StatsListAdapter statsAdapter = new StatsListAdapter(this, gamesList);
             statsListView.Adapter = statsAdapter;

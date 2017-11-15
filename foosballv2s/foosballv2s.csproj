@@ -128,7 +128,6 @@
     <Compile Include="Source\Activities\SplashActivity.cs" />
     <Compile Include="Source\Entities\Game.cs" />
     <Compile Include="Source\Entities\GameStats.cs" />
-    <Compile Include="Source\Entities\Stats.cs" />
     <Compile Include="Source\Entities\Team.cs" />
     <Compile Include="Source\MyApplication.cs" />
     <Compile Include="Source\Services\FileIO\GameTracker.cs" />

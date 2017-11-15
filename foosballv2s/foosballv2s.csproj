@@ -157,6 +157,15 @@
     <AndroidNativeLibrary Include="libs\x86\libcvextern.so">
       <Link>lib\x86\libcvextern.so</Link>
     </AndroidNativeLibrary>
+    <AndroidResource Include="Resources\layout\Games.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Teams.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Tournaments.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <None Include="packages.config" />
     <None Include="Properties\AndroidManifest.xml">
       <SubType>Designer</SubType>

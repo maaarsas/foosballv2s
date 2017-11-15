@@ -47,6 +47,7 @@ namespace foosballv2s.Listeners
             Intent intent = new Intent(Application.Context, intentType);
             currentActivity.StartActivity(intent);
             currentActivity.Finish();
+            return true;
         }
     }
 }

@@ -19,7 +19,7 @@ namespace foosballv2s
         {
             base.OnCreate(savedInstanceState);
 
-            SetContentView(Resource.Layout.StatsScreen);
+            SetContentView(Resource.Layout.Teams);
         }
     }
 }

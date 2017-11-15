@@ -18,7 +18,7 @@ namespace foosballv2s
             var toolbar = (Toolbar) activity.FindViewById(Resource.Id.toolbar);
             activity.SetActionBar(toolbar);
             activity.ActionBar.Title = activity.Resources.GetString(stringId);
-            activity.ActionBar.SetHomeButtonEnabled(true);
+            activity.ActionBar.SetDisplayHomeAsUpEnabled(true);
         }
     }
 }

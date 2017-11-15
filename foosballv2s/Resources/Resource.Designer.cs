@@ -2582,17 +2582,17 @@ namespace foosballv2s
 			// aapt resource value: 0x7f080016
 			public const int multiply = 2131230742;
 			
-			// aapt resource value: 0x7f0800c4
-			public const int nav_games = 2131230916;
-			
-			// aapt resource value: 0x7f0800c2
-			public const int nav_new_game = 2131230914;
+			// aapt resource value: 0x7f0800c5
+			public const int nav_games = 2131230917;
 			
 			// aapt resource value: 0x7f0800c3
-			public const int nav_teams = 2131230915;
+			public const int nav_new_game = 2131230915;
 			
-			// aapt resource value: 0x7f0800c5
-			public const int nav_tournaments = 2131230917;
+			// aapt resource value: 0x7f0800c4
+			public const int nav_teams = 2131230916;
+			
+			// aapt resource value: 0x7f0800c6
+			public const int nav_tournaments = 2131230918;
 			
 			// aapt resource value: 0x7f08007d
 			public const int navigation = 2131230845;
@@ -2788,6 +2788,9 @@ namespace foosballv2s
 			
 			// aapt resource value: 0x7f08007e
 			public const int team_item_name = 2131230846;
+			
+			// aapt resource value: 0x7f0800c2
+			public const int team_list_view = 2131230914;
 			
 			// aapt resource value: 0x7f0800b5
 			public const int test_image_view = 2131230901;

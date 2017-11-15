@@ -3,15 +3,22 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-  <LinearLayout
-      xmlns:android="http://schemas.android.com/apk/res/android"
-      android:orientation="horizontal"
-      android:layout_width="match_parent"
-      android:layout_height="40dp">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:text="Time"
+            style="@android:style/TextAppearance.Medium"
+            android:layout_weight="15"
+            android:layout_height="50dp"
+            android:id="@+id/timeTaken"
+            android:layout_width="0dp"
+            android:gravity="center" />
         <TextView
             android:text="Name"
             style="@android:style/TextAppearance.Medium"
-            android:layout_weight="30"
+            android:layout_weight="25"
             android:layout_height="40dp"
             android:id="@+id/team1nameWindow"
             android:layout_width="0dp"
@@ -26,7 +33,7 @@
             android:gravity="center" />
         <TextView
             android:text=""
-            android:layout_weight="10"
+            android:layout_weight="5"
             android:layout_height="40dp"
             android:id="@+id/space"
             android:layout_width="0dp"
@@ -42,7 +49,7 @@
         <TextView
             android:text="Name"
             style="@android:style/TextAppearance.Medium"
-            android:layout_weight="30"
+            android:layout_weight="25"
             android:layout_height="40dp"
             android:id="@+id/team2nameWindow"
             android:layout_width="0dp"
@@ -51,7 +58,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="?android:attr/listDivider"/>
+        android:background="?android:attr/listDivider" />
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -49,14 +49,17 @@ namespace foosballv2s
             TextView t2name = row.FindViewById<TextView>(Resource.Id.statsTeam2);
             TextView t1score = row.FindViewById<TextView>(Resource.Id.scoreTeam1);
             TextView t2score = row.FindViewById<TextView>(Resource.Id.scoreTeam2);
+            TextView time = row.FindViewById<TextView>(Resource.Id.gameTime);
 
             string score1string = gList[position].team1score.ToString();
             string score2string = gList[position].team2score.ToString();
+            //string timeString = gList[position].time.ToString();
 
             t1name.Text = gList[position].team1name;
             t2name.Text = gList[position].team2name;
             t1score.Text = score1string;
             t2score.Text = score2string;
+            time.Text = gList[position].time.ToString();
 
             return row;
         }

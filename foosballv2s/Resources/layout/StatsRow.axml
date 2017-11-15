@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="horizontal"
     android:weightSum="100">
     <TextView
@@ -13,18 +13,18 @@
         android:gravity="center" />
     <TextView
         android:text="Team 1"
-        android:layout_weight="25"
+        android:layout_weight="35"
         android:layout_height="50dp"
         android:id="@+id/statsTeam1"
         android:layout_width="0dp"
-        android:gravity="center"
-        android:background="#64DD17" />
+        android:gravity="center" />
     <TextView
         android:text="T1Score"
-        android:layout_weight="15"
+        android:layout_weight="5"
         android:layout_height="50dp"
         android:id="@+id/scoreTeam1"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:textSize="18sp"
         android:gravity="center" />
     <TextView
         android:text="-"
@@ -32,20 +32,21 @@
         android:layout_height="50dp"
         android:id="@+id/scoreSeparator"
         android:layout_width="0dp"
+        android:textSize="18sp"
         android:gravity="center" />
     <TextView
         android:text="T2Score"
-        android:layout_weight="15"
+        android:layout_weight="5"
         android:layout_height="50dp"
         android:id="@+id/scoreTeam2"
         android:layout_width="0dp"
+        android:textSize="18sp"
         android:gravity="center" />
     <TextView
         android:text="Team 2"
-        android:layout_weight="25"
+        android:layout_weight="35"
         android:layout_height="50dp"
         android:id="@+id/statsTeam2"
         android:layout_width="0dp"
-        android:gravity="center"
-        android:background="#0F7BDB" />
+        android:gravity="center" />
 </LinearLayout>

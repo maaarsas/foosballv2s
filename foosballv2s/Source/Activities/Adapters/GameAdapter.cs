@@ -5,6 +5,7 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -58,8 +59,22 @@ namespace foosballv2s.Source.Activities.Adapters
             t1score.Text = game.Team1Score.ToString();
             t2score.Text = game.Team2Score.ToString();
             time.Text = GameTimeHelper.GetTimeString(game.StartTime, game.EndTime);
-
+            
+            SetTeamBackgroundColor(t1name, game.Team1Score);
+            SetTeamBackgroundColor(t2name, game.Team2Score);
             return row;
+        }
+
+        private void SetTeamBackgroundColor(TextView textView, int teamScore)
+        {
+            if (teamScore == Game.MAX_SCORE)
+            {
+                textView.SetBackgroundColor(new Color(Resource.Color.winning_background));
+            }
+            else
+            {
+                textView.SetBackgroundColor(new Color(Resource.Color.losing_background));
+            }
         }
     }
 }

@@ -234,7 +234,7 @@ namespace foosballv2s
 
         private void FeedMovementDetector()
         {
-            while (true)
+            while (!game.HasEnded)
             {
                 if (this.textureSetup)
                 {
@@ -247,7 +247,8 @@ namespace foosballv2s
                     
                     foreach (CircleF circle in circles)
                     {
-                        DrawCircle(circle.Center.X, circle.Center.Y, circle.Radius); 
+                        DrawCircle(circle.Center.X, circle.Center.Y, circle.Radius);
+                        break;
                     }
                     frameBitmap.Recycle();
                 }

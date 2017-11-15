@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Diagnostics;
-using Newtonsoft.Json;
+using System.IO;
 using Android.Widget;
+using Newtonsoft.Json;
 using Color = Android.Graphics.Color;
 
-namespace foosballv2s
+namespace foosballv2s.Source.Services.FileIO
 {
     class IO
     {

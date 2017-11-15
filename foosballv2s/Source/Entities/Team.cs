@@ -1,4 +1,4 @@
-﻿namespace foosballv2s
+﻿namespace foosballv2s.Source.Entities
 {
     public class Team
     {

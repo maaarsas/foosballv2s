@@ -1,8 +1,8 @@
 using Android.App;
-using Android.OS;
 using Android.Content;
+using Android.OS;
 
-namespace foosballv2s
+namespace foosballv2s.Source.Activities
 {
     [Activity(MainLauncher = true, Theme = "@style/SplashTheme")]
     public class SplashActivity : Activity

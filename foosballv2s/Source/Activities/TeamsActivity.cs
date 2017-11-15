@@ -2,12 +2,14 @@
 using Android.App;
 using Android.OS;
 using Android.Support.V7.App;
+using foosballv2s.Resources;
 using foosballv2s.Source.Activities.Helpers;
+using foosballv2s.Source.Entities;
 using foosballv2s.Source.Services.FoosballWebService.Repository;
 using Xamarin.Forms;
 using ListView = Android.Widget.ListView;
 
-namespace foosballv2s
+namespace foosballv2s.Source.Activities
 {
     [Activity(ParentActivity=typeof(MainActivity))]
     public class TeamsActivity : AppCompatActivity

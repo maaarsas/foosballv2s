@@ -4,15 +4,17 @@ using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
-using Android.Widget;
+using Android.Graphics;
 using Android.OS;
 using Android.Views;
-using Android.Graphics;
-using RS = Android.Renderscripts;
+using Android.Widget;
 using Emgu.CV;
 using Emgu.CV.Structure;
+using foosballv2s.Resources;
 using foosballv2s.Source.Activities.Helpers;
+using foosballv2s.Source.Entities;
 using foosballv2s.Source.Services.FoosballWebService.Repository;
+using foosballv2s.Source.Services.GameRecognition;
 using Java.Interop;
 using Xamarin.Forms;
 using Camera = Android.Hardware.Camera;
@@ -20,7 +22,7 @@ using Color = Android.Graphics.Color;
 using Size = Xamarin.Forms.Size;
 using View = Android.Views.View;
 
-namespace foosballv2s
+namespace foosballv2s.Source.Activities
 {
     [Activity(
         ConfigurationChanges = ConfigChanges.Orientation,

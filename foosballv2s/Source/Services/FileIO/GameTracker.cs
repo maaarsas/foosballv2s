@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+using foosballv2s.Source.Entities;
 
-namespace foosballv2s
+namespace foosballv2s.Source.Services.FileIO
 {
     class GameTracker
     {

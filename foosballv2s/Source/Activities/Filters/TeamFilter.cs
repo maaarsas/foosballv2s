@@ -2,6 +2,7 @@
 using System.Linq;
 using Android.Widget;
 using foosballv2s.Source.Activities.Adapters;
+using foosballv2s.Source.Entities;
 
 namespace foosballv2s.Source.Activities.Filters
 {

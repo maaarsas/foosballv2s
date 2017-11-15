@@ -1,9 +1,10 @@
 ﻿using System;
 using Emgu.CV.Structure;
+using foosballv2s.Source.Entities;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(foosballv2s.Game))]
-namespace foosballv2s
+[assembly: Dependency(typeof(Game))]
+namespace foosballv2s.Source.Entities
 {
     public class Game
     {

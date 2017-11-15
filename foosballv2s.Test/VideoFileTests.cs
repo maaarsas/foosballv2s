@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System;
 using System.IO;
+using foosballv2s.Source.Services.GameRecognition;
 
 namespace foosballv2s.Test
 {

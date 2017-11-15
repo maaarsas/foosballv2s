@@ -1,6 +1,6 @@
 ﻿using Emgu.CV;
 
-namespace foosballv2s
+namespace foosballv2s.Source.Services.GameRecognition
 {
     public interface IVideo
     {

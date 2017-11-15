@@ -1,20 +1,22 @@
-﻿using Android.App;
-using Android.Widget;
-using Android.OS;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using Android.App;
 using Android.Content;
 using Android.Content.PM;
-using Java.Interop;
-using System.Collections.Generic;
-using foosballv2s.Source.Services.FoosballWebService.Repository;
-using Xamarin.Forms;
-using View = Android.Views.View;
+using Android.OS;
 using Android.Support.V7.App;
-using foosballv2s.Source.Activities;
+using Android.Widget;
+using foosballv2s.Resources;
 using foosballv2s.Source.Activities.Adapters;
 using foosballv2s.Source.Activities.Helpers;
+using foosballv2s.Source.Entities;
+using foosballv2s.Source.Services.FileIO;
+using foosballv2s.Source.Services.FoosballWebService.Repository;
+using Java.Interop;
+using Xamarin.Forms;
+using View = Android.Views.View;
 
-namespace foosballv2s
+namespace foosballv2s.Source.Activities
 {
     [Activity(
         ConfigurationChanges = ConfigChanges.Orientation,

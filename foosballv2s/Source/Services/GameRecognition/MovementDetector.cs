@@ -1,9 +1,9 @@
-﻿using Emgu.CV;
+﻿using System;
+using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
-using System;
 
-namespace foosballv2s
+namespace foosballv2s.Source.Services.GameRecognition
 {
     public class MovementDetector
     {

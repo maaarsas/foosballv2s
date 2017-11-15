@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Android.Graphics;
 using Emgu.CV.Structure;
+using foosballv2s.Source.Services.GameRecognition;
 
 namespace foosballv2s.Test
 {

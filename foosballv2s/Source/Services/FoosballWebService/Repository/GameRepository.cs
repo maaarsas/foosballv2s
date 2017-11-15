@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using foosballv2s.Source.Entities;
 using Newtonsoft.Json;
 using Xamarin.Forms;
 

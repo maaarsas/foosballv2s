@@ -84,6 +84,7 @@ namespace foosballv2s.Source.Activities.Adapters
             else
             {
                 textView.SetBackgroundColor(parent.Resources.GetColor(Resource.Color.losing_background));
+                textView.SetTextColor(parent.Resources.GetColor(Resource.Color.White));
             }
         }
     }

@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Android.Widget;
-using foosballv2s.Adapters;
+using foosballv2s.Source.Activities.Adapters;
 
-namespace foosballv2s.Filters
+namespace foosballv2s.Source.Activities.Filters
 {
+    /// <summary>
+    /// Defines how the team list should be filtered by a given string
+    /// </summary>
     public class TeamFilter : Filter
     {
         TeamAutoCompleteAdapter teamAdapter;

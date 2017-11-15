@@ -4,10 +4,12 @@ using System.Linq;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
-using foosballv2s.Filters;
 
-namespace foosballv2s.Adapters
+namespace foosballv2s.Source.Activities.Adapters
 {
+    /// <summary>
+    /// This class populates a row view in the team list
+    /// </summary>
     public class TeamAdapter : ArrayAdapter<Team>
     {
         public List<Team> teams;
@@ -23,6 +25,11 @@ namespace foosballv2s.Adapters
             }
         }
         
+        /// <summary>
+        /// Get an item from the team list by given position number
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
         public Team GetItem(int position)
         {
             return teams.ElementAt(position);

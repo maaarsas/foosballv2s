@@ -1,21 +1,32 @@
 ﻿using Android.App;
 using Android.Support.Design.Widget;
-using Android.Support.V7.App; 
 using Android.Support.V4.Widget;
-using Android.Widget;
-using foosballv2s.Listeners;
+using Android.Support.V7.App;
+using foosballv2s.Source.Activities.Listeners;
 using V7Toolbar = Android.Support.V7.Widget.Toolbar; 
 
-namespace foosballv2s
+namespace foosballv2s.Source.Activities.Helpers
 {
+    /// <summary>
+    /// Defines common behaviour of the navigation for all activities
+    /// </summary>
     public class NavigationHelper
     {
+        /// <summary>
+        /// Sets up a navigation listener for an activity
+        /// </summary>
+        /// <param name="activity"></param>
         public static void SetupNavigationListener(Activity activity)
         {
             NavigationView navigationView = (NavigationView) activity.FindViewById(Resource.Id.navigation);
             navigationView.SetNavigationItemSelectedListener(new NavigationItemClickListener(activity));
         }
-
+        
+        /// <summary>
+        /// Sets up an action bar for an activity
+        /// </summary>
+        /// <param name="activity"></param>
+        /// <param name="stringId"></param>
         public static void SetActionBarNavigationText(AppCompatActivity activity, int stringId)
         {
             var toolbar = (V7Toolbar) activity.FindViewById(Resource.Id.toolbar);

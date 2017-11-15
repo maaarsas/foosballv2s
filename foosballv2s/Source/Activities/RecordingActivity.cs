@@ -14,6 +14,7 @@ using RS = Android.Renderscripts;
 using Android.Util;
 using Emgu.CV;
 using Emgu.CV.Structure;
+using foosballv2s.Source.Activities.Helpers;
 using foosballv2s.Source.Services.FoosballWebService.Repository;
 using Java.Interop;
 using Java.IO;

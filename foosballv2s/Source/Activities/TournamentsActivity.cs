@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
+using foosballv2s.Source.Activities.Helpers;
 
 namespace foosballv2s
 {

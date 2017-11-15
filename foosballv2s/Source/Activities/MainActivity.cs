@@ -13,7 +13,6 @@ using Java.Interop;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
-using foosballv2s.Adapters;
 using foosballv2s.Source.Services.FoosballWebService;
 using foosballv2s.Source.Services.FoosballWebService.Repository;
 using Java.Interop;
@@ -22,6 +21,9 @@ using View = Android.Views.View;
 using System.Collections.Generic;
 using Android.Support.V7.App;
 using Android.Text;
+using foosballv2s.Source.Activities;
+using foosballv2s.Source.Activities.Adapters;
+using foosballv2s.Source.Activities.Helpers;
 using Java.Lang;
 
 namespace foosballv2s

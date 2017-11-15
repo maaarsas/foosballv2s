@@ -19,5 +19,8 @@ namespace foosballv2s
         public int team1score { get; set; }
         public int team2score { get; set; }
         public bool victory { get; set; }
+        //team 1 victory - true, team 2 victory - false
+        public string time { get; set; }
+
     }
 }

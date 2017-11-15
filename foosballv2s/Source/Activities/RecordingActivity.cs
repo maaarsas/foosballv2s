@@ -47,6 +47,7 @@ namespace foosballv2s
         private Game game;
         private GameRepository gameRepository;
 
+
         private bool textureSetup;
 
         protected override void OnCreate(Bundle bundle)
@@ -120,6 +121,7 @@ namespace foosballv2s
         {
             ProgressDialog dialog = ProgressDialog.Show(this, "", 
                 Resources.GetString(Resource.String.saving_game), true);
+
 
             await gameRepository.Create(game);
             

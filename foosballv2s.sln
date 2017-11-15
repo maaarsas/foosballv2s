@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "foosballv2s", "foosballv2s\foosballv2s.csproj", "{C4788136-773B-4305-8833-472AB9F3491C}"
 EndProject
@@ -10,9 +10,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "foosballv2s.Test", "foosbal
 		{C4788136-773B-4305-8833-472AB9F3491C} = {C4788136-773B-4305-8833-472AB9F3491C}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "foosballv2s.WebService", "foosballv2s.WebService\foosballv2s.WebService.csproj", "{66E8CEDA-7517-4807-8109-CE62F9A95544}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "foosballv2s.WebService", "foosballv2s.WebService\foosballv2s.WebService.csproj", "{66E8CEDA-7517-4807-8109-CE62F9A95544}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "foosballv2s.WebService.Test", "foosballv2s.WebService.Test\foosballv2s.WebService.Test.csproj", "{E6BF22A6-B545-4166-AAA1-FC1CDA7B7092}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "foosballv2s.WebService.Test", "foosballv2s.WebService.Test\foosballv2s.WebService.Test.csproj", "{E6BF22A6-B545-4166-AAA1-FC1CDA7B7092}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,29 +35,29 @@ Global
 		{C4788136-773B-4305-8833-472AB9F3491C}.Release|x86.Build.0 = Release|Any CPU
 		{C4788136-773B-4305-8833-472AB9F3491C}.Release|x86.Deploy.0 = Release|Any CPU
 		{817A9FA9-590E-417F-B1AE-2E488BA9851E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{817A9FA9-590E-417F-B1AE-2E488BA9851E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{817A9FA9-590E-417F-B1AE-2E488BA9851E}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{817A9FA9-590E-417F-B1AE-2E488BA9851E}.Debug|x86.Build.0 = Debug|Any CPU
 		{817A9FA9-590E-417F-B1AE-2E488BA9851E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{817A9FA9-590E-417F-B1AE-2E488BA9851E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{817A9FA9-590E-417F-B1AE-2E488BA9851E}.Release|x86.ActiveCfg = Release|Any CPU
 		{817A9FA9-590E-417F-B1AE-2E488BA9851E}.Release|x86.Build.0 = Release|Any CPU
-		{817A9FA9-590E-417F-B1AE-2E488BA9851E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66E8CEDA-7517-4807-8109-CE62F9A95544}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{66E8CEDA-7517-4807-8109-CE62F9A95544}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{66E8CEDA-7517-4807-8109-CE62F9A95544}.Debug|x86.ActiveCfg = Debug|x86
-		{66E8CEDA-7517-4807-8109-CE62F9A95544}.Debug|x86.Build.0 = Debug|x86
+		{66E8CEDA-7517-4807-8109-CE62F9A95544}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{66E8CEDA-7517-4807-8109-CE62F9A95544}.Debug|x86.Build.0 = Debug|Any CPU
 		{66E8CEDA-7517-4807-8109-CE62F9A95544}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66E8CEDA-7517-4807-8109-CE62F9A95544}.Release|Any CPU.Build.0 = Release|Any CPU
-		{66E8CEDA-7517-4807-8109-CE62F9A95544}.Release|x86.ActiveCfg = Release|x86
-		{66E8CEDA-7517-4807-8109-CE62F9A95544}.Release|x86.Build.0 = Release|x86
+		{66E8CEDA-7517-4807-8109-CE62F9A95544}.Release|x86.ActiveCfg = Release|Any CPU
+		{66E8CEDA-7517-4807-8109-CE62F9A95544}.Release|x86.Build.0 = Release|Any CPU
 		{E6BF22A6-B545-4166-AAA1-FC1CDA7B7092}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E6BF22A6-B545-4166-AAA1-FC1CDA7B7092}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E6BF22A6-B545-4166-AAA1-FC1CDA7B7092}.Debug|x86.ActiveCfg = Debug|x86
-		{E6BF22A6-B545-4166-AAA1-FC1CDA7B7092}.Debug|x86.Build.0 = Debug|x86
+		{E6BF22A6-B545-4166-AAA1-FC1CDA7B7092}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E6BF22A6-B545-4166-AAA1-FC1CDA7B7092}.Debug|x86.Build.0 = Debug|Any CPU
 		{E6BF22A6-B545-4166-AAA1-FC1CDA7B7092}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6BF22A6-B545-4166-AAA1-FC1CDA7B7092}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E6BF22A6-B545-4166-AAA1-FC1CDA7B7092}.Release|x86.ActiveCfg = Release|x86
-		{E6BF22A6-B545-4166-AAA1-FC1CDA7B7092}.Release|x86.Build.0 = Release|x86
+		{E6BF22A6-B545-4166-AAA1-FC1CDA7B7092}.Release|x86.ActiveCfg = Release|Any CPU
+		{E6BF22A6-B545-4166-AAA1-FC1CDA7B7092}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

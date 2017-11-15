@@ -6,6 +6,9 @@ using foosballv2s.Source.Activities.Helpers;
 
 namespace foosballv2s.Source.Activities
 {
+    /// <summary>
+    /// An activity for displaying all tournaments
+    /// </summary>
     [Activity(ParentActivity=typeof(MainActivity))]
     public class TournamentsActivity : AppCompatActivity
     {

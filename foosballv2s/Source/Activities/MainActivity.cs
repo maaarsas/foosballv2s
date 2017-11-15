@@ -18,6 +18,9 @@ using View = Android.Views.View;
 
 namespace foosballv2s.Source.Activities
 {
+    /// <summary>
+    /// Main activity for choosing the teams for the game
+    /// </summary>
     [Activity(
         ConfigurationChanges = ConfigChanges.Orientation,
         ScreenOrientation = ScreenOrientation.Portrait
@@ -60,6 +63,11 @@ namespace foosballv2s.Source.Activities
             SetupTeamDropdownList();
         }
 
+        /// <summary>
+        /// A function that is called when the "Previous settings" button is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnPrev_Click(object sender, EventArgs e)
         {
             Intent intent = new Intent(this, typeof(ColorPickerActivity));
@@ -67,6 +75,11 @@ namespace foosballv2s.Source.Activities
             StartActivity(intent);
         }
 
+        /// <summary>
+        /// Called when submit is clicked
+        /// Checks the teams and starts the game
+        /// </summary>
+        /// <param name="view"></param>
         [Export("SubmitTeamNames")]
         public async void SubmitTeamNames(View view)
         {
@@ -105,12 +118,17 @@ namespace foosballv2s.Source.Activities
             StartActivity(intent);
         }
 
+        /// <summary>
+        /// Sets up a auto complete drop down list with teams from the web service
+        /// </summary>
         private void SetupTeamDropdownList()
         {
-            
             FetchAllTeams();
         }
 
+        /// <summary>
+        /// Retrievies teams and populates the dropdown list
+        /// </summary>
         private async void FetchAllTeams()
         {
             ProgressDialog dialog = ProgressDialog.Show(this, "", 
@@ -128,6 +146,11 @@ namespace foosballv2s.Source.Activities
             
         }
         
+        /// <summary>
+        /// An event when the dropdown list team is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AutoCompleteTextView_ItemClicked(object sender, AdapterView<TeamAutoCompleteAdapter>.ItemClickEventArgs e)
         {
             AutoCompleteTextView view = (AutoCompleteTextView) sender;

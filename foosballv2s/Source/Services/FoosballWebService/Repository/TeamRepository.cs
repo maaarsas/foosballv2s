@@ -6,6 +6,9 @@ using Xamarin.Forms;
 [assembly: Dependency(typeof(foosballv2s.Source.Services.FoosballWebService.Repository.TeamRepository))]
 namespace foosballv2s.Source.Services.FoosballWebService.Repository
 {
+    /// <summary>
+    /// A class for forming and fetching requests to a web service about teams
+    /// </summary>
     public class TeamRepository
     {
         private readonly string endpointUrl = "/team";
@@ -16,6 +19,10 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
             client = DependencyService.Get<IWebServiceClient>();
         }
        
+        /// <summary>
+        /// Gets all teams
+        /// </summary>
+        /// <returns></returns>
         public async Task<Team[]> GetAll()
         {
             var response = await client.GetAsync(endpointUrl);
@@ -23,6 +30,11 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
             return teams;
         }
         
+        /// <summary>
+        /// Gets one team by a given id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<Team> GetById(int id)
         {
             var response = await client.GetAsync(endpointUrl + "/" + id);
@@ -30,6 +42,11 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
             return team;
         }
         
+        /// <summary>
+        /// Creates a team
+        /// </summary>
+        /// <param name="team"></param>
+        /// <returns></returns>
         public async Task<Team> Create(Team team)
         {
             var teamJsonString = JsonConvert.SerializeObject(team);
@@ -38,6 +55,12 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
             return createdTeam;
         }
         
+        /// <summary>
+        /// Updates a team by a given id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="team"></param>
+        /// <returns></returns>
         public async Task<Team> Update(int id, Team team)
         {
             var teamJsonString = JsonConvert.SerializeObject(team);
@@ -46,6 +69,11 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
             return updatedTeam;
         }
         
+        /// <summary>
+        /// Deletes a team by a given id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<Team> Delete(int id)
         {
             var response = await client.DeleteAsync(endpointUrl + "/" + id);

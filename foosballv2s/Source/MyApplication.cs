@@ -9,6 +9,9 @@ using Application = Android.App.Application;
 
 namespace foosballv2s.Source
 {
+    /// <summary>
+    /// Application class extension
+    /// </summary>
     [Application]
     public class MyApplication : Application
     {

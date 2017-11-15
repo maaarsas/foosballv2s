@@ -4,6 +4,9 @@ using Android.OS;
 
 namespace foosballv2s.Source.Activities
 {
+    /// <summary>
+    /// Shows a splash screen on the launch of the app
+    /// </summary>
     [Activity(MainLauncher = true, Theme = "@style/SplashTheme")]
     public class SplashActivity : Activity
     {

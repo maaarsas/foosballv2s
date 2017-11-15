@@ -5,6 +5,9 @@ using Emgu.CV.Structure;
 
 namespace foosballv2s.Source.Services.GameRecognition
 {
+    /// <summary>
+    /// Foosball game detection and recognition class
+    /// </summary>
     public class MovementDetector
     {
         // Steps:
@@ -30,6 +33,12 @@ namespace foosballv2s.Source.Services.GameRecognition
             this.Video = video;
         }
         
+        /// <summary>
+        /// Sets up the detector with frame and ball color values
+        /// </summary>
+        /// <param name="frameHeight"></param>
+        /// <param name="frameWidth"></param>
+        /// <param name="hsvBall"></param>
         public void SetupBallDetector(int frameHeight, int frameWidth, Hsv hsvBall)
         {
             //double t1min = 170, t1max = 4, t2min = 120, t2max = 255, t3min = 120, t3max = 255; // color in HSV
@@ -67,6 +76,13 @@ namespace foosballv2s.Source.Services.GameRecognition
             thresholded = new Image<Gray, byte>(frameWidth, frameHeight); // frame with filtered out colors
         }
         
+        /// <summary>
+        /// Detects a ball in the given frame
+        /// </summary>
+        /// <param name="inputFrame"></param>
+        /// <param name="frameHeight"></param>
+        /// <param name="frameWidth"></param>
+        /// <returns></returns>
         public CircleF[] DetectBall(Image<Hsv, System.Byte> inputFrame, int frameHeight, int frameWidth)
         { 
             if (inputFrame == null)
@@ -83,9 +99,12 @@ namespace foosballv2s.Source.Services.GameRecognition
             return this.DetectCirclesInImage(thresholded, frame);
         }
 
-        /**
-         * Filter out colors which are out of range in Hsv image.
-         */
+        /// <summary>
+        /// Filters out colors which are out of the range in the image
+        /// </summary>
+        /// <param name="hsvImage"></param>
+        /// <param name="minHsv"></param>
+        /// <param name="maxHsv"></param>
         private void FilterHsvImageColor(Image<Hsv, byte> hsvImage, Hsv minHsv, Hsv maxHsv)
         {
             // Dealing with colors that are close to 0 or 180 by their hue (especially red)
@@ -106,9 +125,12 @@ namespace foosballv2s.Source.Services.GameRecognition
             }
         }
         
-        /**
-         * Using Hough transform to detect circles in a black-white image
-         */
+        /// <summary>
+        /// Using Hough transform to detect circles in a black-white image
+        /// </summary>
+        /// <param name="image"></param>
+        /// <param name="outputFrame"></param>
+        /// <returns></returns>
         private CircleF[] DetectCirclesInImage(Image<Gray, byte> image, Mat outputFrame)
         {
             //CircleF[] circles = CvInvoke.HoughCircles(image, HoughType.Gradient, 1, 

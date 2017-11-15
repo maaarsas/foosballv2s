@@ -20,6 +20,7 @@ using Java.Interop;
 using Xamarin.Forms;
 using View = Android.Views.View;
 using System.Collections.Generic;
+using Android.Support.V7.App;
 using Android.Text;
 using Java.Lang;
 
@@ -29,7 +30,7 @@ namespace foosballv2s
         ConfigurationChanges = ConfigChanges.Orientation,
         ScreenOrientation = ScreenOrientation.Portrait
         )]
-    public class MainActivity : Activity
+    public class MainActivity : AppCompatActivity
     {
         private AutoCompleteTextView firstTeamTextView, secondTeamTextView;
         private IO instance = new IO();
@@ -60,6 +61,8 @@ namespace foosballv2s
             btnS.Click += BtnStats_Click;
             
             //Window.SetBackgroundDrawable(Android.Resource.Id.);
+            NavigationHelper.SetupNavigationListener(this);
+            NavigationHelper.SetActionBarNavigationText(this, Resource.String.app_name);
         }
 
         protected override void OnResume()
@@ -81,8 +84,8 @@ namespace foosballv2s
             ProgressDialog dialog = ProgressDialog.Show(this, "", 
                 Resources.GetString(Resource.String.checking_teams), true);
 
-            Team team1 = ((TeamAdapter) firstTeamTextView.Adapter).SelectedTeam;
-            Team team2 = ((TeamAdapter) secondTeamTextView.Adapter).SelectedTeam;
+            Team team1 = ((TeamAutoCompleteAdapter) firstTeamTextView.Adapter).SelectedTeam;
+            Team team2 = ((TeamAutoCompleteAdapter) secondTeamTextView.Adapter).SelectedTeam;
 
             // first team is not selected from the list, so it is a new one, create it
             if (team1 == null)
@@ -135,18 +138,18 @@ namespace foosballv2s
             
             dialog.Dismiss();
             
-            TeamAdapter teamAdapter1 = new TeamAdapter(this, new List<Team>(teams));
-            TeamAdapter teamAdapter2 = new TeamAdapter(this, new List<Team>(teams));
+            TeamAutoCompleteAdapter teamAdapter1 = new TeamAutoCompleteAdapter(this, new List<Team>(teams));
+            TeamAutoCompleteAdapter teamAdapter2 = new TeamAutoCompleteAdapter(this, new List<Team>(teams));
 
             firstTeamTextView.Adapter = teamAdapter1;
             secondTeamTextView.Adapter = teamAdapter2;
             
         }
         
-        private void AutoCompleteTextView_ItemClicked(object sender, AdapterView<TeamAdapter>.ItemClickEventArgs e)
+        private void AutoCompleteTextView_ItemClicked(object sender, AdapterView<TeamAutoCompleteAdapter>.ItemClickEventArgs e)
         {
             AutoCompleteTextView view = (AutoCompleteTextView) sender;
-            TeamAdapter teamAdapter = (TeamAdapter) view.Adapter;
+            TeamAutoCompleteAdapter teamAdapter = (TeamAutoCompleteAdapter) view.Adapter;
             var team = teamAdapter.GetItem(e.Position);
             teamAdapter.SelectedTeam = team;
             teamAdapter.IgnoreFilter = true;

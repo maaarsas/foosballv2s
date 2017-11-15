@@ -2,7 +2,6 @@
 using Android.Support.Design.Widget;
 using Android.Support.V4.Widget;
 using Android.Support.V7.App;
-using foosballv2s.Resources;
 using foosballv2s.Source.Activities.Listeners;
 using V7Toolbar = Android.Support.V7.Widget.Toolbar; 
 

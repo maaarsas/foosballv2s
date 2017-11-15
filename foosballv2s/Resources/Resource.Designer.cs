@@ -11,7 +11,7 @@
 
 [assembly: global::Android.Runtime.ResourceDesignerAttribute("foosballv2s.Resource", IsApplication=true)]
 
-namespace foosballv2s.Resources
+namespace foosballv2s
 {
 	
 	
@@ -26,7 +26,7 @@ namespace foosballv2s.Resources
 		
 		public static void UpdateIdValues()
 		{
-			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::foosballv2s.Resources.Resource.Attribute.actionBarSize;
+			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::foosballv2s.Resource.Attribute.actionBarSize;
 		}
 		
 		public partial class Animation

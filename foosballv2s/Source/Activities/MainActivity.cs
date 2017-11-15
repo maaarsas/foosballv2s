@@ -6,7 +6,6 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Support.V7.App;
 using Android.Widget;
-using foosballv2s.Resources;
 using foosballv2s.Source.Activities.Adapters;
 using foosballv2s.Source.Activities.Helpers;
 using foosballv2s.Source.Entities;

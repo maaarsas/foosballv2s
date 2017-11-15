@@ -4,7 +4,6 @@ using Android.Support.Design.Internal;
 using Android.Support.Design.Widget;
 using Android.Support.V4.Widget;
 using Android.Views;
-using foosballv2s.Resources;
 
 namespace foosballv2s.Source.Activities.Listeners
 {

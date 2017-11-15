@@ -10,7 +10,6 @@ using Android.Views;
 using Android.Widget;
 using Emgu.CV;
 using Emgu.CV.Structure;
-using foosballv2s.Resources;
 using foosballv2s.Source.Activities.Helpers;
 using foosballv2s.Source.Entities;
 using foosballv2s.Source.Services.FoosballWebService.Repository;

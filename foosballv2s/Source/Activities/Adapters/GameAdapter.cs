@@ -3,7 +3,6 @@ using System.Linq;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
-using foosballv2s.Resources;
 using foosballv2s.Source.Activities.Helpers;
 using foosballv2s.Source.Entities;
 

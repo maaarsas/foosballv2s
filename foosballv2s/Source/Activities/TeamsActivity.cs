@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿using System.Collections.Generic;
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Support.V7.App;
-using Android.Views;
-using Android.Widget;
-using foosballv2s.Adapters;
+using foosballv2s.Source.Activities.Adapters;
+using foosballv2s.Source.Activities.Helpers;
+using foosballv2s.Source.Entities;
 using foosballv2s.Source.Services.FoosballWebService.Repository;
 using Xamarin.Forms;
 using ListView = Android.Widget.ListView;
 
-namespace foosballv2s
+namespace foosballv2s.Source.Activities
 {
+    /// <summary>
+    /// An activity for displaying all teams
+    /// </summary>
     [Activity(ParentActivity=typeof(MainActivity))]
     public class TeamsActivity : AppCompatActivity
     {
@@ -37,6 +34,9 @@ namespace foosballv2s
             FetchTeams();
         }
 
+        /// <summary>
+        /// Fetches the teams and populates them to a list
+        /// </summary>
         private async void FetchTeams()
         {
             ProgressDialog dialog = ProgressDialog.Show(this, "", 

@@ -1,7 +1,7 @@
 ﻿using System;
 using Emgu.CV;
 
-namespace foosballv2s
+namespace foosballv2s.Source.Services.GameRecognition
 {
     public class VideoLive : IVideo
     {

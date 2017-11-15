@@ -1,6 +1,7 @@
 ﻿using System;
 using Android.App;
 using Android.Runtime;
+using foosballv2s.Source.Entities;
 using foosballv2s.Source.Services.FoosballWebService;
 using foosballv2s.Source.Services.FoosballWebService.Repository;
 using Xamarin.Forms;
@@ -8,6 +9,9 @@ using Application = Android.App.Application;
 
 namespace foosballv2s.Source
 {
+    /// <summary>
+    /// Application class extension
+    /// </summary>
     [Application]
     public class MyApplication : Application
     {

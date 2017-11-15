@@ -1,13 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
-using foosballv2s.Filters;
+using foosballv2s.Source.Activities.Filters;
+using foosballv2s.Source.Entities;
 
-namespace foosballv2s.Adapters
+namespace foosballv2s.Source.Activities.Adapters
 {
+    /// <summary>
+    /// Works with populating a row in the team auto complete list
+    /// </summary>
     public class TeamAutoCompleteAdapter : ArrayAdapter<Team>
     {
         Filter filter;
@@ -29,6 +32,11 @@ namespace foosballv2s.Adapters
             }
         }
         
+        /// <summary>
+        /// Gets a team from the list by a given position number
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
         public Team GetItem(int position)
         {
             return matchTeams.ElementAt(position);

@@ -1,34 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
-using Android.App;
-using Emgu.CV.Fuzzy;
 using Emgu.CV.Structure;
-using Javax.Security.Auth;
+using foosballv2s.Source.Entities;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(foosballv2s.Game))]
-namespace foosballv2s
+[assembly: Dependency(typeof(Game))]
+namespace foosballv2s.Source.Entities
 {
     public class Game
     {
         public const int MAX_SCORE = 7;
 
-        public int id;
-        
+        public int Id { set; get; }
         private int team1Score = 0;
         private int team2Score = 0;
 
         public Hsv BallColor { get; set; }
-
-        //public int Team1Id { get; set; }
         
         public Team Team1 { get; set; } = new Team();
-        
-        //public int Team2Id { get; set; }
         
         public Team Team2 { get; set; } = new Team();
         
@@ -66,11 +54,17 @@ namespace foosballv2s
         public Team WinningTeam { get; set; }
         public Boolean HasEnded { get; private set; } = false;
 
+        /// <summary>
+        /// Stars the game timer
+        /// </summary>
         public void Start()
         {
             StartTime = DateTime.Now;
         }
 
+        /// <summary>
+        /// Ends the game timer and saves the winning team
+        /// </summary>
         public void End()
         {
             EndTime = DateTime.Now;
@@ -86,6 +80,9 @@ namespace foosballv2s
             }
         }
         
+        /// <summary>
+        /// Checks if the end of the game is reached
+        /// </summary>
         private void CheckGameEnd()
         {
             if (Team1Score == MAX_SCORE || Team2Score == MAX_SCORE)

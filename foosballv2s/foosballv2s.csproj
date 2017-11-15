@@ -134,7 +134,6 @@
     <Compile Include="Source\Entities\Game.cs" />
     <Compile Include="Source\Entities\Team.cs" />
     <Compile Include="Source\MyApplication.cs" />
-    <Compile Include="Source\Services\FileIO\GameTracker.cs" />
     <Compile Include="Source\Services\FileIO\IO.cs" />
     <Compile Include="Source\Services\FileIO\SLSupp.cs" />
     <Compile Include="Source\Services\FoosballWebService\FoosballWebServiceClient.cs" />

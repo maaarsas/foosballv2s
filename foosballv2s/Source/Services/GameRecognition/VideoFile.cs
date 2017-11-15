@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Emgu.CV;
 using System.IO;
+using Emgu.CV;
 
-namespace foosballv2s
+namespace foosballv2s.Source.Services.GameRecognition
 {
     public class VideoFile : IVideo
     {

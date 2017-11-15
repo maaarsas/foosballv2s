@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
 using System.Diagnostics;
-using Newtonsoft.Json;
+using System.IO;
 using Android.Widget;
+using Newtonsoft.Json;
 using Color = Android.Graphics.Color;
 
-namespace foosballv2s
+namespace foosballv2s.Source.Services.FileIO
 {
+    /// <summary>
+    /// A class for writing and reading files
+    /// </summary>
     class IO
     {
         private string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/previousnames.json";
@@ -23,6 +23,14 @@ namespace foosballv2s
         private SLSupp instance = new SLSupp();
         private List<Color> colorlist = new List<Color>();
 
+        /// <summary>
+        /// Logs the game events
+        /// </summary>
+        /// <param name="goalTime"></param>
+        /// <param name="teamName"></param>
+        /// <param name="totalScore"></param>
+        /// <param name="ts"></param>
+        /// <param name="timer"></param>
         public void Write(string goalTime, string teamName, int totalScore, TimeSpan ts, Stopwatch timer)
         {
             ts = timer.Elapsed;
@@ -33,23 +41,6 @@ namespace foosballv2s
                 File.AppendAllText(path, Environment.NewLine + teamName + " Laimejo!" + Environment.NewLine);
             }
         }
-
-        //Since we've decided on using JSON for saving/reading these are not required. May be used in later functionality, such as statistics
-
-        /*public void WriteTeamNames(Team team1, Team team2)
-        {
-            File.AppendAllText(filePath, team1.TeamName + Environment.NewLine + "vs. " + Environment.NewLine + team2.TeamName + Environment.NewLine + Environment.NewLine);
-        }
-
-        public void ReadTeamNames(Team team1, Team team2)
-        {
-            string teamNames = File.ReadLines(filePath).First();
-
-            string[] entries = teamNames.Split(' ');
-
-            team1.TeamName = File.ReadLines(filePath).First();
-            team2.TeamName = File.ReadLines(filePath).Skip(2).Take(1).First();
-        }*/
 
         public Array Read_Deserialize() {
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using foosballv2s.WebService.Models;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 

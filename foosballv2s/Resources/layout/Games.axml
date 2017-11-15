@@ -1,32 +1,82 @@
-<android.support.v4.widget.DrawerLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/drawer_layout"
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<!-- The main content view -->
+    <FrameLayout
+        android:id="@+id/content_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <!-- The main content view -->
-    <FrameLayout
-            android:id="@+id/content_frame"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
             <include
-                    android:id="@+id/toolbar_container"
-                    layout="@layout/Toolbar" />
-            <ListView
+                android:id="@+id/toolbar_container"
+                layout="@layout/Toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/listView">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+                    <TextView
+                        android:text="Time"
+                        style="@android:style/TextAppearance.Medium"
+                        android:layout_weight="15"
+                        android:layout_height="50dp"
+                        android:id="@+id/timeTaken"
+                        android:layout_width="0dp"
+                        android:gravity="center" />
+                    <TextView
+                        android:text="Name"
+                        style="@android:style/TextAppearance.Medium"
+                        android:layout_weight="35"
+                        android:layout_height="40dp"
+                        android:id="@+id/team1nameWindow"
+                        android:layout_width="0dp"
+                        android:gravity="center" />
+                    <TextView
+                        android:text="Score"
+                        style="@android:style/TextAppearance.Medium"
+                        android:layout_weight="15"
+                        android:layout_height="40dp"
+                        android:id="@+id/scoreWindow"
+                        android:layout_width="0dp"
+                        android:gravity="center" />
+                    <TextView
+                        android:text="Name"
+                        style="@android:style/TextAppearance.Medium"
+                        android:layout_weight="35"
+                        android:layout_height="40dp"
+                        android:id="@+id/team2nameWindow"
+                        android:layout_width="0dp"
+                        android:gravity="center" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider" />
+                <ListView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/listView" />
+                    android:background="@color/Black"
+                    android:id="@+id/game_list_view" />
+            </LinearLayout>
         </LinearLayout>
     </FrameLayout>
-    <!-- The navigation drawer -->
+<!-- The navigation drawer -->
     <android.support.design.widget.NavigationView
-            android:id="@+id/navigation"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            app:menu="@menu/navigation" />
+        android:id="@+id/navigation"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/navigation" />
 </android.support.v4.widget.DrawerLayout>

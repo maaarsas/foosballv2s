@@ -111,7 +111,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Source\Activities\Adapters\StatsListAdapter.cs" />
+    <Compile Include="Source\Activities\Adapters\GameAdapter.cs" />
     <Compile Include="Source\Activities\Adapters\TeamAdapter.cs" />
     <Compile Include="Source\Activities\ColorPickerActivity.cs" />
     <Compile Include="Source\Activities\Filters\TeamFilter.cs" />
@@ -119,7 +119,6 @@
     <Compile Include="Source\Activities\Helpers\GameTimeHelper.cs" />
     <Compile Include="Source\Activities\Helpers\NavigationHelper.cs" />
     <Compile Include="Source\Activities\Listeners\NavigationItemClickListener.cs" />
-    <Compile Include="Source\Activities\StatsActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\Activities\Adapters\TeamAutoCompleteAdapter.cs" />
@@ -133,7 +132,6 @@
     <Compile Include="Source\Activities\TeamsActivity.cs" />
     <Compile Include="Source\Activities\TournamentsActivity.cs" />
     <Compile Include="Source\Entities\Game.cs" />
-    <Compile Include="Source\Entities\GameStats.cs" />
     <Compile Include="Source\Entities\Team.cs" />
     <Compile Include="Source\MyApplication.cs" />
     <Compile Include="Source\Services\FileIO\GameTracker.cs" />
@@ -173,9 +171,6 @@
       <SubType>Designer</SubType>
     </None>
     <AndroidResource Include="Resources\layout\ColorPicker.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\StatsScreen.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

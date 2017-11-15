@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace foosballv2s.WebService.Models
 {
@@ -17,7 +18,11 @@ namespace foosballv2s.WebService.Models
         
         public IEnumerable<Game> GetAll()
         {
-            return _context.Games.ToList();
+            return _context.Games
+                .Include(g => g.Team1)
+                .Include(g => g.Team2)
+                .AsNoTracking()
+                .ToList();
         }
 
         public Game Get(int id)

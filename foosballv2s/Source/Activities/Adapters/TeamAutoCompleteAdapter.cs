@@ -8,7 +8,7 @@ using foosballv2s.Filters;
 
 namespace foosballv2s.Adapters
 {
-    public class TeamAdapter : ArrayAdapter<Team>
+    public class TeamAutoCompleteAdapter : ArrayAdapter<Team>
     {
         Filter filter;
         public List<Team> teams;
@@ -16,7 +16,7 @@ namespace foosballv2s.Adapters
         public Team SelectedTeam { get; set; }
         public bool IgnoreFilter { get; set; }
 
-        public TeamAdapter(Context context, List<Team> teams) : base(context, 0, teams)
+        public TeamAutoCompleteAdapter(Context context, List<Team> teams) : base(context, 0, teams)
         {
             this.teams = teams;
             this.matchTeams = teams;

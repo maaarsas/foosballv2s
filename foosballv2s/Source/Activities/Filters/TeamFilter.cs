@@ -7,9 +7,9 @@ namespace foosballv2s.Filters
 {
     public class TeamFilter : Filter
     {
-        TeamAdapter teamAdapter;
+        TeamAutoCompleteAdapter teamAdapter;
             
-        public TeamFilter (TeamAdapter adapter) : base() {
+        public TeamFilter (TeamAutoCompleteAdapter adapter) : base() {
             teamAdapter = adapter;
         }
         

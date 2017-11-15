@@ -34,10 +34,10 @@ namespace foosballv2s
             gameRepository = DependencyService.Get<GameRepository>();
             gameListView = (ListView) FindViewById(Resource.Id.game_list_view);
 
-            PopulateGames();
+            FetchGames();
         }
 
-        private async void PopulateGames()
+        private async void FetchGames()
         {
             ProgressDialog dialog = ProgressDialog.Show(this, "", 
                 Resources.GetString(Resource.String.retrieving_games), true);

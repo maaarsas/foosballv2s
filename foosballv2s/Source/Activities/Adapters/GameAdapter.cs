@@ -12,12 +12,12 @@ using Android.Widget;
 
 namespace foosballv2s.Source.Activities.Adapters
 {
-    class GameAdapter : BaseAdapter<Game>
+    class GameAdapter : ArrayAdapter<Game>
     {
         List<Game> gList;
         private Context gContext;
 
-        public GameAdapter(Context context, List<Game> list)
+        public GameAdapter(Context context, List<Game> list): base(context, 0, list)
         {
             gList = list;
             gContext = context;
@@ -31,10 +31,10 @@ namespace foosballv2s.Source.Activities.Adapters
         {
             return position;
         }
-
-        public override Game this[int position]
+        
+        public Game GetItem(int position)
         {
-            get { return gList[position]; }
+            return gList.ElementAt(position);
         }
 
         public override View GetView(int position, View convertView, ViewGroup parent)
@@ -42,10 +42,10 @@ namespace foosballv2s.Source.Activities.Adapters
             View row = convertView;
             if (row == null)
             {
-                row = LayoutInflater.From(gContext).Inflate(Resource.Layout.StatsRow, null, false);
+                row = LayoutInflater.From(gContext).Inflate(Resource.Layout.StatsRow, parent, false);
             }
 
-            Game game = gList[position];
+            Game game = GetItem(position);
             
             TextView t1name = row.FindViewById<TextView>(Resource.Id.statsTeam1);
             TextView t2name = row.FindViewById<TextView>(Resource.Id.statsTeam2);

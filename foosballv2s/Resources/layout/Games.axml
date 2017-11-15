@@ -12,18 +12,12 @@
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                       android:layout_width="match_parent"
                       android:layout_height="match_parent"
-                      android:gravity="center"
                       android:orientation="vertical"
                       android:padding="18dp">
-            <TextView
-                    android:text="games"
+            <ListView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/FoosWelcome"
-                    android:gravity="center"
-                    android:paddingBottom="24dp"
-                    android:textStyle="bold"
-                    android:textSize="28sp" />
+                    android:id="@+id/listView" />
         </LinearLayout>
     </FrameLayout>
     <!-- The navigation drawer -->

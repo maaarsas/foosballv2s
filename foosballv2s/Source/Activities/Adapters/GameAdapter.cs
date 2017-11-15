@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Content.Res;
 using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
@@ -60,20 +62,20 @@ namespace foosballv2s.Source.Activities.Adapters
             t2score.Text = game.Team2Score.ToString();
             time.Text = GameTimeHelper.GetTimeString(game.StartTime, game.EndTime);
             
-            SetTeamBackgroundColor(t1name, game.Team1Score);
-            SetTeamBackgroundColor(t2name, game.Team2Score);
+            SetTeamBackgroundColor(parent, t1name, game.Team1Score);
+            SetTeamBackgroundColor(parent, t2name, game.Team2Score);
             return row;
         }
 
-        private void SetTeamBackgroundColor(TextView textView, int teamScore)
+        private void SetTeamBackgroundColor(ViewGroup parent, TextView textView, int teamScore)
         {
             if (teamScore == Game.MAX_SCORE)
             {
-                textView.SetBackgroundColor(new Color(Resource.Color.winning_background));
+                textView.SetBackgroundColor(parent.Resources.GetColor(Resource.Color.winning_background));
             }
             else
             {
-                textView.SetBackgroundColor(new Color(Resource.Color.losing_background));
+                textView.SetBackgroundColor(parent.Resources.GetColor(Resource.Color.losing_background));
             }
         }
     }

@@ -1,9 +1,7 @@
 ﻿using NUnit.Framework;
 using NUnit.Mocks;
-using System;
 using System.Collections.Generic;
 using Android.Hardware;
-using Android.Util;
 using foosballv2s.Source.Activities.Helpers;
 
 namespace foosballv2s.Test

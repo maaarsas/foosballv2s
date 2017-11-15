@@ -1,8 +1,5 @@
-﻿using System;
-using Android.Graphics;
-using Emgu.CV;
+﻿using Android.Graphics;
 using Emgu.CV.Structure;
-using Emgu.Util;
 
 namespace foosballv2s
 {

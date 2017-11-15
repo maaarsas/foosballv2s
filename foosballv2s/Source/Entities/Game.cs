@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
-using Android.App;
-using Emgu.CV.Fuzzy;
 using Emgu.CV.Structure;
-using Javax.Security.Auth;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(foosballv2s.Game))]

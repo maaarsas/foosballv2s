@@ -1,20 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Web.Http.Results;
 using System.Net;
-using System.Web.Http.Controllers;
 using foosballv2s.WebService.Controllers;
 using foosballv2s.WebService.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Moq;
 using NUnit.Framework;
-using BadRequestResult = System.Web.Http.Results.BadRequestResult;
 using NotFoundResult = Microsoft.AspNetCore.Mvc.NotFoundResult;
-using StatusCodeResult = System.Web.Http.Results.StatusCodeResult;
 
 namespace foosballv2s.WebService.Test
 {

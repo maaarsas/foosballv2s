@@ -1,15 +1,6 @@
 using Android.App;
-using Android.Widget;
 using Android.OS;
-using Android.Hardware;
-using Android.Views;
-using System;
-using Android;
 using Android.Content;
-using Android.Graphics;
-using Android.Provider;
-using Android.Runtime;
-using Emgu.CV.Structure;
 
 namespace foosballv2s
 {

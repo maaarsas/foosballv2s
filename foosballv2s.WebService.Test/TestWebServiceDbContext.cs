@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using foosballv2s.WebService.Models;
 
 namespace foosballv2s.WebService.Test

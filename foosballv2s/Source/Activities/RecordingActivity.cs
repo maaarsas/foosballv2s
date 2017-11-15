@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Reflection.Emit;
 using System.Threading;
 using System.Threading.Tasks;
 using Android.App;
@@ -11,21 +9,15 @@ using Android.OS;
 using Android.Views;
 using Android.Graphics;
 using RS = Android.Renderscripts;
-using Android.Util;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using foosballv2s.Source.Activities.Helpers;
 using foosballv2s.Source.Services.FoosballWebService.Repository;
 using Java.Interop;
-using Java.IO;
-using Java.Lang;
 using Xamarin.Forms;
 using Camera = Android.Hardware.Camera;
 using Color = Android.Graphics.Color;
-using Console = System.Console;
-using Element = Xamarin.Forms.Element;
 using Size = Xamarin.Forms.Size;
-using Type = System.Type;
 using View = Android.Views.View;
 
 namespace foosballv2s

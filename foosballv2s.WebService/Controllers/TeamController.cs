@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using foosballv2s.WebService.Models;
 using Microsoft.AspNetCore.Mvc;
 

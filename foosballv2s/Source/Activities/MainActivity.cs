@@ -4,27 +4,15 @@ using Android.OS;
 using System;
 using Android.Content;
 using Android.Content.PM;
-using Android.Graphics;
-using Android.Graphics.Drawables;
-using Android.Provider;
-using Android.Runtime;
-using Emgu.CV.Structure;
 using Java.Interop;
-using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.IO;
-using foosballv2s.Source.Services.FoosballWebService;
 using foosballv2s.Source.Services.FoosballWebService.Repository;
-using Java.Interop;
 using Xamarin.Forms;
 using View = Android.Views.View;
-using System.Collections.Generic;
 using Android.Support.V7.App;
-using Android.Text;
 using foosballv2s.Source.Activities;
 using foosballv2s.Source.Activities.Adapters;
 using foosballv2s.Source.Activities.Helpers;
-using Java.Lang;
 
 namespace foosballv2s
 {

@@ -21,6 +21,17 @@ namespace foosballv2s.Listeners
         public bool OnNavigationItemSelected(IMenuItem menuItem)
         {
             System.Type intentType;
+
+            if (menuItem.IsChecked)
+            {
+                menuItem.SetChecked(false);
+            }
+            else
+            {
+                menuItem.SetChecked(true);
+            }
+ 
+            
             switch (menuItem.ItemId)
             {
                 case Resource.Id.nav_teams:

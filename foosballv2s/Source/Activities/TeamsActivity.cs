@@ -7,6 +7,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using foosballv2s.Adapters;
@@ -17,7 +18,7 @@ using ListView = Android.Widget.ListView;
 namespace foosballv2s
 {
     [Activity(ParentActivity=typeof(MainActivity))]
-    public class TeamsActivity : Activity
+    public class TeamsActivity : AppCompatActivity
     {
         private TeamRepository teamRepository;
         private ListView teamListView;

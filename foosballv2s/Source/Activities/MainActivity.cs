@@ -20,6 +20,7 @@ using Java.Interop;
 using Xamarin.Forms;
 using View = Android.Views.View;
 using System.Collections.Generic;
+using Android.Support.V7.App;
 using Android.Text;
 using Java.Lang;
 
@@ -29,7 +30,7 @@ namespace foosballv2s
         ConfigurationChanges = ConfigChanges.Orientation,
         ScreenOrientation = ScreenOrientation.Portrait
         )]
-    public class MainActivity : Activity
+    public class MainActivity : AppCompatActivity
     {
         private AutoCompleteTextView firstTeamTextView, secondTeamTextView;
         private IO instance = new IO();
@@ -58,6 +59,7 @@ namespace foosballv2s
             
             //Window.SetBackgroundDrawable(Android.Resource.Id.);
             NavigationHelper.SetupNavigationListener(this);
+            NavigationHelper.SetActionBarNavigationText(this, Resource.String.app_name);
         }
 
         protected override void OnResume()

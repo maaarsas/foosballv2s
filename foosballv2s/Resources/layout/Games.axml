@@ -14,7 +14,7 @@
                       android:layout_height="wrap_content"
                       android:orientation="vertical">
             <include
-                    android:id="@+id/toolbar"
+                    android:id="@+id/toolbar_container"
                     layout="@layout/Toolbar" />
             <ListView
                     android:layout_width="match_parent"

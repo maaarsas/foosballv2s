@@ -3,6 +3,9 @@ using foosballv2s.WebService.Models;
 
 namespace foosballv2s.WebService.Validators
 {
+    /// <summary>
+    /// A game validator with defined constraints
+    /// </summary>
     public class GameValidator : AbstractValidator
     {
         private Game game;
@@ -15,6 +18,10 @@ namespace foosballv2s.WebService.Validators
             RegisterValidationFunc(ValidateTime);
         }
 
+        /// <summary>
+        /// Validates team names
+        /// </summary>
+        /// <returns></returns>
         private bool ValidateTeams()
         {
             
@@ -25,6 +32,10 @@ namespace foosballv2s.WebService.Validators
             return true;
         }
 
+        /// <summary>
+        /// Validates game score
+        /// </summary>
+        /// <returns></returns>
         private bool ValidateScore()
         {
             var score1 = game.Team1Score;
@@ -39,6 +50,11 @@ namespace foosballv2s.WebService.Validators
             return true;
         }
 
+        
+        /// <summary>
+        /// Validates game time
+        /// </summary>
+        /// <returns></returns>
         private bool ValidateTime()
         {
             var startTime = game.StartTime;

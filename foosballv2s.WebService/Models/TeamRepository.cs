@@ -6,6 +6,9 @@ using foosballv2s.WebService.Validators;
 
 namespace foosballv2s.WebService.Models
 {
+    /// <summary>
+    /// A class for CRUD with team data
+    /// </summary>
     public class TeamRepository : ITeamRepository
     {
         private readonly IWebServiceDbContext _context;
@@ -15,17 +18,32 @@ namespace foosballv2s.WebService.Models
             _context = context;
         }
         
+        /// <summary>
+        /// Gets all teams from the storage
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Team> GetAll()
         {
             return _context.Teams.ToList();
         }
 
+        /// <summary>
+        /// Gets a team from the storage by an id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Team Get(int id)
         {
             var team = _context.Teams.Find(id);
             return team;
         }
 
+        /// <summary>
+        /// Creates a team in the storage
+        /// </summary>
+        /// <param name="team"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public Team Add(Team team)
         {
             if (team == null)
@@ -43,6 +61,11 @@ namespace foosballv2s.WebService.Models
             return team;
         }
 
+        /// <summary>
+        /// Removes a team from the storage
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public bool Remove(int id)
         {
             Team team = Get(id);
@@ -55,6 +78,13 @@ namespace foosballv2s.WebService.Models
             return true;
         }
 
+        /// <summary>
+        /// Updates a team by an id in the storage
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="team"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public bool Update(int id, Team team)
         {
             if (team == null)

@@ -2,6 +2,9 @@
 
 namespace foosballv2s.WebService.Models
 {
+    /// <summary>
+    /// A class for getting/sending data to the database
+    /// </summary>
     public class WebServiceDbContext : DbContext, IWebServiceDbContext
     {
         public WebServiceDbContext(DbContextOptions<WebServiceDbContext> options)

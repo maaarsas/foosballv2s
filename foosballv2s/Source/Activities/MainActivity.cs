@@ -56,9 +56,6 @@ namespace foosballv2s
             
             var btnP = FindViewById<Android.Widget.Button>(Resource.Id.prev);
             btnP.Click += BtnPrev_Click;
-
-            var btnS = FindViewById<Android.Widget.Button>(Resource.Id.stats);
-            btnS.Click += BtnStats_Click;
             
             //Window.SetBackgroundDrawable(Android.Resource.Id.);
             NavigationHelper.SetupNavigationListener(this);
@@ -113,13 +110,6 @@ namespace foosballv2s
             game.Team2 = team2;
 
             Intent intent = new Intent(this, typeof(BallImageActivity));
-            StartActivity(intent);
-        }
-
-        private void BtnStats_Click(object sender, EventArgs e)
-        {
-            Intent intent = new Intent(this, typeof(StatsActivity));
-
             StartActivity(intent);
         }
 

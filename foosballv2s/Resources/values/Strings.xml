@@ -30,4 +30,7 @@
     <string name="nav_tournaments">Tournaments</string>
     <string name="open_drawer">Open</string>
     <string name="close_drawer">Close</string>
+    
+    <!--Games-->
+    <string name="retrieving_games">Loading games. Please wait.</string>
 </resources>

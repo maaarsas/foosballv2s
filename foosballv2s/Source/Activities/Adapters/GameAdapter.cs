@@ -10,14 +10,14 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace foosballv2s
+namespace foosballv2s.Source.Activities.Adapters
 {
-    class StatsListAdapter : BaseAdapter<GameStats>
+    class GameAdapter : BaseAdapter<Game>
     {
-        List<GameStats> gList;
+        List<Game> gList;
         private Context gContext;
 
-        public StatsListAdapter(Context context, List<GameStats> list)
+        public GameAdapter(Context context, List<Game> list)
         {
             gList = list;
             gContext = context;
@@ -32,7 +32,7 @@ namespace foosballv2s
             return position;
         }
 
-        public override GameStats this[int position]
+        public override Game this[int position]
         {
             get { return gList[position]; }
         }
@@ -45,21 +45,19 @@ namespace foosballv2s
                 row = LayoutInflater.From(gContext).Inflate(Resource.Layout.StatsRow, null, false);
             }
 
+            Game game = gList[position];
+            
             TextView t1name = row.FindViewById<TextView>(Resource.Id.statsTeam1);
             TextView t2name = row.FindViewById<TextView>(Resource.Id.statsTeam2);
             TextView t1score = row.FindViewById<TextView>(Resource.Id.scoreTeam1);
             TextView t2score = row.FindViewById<TextView>(Resource.Id.scoreTeam2);
             TextView time = row.FindViewById<TextView>(Resource.Id.gameTime);
 
-            string score1string = gList[position].team1score.ToString();
-            string score2string = gList[position].team2score.ToString();
-            //string timeString = gList[position].time.ToString();
-
-            t1name.Text = gList[position].team1name;
-            t2name.Text = gList[position].team2name;
-            t1score.Text = score1string;
-            t2score.Text = score2string;
-            time.Text = gList[position].time.ToString();
+            t1name.Text = game.Team1.TeamName;
+            t2name.Text = game.Team2.TeamName;
+            t1score.Text = game.Team1Score.ToString();
+            t2score.Text = game.Team2Score.ToString();
+            time.Text = GameTimeHelper.GetTimeString(game.StartTime, game.EndTime);
 
             return row;
         }

@@ -234,7 +234,7 @@ namespace foosballv2s
 
         private void FeedMovementDetector()
         {
-            while (true)
+            while (!game.HasEnded)
             {
                 if (this.textureSetup)
                 {

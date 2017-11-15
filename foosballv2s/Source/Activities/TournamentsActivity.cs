@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace foosballv2s
 {
-    [Activity()]
+    [Activity(ParentActivity=typeof(MainActivity))]
     public class TournamentsActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -21,6 +21,7 @@ namespace foosballv2s
 
             SetContentView(Resource.Layout.Tournaments);
             NavigationHelper.SetupNavigationListener(this);
+            NavigationHelper.SetActionBarNavigationText(this, Resource.String.nav_tournaments);
         }
     }
 }

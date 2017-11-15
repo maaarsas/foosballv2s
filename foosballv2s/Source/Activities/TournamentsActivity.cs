@@ -20,6 +20,7 @@ namespace foosballv2s
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.Tournaments);
+            NavigationHelper.SetupNavigationListener(this);
         }
     }
 }

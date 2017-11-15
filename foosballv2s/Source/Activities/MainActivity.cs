@@ -57,6 +57,7 @@ namespace foosballv2s
             btnP.Click += BtnPrev_Click;
             
             //Window.SetBackgroundDrawable(Android.Resource.Id.);
+            NavigationHelper.SetupNavigationListener(this);
         }
 
         protected override void OnResume()

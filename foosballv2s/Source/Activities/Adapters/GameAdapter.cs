@@ -72,6 +72,7 @@ namespace foosballv2s.Source.Activities.Adapters
             if (teamScore == Game.MAX_SCORE)
             {
                 textView.SetBackgroundColor(parent.Resources.GetColor(Resource.Color.winning_background));
+                textView.SetTextColor(parent.Resources.GetColor(Resource.Color.Black));
             }
             else
             {

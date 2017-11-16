@@ -111,6 +111,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Source\Activities\Adapters\ColorListAdapter.cs" />
     <Compile Include="Source\Activities\Adapters\GameAdapter.cs" />
     <Compile Include="Source\Activities\Adapters\TeamAdapter.cs" />
     <Compile Include="Source\Activities\ColorPickerActivity.cs" />
@@ -170,6 +171,9 @@
       <SubType>Designer</SubType>
     </None>
     <AndroidResource Include="Resources\layout\ColorPicker.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Color_row.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

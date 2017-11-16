@@ -76,12 +76,9 @@ namespace foosballv2s.Source.Services.FileIO
 
         public void Write_Serialize_Color(Color color)
         {
-            instance.CheckColor(colorlist, color);
-
             colordata = JsonConvert.SerializeObject(colorlist);
 
             File.WriteAllText(path_color, colordata);
-
         }
 
         public List<Color> Read_Deserialize_Color()

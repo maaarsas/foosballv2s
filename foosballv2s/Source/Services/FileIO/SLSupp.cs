@@ -12,7 +12,13 @@ namespace foosballv2s.Source.Services.FileIO
             foreach (var name in names)
             {
                 flag1 = NameCheck(team1name, name);
+                if (flag1) break;
+            }
+
+            foreach (var name in names)
+            {
                 flag2 = NameCheck(team2name, name);
+                if (flag2) break;
             }
 
             ToAdd(flag1, team1name, names);

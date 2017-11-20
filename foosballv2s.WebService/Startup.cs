@@ -1,10 +1,16 @@
-﻿using foosballv2s.WebService.Models;
+﻿using System;
+using System.Threading.Tasks;
+using foosballv2s.WebService.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Owin;
+using Microsoft.Owin.Security.OAuth;
 
 namespace foosballv2s.WebService
 {
@@ -26,6 +32,28 @@ namespace foosballv2s.WebService
                 //Configuration.GetConnectionString("DbConnectionString")
                 "Server=mssql1.gear.host;Database=foosballv2s;User ID=foosballv2s;Password=Ew7f-_w63PCx;"
             ));
+
+            services.AddDbContext<IdentityContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("SecurityConnection"), sqlOptions
+                    => sqlOptions.MigrationsAssembly("TokenAuthWebApiCore.Server")));
+            
+            
+            services.AddIdentity<User, UserRole>(cfg =>
+            {
+               
+//                cfg.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents
+//                {
+//                    OnRedirectToLogin = context =>
+//                    {
+//                        if (context.Request.Path.StartsWithSegments("/api"))
+//                        {
+//                            context.Response.StatusCode = (int) System.Net.HttpStatusCode.Unauthorized;
+//                        }
+//                        return Task.FromResult(0);
+//                    }
+//                };
+            }).AddEntityFrameworkStores<IdentityContext>().AddDefaultTokenProviders();          
+            
             services.AddScoped<IWebServiceDbContext>(provider => provider.GetService<WebServiceDbContext>());
             services.AddMvc();
         }
@@ -39,6 +67,7 @@ namespace foosballv2s.WebService
             }
 
             app.UseMvc();
+            app.UseAuthentication();
         }
     }
 }

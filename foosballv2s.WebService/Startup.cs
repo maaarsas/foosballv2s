@@ -34,8 +34,8 @@ namespace foosballv2s.WebService
             ));
 
             services.AddDbContext<IdentityContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("SecurityConnection"), sqlOptions
-                    => sqlOptions.MigrationsAssembly("TokenAuthWebApiCore.Server")));
+                //options.UseSqlServer(Configuration.GetConnectionString("SecurityConnection"), sqlOptions
+                options.UseSqlServer("Server=mssql1.gear.host;Database=foosballv2s;User ID=foosballv2s;Password=Ew7f-_w63PCx;"));
             
             
             services.AddIdentity<User, UserRole>(cfg =>
@@ -67,7 +67,7 @@ namespace foosballv2s.WebService
             }
 
             app.UseMvc();
-            app.UseAuthentication();
+            app.UseIdentity();
         }
     }
 }

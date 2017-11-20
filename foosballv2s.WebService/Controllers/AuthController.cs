@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using foosballv2s.WebService.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,6 +15,8 @@ namespace foosballv2s.WebService.Controllers
             _repository = repository;
         }
         
+        
+        public async Task<> Register([FromBody] RegisterViewModel)
         // GET api/team/
 //        [HttpGet]
 //        public IEnumerable<Team> Get()

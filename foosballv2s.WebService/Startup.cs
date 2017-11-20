@@ -1,16 +1,16 @@
-﻿using System;
-using System.Threading.Tasks;
-using foosballv2s.WebService.Models;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.OAuth;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Owin;
-using Microsoft.Owin.Security.OAuth;
+using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System.Threading.Tasks;
+using foosballv2s.WebService.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 
 namespace foosballv2s.WebService
 {
@@ -26,6 +26,8 @@ namespace foosballv2s.WebService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(Configuration);
+            
             services.AddScoped(typeof(IGameRepository), typeof(GameRepository));
             services.AddScoped(typeof(ITeamRepository), typeof(TeamRepository));
             services.AddDbContext<WebServiceDbContext>(opt => opt.UseSqlServer(
@@ -52,7 +54,29 @@ namespace foosballv2s.WebService
 //                        return Task.FromResult(0);
 //                    }
 //                };
-            }).AddEntityFrameworkStores<IdentityContext>().AddDefaultTokenProviders();          
+                // configure identity options
+                cfg.Password.RequireDigit = false;
+                cfg.Password.RequireLowercase = false;
+                cfg.Password.RequireUppercase = false;
+                cfg.Password.RequireNonAlphanumeric = false;
+                cfg.Password.RequiredLength = 8;
+            }).AddEntityFrameworkStores<IdentityContext>().AddDefaultTokenProviders(); 
+            
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(j =>
+                {
+//                    j.AutomaticAuthenticate = true;
+//                    j.AutomaticChallenge = true;
+                    j.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidIssuer = Configuration["JwtSecurityToken:Issuer"],
+                        ValidAudience = Configuration["JwtSecurityToken:Audience"],
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey =
+                            new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtSecurityToken:Key"])),
+                        ValidateLifetime = true
+                    };
+            });
             
             services.AddScoped<IWebServiceDbContext>(provider => provider.GetService<WebServiceDbContext>());
             services.AddMvc();

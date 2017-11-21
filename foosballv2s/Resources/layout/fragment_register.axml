@@ -45,6 +45,7 @@
                         android:id="@+id/register_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
                         android:layout_marginBottom="38dp"
                         android:hint="@string/hint_register_email"
                         android:textSize="24sp" />
@@ -53,6 +54,7 @@
                         android:id="@+id/register_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="textPassword"
                         android:layout_marginBottom="38dp"
                         android:hint="@string/hint_register_password"
                         android:textSize="24sp" />
@@ -61,6 +63,7 @@
                         android:id="@+id/register_repeat_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="textPassword"
                         android:layout_marginBottom="38dp"
                         android:hint="@string/hint_register_repeat_password"
                         android:textSize="24sp" />

@@ -42,4 +42,10 @@
     <string name="button_login">Login</string>
     <string name="not_registered">Not registered in our application?\nClick here to register</string>
     <string name="please_login">Please log in to your account by entering your email and password</string>
+    <string name="hint_register_email">Email adress</string>
+    <string name="hint_register_password">Password</string>
+    <string name="hint_register_repeat_password">Repeat your password</string>
+    <string name="button_register">Register</string>
+    <string name="already_registered">Already registered in our application?\nClick here to log in</string>
+    <string name="please_register">To register in our application please enter your email and create a password</string>
 </resources>

@@ -93,7 +93,7 @@ namespace foosballv2s.WebService.Controllers
                         issuer: _configuration["JwtSecurityToken:Issuer"],
                         audience: _configuration["JwtSecurityToken:Audience"],
                         claims: claims,
-                        expires: DateTime.MaxValue,
+                        expires: DateTime.UtcNow.AddDays(100),
                         signingCredentials: signingCredentials
                     );
                     return Ok(new

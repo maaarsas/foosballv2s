@@ -62,11 +62,13 @@ namespace foosballv2s.WebService
                 cfg.Password.RequiredLength = 8;
             }).AddEntityFrameworkStores<IdentityContext>().AddDefaultTokenProviders(); 
             
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
                 .AddJwtBearer(j =>
                 {
-//                    j.AutomaticAuthenticate = true;
-//                    j.AutomaticChallenge = true;
                     j.TokenValidationParameters = new TokenValidationParameters()
                     {
                         ValidIssuer = Configuration["JwtSecurityToken:Issuer"],
@@ -89,9 +91,8 @@ namespace foosballv2s.WebService
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseAuthentication();
             app.UseMvc();
-            app.UseIdentity();
         }
     }
 }

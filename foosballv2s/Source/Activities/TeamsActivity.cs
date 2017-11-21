@@ -56,9 +56,12 @@ namespace foosballv2s.Source.Activities
             TeamAdapter teamAdapter = new TeamAdapter(this, teamList);
             teamListView.Adapter = teamAdapter;
             teamListView.ItemClick += OnListItemClick;
-
         }
 
+        /// <summary>
+        /// This method will be called when an item in the list is selected.
+        /// Calculates and sets number of wins and number of games played.
+        /// </summary>
         private Team[] SetTeamsWinPercentage(Team[] teams, Game[] games)
         {
             int winnerID;
@@ -85,6 +88,9 @@ namespace foosballv2s.Source.Activities
             return teams;
         }
 
+        /// <summary>
+        /// This method will be called when an item in the list is selected.
+        /// </summary>
         private void OnListItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             var listView = sender as ListView;
@@ -92,7 +98,6 @@ namespace foosballv2s.Source.Activities
             Team t = new Team();
             EditText input = new EditText(this);
             input.Hint = "New team name";
-
             Android.App.AlertDialog.Builder infoAlert = new Android.App.AlertDialog.Builder(this);
             Android.App.AlertDialog.Builder changeAlert = new Android.App.AlertDialog.Builder(this);
             Android.App.AlertDialog.Builder deleteAlert = new Android.App.AlertDialog.Builder(this);
@@ -119,10 +124,17 @@ namespace foosballv2s.Source.Activities
             changeAlert.SetMessage("Change team name")
                 .SetCancelable(false)
                 .SetView(input)
-                .SetNegativeButton("Ok", (s, ev) =>
+                .SetNegativeButton("Ok", async delegate
                 {
-                    Toast.MakeText(this, input.Text, ToastLength.Short).Show();
-                    changeAlert.Dispose();
+                    if (!AlreadyExists(teamList, input.Text))
+                    {
+                        team.TeamName = input.Text;
+                        t = await teamRepository.Update(team.id, team);
+                        changeAlert.Dispose();
+                        infoAlert.Dispose();
+                    }
+                    else
+                        Toast.MakeText(this, "The team " + input.Text + " already exists.", ToastLength.Short).Show();
                 })
                 .SetPositiveButton("Cancel", delegate
                 {
@@ -134,14 +146,35 @@ namespace foosballv2s.Source.Activities
                 .SetNegativeButton("Yes", async delegate
                 {
                     t = await teamRepository.Delete(team.id);
+                    if (t != null)
+                        Toast.MakeText(this, team.TeamName + " is not deleted.", ToastLength.Short).Show();
+                    else
+                        Toast.MakeText(this, team.TeamName + " is deleted.", ToastLength.Short).Show();
+
                     deleteAlert.Dispose();
+                    infoAlert.Dispose();
                 })
                 .SetPositiveButton("No", delegate
                 {
                     deleteAlert.Dispose();
                 });
 
-            infoAlert.Show();
-        }  
+            infoAlert.Show(); 
+        }
+
+        /// <summary>
+        /// Checks if team name already exists
+        /// </summary>
+        private bool AlreadyExists(List<Team> l, string s)
+        {
+            foreach (Team t in l)
+            {
+                if (t.TeamName.Equals(s))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

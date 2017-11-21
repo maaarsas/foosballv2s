@@ -159,6 +159,7 @@
     <AndroidNativeLibrary Include="libs\x86\libcvextern.so">
       <Link>lib\x86\libcvextern.so</Link>
     </AndroidNativeLibrary>
+    <AndroidResource Include="Resources\drawable\img_background_foosball.jpg" />
     <AndroidResource Include="Resources\layout\Games.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -193,6 +194,7 @@
     <Folder Include="lib\armeabi-v7a\" />
     <Folder Include="lib\armeabi\" />
     <Folder Include="lib\x86\" />
+    <Folder Include="Resources\image" />
     <Folder Include="Source\Activities\Views\" />
   </ItemGroup>
   <ItemGroup>
@@ -213,7 +215,6 @@
     <AndroidResource Include="Resources\values\styles.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\image\img_background_foosball.jpg" />
     <AndroidResource Include="Resources\mipmap-mdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\mipmap-xhdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\mipmap-xxhdpi\ic_launcher.png" />

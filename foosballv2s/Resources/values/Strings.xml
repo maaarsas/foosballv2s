@@ -37,4 +37,9 @@
     <!--Login & registration-->
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="hint_login_email">Your email adress</string>
+    <string name="hint_login_password">Your password</string>
+    <string name="button_login">Login</string>
+    <string name="not_registered">Not registered in our application?\nClick here to register</string>
+    <string name="please_login">Please log in to your account by entering your email and password</string>
 </resources>

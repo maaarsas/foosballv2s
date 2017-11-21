@@ -61,7 +61,8 @@ namespace foosballv2s.WebService.Controllers
         }
         
         [HttpPost("CreateToken")]
-        public async Task<IActionResult> Login([FromBody] LoginViewModel model)
+        [Route("token")]
+        public async Task<IActionResult> GetToken([FromBody] LoginViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -92,7 +93,7 @@ namespace foosballv2s.WebService.Controllers
                         issuer: _configuration["JwtSecurityToken:Issuer"],
                         audience: _configuration["JwtSecurityToken:Audience"],
                         claims: claims,
-                        expires: DateTime.UtcNow.AddMinutes(60),
+                        expires: DateTime.MaxValue,
                         signingCredentials: signingCredentials
                     );
                     return Ok(new

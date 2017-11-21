@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -14,6 +15,7 @@ namespace foosballv2s.Source.Services.FoosballWebService
     {
         private string webServiceUri = "http://18.194.122.53:5000/api";
         private readonly string emptyJson = "{}";
+        private readonly string authScheme = "Bearer";
         private HttpClient client;
 
         public FoosballWebServiceClient()
@@ -72,6 +74,15 @@ namespace foosballv2s.Source.Services.FoosballWebService
             var uri = GetFullUri(endPointUri);
             var response = await client.DeleteAsync(uri);
             return await GetResponseReturn(response);
+        }
+
+        /// <summary>
+        /// Sets the authorization token that will be used in every sent http request
+        /// </summary>
+        /// <param name="token"></param>
+        public void SetAuthroizationToken(string token)
+        {
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(authScheme, token);
         }
 
         /// <summary>

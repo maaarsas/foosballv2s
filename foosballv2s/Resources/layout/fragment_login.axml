@@ -1,21 +1,32 @@
-<ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content" >
+    <ImageView
+            android:id="@+id/background_foosball"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:maxHeight="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_background_foosball" />
+    
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:background="#00000000"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    <RelativeLayout
+        android:layout_height="match_parent">
+        <RelativeLayout
             android:background="#00000000"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                      xmlns:tools="http://schemas.android.com/tools"
-                      android:orientation="vertical"
-                      android:background="#00000000"
-                      android:layout_alignParentTop="true"
-                      android:layout_width="match_parent"
-                      android:layout_height="match_parent">
-
-            <TextView
+            android:layout_height="match_parent">
+            <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/login_container"
+                android:orientation="vertical"
+                android:background="#00000000"
+                android:layout_alignParentTop="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
                     android:text="@string/please_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -25,45 +36,41 @@
                     android:padding="12dp"
                     android:textSize="16sp"
                     android:textStyle="bold" />
-
-            <EditText
+                <EditText
                     android:id="@+id/login_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="38dp"
                     android:hint="@string/hint_login_email"
                     android:textSize="24sp" />
-
-            <EditText
+                <EditText
                     android:id="@+id/login_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="38dp"
                     android:hint="@string/hint_login_password"
                     android:textSize="24sp" />
-
-            <RelativeLayout
+                <RelativeLayout
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:background="#00000000"
                     android:gravity="center">
-                <Button
+                    <Button
                         android:text="@string/button_login"
                         style="@style/primaryButtonStyle"
                         android:id="@+id/button_login"
                         android:layout_marginRight="40dp"
                         android:layout_marginStart="40dp" />
-            </RelativeLayout>
-
-        </LinearLayout>
-        <LinearLayout
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout
                 android:orientation="vertical"
                 android:background="#00000000"
                 android:layout_alignParentBottom="true"
+                android:layout_below="@id/login_container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-
-            <TextView
+                android:layout_height="wrap_content">
+                <TextView
                     android:text="@string/not_registered"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -72,9 +79,7 @@
                     android:gravity="center"
                     android:padding="6dp"
                     android:textSize="12sp" />
-
-        </LinearLayout>
-    </RelativeLayout>
-    
-</ScrollView>
-
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+</FrameLayout>

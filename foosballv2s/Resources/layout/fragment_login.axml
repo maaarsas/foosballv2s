@@ -51,6 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
+                    android:fontFamily="sans-serif"
                     android:layout_marginBottom="38dp"
                     android:hint="@string/hint_login_password"
                     android:textSize="24sp" />

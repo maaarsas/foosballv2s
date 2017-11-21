@@ -33,4 +33,8 @@
     
     <!--Games-->
     <string name="retrieving_games">Loading games. Please wait.</string>
+    
+    <!--Login & registration-->
+    <string name="login">Login</string>
+    <string name="register">Register</string>
 </resources>

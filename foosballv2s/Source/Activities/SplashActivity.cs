@@ -14,7 +14,7 @@ namespace foosballv2s.Source.Activities
         {
             base.OnCreate(savedInstanceState);
             // Start home activity
-            StartActivity(new Intent(this, typeof(MainActivity)));
+            StartActivity(new Intent(this, typeof(AuthActivity)));
             // close splash activity
             Finish();
         }

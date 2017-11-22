@@ -18,7 +18,7 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
     public class AuthRepository
     {
         private readonly string endpointUrl = "/auth";
-        
+
         private IWebServiceClient client;
         private ICredentialStorage _credentialStorage;
 
@@ -27,7 +27,7 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
             client = DependencyService.Get<IWebServiceClient>();
             _credentialStorage = DependencyService.Get<ICredentialStorage>();
         }
-        
+
         public async Task<bool> Login(LoginViewModel model)
         {
             var loginJson = JsonConvert.SerializeObject(model);
@@ -41,4 +41,5 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
             client.AddAuthorizationHeader();
             return true;
         }
+    }
 }

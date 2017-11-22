@@ -17,6 +17,8 @@ using foosballv2s.Source.Activities.Fragments;
 using foosballv2s.Source.Activities.Helpers;
 using foosballv2s.Source.Entities;
 using foosballv2s.Source.Services.FileIO;
+using foosballv2s.Source.Services.FoosballWebService.Models;
+using foosballv2s.Source.Services.FoosballWebService.Repository;
 using foosballv2s.Source.Services.GameRecognition;
 using Java.Interop;
 using Java.Lang;
@@ -39,11 +41,15 @@ namespace foosballv2s.Source.Activities
         private Toolbar toolbar;
         private TabLayout tabLayout;
         private ViewPager viewPager;
+
+        private AuthRepository _authRepository;
  
         protected override void OnCreate(Bundle savedInstanceState) 
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Auth);
+
+            _authRepository = DependencyService.Get<AuthRepository>();
  
             viewPager = (ViewPager) FindViewById(Resource.Id.viewpager);
             setupViewPager(viewPager);
@@ -57,6 +63,25 @@ namespace foosballv2s.Source.Activities
         {
             EditText emailEditText = (EditText) FindViewById(Resource.Id.login_email);
             EditText passwordEditText = (EditText) FindViewById(Resource.Id.login_password);
+            
+            LoginViewModel loginModel = new LoginViewModel();
+            loginModel.Email = emailEditText.Text;
+            loginModel.Password = passwordEditText.Text;
+            
+            ProgressDialog dialog = ProgressDialog.Show(this, "", 
+                Resources.GetString(Resource.String.logging_in), true);
+
+            bool loginResult = await _authRepository.Login(loginModel);
+            dialog.Dismiss();
+
+            if (loginResult == false)
+            {
+                Toast.MakeText(this, Resource.String.login_error, ToastLength.Long).Show();
+                return;
+            }
+            Intent intent = new Intent(this, typeof(MainActivity));
+            StartActivity(intent);
+            Finish();
         }
         
         [Export("SubmitRegister")]

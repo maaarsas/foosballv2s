@@ -48,4 +48,8 @@
     <string name="button_register">Register</string>
     <string name="already_registered">Already registered in our application?\nClick here to log in</string>
     <string name="please_register">To register in our application please enter your email and create a password</string>
+    <string name="logging_in">Logging in...</string>
+    <string name="login_error">You have entered wrong email or password. Please try again</string>
+    <string name="registering">Registering...</string>
+    <string name="register_error">You have entered either wrong email, password or the passwords do not match. Please try again</string>
 </resources>

@@ -147,6 +147,8 @@
     <Compile Include="Source\Services\FoosballWebService\IWebServiceClient.cs" />
     <Compile Include="Source\Services\FoosballWebService\Models\LoginResponse.cs" />
     <Compile Include="Source\Services\FoosballWebService\Models\LoginViewModel.cs" />
+    <Compile Include="Source\Services\FoosballWebService\Models\RegisterResponse.cs" />
+    <Compile Include="Source\Services\FoosballWebService\Models\RegisterViewModel.cs" />
     <Compile Include="Source\Services\FoosballWebService\Repository\AuthRepository.cs" />
     <Compile Include="Source\Services\FoosballWebService\Repository\GameRepository.cs" />
     <Compile Include="Source\Services\FoosballWebService\Repository\TeamRepository.cs" />

@@ -36,7 +36,7 @@ namespace foosballv2s.Source.Activities
 {
     /// <summary>
     /// </summary>
-    [Activity()]
+    [Activity(WindowSoftInputMode = SoftInput.StateHidden)]
     public class AuthActivity : FragmentActivity
     {
         private Toolbar toolbar;
@@ -65,15 +65,15 @@ namespace foosballv2s.Source.Activities
         [Export("SubmitLogin")]
         public async void SubmitLogin(View view)
         {
+            ProgressDialog dialog = ProgressDialog.Show(this, "", 
+                Resources.GetString(Resource.String.logging_in), true);
+            
             EditText emailEditText = (EditText) FindViewById(Resource.Id.login_email);
             EditText passwordEditText = (EditText) FindViewById(Resource.Id.login_password);
             
             LoginViewModel loginModel = new LoginViewModel();
             loginModel.Email = emailEditText.Text;
             loginModel.Password = passwordEditText.Text;
-            
-            ProgressDialog dialog = ProgressDialog.Show(this, "", 
-                Resources.GetString(Resource.String.logging_in), true);
 
             bool loginResult = await _authRepository.Login(loginModel);
             dialog.Dismiss();
@@ -83,6 +83,7 @@ namespace foosballv2s.Source.Activities
                 Toast.MakeText(Application.Context, Resource.String.login_error, ToastLength.Long).Show();
                 return;
             }
+            Toast.MakeText(Application.Context, Resource.String.login_success, ToastLength.Long).Show();
             Intent intent = new Intent(this, typeof(MainActivity));
             StartActivity(intent);
             Finish();
@@ -91,7 +92,31 @@ namespace foosballv2s.Source.Activities
         [Export("SubmitRegister")]
         public async void SubmitRegister(View view)
         {
+            ProgressDialog dialog = ProgressDialog.Show(this, "", 
+                Resources.GetString(Resource.String.registering), true);
             
+            EditText emailEditText = (EditText) FindViewById(Resource.Id.register_email);
+            EditText passwordEditText = (EditText) FindViewById(Resource.Id.register_password);
+            EditText repeatPasswordEditText = (EditText) FindViewById(Resource.Id.register_repeat_password);
+            
+            RegisterViewModel registerModel = new RegisterViewModel();
+            registerModel.Email = emailEditText.Text;
+            registerModel.Password = passwordEditText.Text;
+            registerModel.ConfirmPassword = repeatPasswordEditText.Text;
+
+            bool registerResult = await _authRepository.Register(registerModel);
+            dialog.Dismiss();
+
+            if (registerResult == false)
+            {
+                Toast.MakeText(Application.Context, Resource.String.register_error, ToastLength.Long).Show();
+                return;
+            }
+            else
+            {
+                Toast.MakeText(Application.Context, Resource.String.register_success, ToastLength.Long).Show();
+                return;
+            }
         }
         
         private void setupViewPager(ViewPager viewPager)

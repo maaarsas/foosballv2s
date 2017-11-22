@@ -52,7 +52,9 @@
     <string name="please_register">To register in our application please enter your email and create a password</string>
     <string name="logging_in">Logging in...</string>
     <string name="login_error">You have entered wrong email or password. Please try again</string>
+    <string name="login_success">You have been successfully logged in</string>
     <string name="registering">Registering...</string>
     <string name="register_error">You have entered either wrong email, password or the passwords do not match. Please try again</string>
+    <string name="register_success">Your registration was successful. Now you can log in</string>
     <string name="auto_logged_in">You have been automatically logged in</string>
 </resources>

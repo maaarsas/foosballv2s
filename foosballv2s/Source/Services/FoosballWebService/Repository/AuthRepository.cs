@@ -41,5 +41,13 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
             client.AddAuthorizationHeader();
             return true;
         }
+        
+        public async Task<bool> Register(RegisterViewModel model)
+        {
+            var registerJson = JsonConvert.SerializeObject(model);
+            var response = await client.PostAsync(endpointUrl + "/register", registerJson);
+            RegisterResponse registerResponse = JsonConvert.DeserializeObject<RegisterResponse>(response);
+            return registerResponse.Succeeded;
+        }
     }
 }

@@ -5,6 +5,7 @@ using Android.Support.V7.App;
 using Android.Widget;
 using foosballv2s.Source.Activities.Listeners;
 using foosballv2s.Source.Entities;
+using foosballv2s.Source.Services.CredentialStorage;
 using Org.W3c.Dom;
 using Xamarin.Forms;
 using V7Toolbar = Android.Support.V7.Widget.Toolbar;
@@ -17,11 +18,11 @@ namespace foosballv2s.Source.Activities.Helpers
     /// </summary>
     public class NavigationHelper
     {
-        private static User _user;
+        private static ICredentialStorage _credentialStorage;
         
         static NavigationHelper()
         {
-            _user = DependencyService.Get<User>();
+            _credentialStorage = DependencyService.Get<ICredentialStorage>();
         }
         /// <summary>
         /// Sets up a navigation listener for an activity
@@ -35,7 +36,7 @@ namespace foosballv2s.Source.Activities.Helpers
             // set up navigation header
             View headerView = navigationView.InflateHeaderView(Resource.Layout.navigation_header);
             TextView emailView = (TextView) headerView.FindViewById(Resource.Id.navigation_email);
-            emailView.Text = _user.Email;
+            emailView.Text = _credentialStorage.Read().Email;
         }
         
         /// <summary>

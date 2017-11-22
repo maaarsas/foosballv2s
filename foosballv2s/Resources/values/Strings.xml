@@ -52,4 +52,5 @@
     <string name="login_error">You have entered wrong email or password. Please try again</string>
     <string name="registering">Registering...</string>
     <string name="register_error">You have entered either wrong email, password or the passwords do not match. Please try again</string>
+    <string name="auto_logged_in">You have been automatically logged in</string>
 </resources>

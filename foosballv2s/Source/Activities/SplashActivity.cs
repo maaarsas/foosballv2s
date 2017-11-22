@@ -1,6 +1,11 @@
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Widget;
+using foosballv2s.Source.Services.CredentialStorage;
+using foosballv2s.Source.Services.FoosballWebService.Repository;
+using Xamarin.Forms;
+using Application = Android.App.Application;
 
 namespace foosballv2s.Source.Activities
 {
@@ -10,11 +15,26 @@ namespace foosballv2s.Source.Activities
     [Activity(MainLauncher = true, Theme = "@style/SplashTheme")]
     public class SplashActivity : Activity
     {
+        private ICredentialStorage _credentialStorage;
+        
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            // Start home activity
-            StartActivity(new Intent(this, typeof(MainActivity)));
+            
+            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            
+            _credentialStorage = DependencyService.Get<ICredentialStorage>();
+            if (_credentialStorage.HasExpired())
+            {
+                // Start auth activity
+                StartActivity(new Intent(this, typeof(AuthActivity)));
+            }
+            else
+            {
+                // Start home activity
+                StartActivity(new Intent(this, typeof(MainActivity)));
+                Toast.MakeText(Application.Context, Resource.String.auto_logged_in, ToastLength.Long).Show();
+            }
             // close splash activity
             Finish();
         }

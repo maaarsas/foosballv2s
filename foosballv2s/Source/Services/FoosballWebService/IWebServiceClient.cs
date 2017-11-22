@@ -8,5 +8,6 @@ namespace foosballv2s.Source.Services.FoosballWebService
         Task<string> PostAsync(string endPointUri, string json);
         Task<string> PutAsync(string endPointUri, string json);
         Task<string> DeleteAsync(string endPointUri);
+        void AddAuthorizationHeader();
     }
 }

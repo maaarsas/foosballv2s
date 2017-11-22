@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group 
+        android:id="@+id/nav_group_app"
+        android:checkableBehavior="single">
 
         <item
             android:id="@+id/nav_new_game"
@@ -23,5 +25,14 @@
             android:checked="false"
             android:title="@string/nav_tournaments" />
 
+    </group>
+    <group
+        android:id="@+id/nav_group_logout"
+        android:checkableBehavior="single">
+        
+        <item
+            android:id="@+id/nav_logout"
+            android:checked="false"
+            android:title="@string/nav_logout" />
     </group>
 </menu>

@@ -157,6 +157,8 @@
     <Compile Include="Source\Services\GameRecognition\MovementDetector.cs" />
     <Compile Include="Source\Services\GameRecognition\VideoFile.cs" />
     <Compile Include="Source\Services\GameRecognition\VideoLive.cs" />
+    <Compile Include="Source\Services\TextToSpeech\ITextToSpeech.cs" />
+    <Compile Include="Source\Services\TextToSpeech\TextToSpeech.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidNativeLibrary Include="libs\armeabi\libcvextern.so">
@@ -203,7 +205,7 @@
     <Folder Include="lib\armeabi-v7a\" />
     <Folder Include="lib\armeabi\" />
     <Folder Include="lib\x86\" />
-    <Folder Include="Resources\image" />
+    <Folder Include="Resources\image\" />
     <Folder Include="Source\Activities\Views\" />
   </ItemGroup>
   <ItemGroup>

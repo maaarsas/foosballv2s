@@ -20,7 +20,7 @@ namespace foosballv2s.Source.Activities.Helpers
             double targetRatio = (double) previewHeight / previewWidth;
             Size bestSize = new Size();
 
-            int i = 0;
+                       int i = 0;
             while (i < parameters.SupportedPreviewSizes.Count && 
                    (parameters.SupportedPreviewSizes[i].Height < previewWidth
                    || bestSize.Width / bestSize.Height < targetRatio - 0.1))

@@ -3383,8 +3383,14 @@ namespace foosballv2s
 			// aapt resource value: 0x7f09004c
 			public const int hint_register_repeat_password = 2131296332;
 			
+			// aapt resource value: 0x7f090050
+			public const int logging_in = 2131296336;
+			
 			// aapt resource value: 0x7f090043
 			public const int login = 2131296323;
+			
+			// aapt resource value: 0x7f090051
+			public const int login_error = 2131296337;
 			
 			// aapt resource value: 0x7f090000
 			public const int mr_button_content_description = 2131296256;
@@ -3469,6 +3475,12 @@ namespace foosballv2s
 			
 			// aapt resource value: 0x7f090044
 			public const int register = 2131296324;
+			
+			// aapt resource value: 0x7f090053
+			public const int register_error = 2131296339;
+			
+			// aapt resource value: 0x7f090052
+			public const int registering = 2131296338;
 			
 			// aapt resource value: 0x7f090042
 			public const int retrieving_games = 2131296322;

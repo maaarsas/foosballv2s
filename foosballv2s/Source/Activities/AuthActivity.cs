@@ -23,6 +23,7 @@ using foosballv2s.Source.Services.GameRecognition;
 using Java.Interop;
 using Java.Lang;
 using Xamarin.Forms;
+using Application = Android.App.Application;
 using Button = Android.Widget.Button;
 using Camera = Android.Hardware.Camera;
 using Color = Android.Graphics.Color;
@@ -47,6 +48,9 @@ namespace foosballv2s.Source.Activities
         protected override void OnCreate(Bundle savedInstanceState) 
         {
             base.OnCreate(savedInstanceState);
+            
+            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            
             SetContentView(Resource.Layout.Auth);
 
             _authRepository = DependencyService.Get<AuthRepository>();
@@ -76,7 +80,7 @@ namespace foosballv2s.Source.Activities
 
             if (loginResult == false)
             {
-                Toast.MakeText(this, Resource.String.login_error, ToastLength.Long).Show();
+                Toast.MakeText(Application.Context, Resource.String.login_error, ToastLength.Long).Show();
                 return;
             }
             Intent intent = new Intent(this, typeof(MainActivity));

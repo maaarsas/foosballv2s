@@ -19,12 +19,13 @@ namespace foosballv2s.Source.Services.CredentialStorage
             ISharedPreferencesEditor editor = settings.Edit();
             editor.PutString(USER_TOKEN_SETTING_NAME, token);
             editor.PutLong(USER_TOKEN_EXPIRATION_SETTING_NAME, expiration.Ticks);
+            editor.Commit();
         }
 
         public Credential Read()
         {
             Credential credential = new Credential();
-            ISharedPreferences pref = Application.Context.GetSharedPreferences("PREFERENCE_NAME", FileCreationMode.Private);
+            ISharedPreferences pref = Application.Context.GetSharedPreferences(PREFERENCES_NAME, FileCreationMode.Private);
             credential.Token = pref.GetString(USER_TOKEN_SETTING_NAME, null);
             credential.Expiration = new DateTime(pref.GetLong(USER_TOKEN_EXPIRATION_SETTING_NAME, 0));
             return credential;

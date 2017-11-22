@@ -33,7 +33,7 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
             var loginJson = JsonConvert.SerializeObject(model);
             var response = await client.PostAsync(endpointUrl + "/token", loginJson);
             LoginResponse loginResponse = JsonConvert.DeserializeObject<LoginResponse>(response);
-            if (loginResponse == null)
+            if (loginResponse.Token == null)
             {
                 return false;
             }

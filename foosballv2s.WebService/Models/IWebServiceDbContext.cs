@@ -6,6 +6,8 @@ namespace foosballv2s.WebService.Models
     {
         DbSet<Game> Games { get; set; }
         DbSet<Team> Teams { get; set; }
+        DbSet<TournamentStage> Stages { get; set; }
+        DbSet<Tournament> Tournaments { get; set; }
         int SaveChanges();
         //void MarkAsModified(Team item); 
     }

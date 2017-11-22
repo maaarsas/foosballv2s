@@ -3,6 +3,7 @@ using Android.Accounts;
 using Android.Content;
 using Android.Preferences;
 using foosballv2s.Source.Entities;
+using foosballv2s.Source.Services.CredentialStorage;
 using foosballv2s.Source.Services.FoosballWebService.Models;
 using Newtonsoft.Json;
 using Xamarin.Forms;
@@ -19,10 +20,12 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
         private readonly string endpointUrl = "/auth";
         
         private IWebServiceClient client;
+        private ICredentialStorage _credentialStorage;
 
         public AuthRepository()
         {
             client = DependencyService.Get<IWebServiceClient>();
+            _credentialStorage = DependencyService.Get<ICredentialStorage>();
         }
         
         public async Task<bool> Login(LoginViewModel model)
@@ -34,7 +37,7 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
             {
                 return false;
             }
-
+            _credentialStorage.Save(loginResponse.Token, loginResponse.Expiration);
             return true;
         }
 }

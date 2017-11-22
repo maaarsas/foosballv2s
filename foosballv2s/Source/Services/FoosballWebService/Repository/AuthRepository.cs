@@ -38,6 +38,7 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
                 return false;
             }
             _credentialStorage.Save(loginResponse.Token, loginResponse.Expiration);
+            client.AddAuthorizationHeader();
             return true;
         }
 }

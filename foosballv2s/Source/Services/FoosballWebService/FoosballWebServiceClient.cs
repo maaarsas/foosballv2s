@@ -3,6 +3,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using foosballv2s.Source.Services.CredentialStorage;
+using foosballv2s.Source.Services.CredentialStorage.Models;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(foosballv2s.Source.Services.FoosballWebService.FoosballWebServiceClient))]
@@ -17,11 +19,14 @@ namespace foosballv2s.Source.Services.FoosballWebService
         private readonly string emptyJson = "{}";
         private readonly string authScheme = "Bearer";
         private HttpClient client;
+        private ICredentialStorage _credentialStorage;
 
         public FoosballWebServiceClient()
         {
+            _credentialStorage = DependencyService.Get<ICredentialStorage>();
             client = new HttpClient();
             client.MaxResponseContentBufferSize = 256000;
+            AddAuthorizationHeader();
         }
 
         /// <summary>
@@ -80,10 +85,13 @@ namespace foosballv2s.Source.Services.FoosballWebService
         /// Sets the authorization token that will be used in every sent http request
         /// </summary>
         /// <param name="token"></param>
-        public void SetAuthroizationToken(string token)
+        public void AddAuthorizationHeader()
         {
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(authScheme, token);
+            Credential credential = _credentialStorage.Read();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(authScheme, credential.Token);
         }
+        
+        
 
         /// <summary>
         /// Attach the API adress to the endpoint uri

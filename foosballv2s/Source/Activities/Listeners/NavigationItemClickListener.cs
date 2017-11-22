@@ -4,6 +4,9 @@ using Android.Support.Design.Internal;
 using Android.Support.Design.Widget;
 using Android.Support.V4.Widget;
 using Android.Views;
+using foosballv2s.Source.Services.CredentialStorage;
+using Xamarin.Forms;
+using Application = Android.App.Application;
 
 namespace foosballv2s.Source.Activities.Listeners
 {
@@ -50,6 +53,13 @@ namespace foosballv2s.Source.Activities.Listeners
                 case Resource.Id.nav_tournaments:
                 {
                     intentType = typeof(TournamentsActivity);
+                    break;
+                }
+                case Resource.Id.nav_logout:
+                {
+                    ICredentialStorage storage = DependencyService.Get<ICredentialStorage>();
+                    storage.Remove();
+                    intentType = typeof(AuthActivity);
                     break;
                 }
                 default:

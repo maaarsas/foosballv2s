@@ -2,12 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:background="@drawable/img_background_foosball"
                 android:orientation="vertical"
                 android:weightSum="1">
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_background_foosball" />
+    
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:padding="12dp"
+            android:gravity="bottom|left"
             android:orientation="vertical"
             android:background="#A0000000"
             android:layout_alignParentBottom="true"
@@ -18,10 +26,9 @@
                 android:background="#00000000"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:textColor="#dddddd"
+                android:textColor="#aaaaaa"
                 android:text="@string/logged_in_as"
-                android:textSize="10sp"
+                android:textSize="14sp"
                 android:textStyle="normal" />
     
         <TextView
@@ -30,10 +37,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
-                android:layout_marginLeft="16dp"
                 android:layout_marginTop="5dp"
                 android:text=""
-                android:textSize="14sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
     </LinearLayout>
 </RelativeLayout>

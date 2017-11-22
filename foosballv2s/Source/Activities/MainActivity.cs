@@ -90,7 +90,7 @@ namespace foosballv2s.Source.Activities
 
 
             //Example how to use TextToSpeech
-            //DependencyService.Get<ITextToSpeech>().Speak("Welcome " + TeamName1 + " and " + TeamName2);
+            DependencyService.Get<ITextToSpeech>().Speak("Welcome " + firstTeamTextView.Text + " and " + secondTeamTextView.Text);
 
 
             List<Team> l = new List<Team>(await teamRepository.GetAll());

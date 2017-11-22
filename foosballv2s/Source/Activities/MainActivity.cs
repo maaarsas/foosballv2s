@@ -106,7 +106,7 @@ namespace foosballv2s.Source.Activities
             // if even after creation teams do not exist, means there is an error in the names
             if (team1 == null || team2 == null)
             {
-                Toast.MakeText(this, Resource.String.wrong_team_names, ToastLength.Short);
+                Toast.MakeText(this, Resource.String.wrong_team_names, ToastLength.Short).Show();
                 return;
             }
 

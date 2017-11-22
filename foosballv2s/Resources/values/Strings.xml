@@ -28,9 +28,33 @@
     <string name="nav_teams">Teams</string>
     <string name="nav_games">Games</string>
     <string name="nav_tournaments">Tournaments</string>
+    <string name="nav_logout">Logout</string>
     <string name="open_drawer">Open</string>
     <string name="close_drawer">Close</string>
+    <string name="logged_in_as">Logged in as</string>
     
     <!--Games-->
     <string name="retrieving_games">Loading games. Please wait.</string>
+    
+    <!--Login & registration-->
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="hint_login_email">Your email address</string>
+    <string name="hint_login_password">Your password</string>
+    <string name="button_login">Login</string>
+    <string name="not_registered">Not registered in our application?\nClick here to register</string>
+    <string name="please_login">Please log in to your account by entering your email and password</string>
+    <string name="hint_register_email">Email address</string>
+    <string name="hint_register_password">Password</string>
+    <string name="hint_register_repeat_password">Repeat your password</string>
+    <string name="button_register">Register</string>
+    <string name="already_registered">Already registered in our application?\nClick here to log in</string>
+    <string name="please_register">To register in our application please enter your email and create a password</string>
+    <string name="logging_in">Logging in...</string>
+    <string name="login_error">You have entered wrong email or password. Please try again</string>
+    <string name="login_success">You have been successfully logged in</string>
+    <string name="registering">Registering...</string>
+    <string name="register_error">You have entered either wrong email, password or the passwords do not match. Please try again</string>
+    <string name="register_success">Your registration was successful. Now you can log in</string>
+    <string name="auto_logged_in">You have been automatically logged in</string>
 </resources>

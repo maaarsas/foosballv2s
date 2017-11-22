@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using foosballv2s.WebService.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace foosballv2s.WebService.Controllers
@@ -15,6 +16,7 @@ namespace foosballv2s.WebService.Controllers
         }
         
         // GET api/team/
+        [Authorize]
         [HttpGet]
         public IEnumerable<Team> Get()
         {
@@ -22,6 +24,7 @@ namespace foosballv2s.WebService.Controllers
         }
 
         // GET api/team/5
+        [Authorize]
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -34,6 +37,7 @@ namespace foosballv2s.WebService.Controllers
         }
 
         // POST api/team
+        [Authorize]
         [HttpPost]
         public IActionResult Post([FromBody] Team team)
         {
@@ -46,6 +50,7 @@ namespace foosballv2s.WebService.Controllers
         }
 
         // PUT api/team/5
+        [Authorize]
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Team team)
         {
@@ -61,6 +66,7 @@ namespace foosballv2s.WebService.Controllers
         }
 
         // DELETE api/team/5
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

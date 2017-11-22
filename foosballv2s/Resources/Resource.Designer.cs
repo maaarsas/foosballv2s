@@ -3254,11 +3254,11 @@ namespace foosballv2s
 			// aapt resource value: 0x7f090025
 			public const int character_counter_pattern = 2131296293;
 			
-			// aapt resource value: 0x7f090037
-			public const int checking_teams = 2131296311;
+			// aapt resource value: 0x7f090039
+			public const int checking_teams = 2131296313;
 			
-			// aapt resource value: 0x7f090041
-			public const int close_drawer = 2131296321;
+			// aapt resource value: 0x7f090043
+			public const int close_drawer = 2131296323;
 			
 			// aapt resource value: 0x7f090030
 			public const int detect_again = 2131296304;
@@ -3275,11 +3275,11 @@ namespace foosballv2s
 			// aapt resource value: 0x7f09002a
 			public const int first_team_name = 2131296298;
 			
-			// aapt resource value: 0x7f09003a
-			public const int game_end_result = 2131296314;
+			// aapt resource value: 0x7f09003c
+			public const int game_end_result = 2131296316;
 			
-			// aapt resource value: 0x7f090039
-			public const int game_end_team_won = 2131296313;
+			// aapt resource value: 0x7f09003b
+			public const int game_end_team_won = 2131296315;
 			
 			// aapt resource value: 0x7f090000
 			public const int mr_button_content_description = 2131296256;
@@ -3326,26 +3326,26 @@ namespace foosballv2s
 			// aapt resource value: 0x7f09000e
 			public const int mr_user_route_category_name = 2131296270;
 			
+			// aapt resource value: 0x7f090040
+			public const int nav_games = 2131296320;
+			
 			// aapt resource value: 0x7f09003e
-			public const int nav_games = 2131296318;
-			
-			// aapt resource value: 0x7f09003c
-			public const int nav_new_game = 2131296316;
-			
-			// aapt resource value: 0x7f09003d
-			public const int nav_teams = 2131296317;
+			public const int nav_new_game = 2131296318;
 			
 			// aapt resource value: 0x7f09003f
-			public const int nav_tournaments = 2131296319;
+			public const int nav_teams = 2131296319;
 			
-			// aapt resource value: 0x7f090038
-			public const int ok = 2131296312;
+			// aapt resource value: 0x7f090041
+			public const int nav_tournaments = 2131296321;
+			
+			// aapt resource value: 0x7f09003a
+			public const int ok = 2131296314;
 			
 			// aapt resource value: 0x7f090027
 			public const int openCamera = 2131296295;
 			
-			// aapt resource value: 0x7f090040
-			public const int open_drawer = 2131296320;
+			// aapt resource value: 0x7f090042
+			public const int open_drawer = 2131296322;
 			
 			// aapt resource value: 0x7f090031
 			public const int point_camera_to_ball = 2131296305;
@@ -3353,20 +3353,23 @@ namespace foosballv2s
 			// aapt resource value: 0x7f09002d
 			public const int prev = 2131296301;
 			
-			// aapt resource value: 0x7f090042
-			public const int retrieving_games = 2131296322;
+			// aapt resource value: 0x7f090044
+			public const int retrieving_games = 2131296324;
 			
-			// aapt resource value: 0x7f090036
-			public const int retrieving_teams = 2131296310;
+			// aapt resource value: 0x7f090038
+			public const int retrieving_teams = 2131296312;
 			
-			// aapt resource value: 0x7f09003b
-			public const int saving_game = 2131296315;
+			// aapt resource value: 0x7f090035
+			public const int same_team_names = 2131296309;
+			
+			// aapt resource value: 0x7f09003d
+			public const int saving_game = 2131296317;
 			
 			// aapt resource value: 0x7f09002b
 			public const int second_team_name = 2131296299;
 			
-			// aapt resource value: 0x7f090035
-			public const int stats = 2131296309;
+			// aapt resource value: 0x7f090037
+			public const int stats = 2131296311;
 			
 			// aapt resource value: 0x7f090022
 			public const int status_bar_notification_info_overflow = 2131296290;
@@ -3379,6 +3382,9 @@ namespace foosballv2s
 			
 			// aapt resource value: 0x7f090033
 			public const int team2_goal = 2131296307;
+			
+			// aapt resource value: 0x7f090036
+			public const int team_name_exists = 2131296310;
 			
 			// aapt resource value: 0x7f090028
 			public const int welcome_text = 2131296296;

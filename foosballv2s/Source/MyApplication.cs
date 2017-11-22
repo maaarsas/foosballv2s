@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Runtime;
 using foosballv2s.Source.Entities;
+using foosballv2s.Source.Services.CredentialStorage;
 using foosballv2s.Source.Services.FoosballWebService;
 using foosballv2s.Source.Services.FoosballWebService.Repository;
 using Xamarin.Forms;
@@ -27,6 +28,8 @@ namespace foosballv2s.Source
             DependencyService.Register<FoosballWebServiceClient>();
             DependencyService.Register<TeamRepository>();
             DependencyService.Register<GameRepository>();
+            DependencyService.Register<CredentialStorage>();
+            DependencyService.Register<User>();
         }
     }
 }

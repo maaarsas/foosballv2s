@@ -88,6 +88,11 @@ namespace foosballv2s.Source.Activities
             Team team1 = ((TeamAutoCompleteAdapter) firstTeamTextView.Adapter).SelectedTeam;
             Team team2 = ((TeamAutoCompleteAdapter) secondTeamTextView.Adapter).SelectedTeam;
 
+
+            //Example how to use TextToSpeech
+            //DependencyService.Get<ITextToSpeech>().Speak("Welcome " + TeamName1 + " and " + TeamName2);
+
+
             List<Team> l = new List<Team>(await teamRepository.GetAll());
             Func<string, bool> d = delegate (string s)
             {

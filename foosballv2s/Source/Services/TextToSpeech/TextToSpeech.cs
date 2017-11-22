@@ -29,10 +29,7 @@ namespace DependencyServiceSample.Droid
             {
                 speaker = new TextToSpeech(Forms.Context, this);
             }
-            else
-            {
-                speaker.Speak(toSpeak, QueueMode.Flush, null, null);
-            }
+            speaker.Speak(toSpeak, QueueMode.Flush, null, null);
         }
 
         public void OnInit(OperationResult status)

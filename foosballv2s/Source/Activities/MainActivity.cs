@@ -88,25 +88,54 @@ namespace foosballv2s.Source.Activities
             Team team1 = ((TeamAutoCompleteAdapter) firstTeamTextView.Adapter).SelectedTeam;
             Team team2 = ((TeamAutoCompleteAdapter) secondTeamTextView.Adapter).SelectedTeam;
 
+            List<Team> l = new List<Team>(await teamRepository.GetAll());
+            Func<string, bool> d = delegate (string s)
+            {
+                foreach (Team t in l)
+                {
+                    if (t.TeamName.Equals(s))
+                    {
+                        string msg = Resources.GetString(Resource.String.team_name_exists);
+                        string msg2 = System.String.Format(msg, s);
+                        Toast.MakeText(this, msg2, ToastLength.Short).Show();
+                        return false;
+                    }
+                }
+                return true;
+            };
+
+            dialog.Dismiss();
             // first team is not selected from the list, so it is a new one, create it
             if (team1 == null)
             {
-                team1 = new Team {TeamName = firstTeamTextView.Text};
-                team1 = await teamRepository.Create(team1);
+                if (d(firstTeamTextView.Text))
+                {
+                    team1 = new Team { TeamName = firstTeamTextView.Text };
+                    team1 = await teamRepository.Create(team1);
+                }
+                else return;
             }
             // second team is not selected from the list, so it is a new one, create it
             if (team2 == null)
             {
-                team2 = new Team {TeamName = secondTeamTextView.Text};
-                team2 = await teamRepository.Create(team2);
+                if (d(secondTeamTextView.Text))
+                {
+                    team2 = new Team { TeamName = secondTeamTextView.Text };
+                    team2 = await teamRepository.Create(team2);
+                }
+                else return;
             }
-            
-            dialog.Dismiss();
-            
+
             // if even after creation teams do not exist, means there is an error in the names
             if (team1 == null || team2 == null)
             {
                 Toast.MakeText(this, Resource.String.wrong_team_names, ToastLength.Short).Show();
+                return;
+            }
+
+            if (team1.TeamName.Equals(team2.TeamName))
+            {
+                Toast.MakeText(this, Resource.String.same_team_names, ToastLength.Short).Show();
                 return;
             }
 

@@ -29,6 +29,7 @@ namespace foosballv2s.Source
             DependencyService.Register<TeamRepository>();
             DependencyService.Register<GameRepository>();
             DependencyService.Register<CredentialStorage>();
+            DependencyService.Register<User>();
         }
     }
 }

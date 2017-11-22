@@ -21,6 +21,8 @@ namespace foosballv2s.Source.Activities
         {
             base.OnCreate(savedInstanceState);
             
+            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            
             _credentialStorage = DependencyService.Get<ICredentialStorage>();
             if (_credentialStorage.HasExpired())
             {

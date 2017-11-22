@@ -136,6 +136,7 @@
     <Compile Include="Source\Activities\TournamentsActivity.cs" />
     <Compile Include="Source\Entities\Game.cs" />
     <Compile Include="Source\Entities\Team.cs" />
+    <Compile Include="Source\Entities\User.cs" />
     <Compile Include="Source\MyApplication.cs" />
     <Compile Include="Source\Services\CredentialStorage\CredentialStorage.cs" />
     <Compile Include="Source\Services\CredentialStorage\ICredentialStorage.cs" />
@@ -243,6 +244,7 @@
     <AndroidResource Include="Resources\values\dimens.xml" />
     <AndroidResource Include="Resources\layout\fragment_login.axml" />
     <AndroidResource Include="Resources\layout\fragment_register.axml" />
+    <AndroidResource Include="Resources\layout\navigation_header.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" />

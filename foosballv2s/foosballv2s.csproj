@@ -137,10 +137,16 @@
     <Compile Include="Source\Entities\Game.cs" />
     <Compile Include="Source\Entities\Team.cs" />
     <Compile Include="Source\MyApplication.cs" />
+    <Compile Include="Source\Services\CredentialStorage\CredentialStorage.cs" />
+    <Compile Include="Source\Services\CredentialStorage\ICredentialStorage.cs" />
+    <Compile Include="Source\Services\CredentialStorage\Models\Credential.cs" />
     <Compile Include="Source\Services\FileIO\IO.cs" />
     <Compile Include="Source\Services\FileIO\SLSupp.cs" />
     <Compile Include="Source\Services\FoosballWebService\FoosballWebServiceClient.cs" />
     <Compile Include="Source\Services\FoosballWebService\IWebServiceClient.cs" />
+    <Compile Include="Source\Services\FoosballWebService\Models\LoginResponse.cs" />
+    <Compile Include="Source\Services\FoosballWebService\Models\LoginViewModel.cs" />
+    <Compile Include="Source\Services\FoosballWebService\Repository\AuthRepository.cs" />
     <Compile Include="Source\Services\FoosballWebService\Repository\GameRepository.cs" />
     <Compile Include="Source\Services\FoosballWebService\Repository\TeamRepository.cs" />
     <Compile Include="Source\Services\GameRecognition\BallImage.cs" />

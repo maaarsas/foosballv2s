@@ -78,6 +78,7 @@
                         android:gravity="center">
                     <Button
                             android:text="@string/button_register"
+                            android:onClick="SubmitRegister"
                             style="@style/primaryButtonStyle"
                             android:id="@+id/button_register"
                             android:layout_marginRight="40dp"

@@ -51,6 +51,19 @@ namespace foosballv2s.Source.Activities
             tabLayout = (TabLayout) FindViewById(Resource.Id.sliding_tabs);
             tabLayout.SetupWithViewPager(viewPager);
         }
+
+        [Export("SubmitLogin")]
+        public async void SubmitLogin(View view)
+        {
+            EditText emailEditText = (EditText) FindViewById(Resource.Id.login_email);
+            EditText passwordEditText = (EditText) FindViewById(Resource.Id.login_password);
+        }
+        
+        [Export("SubmitRegister")]
+        public async void SubmitRegister(View view)
+        {
+            
+        }
         
         private void setupViewPager(ViewPager viewPager)
         {
@@ -59,6 +72,7 @@ namespace foosballv2s.Source.Activities
             adapter.addFragment(new RegisterFragment(), Resources.GetString(Resource.String.register));
             viewPager.Adapter = adapter;
         }
+        
         
         
         private class ViewPagerAdapter : FragmentPagerAdapter

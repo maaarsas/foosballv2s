@@ -7,5 +7,7 @@ namespace foosballv2s.Source.Services.CredentialStorage
     {
         void Save(string token, DateTime expiration);
         Credential Read();
+        void Remove();
+        bool HasExpired();
     }
 }

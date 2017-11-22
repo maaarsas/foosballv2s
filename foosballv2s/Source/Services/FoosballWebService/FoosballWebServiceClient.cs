@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -114,6 +115,10 @@ namespace foosballv2s.Source.Services.FoosballWebService
             {
                 var content = await response.Content.ReadAsStringAsync();
                 return content;
+            }
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                _credentialStorage.Remove();
             }
             return emptyJson;
         }

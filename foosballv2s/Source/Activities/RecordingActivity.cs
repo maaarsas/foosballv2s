@@ -89,6 +89,18 @@ namespace foosballv2s.Source.Activities
             var clockTimer = new Timer(new TimerCallback(UpdateGameTimer), null,  TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(1));
         }
 
+        protected override void OnResume()
+        {
+            base.OnResume();
+            StartCamera();
+        }
+        
+        protected override void OnPause()
+        {
+            base.OnPause();
+            StopCamera();
+        }
+
         /// <summary>
         /// Called on the first team's goal
         /// </summary>
@@ -192,11 +204,7 @@ namespace foosballv2s.Source.Activities
         /// <returns></returns>
         public bool OnSurfaceTextureDestroyed(SurfaceTexture surface)
         {
-            if (camera != null) {
-                camera.StopPreview();
-                camera.Release();
-                camera = null;
-            }
+            StopCamera();
             return false;
         }
 
@@ -209,7 +217,7 @@ namespace foosballv2s.Source.Activities
         /// <param name="height"></param>
         public void OnSurfaceTextureAvailable(SurfaceTexture surface, int width, int height)
         {
-            camera = Camera.Open();
+            StartCamera();
             try
             {
                 camera.SetPreviewTexture(surface);
@@ -230,6 +238,31 @@ namespace foosballv2s.Source.Activities
         public void OnSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) { }
 
         public void OnSurfaceTextureUpdated(SurfaceTexture surface) { }
+
+        /// <summary>
+        /// Opens the camera if it is not already opened
+        /// </summary>
+        private void StartCamera()
+        {
+            if (camera == null)
+            {
+                camera = Camera.Open();
+            }
+        }
+
+        /// <summary>
+        /// Closes the camera (if it is open) and releases all previews related to it
+        /// </summary>
+        private void StopCamera()
+        {
+            if (camera != null) {
+                camera.SetPreviewCallback(null);
+                camera.SetPreviewTexture(null);
+                camera.StopPreview();
+                camera.Release();
+                camera = null;
+            }
+        }
 
         /// <summary>
         /// Draws a rectangle onto the screen

@@ -212,7 +212,6 @@ namespace foosballv2s.Source.Activities
             try
             {
                 camera.SetPreviewTexture(surface);
-                camera.StartPreview();
                 camera.SetPreviewCallback(this);
             }
             catch (Java.IO.IOException ex) { }
@@ -220,9 +219,9 @@ namespace foosballv2s.Source.Activities
             Camera.Parameters tmp = camera.GetParameters();
             Camera.Size bestSize = ActivityHelper.GetBestPreviewSize(camera.GetParameters().SupportedPreviewSizes, textureView.Width, textureView.Height);
             tmp.SetPreviewSize((int) bestSize.Width, (int) bestSize.Height);
-            //tmp.SetRotation(0);
             tmp.FocusMode = Camera.Parameters.FocusModeContinuousPicture;
             camera.SetParameters(tmp);
+            camera.StartPreview();
             movementDetector.SetupBallDetector(textureView.Width, textureView.Height, game.BallColor);
             this.textureSetup = true;
         }

@@ -44,6 +44,8 @@ namespace foosballv2s.Source.Activities
         private Game game;
         private GameRepository gameRepository;
 
+        private bool gameDataSent;
+
 
         private bool textureSetup;
 
@@ -72,6 +74,7 @@ namespace foosballv2s.Source.Activities
             gameRepository = DependencyService.Get<GameRepository>();
 
             game.Start();
+            gameDataSent = false;
             
             this.Window.AddFlags(WindowManagerFlags.Fullscreen);
             
@@ -119,8 +122,9 @@ namespace foosballv2s.Source.Activities
         /// <param name="game"></param>
         private void CheckGameEnd(Game game)
         {
-            if (game.HasEnded)
+            if (game.HasEnded && !gameDataSent)
             {
+                gameDataSent = true;
                 SaveGame(game);
                 ShowGameEndScreen();
             }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -39,7 +41,7 @@ namespace foosballv2s.Source.Services.FoosballWebService
         public async Task<string> GetAsync(string endPointUri)
         {
             var uri = GetFullUri(endPointUri);
-            var response = await client.GetAsync(uri);
+            var response = await TaskHelper.RunWithRetry(() => { return client.GetAsync(uri); });
             return await GetResponseReturn(response);
         }
         
@@ -53,7 +55,7 @@ namespace foosballv2s.Source.Services.FoosballWebService
         {
             var uri = GetFullUri(endPointUri);
             var jsonParams = new StringContent (json, Encoding.UTF8, "application/json");
-            var response = await client.PostAsync(uri, jsonParams);
+            var response = await TaskHelper.RunWithRetry(() => { return client.PostAsync(uri, jsonParams); });
             return await GetResponseReturn(response);
         }
         
@@ -67,7 +69,7 @@ namespace foosballv2s.Source.Services.FoosballWebService
         {
             var uri = GetFullUri(endPointUri);
             var jsonParams = new StringContent (json, Encoding.UTF8, "application/json");
-            var response = await client.PutAsync(uri, jsonParams);
+            var response = await TaskHelper.RunWithRetry(() => { return client.PutAsync(uri, jsonParams); });
             return await GetResponseReturn(response);
         }
         
@@ -79,7 +81,7 @@ namespace foosballv2s.Source.Services.FoosballWebService
         public async Task<string> DeleteAsync(string endPointUri)
         {
             var uri = GetFullUri(endPointUri);
-            var response = await client.DeleteAsync(uri);
+            var response = await TaskHelper.RunWithRetry(() => { return client.DeleteAsync(uri); });
             return await GetResponseReturn(response);
         }
 

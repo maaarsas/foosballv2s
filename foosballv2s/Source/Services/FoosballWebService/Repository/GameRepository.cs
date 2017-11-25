@@ -26,7 +26,7 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
         public async Task<Game[]> GetAll()
         {
             var response = await client.GetAsync(endpointUrl);
-            Game[] games = JsonConvert.DeserializeObject<Game[]>(response);
+            Game[] games = FoosballJsonConvert.DeserializeObject<Game[]>(response);
             return games;
         }
         
@@ -38,7 +38,7 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
         public async Task<Game> GetById(int id)
         {
             var response = await client.GetAsync(endpointUrl + "/" + id);
-            Game game = JsonConvert.DeserializeObject<Game>(response);
+            Game game = FoosballJsonConvert.DeserializeObject<Game>(response);
             return game;
         }
         
@@ -51,7 +51,7 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
         {
             var gameJsonString = JsonConvert.SerializeObject(game);
             var response = await client.PostAsync(endpointUrl, gameJsonString);
-            Game createdGame = JsonConvert.DeserializeObject<Game>(response);
+            Game createdGame = FoosballJsonConvert.DeserializeObject<Game>(response);
             return createdGame;
         }
         
@@ -65,7 +65,7 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
         {
             var gameJsonString = JsonConvert.SerializeObject(game);
             var response = await client.PutAsync(endpointUrl + "/" + id , gameJsonString);
-            Game updatedGame = JsonConvert.DeserializeObject<Game>(response);
+            Game updatedGame = FoosballJsonConvert.DeserializeObject<Game>(response);
             return updatedGame;
         }
         
@@ -77,7 +77,7 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
         public async Task<Game> Delete(int id)
         {
             var response = await client.DeleteAsync(endpointUrl + "/" + id);
-            Game updatedGame = JsonConvert.DeserializeObject<Game>(response);
+            Game updatedGame = FoosballJsonConvert.DeserializeObject<Game>(response);
             return updatedGame;
         }
     }

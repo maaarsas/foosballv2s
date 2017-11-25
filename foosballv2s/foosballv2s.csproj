@@ -143,6 +143,7 @@
     <Compile Include="Source\Services\CredentialStorage\Models\Credential.cs" />
     <Compile Include="Source\Services\FileIO\IO.cs" />
     <Compile Include="Source\Services\FileIO\SLSupp.cs" />
+    <Compile Include="Source\Services\FoosballWebService\FoosballJsonConvert.cs" />
     <Compile Include="Source\Services\FoosballWebService\FoosballWebServiceClient.cs" />
     <Compile Include="Source\Services\FoosballWebService\IWebServiceClient.cs" />
     <Compile Include="Source\Services\FoosballWebService\Models\LoginResponse.cs" />

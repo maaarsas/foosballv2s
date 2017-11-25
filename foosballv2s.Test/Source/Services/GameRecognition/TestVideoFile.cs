@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace foosballv2s.Test.Source.Services.GameRecognition
 {
     [TestFixture]
-    public class VideoFileTests
+    public class TestVideoFile
     {
         String projectRootDirectory = AppDomain.CurrentDomain.BaseDirectory + "\\..\\..\\";
 

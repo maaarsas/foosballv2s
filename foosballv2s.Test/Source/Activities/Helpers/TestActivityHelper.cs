@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace foosballv2s.Test.Source.Activities.Helpers
 {
     [TestFixture]
-    public class ActivityHelperTests
+    public class TestActivityHelper
     {
         private int[][] previewSizes = new int[][]
         {

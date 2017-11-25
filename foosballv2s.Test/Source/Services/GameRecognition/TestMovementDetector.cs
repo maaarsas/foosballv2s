@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace foosballv2s.Test.Source.Services.GameRecognition
 {
     [TestFixture]
-    public class MovementDetectorTests
+    public class TestMovementDetector
     {
         String projectRootDirectory = AppDomain.CurrentDomain.BaseDirectory + "\\..\\..\\";
         

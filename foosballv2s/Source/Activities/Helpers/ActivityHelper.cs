@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Android.Hardware;
 using Xamarin.Forms;
@@ -16,21 +17,45 @@ namespace foosballv2s.Source.Activities.Helpers
         /// <param name="previewWidth"></param>
         /// <param name="previewHeight"></param>
         /// <returns></returns>
-        public static Size GetBestPreviewSize(IList<Camera.Size> supportedSizes, int previewWidth, int previewHeight)
+        public static Camera.Size GetBestPreviewSize(IList<Camera.Size> sizes, int previewWidth, int previewHeight)
         {
+            double ASPECT_TOLERANCE = 0.1;
             double targetRatio = (double) previewHeight / previewWidth;
-            Size bestSize = new Size();
 
-                       int i = 0;
-            while (i < supportedSizes.Count && 
-                   (supportedSizes[i].Height < previewWidth
-                   || bestSize.Width / bestSize.Height < targetRatio - 0.1))
+            if (sizes == null) return null;
+
+            Camera.Size optimalSize = null;
+            double minDiff = Double.MaxValue;
+
+            int targetHeight = previewHeight;
+
+            foreach (Camera.Size size in sizes) 
             {
-                bestSize.Width = supportedSizes[i].Width;
-                bestSize.Height = supportedSizes[i].Height;
-                i++;
+                double ratio = (double) size.Width / size.Height;
+                if (Math.Abs(ratio - targetRatio) > ASPECT_TOLERANCE)
+                {
+                    continue;
+                }
+                if (Math.Abs(size.Height - targetHeight) < minDiff) 
+                {
+                    optimalSize = size;
+                    minDiff = Math.Abs(size.Height - targetHeight);
+                }
             }
-            return bestSize;
+
+            if (optimalSize == null) 
+            {
+                minDiff = Double.MaxValue;
+                foreach (Camera.Size size in sizes) 
+                {
+                    if (Math.Abs(size.Height - targetHeight) < minDiff) 
+                    {
+                        optimalSize = size;
+                        minDiff = Math.Abs(size.Height - targetHeight);
+                    }
+                }
+            }
+            return optimalSize;
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using foosballv2s.Source.Services.CredentialStorage;
 using foosballv2s.Source.Services.CredentialStorage.Models;
+using ModernHttpClient;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(foosballv2s.Source.Services.FoosballWebService.FoosballWebServiceClient))]
@@ -25,7 +26,7 @@ namespace foosballv2s.Source.Services.FoosballWebService
         public FoosballWebServiceClient()
         {
             _credentialStorage = DependencyService.Get<ICredentialStorage>();
-            client = new HttpClient();
+            client = new HttpClient(new NativeMessageHandler());
             client.MaxResponseContentBufferSize = 256000;
             AddAuthorizationHeader();
         }

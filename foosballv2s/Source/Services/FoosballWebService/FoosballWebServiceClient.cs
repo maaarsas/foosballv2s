@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using foosballv2s.Source.Services.CredentialStorage;
 using foosballv2s.Source.Services.CredentialStorage.Models;
 using ModernHttpClient;
+using Org.Apache.Http;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(foosballv2s.Source.Services.FoosballWebService.FoosballWebServiceClient))]
@@ -24,7 +25,6 @@ namespace foosballv2s.Source.Services.FoosballWebService
         private readonly string authScheme = "Bearer";
         private HttpClient client;
         private ICredentialStorage _credentialStorage;
-        private TaskHelper<HttpResponseMessage> taskRunner;
 
         public FoosballWebServiceClient()
         {
@@ -32,7 +32,6 @@ namespace foosballv2s.Source.Services.FoosballWebService
             client = new HttpClient(new NativeMessageHandler());
             client.MaxResponseContentBufferSize = 256000;
             AddAuthorizationHeader();
-            ConfigureHttpTaskRunner();
         }
 
         /// <summary>
@@ -43,7 +42,15 @@ namespace foosballv2s.Source.Services.FoosballWebService
         public async Task<string> GetAsync(string endPointUri)
         {
             var uri = GetFullUri(endPointUri);
-            var response = await taskRunner.RunWithRetry(() => { return client.GetAsync(uri); });
+            HttpResponseMessage response;
+            try
+            {
+                response = await client.GetAsync(uri);
+            }
+            catch (Exception e)
+            {
+                response = new HttpResponseMessage(HttpStatusCode.RequestTimeout);
+            }
             return await GetResponseReturn(response);
         }
         
@@ -57,7 +64,15 @@ namespace foosballv2s.Source.Services.FoosballWebService
         {
             var uri = GetFullUri(endPointUri);
             var jsonParams = new StringContent (json, Encoding.UTF8, "application/json");
-            var response = await taskRunner.RunWithRetry(() => { return client.PostAsync(uri, jsonParams); });
+            HttpResponseMessage response;
+            try
+            {
+                response = await client.PostAsync(uri, jsonParams);
+            }
+            catch (Exception e)
+            {
+                response = new HttpResponseMessage(HttpStatusCode.RequestTimeout);
+            }
             return await GetResponseReturn(response);
         }
         
@@ -71,7 +86,15 @@ namespace foosballv2s.Source.Services.FoosballWebService
         {
             var uri = GetFullUri(endPointUri);
             var jsonParams = new StringContent (json, Encoding.UTF8, "application/json");
-            var response = await taskRunner.RunWithRetry(() => { return client.PutAsync(uri, jsonParams); });
+            HttpResponseMessage response;
+            try
+            {
+                response = await client.PutAsync(uri, jsonParams);
+            }
+            catch (Exception e)
+            {
+                response = new HttpResponseMessage(HttpStatusCode.RequestTimeout);
+            }
             return await GetResponseReturn(response);
         }
         
@@ -83,7 +106,15 @@ namespace foosballv2s.Source.Services.FoosballWebService
         public async Task<string> DeleteAsync(string endPointUri)
         {
             var uri = GetFullUri(endPointUri);
-            var response = await taskRunner.RunWithRetry(() => { return client.DeleteAsync(uri); });
+            HttpResponseMessage response;
+            try
+            {
+                response = await client.DeleteAsync(uri);
+            }
+            catch (Exception e)
+            {
+                response = new HttpResponseMessage(HttpStatusCode.RequestTimeout);
+            }
             return await GetResponseReturn(response);
         }
 
@@ -126,12 +157,6 @@ namespace foosballv2s.Source.Services.FoosballWebService
                 _credentialStorage.Remove();
             }
             return emptyJson;
-        }
-
-        private void ConfigureHttpTaskRunner()
-        {
-            taskRunner = new TaskHelper<HttpResponseMessage>();
-            taskRunner.SetFaultTaskReturnObject(new HttpResponseMessage(HttpStatusCode.RequestTimeout));
         }
     }
 }

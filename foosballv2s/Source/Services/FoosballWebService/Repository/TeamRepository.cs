@@ -27,6 +27,10 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
         {
             var response = await client.GetAsync(endpointUrl);
             Team[] teams = FoosballJsonConvert.DeserializeObject<Team[]>(response);
+            if (teams == null)
+            {
+                teams = new Team[]{};
+            }
             return teams;
         }
         

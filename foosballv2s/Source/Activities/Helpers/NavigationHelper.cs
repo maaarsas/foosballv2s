@@ -3,6 +3,7 @@ using Android.Support.Design.Widget;
 using Android.Support.V4.Widget;
 using Android.Support.V7.App;
 using Android.Widget;
+using foosballv2s.Resources;
 using foosballv2s.Source.Activities.Listeners;
 using foosballv2s.Source.Entities;
 using foosballv2s.Source.Services.CredentialStorage;

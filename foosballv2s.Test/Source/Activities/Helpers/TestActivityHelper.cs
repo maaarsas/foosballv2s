@@ -1,10 +1,8 @@
-﻿using NUnit.Framework;
-using NUnit.Mocks;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Android.Hardware;
-using foosballv2s.Source.Activities.Helpers;
+using NUnit.Framework;
 
-namespace foosballv2s.Test
+namespace foosballv2s.Test.Source.Activities.Helpers
 {
     [TestFixture]
     public class ActivityHelperTests

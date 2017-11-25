@@ -1,9 +1,7 @@
-﻿using NUnit.Framework;
-using Android.Graphics;
-using Emgu.CV.Structure;
-using foosballv2s.Source.Services.GameRecognition;
+﻿using Android.Graphics;
+using NUnit.Framework;
 
-namespace foosballv2s.Test
+namespace foosballv2s.Test.Source.Services.GameRecognition
 {
     [TestFixture]
     public class BallImageTests

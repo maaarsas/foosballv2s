@@ -2,6 +2,7 @@
 using Android.App;
 using Android.OS;
 using Android.Support.V7.App;
+using foosballv2s.Resources;
 using foosballv2s.Source.Activities.Adapters;
 using foosballv2s.Source.Activities.Helpers;
 using foosballv2s.Source.Entities;

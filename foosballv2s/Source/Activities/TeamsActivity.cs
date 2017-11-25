@@ -9,6 +9,7 @@ using foosballv2s.Source.Services.FoosballWebService.Repository;
 using Xamarin.Forms;
 using ListView = Android.Widget.ListView;
 using Android.Widget;
+using foosballv2s.Resources;
 
 namespace foosballv2s.Source.Activities
 {

@@ -1,5 +1,6 @@
 ﻿using Android.App;
 using Android.OS;
+using foosballv2s.Resources;
 
 namespace foosballv2s.Source.Activities
 {

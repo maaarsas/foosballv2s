@@ -1,8 +1,7 @@
-using NUnit.Framework;
 using System;
-using foosballv2s.Source.Services.GameRecognition;
+using NUnit.Framework;
 
-namespace foosballv2s.Test
+namespace foosballv2s.Test.Source.Services.GameRecognition
 {
     [TestFixture]
     public class MovementDetectorTests

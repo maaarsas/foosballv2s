@@ -10,7 +10,6 @@ using Android.Views;
 using Android.Widget;
 using Emgu.CV;
 using Emgu.CV.Structure;
-using foosballv2s.Resources;
 using foosballv2s.Source.Activities.Helpers;
 using foosballv2s.Source.Entities;
 using foosballv2s.Source.Services.FoosballWebService.Repository;
@@ -19,7 +18,6 @@ using Java.Interop;
 using Xamarin.Forms;
 using Camera = Android.Hardware.Camera;
 using Color = Android.Graphics.Color;
-using Size = Xamarin.Forms.Size;
 using View = Android.Views.View;
 
 namespace foosballv2s.Source.Activities
@@ -222,13 +220,23 @@ namespace foosballv2s.Source.Activities
             Camera.Parameters tmp = camera.GetParameters();
             Camera.Size bestSize = ActivityHelper.GetBestPreviewSize(camera.GetParameters().SupportedPreviewSizes, textureView.Width, textureView.Height);
             tmp.SetPreviewSize((int) bestSize.Width, (int) bestSize.Height);
+            //tmp.SetRotation(0);
             tmp.FocusMode = Camera.Parameters.FocusModeContinuousPicture;
             camera.SetParameters(tmp);
             movementDetector.SetupBallDetector(textureView.Width, textureView.Height, game.BallColor);
             this.textureSetup = true;
         }
 
-        public void OnSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) { }
+        public void OnSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height)
+        {
+            if (camera != null) {
+                Camera.Parameters tmp = camera.GetParameters();
+                Camera.Size bestSize = ActivityHelper.GetBestPreviewSize(camera.GetParameters().SupportedPreviewSizes, textureView.Width, textureView.Height);
+                tmp.SetPreviewSize((int) bestSize.Width, (int) bestSize.Height);
+                camera.SetParameters(tmp);
+                camera.StartPreview();
+            }
+        }
 
         public void OnSurfaceTextureUpdated(SurfaceTexture surface) { }
 

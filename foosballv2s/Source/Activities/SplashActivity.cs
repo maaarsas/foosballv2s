@@ -2,9 +2,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Widget;
-using foosballv2s.Resources;
 using foosballv2s.Source.Services.CredentialStorage;
-using foosballv2s.Source.Services.FoosballWebService.Repository;
 using Xamarin.Forms;
 using Application = Android.App.Application;
 

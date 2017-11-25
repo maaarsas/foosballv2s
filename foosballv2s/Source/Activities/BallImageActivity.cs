@@ -8,7 +8,6 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Emgu.CV.Structure;
-using foosballv2s.Resources;
 using foosballv2s.Source.Activities.Helpers;
 using foosballv2s.Source.Entities;
 using foosballv2s.Source.Services.FileIO;
@@ -153,7 +152,8 @@ namespace foosballv2s.Source.Activities
         public void OnSurfaceTextureSizeChanged(SurfaceTexture surfacetexture, int i, int j) {
             if (mCamera != null) {
                 Camera.Parameters tmp = mCamera.GetParameters();
-                tmp.SetPreviewSize(tmp.SupportedPreviewSizes[0].Width, tmp.SupportedPreviewSizes[0].Height);
+                Camera.Size bestSize = ActivityHelper.GetBestPreviewSize(mCamera.GetParameters().SupportedPreviewSizes, textureView.Width, textureView.Height);
+                tmp.SetPreviewSize((int) bestSize.Width, (int) bestSize.Height);
                 mCamera.SetParameters(tmp);
                 mCamera.StartPreview();
             }

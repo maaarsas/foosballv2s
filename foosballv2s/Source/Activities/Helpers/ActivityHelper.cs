@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Android.Hardware;
-using Xamarin.Forms;
 
 namespace foosballv2s.Source.Activities.Helpers
 {
@@ -19,8 +18,16 @@ namespace foosballv2s.Source.Activities.Helpers
         /// <returns></returns>
         public static Camera.Size GetBestPreviewSize(IList<Camera.Size> sizes, int previewWidth, int previewHeight)
         {
-            double ASPECT_TOLERANCE = 0.1;
-            double targetRatio = (double) previewHeight / previewWidth;
+            double ASPECT_TOLERANCE = 0.15;
+            double targetRatio;
+            if (previewHeight > previewWidth)
+            {
+                targetRatio = (double) previewHeight / previewWidth;
+            }
+            else
+            {
+                targetRatio = (double) previewWidth / previewHeight;
+            }
 
             if (sizes == null) return null;
 
@@ -36,7 +43,7 @@ namespace foosballv2s.Source.Activities.Helpers
                 {
                     continue;
                 }
-                if (Math.Abs(size.Height - targetHeight) < minDiff) 
+                if (Math.Abs(size.Height - targetHeight) <= minDiff) 
                 {
                     optimalSize = size;
                     minDiff = Math.Abs(size.Height - targetHeight);
@@ -48,7 +55,7 @@ namespace foosballv2s.Source.Activities.Helpers
                 minDiff = Double.MaxValue;
                 foreach (Camera.Size size in sizes) 
                 {
-                    if (Math.Abs(size.Height - targetHeight) < minDiff) 
+                    if (Math.Abs(size.Height - targetHeight) <= minDiff) 
                     {
                         optimalSize = size;
                         minDiff = Math.Abs(size.Height - targetHeight);

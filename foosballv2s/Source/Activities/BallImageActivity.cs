@@ -121,7 +121,7 @@ namespace foosballv2s.Source.Activities
                 Log.Error(TAG + "-ERROR", e.StackTrace);
             }
             Camera.Parameters tmp = mCamera.GetParameters();
-            Xamarin.Forms.Size bestSize = ActivityHelper.GetBestPreviewSize(mCamera.GetParameters(), textureView.Width, textureView.Height);
+            Xamarin.Forms.Size bestSize = ActivityHelper.GetBestPreviewSize(mCamera.GetParameters().SupportedPreviewSizes, textureView.Width, textureView.Height);
             tmp.SetPreviewSize((int) bestSize.Width, (int) bestSize.Height);
             tmp.FocusMode = Camera.Parameters.FocusModeContinuousPicture;
             mCamera.SetParameters(tmp);

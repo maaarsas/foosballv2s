@@ -50,6 +50,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
     <Reference Include="Xamarin.Android.NUnitLite" />
+    <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Xamarin.Forms.2.4.0.280\lib\MonoAndroid10\Xamarin.Forms.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -72,6 +75,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Source\Activities" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\foosballv2s\foosballv2s.csproj">
+      <Project>{C4788136-773B-4305-8833-472AB9F3491C}</Project>
+      <Name>foosballv2s</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

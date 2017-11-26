@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using foosballv2s.Source.Services.CredentialStorage;
+using foosballv2s.Source.Services.CredentialStorage.Models;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(foosballv2s.Source.Services.FoosballWebService.FoosballWebServiceClient))]
@@ -14,12 +18,16 @@ namespace foosballv2s.Source.Services.FoosballWebService
     {
         private string webServiceUri = "http://18.194.122.53:5000/api";
         private readonly string emptyJson = "{}";
+        private readonly string authScheme = "Bearer";
         private HttpClient client;
+        private ICredentialStorage _credentialStorage;
 
         public FoosballWebServiceClient()
         {
+            _credentialStorage = DependencyService.Get<ICredentialStorage>();
             client = new HttpClient();
             client.MaxResponseContentBufferSize = 256000;
+            AddAuthorizationHeader();
         }
 
         /// <summary>
@@ -75,6 +83,18 @@ namespace foosballv2s.Source.Services.FoosballWebService
         }
 
         /// <summary>
+        /// Sets the authorization token that will be used in every sent http request
+        /// </summary>
+        /// <param name="token"></param>
+        public void AddAuthorizationHeader()
+        {
+            Credential credential = _credentialStorage.Read();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(authScheme, credential.Token);
+        }
+        
+        
+
+        /// <summary>
         /// Attach the API adress to the endpoint uri
         /// </summary>
         /// <param name="endpointUri"></param>
@@ -95,6 +115,10 @@ namespace foosballv2s.Source.Services.FoosballWebService
             {
                 var content = await response.Content.ReadAsStringAsync();
                 return content;
+            }
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                _credentialStorage.Remove();
             }
             return emptyJson;
         }

@@ -22,10 +22,7 @@ namespace foosballv2s.Source.Activities
     /// <summary>
     /// Main activity for choosing the teams for the game
     /// </summary>
-    [Activity(
-        ConfigurationChanges = ConfigChanges.Orientation,
-        ScreenOrientation = ScreenOrientation.Portrait
-        )]
+    [Activity]
     public class MainActivity : AppCompatActivity
     {
         private AutoCompleteTextView firstTeamTextView, secondTeamTextView;

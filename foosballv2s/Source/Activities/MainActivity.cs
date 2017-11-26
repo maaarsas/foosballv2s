@@ -14,6 +14,8 @@ using foosballv2s.Source.Services.FoosballWebService.Repository;
 using Java.Interop;
 using Xamarin.Forms;
 using View = Android.Views.View;
+using Android.Media;
+using Android.Views;
 
 namespace foosballv2s.Source.Activities
 {
@@ -33,28 +35,34 @@ namespace foosballv2s.Source.Activities
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
+
+            VolumeControlStream = Android.Media.Stream.Music;
+            AudioManager audioManager =
+            (AudioManager)GetSystemService(Context.AudioService);
+            audioManager.PlaySoundEffect(SoundEffect.KeyClick);
             base.OnCreate(savedInstanceState);
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
             SetContentView(Resource.Layout.Main);
-            
+
             game = DependencyService.Get<Game>();
             teamRepository = DependencyService.Get<TeamRepository>();
-            
-            firstTeamTextView = (AutoCompleteTextView) FindViewById<AutoCompleteTextView>(Resource.Id.team1Name);
-            secondTeamTextView = (AutoCompleteTextView) FindViewById<AutoCompleteTextView>(Resource.Id.team2Name);
-            
+
+            firstTeamTextView = (AutoCompleteTextView)FindViewById<AutoCompleteTextView>(Resource.Id.team1Name);
+            secondTeamTextView = (AutoCompleteTextView)FindViewById<AutoCompleteTextView>(Resource.Id.team2Name);
+
             firstTeamTextView.ItemClick += AutoCompleteTextView_ItemClicked;
             secondTeamTextView.ItemClick += AutoCompleteTextView_ItemClicked;
-            
+
             var btnP = FindViewById<Android.Widget.Button>(Resource.Id.prev);
             btnP.Click += BtnPrev_Click;
-            
+
             //Window.SetBackgroundDrawable(Android.Resource.Id.);
             NavigationHelper.SetupNavigationListener(this);
             NavigationHelper.SetActionBarNavigationText(this, Resource.String.app_name);
         }
+
 
         protected override void OnResume()
         {
@@ -69,6 +77,11 @@ namespace foosballv2s.Source.Activities
         /// <param name="e"></param>
         private void BtnPrev_Click(object sender, EventArgs e)
         {
+            /*View v = new View()
+            {
+                SoundEffectsEnabled = true
+            };
+            v.PlaySoundEffect(SoundEffects.Click);*/
             Intent intent = new Intent(this, typeof(ColorPickerActivity));
 
             StartActivity(intent);
@@ -82,16 +95,15 @@ namespace foosballv2s.Source.Activities
         [Export("SubmitTeamNames")]
         public async void SubmitTeamNames(View view)
         {
-            ProgressDialog dialog = ProgressDialog.Show(this, "", 
+            VolumeControlStream = Android.Media.Stream.Music;
+            ProgressDialog dialog = ProgressDialog.Show(this, "",
                 Resources.GetString(Resource.String.checking_teams), true);
 
-            Team team1 = ((TeamAutoCompleteAdapter) firstTeamTextView.Adapter).SelectedTeam;
-            Team team2 = ((TeamAutoCompleteAdapter) secondTeamTextView.Adapter).SelectedTeam;
-
+            Team team1 = ((TeamAutoCompleteAdapter)firstTeamTextView.Adapter).SelectedTeam;
+            Team team2 = ((TeamAutoCompleteAdapter)secondTeamTextView.Adapter).SelectedTeam;
 
             //Example how to use TextToSpeech
             DependencyService.Get<ITextToSpeech>().Speak("Welcome " + firstTeamTextView.Text + " and " + secondTeamTextView.Text);
-
 
             List<Team> l = new List<Team>(await teamRepository.GetAll());
             Func<string, bool> d = delegate (string s)
@@ -164,21 +176,21 @@ namespace foosballv2s.Source.Activities
         /// </summary>
         private async void FetchAllTeams()
         {
-            ProgressDialog dialog = ProgressDialog.Show(this, "", 
+            ProgressDialog dialog = ProgressDialog.Show(this, "",
                 Resources.GetString(Resource.String.retrieving_teams), true);
-            
+
             Team[] teams = await teamRepository.GetAll();
-            
+
             dialog.Dismiss();
-            
+
             TeamAutoCompleteAdapter teamAdapter1 = new TeamAutoCompleteAdapter(this, new List<Team>(teams));
             TeamAutoCompleteAdapter teamAdapter2 = new TeamAutoCompleteAdapter(this, new List<Team>(teams));
 
             firstTeamTextView.Adapter = teamAdapter1;
             secondTeamTextView.Adapter = teamAdapter2;
-            
+
         }
-        
+
         /// <summary>
         /// An event when the dropdown list team is clicked
         /// </summary>
@@ -186,8 +198,8 @@ namespace foosballv2s.Source.Activities
         /// <param name="e"></param>
         private void AutoCompleteTextView_ItemClicked(object sender, AdapterView<TeamAutoCompleteAdapter>.ItemClickEventArgs e)
         {
-            AutoCompleteTextView view = (AutoCompleteTextView) sender;
-            TeamAutoCompleteAdapter teamAdapter = (TeamAutoCompleteAdapter) view.Adapter;
+            AutoCompleteTextView view = (AutoCompleteTextView)sender;
+            TeamAutoCompleteAdapter teamAdapter = (TeamAutoCompleteAdapter)view.Adapter;
             var team = teamAdapter.GetItem(e.Position);
             teamAdapter.SelectedTeam = team;
             teamAdapter.IgnoreFilter = true;

@@ -1,13 +1,8 @@
 ﻿using System.Threading.Tasks;
-using Android.Accounts;
-using Android.Content;
-using Android.Preferences;
-using foosballv2s.Source.Entities;
 using foosballv2s.Source.Services.CredentialStorage;
 using foosballv2s.Source.Services.FoosballWebService.Models;
 using Newtonsoft.Json;
 using Xamarin.Forms;
-using Application = Android.App.Application;
 
 [assembly: Dependency(typeof(foosballv2s.Source.Services.FoosballWebService.Repository.AuthRepository))]
 namespace foosballv2s.Source.Services.FoosballWebService.Repository

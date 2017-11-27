@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
 using NotFoundResult = Microsoft.AspNetCore.Mvc.NotFoundResult;
 
-namespace foosballv2s.WebService.Test
+namespace foosballv2s.WebService.Test.Controllers
 {
     [TestFixture]
     public class TestTeamController

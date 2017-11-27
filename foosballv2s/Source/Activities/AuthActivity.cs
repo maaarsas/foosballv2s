@@ -1,35 +1,19 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using Android.App;
 using Android.Content;
-using Android.Content.PM;
-using Android.Graphics;
 using Android.OS;
-using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Support.V4.App;
 using Android.Support.V4.View;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
-using Emgu.CV.Structure;
 using foosballv2s.Source.Activities.Fragments;
-using foosballv2s.Source.Activities.Helpers;
-using foosballv2s.Source.Entities;
-using foosballv2s.Source.Services.FileIO;
 using foosballv2s.Source.Services.FoosballWebService.Models;
 using foosballv2s.Source.Services.FoosballWebService.Repository;
-using foosballv2s.Source.Services.GameRecognition;
 using Java.Interop;
 using Java.Lang;
 using Xamarin.Forms;
 using Application = Android.App.Application;
-using Button = Android.Widget.Button;
-using Camera = Android.Hardware.Camera;
-using Color = Android.Graphics.Color;
-using Fragment = Android.Support.V4.App.Fragment;
-using FragmentManager = Android.Support.V4.App.FragmentManager;
-using String = System.String;
 using View = Android.Views.View;
 
 namespace foosballv2s.Source.Activities

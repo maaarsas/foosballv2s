@@ -120,7 +120,7 @@ namespace foosballv2s.Source.Activities
                 Log.Error(TAG + "-ERROR", e.StackTrace);
             }
             Camera.Parameters tmp = mCamera.GetParameters();
-            Xamarin.Forms.Size bestSize = ActivityHelper.GetBestPreviewSize(mCamera.GetParameters(), textureView.Width, textureView.Height);
+            Camera.Size bestSize = ActivityHelper.GetBestPreviewSize(mCamera.GetParameters().SupportedPreviewSizes, textureView.Width, textureView.Height);
             tmp.SetPreviewSize((int) bestSize.Width, (int) bestSize.Height);
             tmp.FocusMode = Camera.Parameters.FocusModeContinuousPicture;
             mCamera.SetParameters(tmp);
@@ -152,7 +152,8 @@ namespace foosballv2s.Source.Activities
         public void OnSurfaceTextureSizeChanged(SurfaceTexture surfacetexture, int i, int j) {
             if (mCamera != null) {
                 Camera.Parameters tmp = mCamera.GetParameters();
-                tmp.SetPreviewSize(tmp.SupportedPreviewSizes[0].Width, tmp.SupportedPreviewSizes[0].Height);
+                Camera.Size bestSize = ActivityHelper.GetBestPreviewSize(mCamera.GetParameters().SupportedPreviewSizes, textureView.Width, textureView.Height);
+                tmp.SetPreviewSize((int) bestSize.Width, (int) bestSize.Height);
                 mCamera.SetParameters(tmp);
                 mCamera.StartPreview();
             }

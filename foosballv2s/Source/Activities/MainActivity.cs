@@ -11,6 +11,7 @@ using foosballv2s.Source.Activities.Helpers;
 using foosballv2s.Source.Entities;
 using foosballv2s.Source.Services.FileIO;
 using foosballv2s.Source.Services.FoosballWebService.Repository;
+using foosballv2s.Source.Services.TextToSpeech;
 using Java.Interop;
 using Xamarin.Forms;
 using View = Android.Views.View;

@@ -120,9 +120,14 @@ namespace foosballv2s.Source.Activities
                 Log.Error(TAG + "-ERROR", e.StackTrace);
             }
             Camera.Parameters tmp = mCamera.GetParameters();
+<<<<<<< HEAD
             //Xamarin.Forms.Size bestSize = ActivityHelper.GetBestPreviewSize(mCamera.GetParameters(), textureView.Width, textureView.Height);
             Camera.Size fullsize = tmp.PreviewSize;
             tmp.SetPreviewSize((int) fullsize.Width, (int) fullsize.Height);
+=======
+            Camera.Size bestSize = ActivityHelper.GetBestPreviewSize(mCamera.GetParameters().SupportedPreviewSizes, textureView.Width, textureView.Height);
+            tmp.SetPreviewSize((int) bestSize.Width, (int) bestSize.Height);
+>>>>>>> e2e369583b2e049ee2ca48165c11cbed4aff94ea
             tmp.FocusMode = Camera.Parameters.FocusModeContinuousPicture;
             mCamera.SetParameters(tmp);
             mCamera.SetDisplayOrientation(90);
@@ -153,7 +158,8 @@ namespace foosballv2s.Source.Activities
         public void OnSurfaceTextureSizeChanged(SurfaceTexture surfacetexture, int i, int j) {
             if (mCamera != null) {
                 Camera.Parameters tmp = mCamera.GetParameters();
-                tmp.SetPreviewSize(tmp.SupportedPreviewSizes[0].Width, tmp.SupportedPreviewSizes[0].Height);
+                Camera.Size bestSize = ActivityHelper.GetBestPreviewSize(mCamera.GetParameters().SupportedPreviewSizes, textureView.Width, textureView.Height);
+                tmp.SetPreviewSize((int) bestSize.Width, (int) bestSize.Height);
                 mCamera.SetParameters(tmp);
                 mCamera.StartPreview();
             }

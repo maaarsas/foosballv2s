@@ -1,25 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using DependencyServiceSample.Droid;
-using Android.Speech.Tts;
+﻿using Android.Speech.Tts;
+using foosballv2s.Source.Services.TextToSpeech;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(TextToSpeechImplementation))]
-namespace DependencyServiceSample.Droid
+namespace foosballv2s.Source.Services.TextToSpeech
 {
 
-    public class TextToSpeechImplementation : Java.Lang.Object, foosballv2s.ITextToSpeech, TextToSpeech.IOnInitListener
+    public class TextToSpeechImplementation : Java.Lang.Object, ITextToSpeech, Android.Speech.Tts.TextToSpeech.IOnInitListener
     {
-        TextToSpeech speaker;
+        Android.Speech.Tts.TextToSpeech speaker;
         string toSpeak;
 
         public void Speak(string text)
@@ -27,7 +16,7 @@ namespace DependencyServiceSample.Droid
             toSpeak = text;
             if (speaker == null)
             {
-                speaker = new TextToSpeech(Forms.Context, this);
+                speaker = new Android.Speech.Tts.TextToSpeech(Forms.Context, this);
             }
             speaker.Speak(toSpeak, QueueMode.Flush, null, null);
         }

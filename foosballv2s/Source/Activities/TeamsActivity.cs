@@ -66,23 +66,23 @@ namespace foosballv2s.Source.Activities
         {
             int winnerID;
 
-            foreach (Game g in games)
+            foreach (Game game in games)
             {
-                if (g.Team1Score > g.Team2Score)
-                    winnerID = g.Team1.id;
-                else winnerID = g.Team2.id;
-                foreach (Team t in teams)
+                if (game.Team1Score > game.Team2Score)
+                    winnerID = game.Team1.id;
+                else winnerID = game.Team2.id;
+                foreach (Team team in teams)
                 {
-                    if (g.Team1.id == t.id)
+                    if (game.Team1.id == team.id)
                     {
-                        t.GamesPlayed = ++t.GamesPlayed;
+                        team.GamesPlayed = ++team.GamesPlayed;
                     }
-                    if (g.Team2.id == t.id)
+                    if (game.Team2.id == team.id)
                     {
-                        t.GamesPlayed = ++t.GamesPlayed;
+                        team.GamesPlayed = ++team.GamesPlayed;
                     }
-                    if (winnerID == t.id)
-                        t.GamesWon = ++t.GamesWon;
+                    if (winnerID == team.id)
+                        team.GamesWon = ++team.GamesWon;
                 }
             }
             return teams;
@@ -97,7 +97,7 @@ namespace foosballv2s.Source.Activities
             var team = teamList[e.Position];
             Team t = new Team();
             EditText input = new EditText(this);
-            input.Hint = "New team name";
+            input.Hint = Resources.GetString(Resource.String.change_name_hint);
             Android.App.AlertDialog.Builder infoAlert = new Android.App.AlertDialog.Builder(this);
             Android.App.AlertDialog.Builder changeAlert = new Android.App.AlertDialog.Builder(this);
             Android.App.AlertDialog.Builder deleteAlert = new Android.App.AlertDialog.Builder(this);
@@ -105,26 +105,26 @@ namespace foosballv2s.Source.Activities
             teamRepository = DependencyService.Get<TeamRepository>();
             
             infoAlert.SetTitle(team.TeamName)
-                .SetMessage(System.String.Format("Games won: {0}\nGames played: {1}\n" +
-                "Win percentage: {2}%", team.GamesWon, team.GamesPlayed, team.Percentage))
+                .SetMessage(System.String.Format(Resources.GetString(Resource.String.games_won_played_perc), 
+                team.GamesWon, team.GamesPlayed, team.Percentage))
                 .SetCancelable(false)
-                .SetNegativeButton("Edit", delegate
+                .SetNegativeButton(Resource.String.edit, delegate
                 {
                     changeAlert.Show();
                 })
-                .SetNeutralButton("Delete", delegate
+                .SetNeutralButton(Resource.String.delete, delegate
                 {
                     deleteAlert.Show();
                 })
-                .SetPositiveButton("Cancel", delegate
+                .SetPositiveButton(Resource.String.cancel, delegate
                 {
                     infoAlert.Dispose();
                 });
 
-            changeAlert.SetMessage("Change team name")
+            changeAlert.SetMessage(Resource.String.change)
                 .SetCancelable(false)
                 .SetView(input)
-                .SetNegativeButton("Ok", async delegate
+                .SetNegativeButton(Resource.String.ok, async delegate
                 {
                     if (!AlreadyExists(teamList, input.Text))
                     {
@@ -134,27 +134,30 @@ namespace foosballv2s.Source.Activities
                         infoAlert.Dispose();
                     }
                     else
-                        Toast.MakeText(this, "The team " + input.Text + " already exists.", ToastLength.Short).Show();
+                        Toast.MakeText(this, 
+                            System.String.Format(Resources.GetString(Resource.String.team_name_exists2), input.Text), 
+                            ToastLength.Short).Show();
                 })
-                .SetPositiveButton("Cancel", delegate
+                .SetPositiveButton(Resource.String.cancel, delegate
                 {
                     changeAlert.Dispose();
                 });
             
-            deleteAlert.SetMessage(System.String.Format("Delete {0}?", team.TeamName))
+            deleteAlert.SetMessage(System.String.Format(Resources.GetString(Resource.String.delete2), 
+                team.TeamName))
                 .SetCancelable(false)
-                .SetNegativeButton("Yes", async delegate
+                .SetNegativeButton(Resource.String.yes, async delegate
                 {
                     t = await teamRepository.Delete(team.id);
                     if (t != null)
-                        Toast.MakeText(this, team.TeamName + " is not deleted.", ToastLength.Short).Show();
+                        Toast.MakeText(this, System.String.Format(Resources.GetString(Resource.String.notDel), team.TeamName), ToastLength.Short).Show();
                     else
-                        Toast.MakeText(this, team.TeamName + " is deleted.", ToastLength.Short).Show();
+                        Toast.MakeText(this, System.String.Format(Resources.GetString(Resource.String.isDel), team.TeamName), ToastLength.Short).Show();
 
                     deleteAlert.Dispose();
                     infoAlert.Dispose();
                 })
-                .SetPositiveButton("No", delegate
+                .SetPositiveButton(Resource.String.no, delegate
                 {
                     deleteAlert.Dispose();
                 });
@@ -165,11 +168,11 @@ namespace foosballv2s.Source.Activities
         /// <summary>
         /// Checks if team name already exists
         /// </summary>
-        private bool AlreadyExists(List<Team> l, string s)
+        private bool AlreadyExists(List<Team> teams, string teamName)
         {
-            foreach (Team t in l)
+            foreach (Team team in teams)
             {
-                if (t.TeamName.Equals(s))
+                if (team.TeamName.Equals(teamName))
                 {
                     return true;
                 }

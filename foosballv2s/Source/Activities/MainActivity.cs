@@ -71,11 +71,6 @@ namespace foosballv2s.Source.Activities
         /// <param name="e"></param>
         private void BtnPrev_Click(object sender, EventArgs e)
         {
-            /*View v = new View()
-            {
-                SoundEffectsEnabled = true
-            };
-            v.PlaySoundEffect(SoundEffects.Click);*/
             Intent intent = new Intent(this, typeof(ColorPickerActivity));
 
             StartActivity(intent);

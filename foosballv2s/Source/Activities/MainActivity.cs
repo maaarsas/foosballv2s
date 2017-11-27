@@ -102,7 +102,7 @@ namespace foosballv2s.Source.Activities
                     {
                         string msg = Resources.GetString(Resource.String.team_name_exists);
                         string msg2 = System.String.Format(msg, s);
-                        Toast.MakeText(this, msg2, ToastLength.Short).Show();
+                        Toast.MakeText(Android.App.Application.Context, msg2, ToastLength.Short).Show();
                         return false;
                     }
                 }
@@ -134,13 +134,13 @@ namespace foosballv2s.Source.Activities
             // if even after creation teams do not exist, means there is an error in the names
             if (team1 == null || team2 == null)
             {
-                Toast.MakeText(this, Resource.String.wrong_team_names, ToastLength.Short).Show();
+                Toast.MakeText(Android.App.Application.Context, Resource.String.wrong_team_names, ToastLength.Short).Show();
                 return;
             }
 
             if (team1.TeamName.Equals(team2.TeamName))
             {
-                Toast.MakeText(this, Resource.String.same_team_names, ToastLength.Short).Show();
+                Toast.MakeText(Android.App.Application.Context, Resource.String.same_team_names, ToastLength.Short).Show();
                 return;
             }
 

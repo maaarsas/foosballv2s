@@ -68,7 +68,8 @@ namespace foosballv2s.Source.Activities.Listeners
                     break;
                 }
             }
-            Intent intent = new Intent(Application.Context, intentType);
+            Intent intent = new Intent(currentActivity, intentType);
+            intent.AddFlags(ActivityFlags.NoAnimation);
             currentActivity.StartActivity(intent);
             currentActivity.Finish();
             return true;

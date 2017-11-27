@@ -134,7 +134,7 @@ namespace foosballv2s.Source.Activities
                         infoAlert.Dispose();
                     }
                     else
-                        Toast.MakeText(this, "The team " + input.Text + " already exists.", ToastLength.Short).Show();
+                        Toast.MakeText(Android.App.Application.Context, "The team " + input.Text + " already exists.", ToastLength.Short).Show();
                 })
                 .SetPositiveButton("Cancel", delegate
                 {
@@ -147,9 +147,9 @@ namespace foosballv2s.Source.Activities
                 {
                     t = await teamRepository.Delete(team.id);
                     if (t != null)
-                        Toast.MakeText(this, team.TeamName + " is not deleted.", ToastLength.Short).Show();
+                        Toast.MakeText(Android.App.Application.Context, team.TeamName + " is not deleted.", ToastLength.Short).Show();
                     else
-                        Toast.MakeText(this, team.TeamName + " is deleted.", ToastLength.Short).Show();
+                        Toast.MakeText(Android.App.Application.Context, team.TeamName + " is deleted.", ToastLength.Short).Show();
 
                     deleteAlert.Dispose();
                     infoAlert.Dispose();

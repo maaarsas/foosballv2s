@@ -35,7 +35,7 @@ namespace foosballv2s.WebService
             ));
 
             services.AddDbContext<IdentityContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("SecurityConnection"))
+                options.UseSqlServer(Configuration.GetConnectionString("DbConnectionString"))
             );
             
             

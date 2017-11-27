@@ -34,9 +34,6 @@ namespace foosballv2s.Source.Activities
         {
 
             VolumeControlStream = Android.Media.Stream.Music;
-            AudioManager audioManager =
-            (AudioManager)GetSystemService(Context.AudioService);
-            audioManager.PlaySoundEffect(SoundEffect.KeyClick);
             base.OnCreate(savedInstanceState);
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);

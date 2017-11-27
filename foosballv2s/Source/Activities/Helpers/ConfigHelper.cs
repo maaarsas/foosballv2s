@@ -1,14 +1,25 @@
-﻿namespace foosballv2s.Source.Activities.Helpers
+﻿using Android.Content;
+using Android.Content.PM;
+using Android.OS;
+using Android.Util;
+
+namespace foosballv2s.Source.Activities.Helpers
 {
     public class ConfigHelper
     {
-//        private readonly string configFile = "";
-//
-//        public string GetConfigJson()
-//        {
-//            JSONArray configJson = Newtonsoft.Json.JsonConvert.DeserializeObject<JSONArray>(
-//                System.IO.File.ReadAllText(configFile)
-//            ); 
-//        }
+        public static string GetConfigData(Context context, string name) {
+            try 
+            {
+                ApplicationInfo ai = context.PackageManager.GetApplicationInfo(
+                    context.PackageName, PackageInfoFlags.MetaData);
+                Bundle bundle = ai.MetaData;
+                return bundle.GetString(name);
+            } 
+            catch (PackageManager.NameNotFoundException e) 
+            {
+                Log.Error("foosballv2s", "Unable to load meta-data: " + e.Message);
+            }
+            return null;
+        }
     }
 }

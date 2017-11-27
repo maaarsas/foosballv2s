@@ -58,9 +58,15 @@
       <HintPath>..\packages\Xamarin.Forms.2.4.0.280\lib\MonoAndroid10\FormsViewGroup.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="ModernHttpClient, Version=2.4.2.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\modernhttpclient.2.4.2\lib\MonoAndroid\ModernHttpClient.dll</HintPath>
+    </Reference>
     <Reference Include="Mono.Android.Export" />
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="OkHttp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\modernhttpclient.2.4.2\lib\MonoAndroid\OkHttp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -144,6 +150,7 @@
     <Compile Include="Source\Services\FileIO\IO.cs" />
     <Compile Include="Source\Services\FileIO\SLSupp.cs" />
     <Compile Include="Source\Services\FoosballWebService\FoosballWebServiceClient.cs" />
+    <Compile Include="Source\Services\FoosballWebService\Helpers\FoosballJsonConvert.cs" />
     <Compile Include="Source\Services\FoosballWebService\IWebServiceClient.cs" />
     <Compile Include="Source\Services\FoosballWebService\Models\LoginResponse.cs" />
     <Compile Include="Source\Services\FoosballWebService\Models\LoginViewModel.cs" />

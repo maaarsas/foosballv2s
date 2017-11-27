@@ -32,7 +32,7 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
         {
             var loginJson = JsonConvert.SerializeObject(model);
             var response = await client.PostAsync(endpointUrl + "/token", loginJson);
-            LoginResponse loginResponse = JsonConvert.DeserializeObject<LoginResponse>(response);
+            LoginResponse loginResponse = FoosballJsonConvert.DeserializeObject<LoginResponse>(response);
             if (loginResponse.Token == null)
             {
                 return false;
@@ -46,7 +46,7 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
         {
             var registerJson = JsonConvert.SerializeObject(model);
             var response = await client.PostAsync(endpointUrl + "/register", registerJson);
-            RegisterResponse registerResponse = JsonConvert.DeserializeObject<RegisterResponse>(response);
+            RegisterResponse registerResponse = FoosballJsonConvert.DeserializeObject<RegisterResponse>(response);
             return registerResponse.Succeeded;
         }
     }

@@ -264,3 +264,5 @@ __pycache__/
 ![Bb]in/libs/
 ![Bb]in/libs/x86
 ![Bb]in/libs/x64
+
+foosballv2s.WebService/appsettings.Production.json

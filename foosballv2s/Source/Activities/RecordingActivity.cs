@@ -50,6 +50,7 @@ namespace foosballv2s.Source.Activities
 
         protected override void OnCreate(Bundle bundle)
         {
+            VolumeControlStream = Android.Media.Stream.Music;
             base.OnCreate(bundle);
             global::Xamarin.Forms.Forms.Init(this, bundle);
 

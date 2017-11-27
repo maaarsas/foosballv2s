@@ -6,11 +6,13 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using foosballv2s.Source.Activities.Helpers;
 using foosballv2s.Source.Services.CredentialStorage;
 using foosballv2s.Source.Services.CredentialStorage.Models;
 using ModernHttpClient;
 using Org.Apache.Http;
 using Xamarin.Forms;
+using Application = Android.App.Application;
 
 [assembly: Dependency(typeof(foosballv2s.Source.Services.FoosballWebService.FoosballWebServiceClient))]
 namespace foosballv2s.Source.Services.FoosballWebService
@@ -20,7 +22,7 @@ namespace foosballv2s.Source.Services.FoosballWebService
     /// </summary>
     public class FoosballWebServiceClient : IWebServiceClient
     {
-        private string webServiceUri = "http://18.194.122.53:5000/api";
+        private string webServiceUri = "";
         private readonly string emptyJson = "{}";
         private readonly string authScheme = "Bearer";
         private HttpClient client;
@@ -28,6 +30,7 @@ namespace foosballv2s.Source.Services.FoosballWebService
 
         public FoosballWebServiceClient()
         {
+            webServiceUri = ReadWebServiceUri();
             _credentialStorage = DependencyService.Get<ICredentialStorage>();
             client = new HttpClient(new NativeMessageHandler());
             client.MaxResponseContentBufferSize = 256000;
@@ -116,6 +119,11 @@ namespace foosballv2s.Source.Services.FoosballWebService
                 response = new HttpResponseMessage(HttpStatusCode.RequestTimeout);
             }
             return await GetResponseReturn(response);
+        }
+
+        private string ReadWebServiceUri()
+        {
+            return ConfigHelper.GetConfigData(Application.Context, "api_url");
         }
 
         /// <summary>

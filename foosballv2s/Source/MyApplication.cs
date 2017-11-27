@@ -28,6 +28,7 @@ namespace foosballv2s.Source
             DependencyService.Register<FoosballWebServiceClient>();
             DependencyService.Register<TeamRepository>();
             DependencyService.Register<GameRepository>();
+            DependencyService.Register<AuthRepository>();
             DependencyService.Register<CredentialStorage>();
             DependencyService.Register<User>();
         }

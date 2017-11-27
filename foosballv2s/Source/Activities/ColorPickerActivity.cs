@@ -8,7 +8,6 @@ namespace foosballv2s.Source.Activities
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            VolumeControlStream = Android.Media.Stream.Music;
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.ColorPicker);
             

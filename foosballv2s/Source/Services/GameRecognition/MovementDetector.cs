@@ -25,8 +25,8 @@ namespace foosballv2s.Source.Services.GameRecognition
         private Hsv maxHsv;
         
         public bool NewGoalDetected { get; private set; }
-        private CircleF lastBallDetected;
-        private DateTime lastTimeBallDetected;
+        public CircleF LastBallDetected { get; private set; }
+        public DateTime LastTimeBallDetected { get; private set; } = DateTime.MinValue;
 
         public IVideo Video { get; set; }
         
@@ -102,9 +102,10 @@ namespace foosballv2s.Source.Services.GameRecognition
             thresholded = thresholded.SmoothGaussian(5);
             // Find circles in grayscale image and draw them on the frame
             CircleF[] circles = this.DetectCirclesInImage(thresholded, frame, bitmapScaleDown);
-            lastBallDetected = circles[0];
-            lastTimeBallDetected = DateTime.Now;
+            LastBallDetected = circles[0];
+            LastTimeBallDetected = DateTime.Now;
             CheckGoal();
+            return circles;
         }
 
         /// <summary>
@@ -148,9 +149,12 @@ namespace foosballv2s.Source.Services.GameRecognition
 
         private void CheckGoal()
         {
-            if (lastTimeBallDetected == DateTime.MinValue 
-                || DateTime.Now - lastTimeBallDetected < TimeSpan.FromSeconds(3))
+            if (NewGoalDetected 
+                || LastTimeBallDetected == DateTime.MinValue 
+                || DateTime.Now - LastTimeBallDetected < TimeSpan.FromSeconds(3))
             {
+                NewGoalDetected = false;
+                LastTimeBallDetected = DateTime.MinValue;
                 return;
             }
             NewGoalDetected = true;

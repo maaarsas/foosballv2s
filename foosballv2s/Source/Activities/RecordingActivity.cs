@@ -351,12 +351,10 @@ namespace foosballv2s.Source.Activities
                     CircleF[] circles = movementDetector.DetectBall(hsvFrame, textureView.Height, textureView.Width, 
                         bitmapScaleDown);
                     
-                    foreach (CircleF circle in circles)
-                    {
-                        DrawCircle(circle.Center.X * bitmapScaleDown, circle.Center.Y * bitmapScaleDown, 
-                            circle.Radius * bitmapScaleDown);
-                        break;
-                    }
+                    var circle = circles[0];
+                    DrawCircle(circle.Center.X * bitmapScaleDown, circle.Center.Y * bitmapScaleDown, 
+                        circle.Radius * bitmapScaleDown);
+                    
                     frameBitmap.Recycle();
                 }
             }

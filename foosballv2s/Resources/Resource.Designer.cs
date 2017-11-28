@@ -2658,11 +2658,14 @@ namespace foosballv2s
 			// aapt resource value: 0x7f0800db
 			public const int nav_group_app = 2131230939;
 			
-			// aapt resource value: 0x7f0800e0
-			public const int nav_group_logout = 2131230944;
-			
 			// aapt resource value: 0x7f0800e1
-			public const int nav_logout = 2131230945;
+			public const int nav_group_logout = 2131230945;
+			
+			// aapt resource value: 0x7f0800e0
+			public const int nav_language = 2131230944;
+			
+			// aapt resource value: 0x7f0800e2
+			public const int nav_logout = 2131230946;
 			
 			// aapt resource value: 0x7f0800dc
 			public const int nav_new_game = 2131230940;

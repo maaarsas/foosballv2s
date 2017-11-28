@@ -107,8 +107,11 @@ namespace foosballv2s.Source.Services.GameRecognition
             thresholded = thresholded.SmoothGaussian(5);
             // Find circles in grayscale image and draw them on the frame
             CircleF[] circles = this.DetectCirclesInImage(thresholded, frame, bitmapScaleDown);
-            LastBallDetected = circles[0];
-            LastTimeBallDetected = DateTime.Now;
+            if (circles.Length > 0)
+            {
+                LastBallDetected = circles[0];
+                LastTimeBallDetected = DateTime.Now;
+            }
             CheckGoal();
             return circles;
         }

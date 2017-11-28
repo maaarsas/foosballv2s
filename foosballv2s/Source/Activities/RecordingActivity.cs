@@ -334,11 +334,15 @@ namespace foosballv2s.Source.Activities
         /// </summary>
         private void FeedMovementDetector()
         {
+            int bitmapScaleDown = 4; // bitmap image dimensions are divided by this number to improve performance
+            
             while (!game.HasEnded)
             {
                 if (this.textureSetup)
                 {
                     Bitmap frameBitmap = textureView.Bitmap;
+                    frameBitmap = Bitmap.CreateScaledBitmap(
+                        frameBitmap, frameBitmap.Width / bitmapScaleDown, frameBitmap.Height / bitmapScaleDown, false);
                                                  
                     Image<Hsv, System.Byte> hsvFrame = new Image<Hsv, byte>(frameBitmap);
                     Bitmap bitmap = hsvFrame.Bitmap;
@@ -347,7 +351,8 @@ namespace foosballv2s.Source.Activities
                     
                     foreach (CircleF circle in circles)
                     {
-                        DrawCircle(circle.Center.X, circle.Center.Y, circle.Radius);
+                        DrawCircle(circle.Center.X * bitmapScaleDown, circle.Center.Y * bitmapScaleDown, 
+                            circle.Radius * bitmapScaleDown);
                         break;
                     }
                     frameBitmap.Recycle();

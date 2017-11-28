@@ -27,7 +27,8 @@ namespace foosballv2s.Source.Activities
     /// </summary>
     [Activity(
         ConfigurationChanges = ConfigChanges.Orientation,
-        ScreenOrientation = ScreenOrientation.Landscape
+        ScreenOrientation = ScreenOrientation.Landscape,
+        HardwareAccelerated = true
     )]
     public class RecordingActivity : Activity, TextureView.ISurfaceTextureListener, Camera.IPreviewCallback
     {
@@ -347,7 +348,8 @@ namespace foosballv2s.Source.Activities
                     Image<Hsv, System.Byte> hsvFrame = new Image<Hsv, byte>(frameBitmap);
                     Bitmap bitmap = hsvFrame.Bitmap;
                     
-                    CircleF[] circles = movementDetector.DetectBall(hsvFrame, textureView.Height, textureView.Width);
+                    CircleF[] circles = movementDetector.DetectBall(hsvFrame, textureView.Height, textureView.Width, 
+                        bitmapScaleDown);
                     
                     foreach (CircleF circle in circles)
                     {

@@ -23,6 +23,10 @@ namespace foosballv2s.Source.Services.GameRecognition
         private Image<Gray, Byte> thresholded;
         private Hsv minHsv;
         private Hsv maxHsv;
+        
+        public bool NewGoalDetected { get; private set; }
+        private CircleF lastBallDetected;
+        private DateTime lastTimeBallDetected;
 
         public IVideo Video { get; set; }
         
@@ -83,7 +87,8 @@ namespace foosballv2s.Source.Services.GameRecognition
         /// <param name="frameHeight"></param>
         /// <param name="frameWidth"></param>
         /// <returns></returns>
-        public CircleF[] DetectBall(Image<Hsv, System.Byte> inputFrame, int frameHeight, int frameWidth)
+        public CircleF[] DetectBall(Image<Hsv, System.Byte> inputFrame, int frameHeight, int frameWidth,
+            int bitmapScaleDown)
         { 
             if (inputFrame == null)
             {
@@ -96,7 +101,10 @@ namespace foosballv2s.Source.Services.GameRecognition
             // Make some smoothing for better detection results
             thresholded = thresholded.SmoothGaussian(5);
             // Find circles in grayscale image and draw them on the frame
-            return this.DetectCirclesInImage(thresholded, frame);
+            CircleF[] circles = this.DetectCirclesInImage(thresholded, frame, bitmapScaleDown);
+            lastBallDetected = circles[0];
+            lastTimeBallDetected = DateTime.Now;
+            CheckGoal();
         }
 
         /// <summary>
@@ -131,11 +139,21 @@ namespace foosballv2s.Source.Services.GameRecognition
         /// <param name="image"></param>
         /// <param name="outputFrame"></param>
         /// <returns></returns>
-        private CircleF[] DetectCirclesInImage(Image<Gray, byte> image, Mat outputFrame)
+        private CircleF[] DetectCirclesInImage(Image<Gray, byte> image, Mat outputFrame, int bitmapScaleDown)
         {
             //CircleF[] circles = CvInvoke.HoughCircles(image, HoughType.Gradient, 1, 
             //    1000, 10, 10, 15, 60);
-            return CvInvoke.HoughCircles(image, HoughType.Gradient, 2, image.Height / 4, 50, 40, 15, 50);
+            return CvInvoke.HoughCircles(image, HoughType.Gradient, 2, image.Height / 4, 50, 40, 15 / bitmapScaleDown, 30 / bitmapScaleDown);
+        }
+
+        private void CheckGoal()
+        {
+            if (lastTimeBallDetected == DateTime.MinValue 
+                || DateTime.Now - lastTimeBallDetected < TimeSpan.FromSeconds(3))
+            {
+                return;
+            }
+            NewGoalDetected = true;
         }
 
         

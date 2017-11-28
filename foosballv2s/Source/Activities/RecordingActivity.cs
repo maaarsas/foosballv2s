@@ -18,7 +18,6 @@ using Java.Interop;
 using Xamarin.Forms;
 using Camera = Android.Hardware.Camera;
 using Color = Android.Graphics.Color;
-using Size = Xamarin.Forms.Size;
 using View = Android.Views.View;
 
 namespace foosballv2s.Source.Activities
@@ -44,11 +43,14 @@ namespace foosballv2s.Source.Activities
         private Game game;
         private GameRepository gameRepository;
 
+        private bool gameDataSent;
+
 
         private bool textureSetup;
 
         protected override void OnCreate(Bundle bundle)
         {
+            VolumeControlStream = Android.Media.Stream.Music;
             base.OnCreate(bundle);
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
@@ -72,6 +74,7 @@ namespace foosballv2s.Source.Activities
             gameRepository = DependencyService.Get<GameRepository>();
 
             game.Start();
+            gameDataSent = false;
             
             this.Window.AddFlags(WindowManagerFlags.Fullscreen);
             
@@ -87,6 +90,18 @@ namespace foosballv2s.Source.Activities
 
             Task.Run(async () => FeedMovementDetector());
             var clockTimer = new Timer(new TimerCallback(UpdateGameTimer), null,  TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(1));
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+            StartCamera();
+        }
+        
+        protected override void OnPause()
+        {
+            base.OnPause();
+            StopCamera();
         }
 
         /// <summary>
@@ -119,8 +134,9 @@ namespace foosballv2s.Source.Activities
         /// <param name="game"></param>
         private void CheckGameEnd(Game game)
         {
-            if (game.HasEnded)
+            if (game.HasEnded && !gameDataSent)
             {
+                gameDataSent = true;
                 SaveGame(game);
                 ShowGameEndScreen();
             }
@@ -192,11 +208,7 @@ namespace foosballv2s.Source.Activities
         /// <returns></returns>
         public bool OnSurfaceTextureDestroyed(SurfaceTexture surface)
         {
-            if (camera != null) {
-                camera.StopPreview();
-                camera.Release();
-                camera = null;
-            }
+            StopCamera();
             return false;
         }
 
@@ -209,27 +221,61 @@ namespace foosballv2s.Source.Activities
         /// <param name="height"></param>
         public void OnSurfaceTextureAvailable(SurfaceTexture surface, int width, int height)
         {
-            camera = Camera.Open();
+            StartCamera();
             try
             {
                 camera.SetPreviewTexture(surface);
-                camera.StartPreview();
                 camera.SetPreviewCallback(this);
             }
             catch (Java.IO.IOException ex) { }
 
             Camera.Parameters tmp = camera.GetParameters();
-            Size bestSize = ActivityHelper.GetBestPreviewSize(camera.GetParameters(), textureView.Width, textureView.Height);
+            Camera.Size bestSize = ActivityHelper.GetBestPreviewSize(camera.GetParameters().SupportedPreviewSizes, textureView.Width, textureView.Height);
             tmp.SetPreviewSize((int) bestSize.Width, (int) bestSize.Height);
             tmp.FocusMode = Camera.Parameters.FocusModeContinuousPicture;
             camera.SetParameters(tmp);
+            camera.StartPreview();
             movementDetector.SetupBallDetector(textureView.Width, textureView.Height, game.BallColor);
             this.textureSetup = true;
         }
 
-        public void OnSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) { }
+        public void OnSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height)
+        {
+            if (camera != null) {
+                Camera.Parameters tmp = camera.GetParameters();
+                Camera.Size bestSize = ActivityHelper.GetBestPreviewSize(camera.GetParameters().SupportedPreviewSizes, textureView.Width, textureView.Height);
+                tmp.SetPreviewSize((int) bestSize.Width, (int) bestSize.Height);
+                camera.SetParameters(tmp);
+                camera.StartPreview();
+            }
+        }
 
         public void OnSurfaceTextureUpdated(SurfaceTexture surface) { }
+
+        /// <summary>
+        /// Opens the camera if it is not already opened
+        /// </summary>
+        private void StartCamera()
+        {
+            if (camera == null)
+            {
+                camera = Camera.Open();
+            }
+        }
+
+        /// <summary>
+        /// Closes the camera (if it is open) and releases all previews related to it
+        /// </summary>
+        private void StopCamera()
+        {
+            if (camera != null) {
+                camera.SetPreviewCallback(null);
+                camera.SetPreviewTexture(null);
+                camera.StopPreview();
+                camera.Release();
+                camera = null;
+            }
+        }
 
         /// <summary>
         /// Draws a rectangle onto the screen

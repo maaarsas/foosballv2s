@@ -28,7 +28,7 @@ namespace foosballv2s.Source.Activities.Listeners
         public bool OnNavigationItemSelected(IMenuItem menuItem)
         {
             System.Type intentType;
-            
+
             if (menuItem.IsChecked)
             {
                 menuItem.SetChecked(false);

@@ -59,7 +59,12 @@ namespace foosballv2s.Source.Entities
         /// </summary>
         public void Start()
         {
+            HasEnded = false;
+            Team1Score = 0;
+            Team2Score = 0;
             StartTime = DateTime.Now;
+            EndTime = null;
+            WinningTeam = null;
         }
 
         /// <summary>

@@ -1,5 +1,6 @@
+using System;
+using System.Collections.Generic;
 using Android.Hardware;
-using Xamarin.Forms;
 
 namespace foosballv2s.Source.Activities.Helpers
 {
@@ -11,27 +12,57 @@ namespace foosballv2s.Source.Activities.Helpers
         /// <summary>
         /// From the list of all supported camera sizes chooses the best one according to the preview dimensions
         /// </summary>
-        /// <param name="parameters"></param>
+        /// <param name="supportedSizes"></param>
         /// <param name="previewWidth"></param>
         /// <param name="previewHeight"></param>
         /// <returns></returns>
-        public static Size GetBestPreviewSize(Camera.Parameters parameters, int previewWidth, int previewHeight)
+        public static Camera.Size GetBestPreviewSize(IList<Camera.Size> sizes, int previewWidth, int previewHeight)
         {
-            double targetRatio = (double) previewHeight / previewWidth;
-            Size bestSize = new Size();
-            bestSize.Width = parameters.SupportedPreviewSizes[0].Width;
-            bestSize.Height = parameters.SupportedPreviewSizes[0].Height;
-
-            int i = 0;
-            while (i < parameters.SupportedPreviewSizes.Count && 
-                   (parameters.SupportedPreviewSizes[i].Height < previewWidth
-                   || bestSize.Width / bestSize.Height < targetRatio - 0.1))
+            double ASPECT_TOLERANCE = 0.15;
+            double targetRatio;
+            if (previewHeight > previewWidth)
             {
-                bestSize.Width = parameters.SupportedPreviewSizes[i].Width;
-                bestSize.Height = parameters.SupportedPreviewSizes[i].Height;
-                i++;
+                targetRatio = (double) previewHeight / previewWidth;
             }
-            return bestSize;
+            else
+            {
+                targetRatio = (double) previewWidth / previewHeight;
+            }
+
+            if (sizes == null) return null;
+
+            Camera.Size optimalSize = null;
+            double minDiff = Double.MaxValue;
+
+            int targetHeight = previewHeight;
+
+            foreach (Camera.Size size in sizes) 
+            {
+                double ratio = (double) size.Width / size.Height;
+                if (Math.Abs(ratio - targetRatio) > ASPECT_TOLERANCE)
+                {
+                    continue;
+                }
+                if (Math.Abs(size.Height - targetHeight) <= minDiff) 
+                {
+                    optimalSize = size;
+                    minDiff = Math.Abs(size.Height - targetHeight);
+                }
+            }
+
+            if (optimalSize == null) 
+            {
+                minDiff = Double.MaxValue;
+                foreach (Camera.Size size in sizes) 
+                {
+                    if (Math.Abs(size.Height - targetHeight) <= minDiff) 
+                    {
+                        optimalSize = size;
+                        minDiff = Math.Abs(size.Height - targetHeight);
+                    }
+                }
+            }
+            return optimalSize;
         }
     }
 }

@@ -1,12 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using foosballv2s.Source.Activities.Helpers;
 using foosballv2s.Source.Services.CredentialStorage;
 using foosballv2s.Source.Services.CredentialStorage.Models;
+using ModernHttpClient;
+using Org.Apache.Http;
 using Xamarin.Forms;
+using Application = Android.App.Application;
 
 [assembly: Dependency(typeof(foosballv2s.Source.Services.FoosballWebService.FoosballWebServiceClient))]
 namespace foosballv2s.Source.Services.FoosballWebService
@@ -16,7 +22,7 @@ namespace foosballv2s.Source.Services.FoosballWebService
     /// </summary>
     public class FoosballWebServiceClient : IWebServiceClient
     {
-        private string webServiceUri = "http://18.194.122.53:5000/api";
+        private string webServiceUri = "";
         private readonly string emptyJson = "{}";
         private readonly string authScheme = "Bearer";
         private HttpClient client;
@@ -24,8 +30,9 @@ namespace foosballv2s.Source.Services.FoosballWebService
 
         public FoosballWebServiceClient()
         {
+            webServiceUri = ReadWebServiceUri();
             _credentialStorage = DependencyService.Get<ICredentialStorage>();
-            client = new HttpClient();
+            client = new HttpClient(new NativeMessageHandler());
             client.MaxResponseContentBufferSize = 256000;
             AddAuthorizationHeader();
         }
@@ -38,7 +45,15 @@ namespace foosballv2s.Source.Services.FoosballWebService
         public async Task<string> GetAsync(string endPointUri)
         {
             var uri = GetFullUri(endPointUri);
-            var response = await client.GetAsync(uri);
+            HttpResponseMessage response;
+            try
+            {
+                response = await client.GetAsync(uri);
+            }
+            catch (Exception e)
+            {
+                response = new HttpResponseMessage(HttpStatusCode.RequestTimeout);
+            }
             return await GetResponseReturn(response);
         }
         
@@ -52,7 +67,15 @@ namespace foosballv2s.Source.Services.FoosballWebService
         {
             var uri = GetFullUri(endPointUri);
             var jsonParams = new StringContent (json, Encoding.UTF8, "application/json");
-            var response = await client.PostAsync(uri, jsonParams);
+            HttpResponseMessage response;
+            try
+            {
+                response = await client.PostAsync(uri, jsonParams);
+            }
+            catch (Exception e)
+            {
+                response = new HttpResponseMessage(HttpStatusCode.RequestTimeout);
+            }
             return await GetResponseReturn(response);
         }
         
@@ -66,7 +89,15 @@ namespace foosballv2s.Source.Services.FoosballWebService
         {
             var uri = GetFullUri(endPointUri);
             var jsonParams = new StringContent (json, Encoding.UTF8, "application/json");
-            var response = await client.PutAsync(uri, jsonParams);
+            HttpResponseMessage response;
+            try
+            {
+                response = await client.PutAsync(uri, jsonParams);
+            }
+            catch (Exception e)
+            {
+                response = new HttpResponseMessage(HttpStatusCode.RequestTimeout);
+            }
             return await GetResponseReturn(response);
         }
         
@@ -78,8 +109,21 @@ namespace foosballv2s.Source.Services.FoosballWebService
         public async Task<string> DeleteAsync(string endPointUri)
         {
             var uri = GetFullUri(endPointUri);
-            var response = await client.DeleteAsync(uri);
+            HttpResponseMessage response;
+            try
+            {
+                response = await client.DeleteAsync(uri);
+            }
+            catch (Exception e)
+            {
+                response = new HttpResponseMessage(HttpStatusCode.RequestTimeout);
+            }
             return await GetResponseReturn(response);
+        }
+
+        private string ReadWebServiceUri()
+        {
+            return ConfigHelper.GetConfigData(Application.Context, "api_url");
         }
 
         /// <summary>

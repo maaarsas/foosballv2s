@@ -1,13 +1,8 @@
 ﻿using System.Threading.Tasks;
-using Android.Accounts;
-using Android.Content;
-using Android.Preferences;
-using foosballv2s.Source.Entities;
 using foosballv2s.Source.Services.CredentialStorage;
 using foosballv2s.Source.Services.FoosballWebService.Models;
 using Newtonsoft.Json;
 using Xamarin.Forms;
-using Application = Android.App.Application;
 
 [assembly: Dependency(typeof(foosballv2s.Source.Services.FoosballWebService.Repository.AuthRepository))]
 namespace foosballv2s.Source.Services.FoosballWebService.Repository
@@ -32,7 +27,7 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
         {
             var loginJson = JsonConvert.SerializeObject(model);
             var response = await client.PostAsync(endpointUrl + "/token", loginJson);
-            LoginResponse loginResponse = JsonConvert.DeserializeObject<LoginResponse>(response);
+            LoginResponse loginResponse = FoosballJsonConvert.DeserializeObject<LoginResponse>(response);
             if (loginResponse.Token == null)
             {
                 return false;
@@ -46,7 +41,7 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
         {
             var registerJson = JsonConvert.SerializeObject(model);
             var response = await client.PostAsync(endpointUrl + "/register", registerJson);
-            RegisterResponse registerResponse = JsonConvert.DeserializeObject<RegisterResponse>(response);
+            RegisterResponse registerResponse = FoosballJsonConvert.DeserializeObject<RegisterResponse>(response);
             return registerResponse.Succeeded;
         }
     }

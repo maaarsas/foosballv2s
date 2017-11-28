@@ -1,5 +1,4 @@
-﻿using Android.App;
-using Android.OS;
+﻿using Android.OS;
 using Android.Views;
 using Fragment = Android.Support.V4.App.Fragment;
 

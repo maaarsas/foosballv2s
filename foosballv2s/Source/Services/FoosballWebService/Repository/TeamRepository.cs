@@ -26,7 +26,11 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
         public async Task<Team[]> GetAll()
         {
             var response = await client.GetAsync(endpointUrl);
-            Team[] teams = JsonConvert.DeserializeObject<Team[]>(response);
+            Team[] teams = FoosballJsonConvert.DeserializeObject<Team[]>(response);
+            if (teams == null)
+            {
+                teams = new Team[]{};
+            }
             return teams;
         }
         
@@ -38,7 +42,7 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
         public async Task<Team> GetById(int id)
         {
             var response = await client.GetAsync(endpointUrl + "/" + id);
-            Team team = JsonConvert.DeserializeObject<Team>(response);
+            Team team = FoosballJsonConvert.DeserializeObject<Team>(response);
             return team;
         }
         
@@ -51,7 +55,7 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
         {
             var teamJsonString = JsonConvert.SerializeObject(team);
             var response = await client.PostAsync(endpointUrl, teamJsonString);
-            Team createdTeam = JsonConvert.DeserializeObject<Team>(response);
+            Team createdTeam = FoosballJsonConvert.DeserializeObject<Team>(response);
             return createdTeam;
         }
         
@@ -65,7 +69,7 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
         {
             var teamJsonString = JsonConvert.SerializeObject(team);
             var response = await client.PutAsync(endpointUrl + "/" + id , teamJsonString);
-            Team updatedTeam = JsonConvert.DeserializeObject<Team>(response);
+            Team updatedTeam = FoosballJsonConvert.DeserializeObject<Team>(response);
             return updatedTeam;
         }
         
@@ -77,7 +81,7 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
         public async Task<Team> Delete(int id)
         {
             var response = await client.DeleteAsync(endpointUrl + "/" + id);
-            Team updatedTeam = JsonConvert.DeserializeObject<Team>(response);
+            Team updatedTeam = FoosballJsonConvert.DeserializeObject<Team>(response);
             return updatedTeam;
         }
     }

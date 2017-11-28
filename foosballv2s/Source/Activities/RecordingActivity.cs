@@ -6,10 +6,12 @@ using Android.Content;
 using Android.Content.PM;
 using Android.Graphics;
 using Android.OS;
+using Android.Text.Method;
 using Android.Views;
 using Android.Widget;
 using Emgu.CV;
 using Emgu.CV.Structure;
+using foosballv2s.Source.Activities.Events;
 using foosballv2s.Source.Activities.Helpers;
 using foosballv2s.Source.Entities;
 using foosballv2s.Source.Services.FoosballWebService.Repository;
@@ -109,22 +111,32 @@ namespace foosballv2s.Source.Activities
         /// Called on the first team's goal
         /// </summary>
         /// <param name="view"></param>
-        [Export("Team1Goal")]
-        public void Team1Goal(View view)
+        [Export("Team1GoalClick")]
+        public void Team1GoalClick(View view)
         {
-            game.Team1Score++;
-            team1ScoreView.Text = game.Team1Score.ToString();
-            CheckGameEnd(game);
+            Team1Goal();
         }
         
         /// <summary>
         /// Called on the second team's goal
         /// </summary>
         /// <param name="view"></param>
-        [Export("Team2Goal")]
-        public void Team2Goal(View view)
+        [Export("Team2GoalClick")]
+        public void Team2GoalClick(View view)
         {
-            game.Team2Score++;
+            Team2Goal();
+        }
+        
+        private void Team1Goal()
+        {
+            game.AddTeam1Goal();
+            team1ScoreView.Text = game.Team1Score.ToString();
+            CheckGameEnd(game);
+        }
+        
+        private void Team2Goal()
+        {
+            game.AddTeam2Goal();
             team2ScoreView.Text = game.Team2Score.ToString();
             CheckGameEnd(game);
         }
@@ -355,10 +367,29 @@ namespace foosballv2s.Source.Activities
                     DrawCircle(circle.Center.X * bitmapScaleDown, circle.Center.Y * bitmapScaleDown, 
                         circle.Radius * bitmapScaleDown);
                     
+                    CheckGoal(movementDetector);
+                    
                     frameBitmap.Recycle();
                 }
             }
            
+        }
+
+        private void CheckGoal(MovementDetector detector)
+        {
+            if (!detector.NewGoalDetected)
+            {
+                return;
+            }
+
+            if (detector.GoalSide == MovementDetector.LEFT_SIDE)
+            {
+                Team1Goal();
+            }
+            else if (detector.GoalSide == MovementDetector.RIGHT_SIDE)
+            {
+                Team2Goal();
+            }
         }
 
         /// <summary>

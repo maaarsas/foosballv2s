@@ -1,5 +1,6 @@
 ﻿using System;
 using Emgu.CV.Structure;
+using foosballv2s.Source.Activities.Events;
 using foosballv2s.Source.Entities;
 using Xamarin.Forms;
 
@@ -8,6 +9,10 @@ namespace foosballv2s.Source.Entities
 {
     public class Game
     {
+        public event EventHandler<GameEventArgs> OnStart; 
+        public event EventHandler<GameEventArgs> OnGoal; 
+        public event EventHandler<GameEventArgs> OnFinish; 
+        
         public const int MAX_SCORE = 7;
 
         public int Id { set; get; }
@@ -23,7 +28,7 @@ namespace foosballv2s.Source.Entities
         public int Team1Score
         {
             get { return team1Score; }
-            set
+            private set
             {
                 if (HasEnded)
                 {
@@ -37,7 +42,7 @@ namespace foosballv2s.Source.Entities
         public int Team2Score
         {
             get { return team2Score; }
-            set
+            private set
             {
                 if (HasEnded)
                 {
@@ -65,6 +70,10 @@ namespace foosballv2s.Source.Entities
             StartTime = DateTime.Now;
             EndTime = null;
             WinningTeam = null;
+            if (OnStart != null)
+            {
+                OnStart(this, new GameEventArgs(this, null));
+            }
         }
 
         /// <summary>
@@ -82,6 +91,28 @@ namespace foosballv2s.Source.Entities
             else if (Team2Score == MAX_SCORE)
             {
                 WinningTeam = Team2;
+            }
+            if (OnFinish != null)
+            {
+                OnFinish(this, new GameEventArgs(this, WinningTeam));
+            }
+        }
+
+        public void AddTeam1Goal()
+        {
+            Team1Score++;
+            if (OnGoal != null)
+            {
+                OnGoal(this, new GameEventArgs(this, Team1));
+            }
+        }
+        
+        public void AddTeam2Goal()
+        {
+            Team2Score++;
+            if (OnGoal != null)
+            {
+                OnGoal(this, new GameEventArgs(this, Team2));
             }
         }
         

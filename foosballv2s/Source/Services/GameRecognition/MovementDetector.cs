@@ -24,9 +24,14 @@ namespace foosballv2s.Source.Services.GameRecognition
         private Hsv minHsv;
         private Hsv maxHsv;
         
+        public const int NONE = 0;
+        public const int LEFT_SIDE = 1;
+        public const int RIGHT_SIDE = 2;
+        
         public bool NewGoalDetected { get; private set; }
         public CircleF LastBallDetected { get; private set; }
         public DateTime LastTimeBallDetected { get; private set; } = DateTime.MinValue;
+        public int GoalSide { get; private set; }
 
         public IVideo Video { get; set; }
         
@@ -157,6 +162,15 @@ namespace foosballv2s.Source.Services.GameRecognition
                 LastTimeBallDetected = DateTime.MinValue;
                 return;
             }
+            if (LastBallDetected.Center.X < hsvFrame.Width / 2)
+            {
+                GoalSide = LEFT_SIDE;
+            }
+            else if(LastBallDetected.Center.X > hsvFrame.Width / 2)
+            {
+                GoalSide = RIGHT_SIDE;
+            }
+            
             NewGoalDetected = true;
         }
 

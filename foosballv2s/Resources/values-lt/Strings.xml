@@ -24,6 +24,13 @@
   <string name="game_end_result">Rezultatas: {0} {2} - {3} {1}</string>
   <string name="saving_game">Žaidimas išsaugomas.</string>
   <string name="choose_lang">Pasirinkite kalbą</string>
+  <string name="lang_btn">Kalba</string>
+  <string-array name="lang_arr">
+    <item>lietuvių</item>
+    <item>anglų</item>
+  </string-array>
+  <string name="item_lt">lietuvių</string>
+  <string name="item_en">anglų</string>
 
   <!--Navigation-->
   <string name="nav_new_game">Naujas žaidimas</string>
@@ -63,7 +70,7 @@
   <string name="hint_login_email">El. pašto adresas</string>
   <string name="hint_login_password">Slaptažodis</string>
   <string name="button_login">Prisijungti</string>
-  <string name="not_registered">Nesate užsiregistravę?\nNorėdami užsiregistruoti spauskite čia</string>
+  <string name="not_registered">Nesate užsiregistravę?\nNorėdami užsiregistruoti \nspauskite čia</string>
   <string name="please_login">Norėdami prisijungti įveskite el. pašto adresą ir slaptažodį</string>
   <string name="hint_register_email">El. pašto adresas</string>
   <string name="hint_register_password">Slaptažodis</string>

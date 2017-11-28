@@ -24,10 +24,6 @@
             android:id="@+id/nav_tournaments"
             android:checked="false"
             android:title="@string/nav_tournaments" />
-		<item
-            android:id="@+id/nav_language"
-            android:checked="false"
-            android:title="@string/nav_language" />
 
     </group>
     <group

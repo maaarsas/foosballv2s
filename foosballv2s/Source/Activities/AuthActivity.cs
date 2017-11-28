@@ -31,6 +31,8 @@ using Fragment = Android.Support.V4.App.Fragment;
 using FragmentManager = Android.Support.V4.App.FragmentManager;
 using String = System.String;
 using View = Android.Views.View;
+using Java.Util;
+using Android.Content.Res;
 
 namespace foosballv2s.Source.Activities
 {
@@ -42,7 +44,6 @@ namespace foosballv2s.Source.Activities
         private Toolbar toolbar;
         private TabLayout tabLayout;
         private ViewPager viewPager;
-
         private AuthRepository _authRepository;
  
         protected override void OnCreate(Bundle savedInstanceState) 
@@ -60,6 +61,55 @@ namespace foosballv2s.Source.Activities
  
             tabLayout = (TabLayout) FindViewById(Resource.Id.sliding_tabs);
             tabLayout.SetupWithViewPager(viewPager);
+        }
+
+        [Export("ChangeLanguage")]
+        public async void ChangeLanguage(View view)
+        {
+            Button btn = (Button)FindViewById(Resource.Id.lang_button);
+            LayoutInflater inflater = (LayoutInflater)ApplicationContext.GetSystemService(Context.LayoutInflaterService);
+            View layout_spinners = inflater.Inflate(Resource.Layout.language_spinner, null);
+            Spinner spinner = (Spinner)layout_spinners.FindViewById(Resource.Id.spinner);
+            Intent intent = new Intent(this, typeof(AuthActivity));
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.SetTitle(Resource.String.choose_lang);
+            builder.SetView(layout_spinners);
+            builder.SetCancelable(false);
+            builder.SetPositiveButton(Resource.String.ok, delegate
+            {
+                if (spinner.SelectedItem.ToString() == Resources.GetString(Resource.String.item_lt))
+                {
+                    UpdateResources(this, "lt");
+                    builder.Dispose();
+                    StartActivity(intent);
+                    Finish();
+                }
+                    
+                else if (spinner.SelectedItem.ToString() == Resources.GetString(Resource.String.item_en))
+                {
+                    UpdateResources(this, "en");
+                    builder.Dispose();
+                    StartActivity(intent);
+                    Finish();
+                }
+            });
+            builder.Show();
+        }
+
+        private static bool UpdateResources(Context context, string language)
+        {
+            Locale locale = new Locale(language);
+            Locale.Default = locale;
+
+            Resources resources = context.Resources;
+
+            Configuration configuration = resources.Configuration;
+            configuration.Locale = locale;
+
+            resources.UpdateConfiguration(configuration, resources.DisplayMetrics);
+
+            return true;
         }
 
         [Export("SubmitLogin")]

@@ -55,11 +55,6 @@ namespace foosballv2s.Source.Activities.Listeners
                     intentType = typeof(TournamentsActivity);
                     break;
                 }
-                case Resource.Id.nav_language:
-                {
-                    intentType = typeof(LanguageActivity);
-                    break;
-                }
                 case Resource.Id.nav_logout:
                 {
                     ICredentialStorage storage = DependencyService.Get<ICredentialStorage>();

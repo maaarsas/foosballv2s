@@ -16,7 +16,6 @@ namespace foosballv2s.Source.Services.GameLogger
         {
             _game.GameEvents.Add(new GameEvent()
             {
-                Game = _game,
                 EventType = GameEvent.EventTypes.GameStart,
             });
         }
@@ -25,7 +24,6 @@ namespace foosballv2s.Source.Services.GameLogger
         {
             _game.GameEvents.Add(new GameEvent()
             {
-                Game = _game,
                 Team = args.EventTeam,
                 EventType = GameEvent.EventTypes.Goal,
             });
@@ -35,7 +33,6 @@ namespace foosballv2s.Source.Services.GameLogger
         {
             _game.GameEvents.Add(new GameEvent()
             {
-                Game = _game,
                 EventType = GameEvent.EventTypes.GameEnd,
             });
         }

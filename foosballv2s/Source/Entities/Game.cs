@@ -61,7 +61,7 @@ namespace foosballv2s.Source.Entities
         public Team WinningTeam { get; set; }
         public Boolean HasEnded { get; private set; } = false;
         
-        public List<GameEvent> GameEvents { get; set; }
+        public IList<GameEvent> GameEvents { get; set; } = new List<GameEvent>();
 
         /// <summary>
         /// Stars the game timer

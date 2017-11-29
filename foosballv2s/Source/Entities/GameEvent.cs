@@ -4,7 +4,6 @@ namespace foosballv2s.Source.Entities
 {
     public class GameEvent
     {
-        public Game Game { get; set; }
         public EventTypes EventType { get; set; }
         public Team Team { get; set; } = null;
         public DateTime EventTime { get; set; }

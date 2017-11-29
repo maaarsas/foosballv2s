@@ -14,15 +14,25 @@ namespace foosballv2s.WebService.Models
 
         public DbSet<Game> Games { get; set; }
         public DbSet<Team> Teams { get; set; }
+        public DbSet<GameEvent> GameEvents { get; set; }
         
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder
                 .Entity<Game>()
                 .HasIndex(g => g.Id).IsUnique(true);
+
+            builder
+                .Entity<Game>()
+                .HasMany(c => c.GameEvents)
+                .WithOne(e => e.Game);
             
             builder
                 .Entity<Team>()
+                .HasIndex(t => t.Id).IsUnique(true);
+            
+            builder
+                .Entity<GameEvent>()
                 .HasIndex(t => t.Id).IsUnique(true);
         }
 

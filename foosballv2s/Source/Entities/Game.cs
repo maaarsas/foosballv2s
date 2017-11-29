@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Emgu.CV.Structure;
 using foosballv2s.Source.Activities.Events;
 using foosballv2s.Source.Entities;
@@ -58,6 +59,8 @@ namespace foosballv2s.Source.Entities
 
         public Team WinningTeam { get; set; }
         public Boolean HasEnded { get; private set; } = false;
+        
+        public List<GameEvent> GameEvents { get; set; }
 
         /// <summary>
         /// Stars the game timer
@@ -70,6 +73,7 @@ namespace foosballv2s.Source.Entities
             StartTime = DateTime.Now;
             EndTime = null;
             WinningTeam = null;
+            GameEvents.Clear();
             if (OnStart != null)
             {
                 OnStart(this, new GameEventArgs(this, null));

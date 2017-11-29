@@ -86,20 +86,20 @@ namespace foosballv2s.Source.Entities
 
         public void AddTeam1Goal()
         {
-            Team1Score++;
             if (OnGoal != null)
             {
                 OnGoal(this, new GameEventArgs(this, Team1));
             }
+            Team1Score++;
         }
         
         public void AddTeam2Goal()
         {
-            Team2Score++;
             if (OnGoal != null)
             {
                 OnGoal(this, new GameEventArgs(this, Team2));
             }
+            Team2Score++;
         }
         
         /// <summary>
@@ -116,7 +116,7 @@ namespace foosballv2s.Source.Entities
         /// <summary>
         /// Ends the game timer and saves the winning team
         /// </summary>
-        public void End()
+        private void End()
         {
             EndTime = DateTime.Now;
             HasEnded = true;

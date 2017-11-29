@@ -162,6 +162,7 @@
     <Compile Include="Source\Services\FoosballWebService\Repository\GameRepository.cs" />
     <Compile Include="Source\Services\FoosballWebService\Repository\TeamRepository.cs" />
     <Compile Include="Source\Services\GameLogger\GameLogger.cs" />
+    <Compile Include="Source\Services\GameLogger\IGameLogger.cs" />
     <Compile Include="Source\Services\GameRecognition\BallImage.cs" />
     <Compile Include="Source\Services\GameRecognition\IVideo.cs" />
     <Compile Include="Source\Services\GameRecognition\MovementDetector.cs" />

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Emgu.CV.Structure;
 using foosballv2s.Source.Activities.Events;
 using foosballv2s.Source.Entities;
+using foosballv2s.Source.Services.GameLogger;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(Game))]
@@ -65,7 +66,7 @@ namespace foosballv2s.Source.Entities
         /// <summary>
         /// Stars the game timer
         /// </summary>
-        public void Start()
+        public void Start(IGameLogger logger)
         {
             HasEnded = false;
             Team1Score = 0;
@@ -74,6 +75,9 @@ namespace foosballv2s.Source.Entities
             EndTime = null;
             WinningTeam = null;
             GameEvents.Clear();
+
+            SetupLogger(logger);
+            
             if (OnStart != null)
             {
                 OnStart(this, new GameEventArgs(this, null));
@@ -129,6 +133,13 @@ namespace foosballv2s.Source.Entities
             {
                 End();
             }
+        }
+
+        private void SetupLogger(IGameLogger logger)
+        {
+            OnStart += logger.LogStart;
+            OnGoal += logger.LogGoal;
+            OnFinish += logger.LogEnd;
         }
     }
 }

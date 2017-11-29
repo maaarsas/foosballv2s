@@ -3,7 +3,7 @@ using foosballv2s.Source.Entities;
 
 namespace foosballv2s.Source.Services.GameLogger
 {
-    public class GameLogger
+    public class GameLogger : IGameLogger
     {
         private Game _game;
         

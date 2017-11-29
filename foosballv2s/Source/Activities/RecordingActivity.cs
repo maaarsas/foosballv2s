@@ -16,6 +16,7 @@ using foosballv2s.Source.Activities.Events;
 using foosballv2s.Source.Activities.Helpers;
 using foosballv2s.Source.Entities;
 using foosballv2s.Source.Services.FoosballWebService.Repository;
+using foosballv2s.Source.Services.GameLogger;
 using foosballv2s.Source.Services.GameRecognition;
 using Java.Interop;
 using Xamarin.Forms;
@@ -77,7 +78,7 @@ namespace foosballv2s.Source.Activities
             game = DependencyService.Get<Game>();
             gameRepository = DependencyService.Get<GameRepository>();
 
-            game.Start();
+            game.Start(new GameLogger(game));
             gameDataSent = false;
             
             this.Window.AddFlags(WindowManagerFlags.Fullscreen);

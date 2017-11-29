@@ -387,11 +387,11 @@ namespace foosballv2s.Source.Activities
 
             if (detector.GoalSide == MovementDetector.LEFT_SIDE)
             {
-                Team1Goal();
+                RunOnUiThread(() => Team1Goal());
             }
             else if (detector.GoalSide == MovementDetector.RIGHT_SIDE)
             {
-                Team2Goal();
+                RunOnUiThread(() => Team2Goal());
             }
             detector.NewGoalDetected = false;
         }

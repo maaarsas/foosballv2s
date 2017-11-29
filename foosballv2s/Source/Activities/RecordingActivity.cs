@@ -77,22 +77,27 @@ namespace foosballv2s.Source.Activities
             
             game = DependencyService.Get<Game>();
             gameRepository = DependencyService.Get<GameRepository>();
-
-            game.Start(new GameLogger(game));
-            gameDataSent = false;
             
             this.Window.AddFlags(WindowManagerFlags.Fullscreen);
-            
+
+            team1ScoreView = (TextView) FindViewById(Resource.Id.team1_score);
+            team2ScoreView = (TextView) FindViewById(Resource.Id.team2_score);
+
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+            game.Start(new GameLogger(game));
+            gameDataSent = false;
+           
             // set up displayed texts on the screen
             TextView team1NameView = (TextView) FindViewById(Resource.Id.team1_name);
             team1NameView.Text = game.Team1.TeamName;
             
             TextView team2NameView = (TextView) FindViewById(Resource.Id.team2_name);
             team2NameView.Text = game.Team2.TeamName;
-
-            team1ScoreView = (TextView) FindViewById(Resource.Id.team1_score);
-            team2ScoreView = (TextView) FindViewById(Resource.Id.team2_score);
-
+            
             Task.Run(async () => FeedMovementDetector());
             var clockTimer = new Timer(new TimerCallback(UpdateGameTimer), null,  TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(1));
         }
@@ -394,6 +399,7 @@ namespace foosballv2s.Source.Activities
                 RunOnUiThread(() => Team2Goal());
             }
             detector.NewGoalDetected = false;
+            detector.LastTimeBallDetected = DateTime.MinValue;
         }
 
         /// <summary>

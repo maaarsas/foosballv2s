@@ -32,7 +32,7 @@ namespace foosballv2s.Source.Services.GameRecognition
         
         public bool NewGoalDetected { get; set; }
         public CircleF LastBallDetected { get; private set; }
-        public DateTime LastTimeBallDetected { get; private set; } = DateTime.MinValue;
+        public DateTime LastTimeBallDetected { get; set; } = DateTime.MinValue;
         public int GoalSide { get; private set; }
 
         public IVideo Video { get; set; }

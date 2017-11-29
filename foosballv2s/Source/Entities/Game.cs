@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Emgu.CV.Structure;
 using foosballv2s.Source.Activities.Events;
 using foosballv2s.Source.Entities;
@@ -30,28 +31,18 @@ namespace foosballv2s.Source.Entities
         public int Team1Score
         {
             get { return team1Score; }
-            private set
+            set
             {
-                if (HasEnded)
-                {
-                    return;
-                }
                 team1Score = value;
-                CheckGameEnd();
             }
         }
 
         public int Team2Score
         {
             get { return team2Score; }
-            private set
+            set
             {
-                if (HasEnded)
-                {
-                    return;
-                }
                 team2Score = value;
-                CheckGameEnd();
             }
         }
 
@@ -61,7 +52,7 @@ namespace foosballv2s.Source.Entities
         public Team WinningTeam { get; set; }
         public Boolean HasEnded { get; private set; } = false;
         
-        public IList<GameEvent> GameEvents { get; set; } = new List<GameEvent>();
+        public ICollection<GameEvent> GameEvents { get; set; } = new Collection<GameEvent>();
 
         /// <summary>
         /// Stars the game timer
@@ -86,20 +77,30 @@ namespace foosballv2s.Source.Entities
 
         public void AddTeam1Goal()
         {
+            if (HasEnded)
+            {
+                return;
+            }
             if (OnGoal != null)
             {
                 OnGoal(this, new GameEventArgs(this, Team1));
             }
             Team1Score++;
+            CheckGameEnd();
         }
         
         public void AddTeam2Goal()
         {
+            if (HasEnded)
+            {
+                return;
+            }
             if (OnGoal != null)
             {
                 OnGoal(this, new GameEventArgs(this, Team2));
             }
             Team2Score++;
+            CheckGameEnd();
         }
         
         /// <summary>

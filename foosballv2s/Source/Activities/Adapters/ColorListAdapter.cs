@@ -6,22 +6,23 @@ using Android.Widget;
 using foosballv2s.Source.Activities.Helpers;
 using foosballv2s.Source.Entities;
 using Android.Graphics;
+using Emgu.CV.Structure;
 
 namespace foosballv2s.Source.Activities.Adapters
 {
     /// <summary>
     /// This class populates a one row in the game list with needed values
     /// </summary>
-    class ColorListAdapter : BaseAdapter<Color>
+    class ColorListAdapter : BaseAdapter<Hsv>
     {
-        private List<Color> colorList;
+        private List<Hsv> colorList;
         private Context cContext;
         public override int Count
         {
             get { return colorList.Count; }
         }
 
-        public ColorListAdapter(Context context, List<Color> list)
+        public ColorListAdapter(Context context, List<Hsv> list)
         {
             colorList = list;
             cContext = context;
@@ -32,7 +33,7 @@ namespace foosballv2s.Source.Activities.Adapters
             return position;
         }
 
-        public override Color this[int position]
+        public override Hsv this[int position]
         {
             get { return colorList[position]; }
         }
@@ -50,9 +51,22 @@ namespace foosballv2s.Source.Activities.Adapters
 
             //string newColor = "#" +  colorList[position].R.ToString() + colorList[position].G.ToString() + colorList[position].B.ToString();
 
-            colorView.SetBackgroundColor(colorList[position]);
+            colorView.SetBackgroundColor(HSVtoColor(colorList[position]));
 
             return row;
+        }
+
+        public Color HSVtoColor(Hsv hsvColor)
+        {
+            Color aColor;
+
+            aColor = Color.HSVToColor(new float[]{
+                (float) hsvColor.Hue * 2,
+                (float) hsvColor.Satuation / 255,
+                (float) hsvColor.Value / 255
+            });
+
+            return aColor;
         }
     }
 }

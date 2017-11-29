@@ -36,6 +36,7 @@ namespace foosballv2s.Source.Activities
         private Camera mCamera;
         private TextureView textureView;
         private Color detectedRGBColor;
+        private Hsv hsvColor;
 
         private int viewWidth = 0;
         private int viewHeight = 0;
@@ -70,7 +71,7 @@ namespace foosballv2s.Source.Activities
             Bitmap b = textureView.Bitmap;
             
             BallImage ballImage = new BallImage(b);
-            Hsv hsvColor = ballImage.getColor();
+            hsvColor = ballImage.getColor();
             
             detectedRGBColor = Color.HSVToColor(new float[]{
                 (float) hsvColor.Hue * 2, 
@@ -100,7 +101,7 @@ namespace foosballv2s.Source.Activities
         [Export("SubmitBallPhoto")]
         public void SubmitBallPhoto(View view)
         {
-            instance.Write_Serialize_Color(detectedRGBColor);
+            instance.Write_Serialize_Color(hsvColor);
 
             Intent intent = new Intent(this, typeof(RecordingActivity));
             StartActivity(intent);
@@ -120,14 +121,8 @@ namespace foosballv2s.Source.Activities
                 Log.Error(TAG + "-ERROR", e.StackTrace);
             }
             Camera.Parameters tmp = mCamera.GetParameters();
-<<<<<<< HEAD
-            //Xamarin.Forms.Size bestSize = ActivityHelper.GetBestPreviewSize(mCamera.GetParameters(), textureView.Width, textureView.Height);
-            Camera.Size fullsize = tmp.PreviewSize;
-            tmp.SetPreviewSize((int) fullsize.Width, (int) fullsize.Height);
-=======
             Camera.Size bestSize = ActivityHelper.GetBestPreviewSize(mCamera.GetParameters().SupportedPreviewSizes, textureView.Width, textureView.Height);
             tmp.SetPreviewSize((int) bestSize.Width, (int) bestSize.Height);
->>>>>>> e2e369583b2e049ee2ca48165c11cbed4aff94ea
             tmp.FocusMode = Camera.Parameters.FocusModeContinuousPicture;
             mCamera.SetParameters(tmp);
             mCamera.SetDisplayOrientation(90);

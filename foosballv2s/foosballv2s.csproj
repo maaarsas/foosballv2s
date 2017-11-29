@@ -191,6 +191,9 @@
     <AndroidResource Include="Resources\layout\Color_row.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\Toolbar.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ColorSquare.xml" />
@@ -247,7 +250,6 @@
     <Content Include="Config\config.json" />
     <AndroidResource Include="Resources\layout\item_team.axml" />
     <AndroidResource Include="Resources\menu\navigation.xml" />
-    <AndroidResource Include="Resources\layout\Toolbar.axml" />
     <AndroidResource Include="Resources\layout\Auth.axml" />
     <AndroidResource Include="Resources\values\dimens.xml" />
     <AndroidResource Include="Resources\layout\fragment_login.axml" />

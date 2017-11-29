@@ -217,14 +217,8 @@ namespace foosballv2s.Source.Activities
             catch (Java.IO.IOException ex) { }
 
             Camera.Parameters tmp = camera.GetParameters();
-<<<<<<< HEAD
-            Camera.Size size = tmp.PreviewSize;
-
-            tmp.SetPreviewSize((int) size.Width, (int) size.Height);
-=======
             Camera.Size bestSize = ActivityHelper.GetBestPreviewSize(camera.GetParameters().SupportedPreviewSizes, textureView.Width, textureView.Height);
             tmp.SetPreviewSize((int) bestSize.Width, (int) bestSize.Height);
->>>>>>> e2e369583b2e049ee2ca48165c11cbed4aff94ea
             tmp.FocusMode = Camera.Parameters.FocusModeContinuousPicture;
             camera.SetParameters(tmp);
             camera.StartPreview();

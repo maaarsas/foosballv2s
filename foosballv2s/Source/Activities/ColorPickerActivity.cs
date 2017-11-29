@@ -1,17 +1,24 @@
 ﻿using Android.App;
+using Color = Android.Graphics.Color;
+using ListView = Android.Widget.ListView;
 using Android.Graphics;
 using Android.OS;
 using Android.Widget;
 using foosballv2s.Source.Activities.Adapters;
+using foosballv2s.Source.Entities;
 using foosballv2s.Source.Services.FileIO;
+using System;
 using System.Collections.Generic;
+using Xamarin.Forms;
+using Emgu.CV.Structure;
+using Android.Content;
 
 namespace foosballv2s.Source.Activities
 {
     [Activity(Label = "PreviousGamesActivity")]
     public class ColorPickerActivity : Activity
     {
-        private List<Color> cList;
+        private List<Hsv> cList;
         private ListView cListView;
         private IO instance = new IO();
         protected override void OnCreate(Bundle savedInstanceState)
@@ -25,7 +32,20 @@ namespace foosballv2s.Source.Activities
 
             ColorListAdapter adapter = new ColorListAdapter(this, cList);
 
+            String test = cList[0].ToString();
+
             cListView.Adapter = adapter;
+            cListView.ItemClick += CListView_ItemClick;
+        }
+
+        private void CListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        {
+            Game game = DependencyService.Get<Game>();
+
+            game.BallColor = cList[e.Position];
+
+            Intent intent = new Intent(this, typeof(RecordingActivity));
+            StartActivity(intent);
         }
     }
 }

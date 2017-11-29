@@ -68,13 +68,83 @@ namespace foosballv2s.Source.Activities
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BtnPrev_Click(object sender, EventArgs e)
+        /*private void BtnPrev_Click(object sender, EventArgs e)
         {
             Intent intent = new Intent(this, typeof(ColorPickerActivity));
 
             StartActivity(intent);
-        }
+        }*/
 
+        public async void BtnPrev_Click(object sender, EventArgs e)
+        {
+            ProgressDialog dialog = ProgressDialog.Show(this, "",
+                Resources.GetString(Resource.String.checking_teams), true);
+
+            Team team1 = ((TeamAutoCompleteAdapter)firstTeamTextView.Adapter).SelectedTeam;
+            Team team2 = ((TeamAutoCompleteAdapter)secondTeamTextView.Adapter).SelectedTeam;
+
+
+            //Example how to use TextToSpeech
+            DependencyService.Get<ITextToSpeech>().Speak("Welcome " + firstTeamTextView.Text + " and " + secondTeamTextView.Text);
+
+
+            List<Team> l = new List<Team>(await teamRepository.GetAll());
+            Func<string, bool> d = delegate (string s)
+            {
+                foreach (Team t in l)
+                {
+                    if (t.TeamName.Equals(s))
+                    {
+                        string msg = Resources.GetString(Resource.String.team_name_exists);
+                        string msg2 = System.String.Format(msg, s);
+                        Toast.MakeText(this, msg2, ToastLength.Short).Show();
+                        return false;
+                    }
+                }
+                return true;
+            };
+
+            dialog.Dismiss();
+            // first team is not selected from the list, so it is a new one, create it
+            if (team1 == null)
+            {
+                if (d(firstTeamTextView.Text))
+                {
+                    team1 = new Team { TeamName = firstTeamTextView.Text };
+                    team1 = await teamRepository.Create(team1);
+                }
+                else return;
+            }
+            // second team is not selected from the list, so it is a new one, create it
+            if (team2 == null)
+            {
+                if (d(secondTeamTextView.Text))
+                {
+                    team2 = new Team { TeamName = secondTeamTextView.Text };
+                    team2 = await teamRepository.Create(team2);
+                }
+                else return;
+            }
+
+            // if even after creation teams do not exist, means there is an error in the names
+            if (team1 == null || team2 == null)
+            {
+                Toast.MakeText(this, Resource.String.wrong_team_names, ToastLength.Short).Show();
+                return;
+            }
+
+            if (team1.TeamName.Equals(team2.TeamName))
+            {
+                Toast.MakeText(this, Resource.String.same_team_names, ToastLength.Short).Show();
+                return;
+            }
+
+            game.Team1 = team1;
+            game.Team2 = team2;
+
+            Intent intent = new Intent(this, typeof(ColorPickerActivity));
+            StartActivity(intent);
+        }
         /// <summary>
         /// Called when submit is clicked
         /// Checks the teams and starts the game

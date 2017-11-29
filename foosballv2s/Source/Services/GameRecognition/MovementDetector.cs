@@ -2,6 +2,8 @@
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
+using Xamarin.Forms.Internals;
+using Log = Android.Util.Log;
 
 namespace foosballv2s.Source.Services.GameRecognition
 {
@@ -152,7 +154,7 @@ namespace foosballv2s.Source.Services.GameRecognition
         {
             //CircleF[] circles = CvInvoke.HoughCircles(image, HoughType.Gradient, 1, 
             //    1000, 10, 10, 15, 60);
-            return CvInvoke.HoughCircles(image, HoughType.Gradient, 2, image.Height / 4, 50, 40, 15 / bitmapScaleDown, 30 / bitmapScaleDown);
+            return CvInvoke.HoughCircles(image, HoughType.Gradient, 2, image.Height / 4, 50, 40, 15 / bitmapScaleDown, 50 / bitmapScaleDown);
         }
 
         private void CheckGoal()
@@ -162,7 +164,6 @@ namespace foosballv2s.Source.Services.GameRecognition
                 || DateTime.Now - LastTimeBallDetected < TimeSpan.FromSeconds(3))
             {
                 NewGoalDetected = false;
-                LastTimeBallDetected = DateTime.MinValue;
                 return;
             }
             if (LastBallDetected.Center.X < hsvFrame.Width / 2)

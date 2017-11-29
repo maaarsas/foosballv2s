@@ -7,6 +7,7 @@ using Android.Content.PM;
 using Android.Graphics;
 using Android.OS;
 using Android.Text.Method;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Emgu.CV;

@@ -84,28 +84,6 @@ namespace foosballv2s.Source.Entities
             }
         }
 
-        /// <summary>
-        /// Ends the game timer and saves the winning team
-        /// </summary>
-        public void End()
-        {
-            EndTime = DateTime.Now;
-            HasEnded = true;
-
-            if (Team1Score == MAX_SCORE)
-            {
-                WinningTeam = Team1;
-            }
-            else if (Team2Score == MAX_SCORE)
-            {
-                WinningTeam = Team2;
-            }
-            if (OnFinish != null)
-            {
-                OnFinish(this, new GameEventArgs(this, WinningTeam));
-            }
-        }
-
         public void AddTeam1Goal()
         {
             Team1Score++;
@@ -132,6 +110,28 @@ namespace foosballv2s.Source.Entities
             if (Team1Score == MAX_SCORE || Team2Score == MAX_SCORE)
             {
                 End();
+            }
+        }
+        
+        /// <summary>
+        /// Ends the game timer and saves the winning team
+        /// </summary>
+        public void End()
+        {
+            EndTime = DateTime.Now;
+            HasEnded = true;
+
+            if (Team1Score == MAX_SCORE)
+            {
+                WinningTeam = Team1;
+            }
+            else if (Team2Score == MAX_SCORE)
+            {
+                WinningTeam = Team2;
+            }
+            if (OnFinish != null)
+            {
+                OnFinish(this, new GameEventArgs(this, WinningTeam));
             }
         }
 

@@ -393,6 +393,7 @@ namespace foosballv2s.Source.Activities
             {
                 Team2Goal();
             }
+            detector.NewGoalDetected = false;
         }
 
         /// <summary>

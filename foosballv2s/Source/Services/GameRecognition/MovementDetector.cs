@@ -30,7 +30,7 @@ namespace foosballv2s.Source.Services.GameRecognition
         public const int LEFT_SIDE = 1;
         public const int RIGHT_SIDE = 2;
         
-        public bool NewGoalDetected { get; private set; }
+        public bool NewGoalDetected { get; set; }
         public CircleF LastBallDetected { get; private set; }
         public DateTime LastTimeBallDetected { get; private set; } = DateTime.MinValue;
         public int GoalSide { get; private set; }

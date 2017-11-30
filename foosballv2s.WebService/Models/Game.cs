@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace foosballv2s.WebService.Models
 {
@@ -18,5 +20,7 @@ namespace foosballv2s.WebService.Models
         
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
+        
+        public ICollection<GameEvent> GameEvents { get; set; }
     }
 }

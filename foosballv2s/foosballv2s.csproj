@@ -141,8 +141,10 @@
     <Compile Include="Source\Activities\TeamsActivity.cs" />
     <Compile Include="Source\Activities\TournamentsActivity.cs" />
     <Compile Include="Source\Entities\Game.cs" />
+    <Compile Include="Source\Entities\GameEvent.cs" />
     <Compile Include="Source\Entities\Team.cs" />
     <Compile Include="Source\Entities\User.cs" />
+    <Compile Include="Source\Events\GameEventArgs.cs" />
     <Compile Include="Source\MyApplication.cs" />
     <Compile Include="Source\Services\CredentialStorage\CredentialStorage.cs" />
     <Compile Include="Source\Services\CredentialStorage\ICredentialStorage.cs" />
@@ -159,6 +161,8 @@
     <Compile Include="Source\Services\FoosballWebService\Repository\AuthRepository.cs" />
     <Compile Include="Source\Services\FoosballWebService\Repository\GameRepository.cs" />
     <Compile Include="Source\Services\FoosballWebService\Repository\TeamRepository.cs" />
+    <Compile Include="Source\Services\GameLogger\GameLogger.cs" />
+    <Compile Include="Source\Services\GameLogger\IGameLogger.cs" />
     <Compile Include="Source\Services\GameRecognition\BallImage.cs" />
     <Compile Include="Source\Services\GameRecognition\IVideo.cs" />
     <Compile Include="Source\Services\GameRecognition\MovementDetector.cs" />

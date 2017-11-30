@@ -6,13 +6,17 @@ using Android.Content;
 using Android.Content.PM;
 using Android.Graphics;
 using Android.OS;
+using Android.Text.Method;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Emgu.CV;
 using Emgu.CV.Structure;
+using foosballv2s.Source.Activities.Events;
 using foosballv2s.Source.Activities.Helpers;
 using foosballv2s.Source.Entities;
 using foosballv2s.Source.Services.FoosballWebService.Repository;
+using foosballv2s.Source.Services.GameLogger;
 using foosballv2s.Source.Services.GameRecognition;
 using Java.Interop;
 using Xamarin.Forms;
@@ -27,7 +31,8 @@ namespace foosballv2s.Source.Activities
     /// </summary>
     [Activity(
         ConfigurationChanges = ConfigChanges.Orientation,
-        ScreenOrientation = ScreenOrientation.Landscape
+        ScreenOrientation = ScreenOrientation.Landscape,
+        HardwareAccelerated = true
     )]
     public class RecordingActivity : Activity, TextureView.ISurfaceTextureListener, Camera.IPreviewCallback
     {
@@ -72,22 +77,27 @@ namespace foosballv2s.Source.Activities
             
             game = DependencyService.Get<Game>();
             gameRepository = DependencyService.Get<GameRepository>();
-
-            game.Start();
-            gameDataSent = false;
             
             this.Window.AddFlags(WindowManagerFlags.Fullscreen);
-            
+
+            team1ScoreView = (TextView) FindViewById(Resource.Id.team1_score);
+            team2ScoreView = (TextView) FindViewById(Resource.Id.team2_score);
+
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+            game.Start(new GameLogger(game));
+            gameDataSent = false;
+           
             // set up displayed texts on the screen
             TextView team1NameView = (TextView) FindViewById(Resource.Id.team1_name);
             team1NameView.Text = game.Team1.TeamName;
             
             TextView team2NameView = (TextView) FindViewById(Resource.Id.team2_name);
             team2NameView.Text = game.Team2.TeamName;
-
-            team1ScoreView = (TextView) FindViewById(Resource.Id.team1_score);
-            team2ScoreView = (TextView) FindViewById(Resource.Id.team2_score);
-
+            
             Task.Run(async () => FeedMovementDetector());
             var clockTimer = new Timer(new TimerCallback(UpdateGameTimer), null,  TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(1));
         }
@@ -108,22 +118,32 @@ namespace foosballv2s.Source.Activities
         /// Called on the first team's goal
         /// </summary>
         /// <param name="view"></param>
-        [Export("Team1Goal")]
-        public void Team1Goal(View view)
+        [Export("Team1GoalClick")]
+        public void Team1GoalClick(View view)
         {
-            game.Team1Score++;
-            team1ScoreView.Text = game.Team1Score.ToString();
-            CheckGameEnd(game);
+            Team1Goal();
         }
         
         /// <summary>
         /// Called on the second team's goal
         /// </summary>
         /// <param name="view"></param>
-        [Export("Team2Goal")]
-        public void Team2Goal(View view)
+        [Export("Team2GoalClick")]
+        public void Team2GoalClick(View view)
         {
-            game.Team2Score++;
+            Team2Goal();
+        }
+        
+        private void Team1Goal()
+        {
+            game.AddTeam1Goal();
+            team1ScoreView.Text = game.Team1Score.ToString();
+            CheckGameEnd(game);
+        }
+        
+        private void Team2Goal()
+        {
+            game.AddTeam2Goal();
             team2ScoreView.Text = game.Team2Score.ToString();
             CheckGameEnd(game);
         }
@@ -334,26 +354,52 @@ namespace foosballv2s.Source.Activities
         /// </summary>
         private void FeedMovementDetector()
         {
+            int bitmapScaleDown = 4; // bitmap image dimensions are divided by this number to improve performance
+            
             while (!game.HasEnded)
             {
                 if (this.textureSetup)
                 {
                     Bitmap frameBitmap = textureView.Bitmap;
+                    frameBitmap = Bitmap.CreateScaledBitmap(
+                        frameBitmap, frameBitmap.Width / bitmapScaleDown, frameBitmap.Height / bitmapScaleDown, false);
                                                  
                     Image<Hsv, System.Byte> hsvFrame = new Image<Hsv, byte>(frameBitmap);
                     Bitmap bitmap = hsvFrame.Bitmap;
                     
-                    CircleF[] circles = movementDetector.DetectBall(hsvFrame, textureView.Height, textureView.Width);
-                    
-                    foreach (CircleF circle in circles)
+                    CircleF[] circles = movementDetector.DetectBall(hsvFrame, textureView.Height, textureView.Width, 
+                        bitmapScaleDown);
+
+                    for (int i = 0; i <= 0 && i < circles.Length; i++)
                     {
-                        DrawCircle(circle.Center.X, circle.Center.Y, circle.Radius);
-                        break;
+                        DrawCircle(circles[i].Center.X * bitmapScaleDown, circles[i].Center.Y * bitmapScaleDown,
+                            circles[i].Radius * bitmapScaleDown);
                     }
+
+                    CheckGoal(movementDetector);
                     frameBitmap.Recycle();
                 }
             }
            
+        }
+
+        private void CheckGoal(MovementDetector detector)
+        {
+            if (!detector.NewGoalDetected)
+            {
+                return;
+            }
+
+            if (detector.GoalSide == MovementDetector.LEFT_SIDE)
+            {
+                RunOnUiThread(() => Team1Goal());
+            }
+            else if (detector.GoalSide == MovementDetector.RIGHT_SIDE)
+            {
+                RunOnUiThread(() => Team2Goal());
+            }
+            detector.NewGoalDetected = false;
+            detector.LastTimeBallDetected = DateTime.MinValue;
         }
 
         /// <summary>

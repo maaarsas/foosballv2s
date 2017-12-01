@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
 using foosballv2s.WebService.Models;
+using foosballv2s.WebService.Params;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,18 +12,21 @@ namespace foosballv2s.WebService.Controllers
     public class TeamController : Controller
     {
         private readonly ITeamRepository _repository;
+        private readonly UserManager<User> _userManager;
 
-        public TeamController(ITeamRepository repository)
+        public TeamController(ITeamRepository repository, UserManager<User> userManager)
         {
             _repository = repository;
+            _userManager = userManager;
         }
         
         // GET api/team/
         [Authorize]
         [HttpGet]
-        public IEnumerable<Team> Get()
+        public IEnumerable<Team> Get(TeamParams teamParams)
         {
-            return _repository.GetAll();
+            var user = _userManager.FindById(User.Identity.GetUserId());
+            return _repository.GetAll(teamParams, user);
         }
 
         // GET api/team/5

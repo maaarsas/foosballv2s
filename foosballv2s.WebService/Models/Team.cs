@@ -1,4 +1,6 @@
-﻿namespace foosballv2s.WebService.Models
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace foosballv2s.WebService.Models
 {
     public class Team
     {
@@ -6,6 +8,6 @@
         
         public string TeamName { get; set; }
         
-        public User User { get; set; }
+        public virtual IdentityUser User { get; set; }
     }
 }

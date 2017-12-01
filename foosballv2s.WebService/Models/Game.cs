@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Microsoft.AspNetCore.Identity;
 
 namespace foosballv2s.WebService.Models
 {
@@ -23,6 +24,6 @@ namespace foosballv2s.WebService.Models
         
         public ICollection<GameEvent> GameEvents { get; set; }
         
-        public User User { get; set; }
+        public virtual IdentityUser User { get; set; }
     }
 }

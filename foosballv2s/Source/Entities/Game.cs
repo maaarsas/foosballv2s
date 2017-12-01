@@ -53,6 +53,8 @@ namespace foosballv2s.Source.Entities
         public Boolean HasEnded { get; private set; } = false;
         
         public ICollection<GameEvent> GameEvents { get; set; } = new Collection<GameEvent>();
+        
+        public User User { get; set; }
 
         /// <summary>
         /// Stars the game timer

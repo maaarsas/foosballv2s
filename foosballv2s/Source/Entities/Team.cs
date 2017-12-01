@@ -8,6 +8,8 @@ namespace foosballv2s.Source.Entities
         
         public string TeamName { get; set; }
         
+        public User User { get; set; }
+        
         private int gamesPlayed = 0;
         private int gamesWon = 0;
 

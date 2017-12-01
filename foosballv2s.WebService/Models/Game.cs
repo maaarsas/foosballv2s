@@ -22,5 +22,7 @@ namespace foosballv2s.WebService.Models
         public DateTime EndTime { get; set; }
         
         public ICollection<GameEvent> GameEvents { get; set; }
+        
+        public User User { get; set; }
     }
 }

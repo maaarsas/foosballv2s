@@ -23,10 +23,10 @@ namespace foosballv2s.WebService.Controllers
         // GET api/team/
         [Authorize]
         [HttpGet]
-        public IEnumerable<Team> Get(TeamParams teamParams)
+        public IEnumerable<Team> Get(TeamParams teamParams, SortParams sortParams)
         {
             var user = _userManager.FindById(User.Identity.GetUserId());
-            return _repository.GetAll(teamParams, user);
+            return _repository.GetAll(teamParams, sortParams, user);
         }
 
         // GET api/team/5

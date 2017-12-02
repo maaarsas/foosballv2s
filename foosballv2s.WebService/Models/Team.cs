@@ -10,6 +10,6 @@ namespace foosballv2s.WebService.Models
         public string TeamName { get; set; }
         
         [Required]
-        public virtual IdentityUser User { get; set; }
+        public virtual User User { get; set; }
     }
 }

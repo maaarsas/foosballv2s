@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace foosballv2s.WebService.Models
 {
     /// <summary>
     /// A class for getting/sending data to the database
     /// </summary>
-    public class WebServiceDbContext : DbContext, IWebServiceDbContext
+    public class WebServiceDbContext : IdentityDbContext<User>, IWebServiceDbContext
     {
         public WebServiceDbContext(DbContextOptions<WebServiceDbContext> options)
             : base(options)
@@ -18,6 +19,8 @@ namespace foosballv2s.WebService.Models
         
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
+            
             builder
                 .Entity<Game>()
                 .HasIndex(g => g.Id).IsUnique(true);

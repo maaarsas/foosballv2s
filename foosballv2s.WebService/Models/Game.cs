@@ -26,6 +26,6 @@ namespace foosballv2s.WebService.Models
         public ICollection<GameEvent> GameEvents { get; set; }
         
         [Required]
-        public virtual IdentityUser User { get; set; }
+        public virtual User User { get; set; }
     }
 }

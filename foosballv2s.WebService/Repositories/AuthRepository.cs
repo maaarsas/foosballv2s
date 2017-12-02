@@ -12,9 +12,9 @@ namespace foosballv2s.WebService.Models
     /// </summary>
     public class AuthRepository : IAuthRepository
     {
-        private readonly IIdentityContext _context;
+        private readonly IWebServiceDbContext _context;
 
-        public AuthRepository(IIdentityContext context)
+        public AuthRepository(IWebServiceDbContext context)
         {
             _context = context;
         }

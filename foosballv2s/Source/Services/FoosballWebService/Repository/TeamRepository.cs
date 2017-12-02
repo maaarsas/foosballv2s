@@ -23,9 +23,9 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
         /// Gets all teams
         /// </summary>
         /// <returns></returns>
-        public async Task<Team[]> GetAll()
+        public async Task<Team[]> GetAll(string urlParams = null)
         {
-            var response = await client.GetAsync(endpointUrl);
+            var response = await client.GetAsync(endpointUrl + "/?" + urlParams);
             Team[] teams = FoosballJsonConvert.DeserializeObject<Team[]>(response);
             if (teams == null)
             {

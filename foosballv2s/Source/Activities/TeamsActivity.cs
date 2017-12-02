@@ -9,6 +9,8 @@ using foosballv2s.Source.Services.FoosballWebService.Repository;
 using Xamarin.Forms;
 using ListView = Android.Widget.ListView;
 using Android.Widget;
+using foosballv2s.Source.Services.CredentialStorage;
+using foosballv2s.Source.Services.FoosballWebService;
 
 namespace foosballv2s.Source.Activities
 {
@@ -32,22 +34,28 @@ namespace foosballv2s.Source.Activities
 
             teamRepository = DependencyService.Get<TeamRepository>();
             teamListView = (ListView) FindViewById(Resource.Id.team_list_view);
-            
-            FetchTeams();
+
+            FetchUserTeams();
+            FetchAllTeams();
         }
 
         /// <summary>
         /// Fetches the teams and populates them to a list
         /// </summary>
-        private async void FetchTeams()
+        private async void FetchUserTeams()
         {
             ProgressDialog dialog = ProgressDialog.Show(this, "", 
-                Resources.GetString(Resource.String.retrieving_teams), true);
+                Resources.GetString(Resource.String.retrieving_your_teams), true);
 
             GameRepository gameRepository = DependencyService.Get<GameRepository>();
+            var credentialStorage = DependencyService.Get<ICredentialStorage>();
 
-            Game[] games = await gameRepository.GetAll();
-            Team[] teams = await teamRepository.GetAll();
+            UrlParamsFormatter urlParams = new UrlParamsFormatter();
+            urlParams.AddParam("userid", credentialStorage.Read().Id);
+            urlParams.AddParam("sortby", "-id");
+            
+            Game[] games = await gameRepository.GetAll(urlParams.UrlParams);
+            Team[] teams = await teamRepository.GetAll(urlParams.UrlParams);
 
             teams = SetTeamsWinPercentage(teams, games);
             teamList = new List<Team>(teams);
@@ -56,6 +64,28 @@ namespace foosballv2s.Source.Activities
             TeamAdapter teamAdapter = new TeamAdapter(this, teamList);
             teamListView.Adapter = teamAdapter;
             teamListView.ItemClick += OnListItemClick;
+        }
+        
+        /// <summary>
+        /// Fetches all teams and populates them to a list
+        /// </summary>
+        private async void FetchAllTeams()
+        {
+            ProgressDialog dialog = ProgressDialog.Show(this, "", 
+                Resources.GetString(Resource.String.retrieving_all_teams), true);
+
+            var credentialStorage = DependencyService.Get<ICredentialStorage>();
+
+            UrlParamsFormatter urlParams = new UrlParamsFormatter();
+            urlParams.AddParam("userid", credentialStorage.Read().Id);
+            urlParams.AddParam("sortby", "-id");
+            
+            Team[] teams = await teamRepository.GetAll(urlParams.UrlParams);
+            
+            dialog.Dismiss();
+            
+            TeamAdapter teamAdapter = new TeamAdapter(this, new List<Team>(teams));
+            //teamListView.Adapter = teamAdapter;
         }
 
         /// <summary>

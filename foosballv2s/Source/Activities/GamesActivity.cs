@@ -5,6 +5,8 @@ using Android.Support.V7.App;
 using foosballv2s.Source.Activities.Adapters;
 using foosballv2s.Source.Activities.Helpers;
 using foosballv2s.Source.Entities;
+using foosballv2s.Source.Services.CredentialStorage;
+using foosballv2s.Source.Services.FoosballWebService;
 using foosballv2s.Source.Services.FoosballWebService.Repository;
 using Xamarin.Forms;
 using ListView = Android.Widget.ListView;
@@ -31,18 +33,44 @@ namespace foosballv2s.Source.Activities
             gameRepository = DependencyService.Get<GameRepository>();
             gameListView = (ListView) FindViewById(Resource.Id.game_list_view);
 
-            FetchGames();
+            FetchUserGames();
+            FetchAllGames();
+        }
+        
+        /// <summary>
+        /// Retrieves a list of games from a web service and populates a list
+        /// </summary>
+        private async void FetchUserGames()
+        {
+            ProgressDialog dialog = ProgressDialog.Show(this, "", 
+                Resources.GetString(Resource.String.retrieving_your_games), true);
+            
+            var credentialStorage = DependencyService.Get<ICredentialStorage>();
+            
+            UrlParamsFormatter urlParams = new UrlParamsFormatter();
+            urlParams.AddParam("userid", credentialStorage.Read().Id);
+            urlParams.AddParam("sortby", "-endtime");
+            
+            Game[] games = await gameRepository.GetAll(urlParams.UrlParams);
+
+            dialog.Dismiss();
+            
+            GameAdapter gameAdapter = new GameAdapter(this, new List<Game>(games));
+            //gameListView.Adapter = gameAdapter;
         }
 
         /// <summary>
         /// Retrieves a list of games from a web service and populates a list
         /// </summary>
-        private async void FetchGames()
+        private async void FetchAllGames()
         {
             ProgressDialog dialog = ProgressDialog.Show(this, "", 
-                Resources.GetString(Resource.String.retrieving_games), true);
+                Resources.GetString(Resource.String.retrieving_all_games), true);
             
-            Game[] games = await gameRepository.GetAll();
+            UrlParamsFormatter urlParams = new UrlParamsFormatter();
+            urlParams.AddParam("sortby", "-endtime");
+            
+            Game[] games = await gameRepository.GetAll(urlParams.UrlParams);
 
             dialog.Dismiss();
             

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using foosballv2s.WebService.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,15 +22,16 @@ namespace foosballv2s.WebService.Params
             {
                 char direction = sortByParam[0];
                 string name = sortByParam.Substring(1);
-                
+                string nameFirstCapital = name.First().ToString().ToUpper() + name.Substring(1);
+                PropertyInfo property = typeof(Team).GetProperty(nameFirstCapital);
                 
                 if (direction == '+')
                 {
-                    queryableSet = queryableSet.OrderBy(t => t.GetType().GetProperty(name.ToUpper()).GetValue(t));
+                    queryableSet = queryableSet.OrderBy(t => property.GetValue(t, null));
                 }
                 else if (direction == '-')
                 {
-                    queryableSet = queryableSet.OrderByDescending(t => t.GetType().GetProperty(name.ToUpper()).GetValue(t));
+                    queryableSet = queryableSet.OrderByDescending(t => property.GetValue(t, null));
                 }
                 else
                 {

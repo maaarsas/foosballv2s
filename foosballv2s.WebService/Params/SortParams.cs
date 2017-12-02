@@ -10,20 +10,20 @@ namespace foosballv2s.WebService.Params
     {
         public string SortBy { get; set; } = "";
 
-        public IQueryable<Team> ApplyTeamSortParams(DbSet<Team> set)
+        public IQueryable<T> ApplySortParams<T>(DbSet<T> set) where T : class
         {
             if (SortBy.Length == 0)
             {
                 return set;
             }
-            IQueryable<Team> queryableSet = set;
+            IQueryable<T> queryableSet = set;
             
             foreach (string sortByParam in SplitSortByParam())
             {
                 char direction = sortByParam[0];
                 string name = sortByParam.Substring(1);
                 string nameFirstCapital = name.First().ToString().ToUpper() + name.Substring(1);
-                PropertyInfo property = typeof(Team).GetProperty(nameFirstCapital);
+                PropertyInfo property = typeof(T).GetProperty(nameFirstCapital);
                 
                 if (direction == '+')
                 {

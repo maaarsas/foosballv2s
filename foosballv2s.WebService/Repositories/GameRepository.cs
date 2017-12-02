@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using foosballv2s.WebService.Params;
 using Microsoft.EntityFrameworkCore;
 
 namespace foosballv2s.WebService.Models
@@ -23,14 +24,24 @@ namespace foosballv2s.WebService.Models
         /// Gets all game from the storage
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Game> GetAll()
+        public IEnumerable<Game> GetAll(GameParams gameParams, SortParams sortParams, User user)
         {
-            return _context.Games
+            IQueryable<Game> gameSet = sortParams.ApplySortParams<Game>(_context.Games);
+            gameSet.Include(g => g.Team1)
                 .Include(g => g.Team1)
                 .Include(g => g.Team2)
                 .Include(g => g.GameEvents)
-                .AsNoTracking()
-                .ToList();
+                .AsNoTracking();
+            
+            if (gameParams.UserId == user.Id)
+            {
+                return gameSet.Where(t => t.User.Id == user.Id).ToList();
+            }
+            else if (gameParams.UserId.Length == 0)
+            {
+                return gameSet.ToList();
+            }
+            return null;
         }
 
         /// <summary>

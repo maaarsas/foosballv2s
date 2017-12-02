@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
 using Android.App;
 using Android.OS;
+using Android.Support.Design.Widget;
+using Android.Support.V4.View;
 using Android.Support.V7.App;
 using foosballv2s.Source.Activities.Adapters;
+using foosballv2s.Source.Activities.Fragments;
 using foosballv2s.Source.Activities.Helpers;
 using foosballv2s.Source.Entities;
 using foosballv2s.Source.Services.CredentialStorage;
@@ -19,19 +22,28 @@ namespace foosballv2s.Source.Activities
     [Activity(ParentActivity=typeof(MainActivity))]
     public class GamesActivity : AppCompatActivity
     {
+        private TabLayout tabLayout;
+        private ViewPager viewPager;
         private GameRepository gameRepository;
-        private ListView gameListView;
+        private GameListFragment myGamesListFragment = new GameListFragment();
+        private GameListFragment allGamesListFragment = new GameListFragment();
         
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.Games);
+            
+            viewPager = (ViewPager) FindViewById(Resource.Id.viewpager);
+            setupViewPager(viewPager);
+ 
+            tabLayout = (TabLayout) FindViewById(Resource.Id.sliding_tabs);
+            tabLayout.SetupWithViewPager(viewPager);
+            
             NavigationHelper.SetupNavigationListener(this);
             NavigationHelper.SetActionBarNavigationText(this, Resource.String.nav_games);
 
             gameRepository = DependencyService.Get<GameRepository>();
-            gameListView = (ListView) FindViewById(Resource.Id.game_list_view);
 
             FetchUserGames();
             FetchAllGames();
@@ -49,14 +61,14 @@ namespace foosballv2s.Source.Activities
             
             UrlParamsFormatter urlParams = new UrlParamsFormatter();
             urlParams.AddParam("userid", credentialStorage.Read().Id);
-            urlParams.AddParam("sortby", "-endtime");
+            urlParams.AddParam("sortby", "-EndTime");
             
             Game[] games = await gameRepository.GetAll(urlParams.UrlParams);
 
             dialog.Dismiss();
             
             GameAdapter gameAdapter = new GameAdapter(this, new List<Game>(games));
-            //gameListView.Adapter = gameAdapter;
+            myGamesListFragment.GameListView.Adapter = gameAdapter;
         }
 
         /// <summary>
@@ -75,7 +87,15 @@ namespace foosballv2s.Source.Activities
             dialog.Dismiss();
             
             GameAdapter gameAdapter = new GameAdapter(this, new List<Game>(games));
-            gameListView.Adapter = gameAdapter;
+            allGamesListFragment.GameListView.Adapter = gameAdapter;
+        }
+        
+        private void setupViewPager(ViewPager viewPager)
+        {
+            ViewPagerAdapter adapter = new ViewPagerAdapter(SupportFragmentManager);
+            adapter.addFragment(myGamesListFragment, Resources.GetString(Resource.String.my_games));
+            adapter.addFragment(allGamesListFragment, Resources.GetString(Resource.String.all_games));
+            viewPager.Adapter = adapter;
         }
     }
 }

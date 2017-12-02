@@ -119,11 +119,14 @@
   <ItemGroup>
     <Compile Include="Source\Activities\Adapters\GameAdapter.cs" />
     <Compile Include="Source\Activities\Adapters\TeamAdapter.cs" />
+    <Compile Include="Source\Activities\Adapters\ViewPagerAdapter.cs" />
     <Compile Include="Source\Activities\AuthActivity.cs" />
     <Compile Include="Source\Activities\ColorPickerActivity.cs" />
     <Compile Include="Source\Activities\Filters\TeamFilter.cs" />
+    <Compile Include="Source\Activities\Fragments\GameListFragment.cs" />
     <Compile Include="Source\Activities\Fragments\LoginFragment.cs" />
     <Compile Include="Source\Activities\Fragments\RegisterFragment.cs" />
+    <Compile Include="Source\Activities\Fragments\TeamListFragment.cs" />
     <Compile Include="Source\Activities\GamesActivity.cs" />
     <Compile Include="Source\Activities\Helpers\GameTimeHelper.cs" />
     <Compile Include="Source\Activities\Helpers\NavigationHelper.cs" />
@@ -183,6 +186,8 @@
       <Link>lib\x86\libcvextern.so</Link>
     </AndroidNativeLibrary>
     <AndroidResource Include="Resources\drawable\img_background_foosball.jpg" />
+    <AndroidResource Include="Resources\layout\fragment_game_list.axml" />
+    <AndroidResource Include="Resources\layout\fragment_team_list.axml" />
     <AndroidResource Include="Resources\layout\Games.axml">
       <SubType>Designer</SubType>
     </AndroidResource>

@@ -25,6 +25,8 @@
     <string name="game_end_team_won">Team {0} has won this game!</string>
     <string name="game_end_result">Result: {0} {2} - {3} {1}</string>
     <string name="saving_game">Your game is being saved.</string>
+    <string name="my_teams">My teams</string>
+    <string name="all_teams">All teams</string>
     
     <!--Navigation-->
     <string name="nav_new_game">New game</string>
@@ -39,6 +41,8 @@
     <!--Games-->
     <string name="retrieving_your_games">Loading your games. Please wait.</string>
     <string name="retrieving_all_games">Loading all games. Please wait.</string>
+    <string name="my_games">My games</string>
+    <string name="all_games">All games</string>
     
     <!--Login & registration-->
     <string name="login">Login</string>

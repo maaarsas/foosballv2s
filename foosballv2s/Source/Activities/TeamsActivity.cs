@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Android.App;
 using Android.OS;
+using Android.Support.Design.Widget;
+using Android.Support.V4.View;
 using Android.Support.V7.App;
 using foosballv2s.Source.Activities.Adapters;
 using foosballv2s.Source.Activities.Helpers;
@@ -9,8 +11,10 @@ using foosballv2s.Source.Services.FoosballWebService.Repository;
 using Xamarin.Forms;
 using ListView = Android.Widget.ListView;
 using Android.Widget;
+using foosballv2s.Source.Activities.Fragments;
 using foosballv2s.Source.Services.CredentialStorage;
 using foosballv2s.Source.Services.FoosballWebService;
+using Fragment = Android.Support.V4.App.Fragment;
 
 namespace foosballv2s.Source.Activities
 {
@@ -20,20 +24,29 @@ namespace foosballv2s.Source.Activities
     [Activity(ParentActivity=typeof(MainActivity))]
     public class TeamsActivity : AppCompatActivity
     {
+        private TabLayout tabLayout;
+        private ViewPager viewPager;
         private TeamRepository teamRepository;
-        private ListView teamListView;
         private List<Team> teamList;
+        private TeamListFragment myTeamsListFragment = new TeamListFragment();
+        private TeamListFragment allTeamsListFragment = new TeamListFragment();
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.Teams);
+            
+            viewPager = (ViewPager) FindViewById(Resource.Id.viewpager);
+            setupViewPager(viewPager);
+ 
+            tabLayout = (TabLayout) FindViewById(Resource.Id.sliding_tabs);
+            tabLayout.SetupWithViewPager(viewPager);
+            
             NavigationHelper.SetupNavigationListener(this);
             NavigationHelper.SetActionBarNavigationText(this, Resource.String.nav_teams);
 
             teamRepository = DependencyService.Get<TeamRepository>();
-            teamListView = (ListView) FindViewById(Resource.Id.team_list_view);
 
             FetchUserTeams();
             FetchAllTeams();
@@ -62,8 +75,8 @@ namespace foosballv2s.Source.Activities
             dialog.Dismiss();
             
             TeamAdapter teamAdapter = new TeamAdapter(this, teamList);
-            teamListView.Adapter = teamAdapter;
-            teamListView.ItemClick += OnListItemClick;
+            myTeamsListFragment.TeamListView.Adapter = teamAdapter;
+            myTeamsListFragment.TeamListView.ItemClick += OnListItemClick;
         }
         
         /// <summary>
@@ -85,7 +98,7 @@ namespace foosballv2s.Source.Activities
             dialog.Dismiss();
             
             TeamAdapter teamAdapter = new TeamAdapter(this, new List<Team>(teams));
-            //teamListView.Adapter = teamAdapter;
+            allTeamsListFragment.TeamListView.Adapter = teamAdapter;
         }
 
         /// <summary>
@@ -205,6 +218,14 @@ namespace foosballv2s.Source.Activities
                 }
             }
             return false;
+        }
+        
+        private void setupViewPager(ViewPager viewPager)
+        {
+            ViewPagerAdapter adapter = new ViewPagerAdapter(SupportFragmentManager);
+            adapter.addFragment(myTeamsListFragment, Resources.GetString(Resource.String.my_teams));
+            adapter.addFragment(allTeamsListFragment, Resources.GetString(Resource.String.all_teams));
+            viewPager.Adapter = adapter;
         }
     }
 }

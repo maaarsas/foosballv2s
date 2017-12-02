@@ -24,6 +24,11 @@ namespace foosballv2s.WebService.Params
                 string name = sortByParam.Substring(1);
                 string nameFirstCapital = name.First().ToString().ToUpper() + name.Substring(1);
                 PropertyInfo property = typeof(T).GetProperty(nameFirstCapital);
+
+                if (property == null)
+                {
+                    continue;
+                }
                 
                 if (direction == '+')
                 {

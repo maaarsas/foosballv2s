@@ -87,10 +87,7 @@ namespace foosballv2s.Source.Activities
             ProgressDialog dialog = ProgressDialog.Show(this, "", 
                 Resources.GetString(Resource.String.retrieving_all_teams), true);
 
-            var credentialStorage = DependencyService.Get<ICredentialStorage>();
-
             UrlParamsFormatter urlParams = new UrlParamsFormatter();
-            urlParams.AddParam("userid", credentialStorage.Read().Id);
             urlParams.AddParam("sortby", "-id");
             
             Team[] teams = await teamRepository.GetAll(urlParams.UrlParams);

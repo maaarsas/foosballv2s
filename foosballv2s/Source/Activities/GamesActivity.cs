@@ -80,7 +80,7 @@ namespace foosballv2s.Source.Activities
                 Resources.GetString(Resource.String.retrieving_all_games), true);
             
             UrlParamsFormatter urlParams = new UrlParamsFormatter();
-            urlParams.AddParam("sortby", "-endtime");
+            urlParams.AddParam("sortby", "-EndTime");
             
             Game[] games = await gameRepository.GetAll(urlParams.UrlParams);
 

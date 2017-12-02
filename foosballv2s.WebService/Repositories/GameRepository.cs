@@ -27,8 +27,7 @@ namespace foosballv2s.WebService.Models
         public IEnumerable<Game> GetAll(GameParams gameParams, SortParams sortParams, User user)
         {
             IQueryable<Game> gameSet = sortParams.ApplySortParams<Game>(_context.Games);
-            gameSet.Include(g => g.Team1)
-                .Include(g => g.Team1)
+            gameSet = gameSet.Include(g => g.Team1)
                 .Include(g => g.Team2)
                 .Include(g => g.GameEvents)
                 .AsNoTracking();

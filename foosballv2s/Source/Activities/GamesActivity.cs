@@ -34,6 +34,9 @@ namespace foosballv2s.Source.Activities
 
             SetContentView(Resource.Layout.Games);
             
+            myGamesListFragment = new GameListFragment();
+            allGamesListFragment = new GameListFragment();
+            
             viewPager = (ViewPager) FindViewById(Resource.Id.viewpager);
             setupViewPager(viewPager);
  
@@ -42,9 +45,6 @@ namespace foosballv2s.Source.Activities
             
             NavigationHelper.SetupNavigationListener(this);
             NavigationHelper.SetActionBarNavigationText(this, Resource.String.nav_games);
-            
-            myGamesListFragment = new GameListFragment();
-            allGamesListFragment = new GameListFragment();
 
             gameRepository = DependencyService.Get<GameRepository>();
 

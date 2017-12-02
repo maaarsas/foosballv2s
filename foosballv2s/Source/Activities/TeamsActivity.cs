@@ -37,6 +37,9 @@ namespace foosballv2s.Source.Activities
 
             SetContentView(Resource.Layout.Teams);
             
+            myTeamsListFragment = new TeamListFragment();
+            allTeamsListFragment = new TeamListFragment();
+            
             viewPager = (ViewPager) FindViewById(Resource.Id.viewpager);
             setupViewPager(viewPager);
  
@@ -46,9 +49,6 @@ namespace foosballv2s.Source.Activities
             NavigationHelper.SetupNavigationListener(this);
             NavigationHelper.SetActionBarNavigationText(this, Resource.String.nav_teams);
             
-            myTeamsListFragment = new TeamListFragment();
-            allTeamsListFragment = new TeamListFragment();
-
             teamRepository = DependencyService.Get<TeamRepository>();
 
             FetchUserTeams();

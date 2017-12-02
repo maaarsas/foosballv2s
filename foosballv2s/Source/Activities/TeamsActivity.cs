@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Android.App;
+using Android.Content.PM;
 using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V4.View;
@@ -21,7 +22,8 @@ namespace foosballv2s.Source.Activities
     /// <summary>
     /// An activity for displaying all teams
     /// </summary>
-    [Activity(ParentActivity=typeof(MainActivity))]
+    [Activity(ParentActivity=typeof(MainActivity), 
+        ConfigurationChanges = ConfigChanges.KeyboardHidden | ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
     public class TeamsActivity : AppCompatActivity
     {
         private TabLayout tabLayout;
@@ -50,7 +52,12 @@ namespace foosballv2s.Source.Activities
             NavigationHelper.SetActionBarNavigationText(this, Resource.String.nav_teams);
             
             teamRepository = DependencyService.Get<TeamRepository>();
-
+        }
+        
+        protected override void OnResume()
+        {
+            base.OnResume();
+            
             FetchUserTeams();
             FetchAllTeams();
         }

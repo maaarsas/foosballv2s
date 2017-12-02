@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Android.App;
+using Android.Content.PM;
 using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V4.View;
@@ -19,7 +20,8 @@ namespace foosballv2s.Source.Activities
     /// <summary>
     /// An activity for displaying a history of games
     /// </summary>
-    [Activity(ParentActivity=typeof(MainActivity))]
+    [Activity(ParentActivity=typeof(MainActivity), 
+        ConfigurationChanges = ConfigChanges.KeyboardHidden | ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
     public class GamesActivity : AppCompatActivity
     {
         private TabLayout tabLayout;
@@ -47,7 +49,12 @@ namespace foosballv2s.Source.Activities
             NavigationHelper.SetActionBarNavigationText(this, Resource.String.nav_games);
 
             gameRepository = DependencyService.Get<GameRepository>();
+        }
 
+        protected override void OnResume()
+        {
+            base.OnResume();
+            
             FetchUserGames();
             FetchAllGames();
         }

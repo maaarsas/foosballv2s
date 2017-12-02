@@ -28,8 +28,8 @@ namespace foosballv2s.Source.Activities
         private ViewPager viewPager;
         private TeamRepository teamRepository;
         private List<Team> teamList;
-        private TeamListFragment myTeamsListFragment = new TeamListFragment();
-        private TeamListFragment allTeamsListFragment = new TeamListFragment();
+        private TeamListFragment myTeamsListFragment;
+        private TeamListFragment allTeamsListFragment;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -45,6 +45,9 @@ namespace foosballv2s.Source.Activities
             
             NavigationHelper.SetupNavigationListener(this);
             NavigationHelper.SetActionBarNavigationText(this, Resource.String.nav_teams);
+            
+            myTeamsListFragment = new TeamListFragment();
+            allTeamsListFragment = new TeamListFragment();
 
             teamRepository = DependencyService.Get<TeamRepository>();
 

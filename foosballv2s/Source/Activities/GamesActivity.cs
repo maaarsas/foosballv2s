@@ -25,8 +25,8 @@ namespace foosballv2s.Source.Activities
         private TabLayout tabLayout;
         private ViewPager viewPager;
         private GameRepository gameRepository;
-        private GameListFragment myGamesListFragment = new GameListFragment();
-        private GameListFragment allGamesListFragment = new GameListFragment();
+        private GameListFragment myGamesListFragment;
+        private GameListFragment allGamesListFragment;
         
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -42,6 +42,9 @@ namespace foosballv2s.Source.Activities
             
             NavigationHelper.SetupNavigationListener(this);
             NavigationHelper.SetActionBarNavigationText(this, Resource.String.nav_games);
+            
+            myGamesListFragment = new GameListFragment();
+            allGamesListFragment = new GameListFragment();
 
             gameRepository = DependencyService.Get<GameRepository>();
 

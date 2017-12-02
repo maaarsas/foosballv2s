@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using foosballv2s.WebService.Models;
@@ -10,13 +11,13 @@ namespace foosballv2s.WebService.Params
     {
         public string SortBy { get; set; } = "";
 
-        public IQueryable<T> ApplySortParams<T>(DbSet<T> set) where T : class
+        public IEnumerable<T> ApplySortParams<T>(IEnumerable<T> set) where T : class
         {
             if (SortBy.Length == 0)
             {
                 return set;
             }
-            IQueryable<T> queryableSet = set;
+            IEnumerable<T> queryableSet = set;
             
             foreach (string sortByParam in SplitSortByParam())
             {

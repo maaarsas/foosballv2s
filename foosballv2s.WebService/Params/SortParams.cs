@@ -9,20 +9,27 @@ namespace foosballv2s.WebService.Params
     {
         public string SortBy { get; set; } = "";
 
-        public DbSet<Team> ApplyTeamSortParams(DbSet<Team> set)
+        public IQueryable<Team> ApplyTeamSortParams(DbSet<Team> set)
         {
+            if (SortBy.Length == 0)
+            {
+                return set;
+            }
+            IQueryable<Team> queryableSet = set;
+            
             foreach (string sortByParam in SplitSortByParam())
             {
                 char direction = sortByParam[0];
                 string name = sortByParam.Substring(1);
-
+                
+                
                 if (direction == '+')
                 {
-                    set.OrderBy(t => t.GetType().GetProperty(name.ToUpper()));
+                    queryableSet = queryableSet.OrderBy(t => t.GetType().GetProperty(name.ToUpper()).GetValue(t));
                 }
                 else if (direction == '-')
                 {
-                    set.OrderByDescending(t => t.GetType().GetProperty(name.ToUpper()));
+                    queryableSet = queryableSet.OrderByDescending(t => t.GetType().GetProperty(name.ToUpper()).GetValue(t));
                 }
                 else
                 {
@@ -30,7 +37,7 @@ namespace foosballv2s.WebService.Params
                 }
                 
             }
-            return set;
+            return queryableSet;
         }
 
         private string[] SplitSortByParam()

@@ -26,8 +26,7 @@ namespace foosballv2s.WebService.Models
         /// <returns></returns>
         public IEnumerable<Team> GetAll(TeamParams teamParams, SortParams sortParams, User user)
         {
-            Microsoft.EntityFrameworkCore.DbSet<Team> teamSet = _context.Teams;
-            teamSet = sortParams.ApplyTeamSortParams(teamSet);
+            IQueryable<Team> teamSet = sortParams.ApplyTeamSortParams( _context.Teams);
             if (teamParams.UserId == user.Id)
             {
                 return teamSet.Where(t => t.User.Id == user.Id).ToList();

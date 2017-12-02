@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using foosballv2s.WebService.Models;
 using foosballv2s.WebService.Params;
 using Microsoft.AspNet.Identity;
@@ -12,9 +13,9 @@ namespace foosballv2s.WebService.Controllers
     public class TeamController : Controller
     {
         private readonly ITeamRepository _repository;
-        private readonly UserManager<User> _userManager;
-
-        public TeamController(ITeamRepository repository, UserManager<User> userManager)
+        private readonly Microsoft.AspNetCore.Identity.UserManager<User> _userManager;
+        
+        public TeamController(ITeamRepository repository, Microsoft.AspNetCore.Identity.UserManager<User> userManager)
         {
             _repository = repository;
             _userManager = userManager;
@@ -25,7 +26,7 @@ namespace foosballv2s.WebService.Controllers
         [HttpGet]
         public IEnumerable<Team> Get(TeamParams teamParams, SortParams sortParams)
         {
-            var user = _userManager.FindById(User.Identity.GetUserId());
+            var user = _userManager.Users.FirstOrDefault(u => u.Email == User.Identity.GetUserId());
             return _repository.GetAll(teamParams, sortParams, user);
         }
 

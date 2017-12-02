@@ -28,8 +28,16 @@ namespace foosballv2s.WebService.Models
                 .WithOne(e => e.Game);
             
             builder
+                .Entity<Game>()
+                .HasOne(c => c.User);
+            
+            builder
                 .Entity<Team>()
                 .HasIndex(t => t.Id).IsUnique(true);
+            
+            builder
+                .Entity<Team>()
+                .HasOne(c => c.User);
             
             builder
                 .Entity<GameEvent>()

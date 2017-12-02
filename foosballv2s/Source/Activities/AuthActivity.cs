@@ -17,6 +17,7 @@ using Application = Android.App.Application;
 using View = Android.Views.View;
 using Java.Util;
 using Android.Content.Res;
+using System;
 
 namespace foosballv2s.Source.Activities
 {
@@ -29,7 +30,11 @@ namespace foosballv2s.Source.Activities
         private TabLayout tabLayout;
         private ViewPager viewPager;
         private AuthRepository _authRepository;
- 
+
+        private RadioGroup languages;
+        private Android.Widget.Button btnSumbitLanguage;
+        private Dialog dialog;
+
         protected override void OnCreate(Bundle savedInstanceState) 
         {
             base.OnCreate(savedInstanceState);
@@ -50,35 +55,38 @@ namespace foosballv2s.Source.Activities
         [Export("ChangeLanguage")]
         public async void ChangeLanguage(View view)
         {
-            Button btn = (Button)FindViewById(Resource.Id.lang_button);
-            LayoutInflater inflater = (LayoutInflater)ApplicationContext.GetSystemService(Context.LayoutInflaterService);
-            View layout_spinners = inflater.Inflate(Resource.Layout.language_spinner, null);
-            Spinner spinner = (Spinner)layout_spinners.FindViewById(Resource.Id.spinner);
-            Intent intent = new Intent(this, typeof(AuthActivity));
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            dialog = new Dialog(this);
+            dialog.SetContentView(Resource.Layout.language_spinner);
+            dialog.SetTitle(Resource.String.choose_lang);
+            dialog.SetCancelable(false);
+            dialog.Show();
 
-            builder.SetTitle(Resource.String.choose_lang);
-            builder.SetView(layout_spinners);
-            builder.SetCancelable(false);
-            builder.SetPositiveButton(Resource.String.ok, delegate
+            languages = (RadioGroup)dialog.FindViewById(Resource.Id.languages);
+            btnSumbitLanguage = dialog.FindViewById<Android.Widget.Button>(Resource.Id.btnSumbitLanguage);
+            btnSumbitLanguage.Click += btnSumbitLanguage_Click;
+        }
+        private void btnSumbitLanguage_Click(object sender, EventArgs e)
+        {
+            Intent intent = new Intent(this, typeof(AuthActivity));
+            dialog.Dismiss();
+
+            switch (languages.CheckedRadioButtonId)
             {
-                if (spinner.SelectedItem.ToString() == Resources.GetString(Resource.String.item_lt))
-                {
+                case Resource.Id.language1:
+                    if (Locale.Default.Language.Equals("lt"))
+                        break;
                     UpdateResources(this, "lt");
-                    builder.Dispose();
                     StartActivity(intent);
                     Finish();
-                }
-                    
-                else if (spinner.SelectedItem.ToString() == Resources.GetString(Resource.String.item_en))
-                {
+                    break;
+                case Resource.Id.language2:
+                    if (Locale.Default.Language.Equals("en"))
+                        break;
                     UpdateResources(this, "en");
-                    builder.Dispose();
                     StartActivity(intent);
                     Finish();
-                }
-            });
-            builder.Show();
+                    break;
+            }
         }
 
         private static bool UpdateResources(Context context, string language)

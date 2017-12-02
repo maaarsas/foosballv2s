@@ -25,12 +25,8 @@
   <string name="saving_game">Žaidimas išsaugomas.</string>
   <string name="choose_lang">Pasirinkite kalbą</string>
   <string name="lang_btn">Kalba</string>
-  <string-array name="lang_arr">
-    <item>lietuvių</item>
-    <item>anglų</item>
-  </string-array>
-  <string name="item_lt">lietuvių</string>
-  <string name="item_en">anglų</string>
+  <string name="lang_lt">lietuvių</string>
+  <string name="lang_en">anglų</string>
 
   <!--Navigation-->
   <string name="nav_new_game">Naujas žaidimas</string>

@@ -5,8 +5,10 @@ using Android.Support.Design.Internal;
 using Android.Support.Design.Widget;
 using Android.Support.V4.Widget;
 using Android.Views;
+using Android.Widget;
 using foosballv2s.Source.Services.CredentialStorage;
 using Java.Util;
+using System;
 using Xamarin.Forms;
 using Application = Android.App.Application;
 
@@ -19,6 +21,9 @@ namespace foosballv2s.Source.Activities.Listeners
     {
         private Activity currentActivity;
         private NavigationMenuView menu;
+        private RadioGroup languages;
+        private Android.Widget.Button btnSumbitLanguage;
+        private Dialog dialog;
 
         public NavigationItemClickListener(Activity activity)
         {
@@ -73,34 +78,44 @@ namespace foosballv2s.Source.Activities.Listeners
 
             if (menuItem.ItemId == Resource.Id.nav_language)
             {
-                AlertDialog.Builder builder = new AlertDialog.Builder(currentActivity);
-                Intent intent;
-                builder.SetTitle(Resource.String.choose_lang);
-                builder.SetCancelable(false);
-                builder.SetPositiveButton(Resource.String.item_lt, delegate
-                {
-                    UpdateResources(currentActivity, "lt");
-                    intent = new Intent(Application.Context, intentType);
-                    currentActivity.StartActivity(intent);
-                    currentActivity.Finish();
-                });
-                builder.SetNegativeButton(Resource.String.item_en, delegate
-                {
-                    UpdateResources(currentActivity, "en");
-                    intent = new Intent(Application.Context, intentType);
-                    currentActivity.StartActivity(intent);
-                    currentActivity.Finish();
-                });
-                AlertDialog alertDialog = builder.Create();
-                alertDialog.Show();
+                dialog = new Dialog(currentActivity);
+                dialog.SetContentView(Resource.Layout.language_spinner);
+                dialog.SetTitle(Resource.String.choose_lang);
+                dialog.SetCancelable(false);
+                dialog.Show();
+
+                languages = (RadioGroup)dialog.FindViewById(Resource.Id.languages);
+                btnSumbitLanguage = dialog.FindViewById<Android.Widget.Button>(Resource.Id.btnSumbitLanguage);
+                btnSumbitLanguage.Click += btnSumbitLanguage_Click;
             }
             else
             {
                 Intent intent = new Intent(Application.Context, intentType);
                 currentActivity.StartActivity(intent);
-                currentActivity.Finish();   
+                currentActivity.Finish();
             }
             return true;
+        }
+
+        private void btnSumbitLanguage_Click(object sender, EventArgs e)
+        {
+            Intent intent = new Intent(currentActivity, typeof(MainActivity));
+            switch (languages.CheckedRadioButtonId)
+            {
+                case Resource.Id.language1:
+                    if (Locale.Default.Language.Equals("lt"))
+                        break;
+                    UpdateResources(currentActivity, "lt");
+                    break;
+                case Resource.Id.language2:
+                    if (Locale.Default.Language.Equals("en"))
+                        break;
+                    UpdateResources(currentActivity, "en");
+                    break;
+            }
+            dialog.Dismiss();
+            currentActivity.StartActivity(intent);
+            currentActivity.Finish();
         }
 
         private static bool UpdateResources(Context context, string language)
@@ -117,5 +132,7 @@ namespace foosballv2s.Source.Activities.Listeners
 
             return true;
         }
+        
+        
     }
 }

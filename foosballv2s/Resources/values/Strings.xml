@@ -25,12 +25,8 @@
   <string name="saving_game">Your game is being saved.</string>
   <string name="choose_lang">Choose language</string>
   <string name="lang_btn">Language</string>
-  <string-array name="lang_arr">
-    <item>Lithuanian</item>
-    <item>English</item>
-  </string-array>
-  <string name="item_lt">Lithuanian</string>
-  <string name="item_en">English</string>
+  <string name="lang_lt">Lithuanian</string>
+  <string name="lang_en">English</string>
 
     <!--Navigation-->
   <string name="nav_new_game">New game</string>

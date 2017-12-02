@@ -2,7 +2,7 @@
 {
     public class UrlParamsFormatter
     {
-        public string UrlParams { get; private set; }
+        public string UrlParams { get; private set; } = "";
 
         public void AddParam(string name, string value)
         {

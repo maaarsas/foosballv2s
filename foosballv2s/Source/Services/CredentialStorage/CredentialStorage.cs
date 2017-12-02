@@ -55,7 +55,13 @@ namespace foosballv2s.Source.Services.CredentialStorage
         public bool HasExpired()
         {
             Credential credential = Read();
+            // expiration time reached
             if (credential.Token == null || credential.Expiration < DateTime.Now)
+            {
+                return true;
+            }
+            // or something is missing, relogin then also
+            if (credential.Id == null || credential.Email == null || credential.Token == null)
             {
                 return true;
             }

@@ -169,7 +169,7 @@ namespace foosballv2s.Source.Activities
         private async void FetchUserTeams()
         {
             ProgressDialog dialog = ProgressDialog.Show(this, "",
-                Resources.GetString(Resource.String.retrieving_teams), true);
+                Resources.GetString(Resource.String.retrieving_your_teams), true);
 
             var credentialStorage = DependencyService.Get<ICredentialStorage>();
             UrlParamsFormatter urlParams = new UrlParamsFormatter();

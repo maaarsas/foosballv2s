@@ -14,7 +14,8 @@
   <string name="point_camera_to_ball">Reikalinga kamuoliuko spalva. Nukreipkite kamerą į kamuoliuką.</string>
   <string name="team1_goal">I įvartis</string>
   <string name="team2_goal">II įvartis</string>
-  <string name="wrong_team_names">Komandų pavadinimai yra netinkami (galbūt yra neleistinų simbolių)</string>
+  <string name="wrong_first_team_name">Pirmos komandos pavadinimas netinkamas. Pavadinimas privalo būti ilgesnis nei 2 simboliai ir sudarytas tik iš raidžių ar skaitmenų.</string>
+  <string name="wrong_second_team_name">Antros komandos pavadinimas netinkamas. Pavadinimas privalo būti ilgesnis nei 2 simboliai ir sudarytas tik iš raidžių ar skaitmenų.</string>
   <string name="same_team_names">Komandos negali turėti vienodų pavadinimų</string>
   <string name="team_name_exists">Komanda {0} jau yra. Pasirinkite komandą iš sąrašo arba įveskite naują.</string>
   <string name="stats">Stats</string>

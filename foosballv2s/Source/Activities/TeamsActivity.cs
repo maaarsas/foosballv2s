@@ -119,19 +119,19 @@ namespace foosballv2s.Source.Activities
             foreach (Game g in games)
             {
                 if (g.Team1Score > g.Team2Score)
-                    winnerID = g.Team1.id;
-                else winnerID = g.Team2.id;
+                    winnerID = g.Team1.Id;
+                else winnerID = g.Team2.Id;
                 foreach (Team t in teams)
                 {
-                    if (g.Team1.id == t.id)
+                    if (g.Team1.Id == t.Id)
                     {
                         t.GamesPlayed = ++t.GamesPlayed;
                     }
-                    if (g.Team2.id == t.id)
+                    if (g.Team2.Id == t.Id)
                     {
                         t.GamesPlayed = ++t.GamesPlayed;
                     }
-                    if (winnerID == t.id)
+                    if (winnerID == t.Id)
                         t.GamesWon = ++t.GamesWon;
                 }
             }
@@ -179,7 +179,7 @@ namespace foosballv2s.Source.Activities
                     if (!AlreadyExists(teamList, input.Text))
                     {
                         team.TeamName = input.Text;
-                        t = await teamRepository.Update(team.id, team);
+                        t = await teamRepository.Update(team.Id, team);
                         changeAlert.Dispose();
                         infoAlert.Dispose();
                     }
@@ -195,7 +195,7 @@ namespace foosballv2s.Source.Activities
                 .SetCancelable(false)
                 .SetNegativeButton("Yes", async delegate
                 {
-                    t = await teamRepository.Delete(team.id);
+                    t = await teamRepository.Delete(team.Id);
                     if (t != null)
                         Toast.MakeText(Android.App.Application.Context, team.TeamName + " is not deleted.", ToastLength.Short).Show();
                     else

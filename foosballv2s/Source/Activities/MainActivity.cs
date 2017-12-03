@@ -121,6 +121,13 @@ namespace foosballv2s.Source.Activities
                 {
                     team1 = new Team { TeamName = firstTeamTextView.Text };
                     team1 = await teamRepository.Create(team1);
+                    if (team1 == null)
+                    {
+                        Toast.MakeText(
+                            Android.App.Application.Context, Resource.String.wrong_first_team_name, ToastLength.Short)
+                            .Show();
+                        return;
+                    }
                 }
                 else return;
             }
@@ -131,15 +138,16 @@ namespace foosballv2s.Source.Activities
                 {
                     team2 = new Team { TeamName = secondTeamTextView.Text };
                     team2 = await teamRepository.Create(team2);
+                    if (team2 == null)
+                    {
+                        await teamRepository.Delete(team1.Id);
+                        Toast.MakeText(
+                                Android.App.Application.Context, Resource.String.wrong_second_team_name, ToastLength.Short)
+                            .Show();
+                        return;
+                    }
                 }
                 else return;
-            }
-
-            // if even after creation teams do not exist, means there is an error in the names
-            if (team1 == null || team2 == null)
-            {
-                Toast.MakeText(Android.App.Application.Context, Resource.String.wrong_team_names, ToastLength.Short).Show();
-                return;
             }
 
             if (team1.TeamName.Equals(team2.TeamName))
@@ -186,6 +194,9 @@ namespace foosballv2s.Source.Activities
             firstTeamTextView.Adapter = teamAdapter1;
             secondTeamTextView.Adapter = teamAdapter2;
 
+            firstTeamTextView.Text = "";
+            secondTeamTextView.Text = "";
+
         }
 
         /// <summary>
@@ -201,6 +212,7 @@ namespace foosballv2s.Source.Activities
             teamAdapter.SelectedTeam = team;
             teamAdapter.IgnoreFilter = true;
             view.Text = team.TeamName;
+            view.SetSelection(view.Text.Length);
         }
     }
 }

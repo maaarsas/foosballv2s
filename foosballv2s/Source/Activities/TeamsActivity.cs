@@ -116,23 +116,23 @@ namespace foosballv2s.Source.Activities
         {
             int winnerID;
 
-            foreach (Game game in games)
+            foreach (Game g in games)
             {
-                if (game.Team1Score > game.Team2Score)
-                    winnerID = game.Team1.id;
-                else winnerID = game.Team2.id;
-                foreach (Team team in teams)
+                if (g.Team1Score > g.Team2Score)
+                    winnerID = g.Team1.Id;
+                else winnerID = g.Team2.Id;
+                foreach (Team t in teams)
                 {
-                    if (game.Team1.id == team.id)
+                    if (g.Team1.Id == t.Id)
                     {
-                        team.GamesPlayed = ++team.GamesPlayed;
+                        t.GamesPlayed = ++t.GamesPlayed;
                     }
-                    if (game.Team2.id == team.id)
+                    if (g.Team2.Id == t.Id)
                     {
-                        team.GamesPlayed = ++team.GamesPlayed;
+                        t.GamesPlayed = ++t.GamesPlayed;
                     }
-                    if (winnerID == team.id)
-                        team.GamesWon = ++team.GamesWon;
+                    if (winnerID == t.Id)
+                        t.GamesWon = ++t.GamesWon;
                 }
             }
             return teams;
@@ -179,7 +179,7 @@ namespace foosballv2s.Source.Activities
                     if (!AlreadyExists(teamList, input.Text))
                     {
                         team.TeamName = input.Text;
-                        t = await teamRepository.Update(team.id, team);
+                        t = await teamRepository.Update(team.Id, team);
                         changeAlert.Dispose();
                         infoAlert.Dispose();
                     }
@@ -198,7 +198,7 @@ namespace foosballv2s.Source.Activities
                 .SetCancelable(false)
                 .SetNegativeButton(Resource.String.yes, async delegate
                 {
-                    t = await teamRepository.Delete(team.id);
+                    t = await teamRepository.Delete(team.Id);
                     if (t != null)
                         Toast.MakeText(Android.App.Application.Context, System.String.Format(Resources.GetString(Resource.String.notDel), team.TeamName), ToastLength.Short).Show();
                     else

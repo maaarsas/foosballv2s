@@ -4,7 +4,7 @@ namespace foosballv2s.Source.Entities
 {
     public class Team
     {
-        public int id;
+        public int Id { get; set; }
         
         public string TeamName { get; set; }
         

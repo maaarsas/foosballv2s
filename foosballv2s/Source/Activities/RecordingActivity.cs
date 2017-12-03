@@ -12,6 +12,7 @@ using Android.Views;
 using Android.Widget;
 using Emgu.CV;
 using Emgu.CV.Structure;
+using foosballv2s.Droid.Shared.Source.Activities.Helpers;
 using foosballv2s.Source.Activities.Events;
 using foosballv2s.Source.Activities.Helpers;
 using foosballv2s.Source.Entities;

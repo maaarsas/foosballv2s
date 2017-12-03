@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "foosballv2s.WebService.Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "foosballv2s.Test", "foosballv2s.Test\foosballv2s.Test.csproj", "{B0B88C76-A37D-4D05-A3C1-A1C2D06ADDC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "foosballv2s.Android.Shared", "foosballv2s.Android.Shared\foosballv2s.Android.Shared.csproj", "{AD1F922D-1E46-4372-9336-112DDE5590B3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "foosballv2s.Droid.Shared", "foosballv2s.Android.Shared\foosballv2s.Android.Shared.csproj", "{AD1F922D-1E46-4372-9336-112DDE5590B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

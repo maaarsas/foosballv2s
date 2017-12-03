@@ -132,7 +132,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source\Activities\Adapters\TeamAutoCompleteAdapter.cs" />
     <Compile Include="Source\Activities\BallImageActivity.cs" />
-    <Compile Include="Source\Activities\Helpers\ActivityHelper.cs" />
     <Compile Include="Source\Activities\Helpers\ConfigHelper.cs" />
     <Compile Include="Source\Activities\MainActivity.cs" />
     <Compile Include="Source\Activities\PreviousGamesActivity.cs" />
@@ -263,6 +262,12 @@
     <AndroidResource Include="Resources\layout\fragment_login.axml" />
     <AndroidResource Include="Resources\layout\fragment_register.axml" />
     <AndroidResource Include="Resources\layout\navigation_header.axml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\foosballv2s.Android.Shared\foosballv2s.Android.Shared.csproj">
+      <Project>{AD1F922D-1E46-4372-9336-112DDE5590B3}</Project>
+      <Name>foosballv2s.Android.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" />

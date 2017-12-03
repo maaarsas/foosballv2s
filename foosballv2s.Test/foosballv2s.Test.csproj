@@ -126,9 +126,9 @@
     <Folder Include="Source\Activities" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\foosballv2s.Android.Shared\foosballv2s.Android.Shared.csproj">
+    <ProjectReference Include="..\foosballv2s.Droid.Shared\foosballv2s.Droid.Shared.csproj">
       <Project>{AD1F922D-1E46-4372-9336-112DDE5590B3}</Project>
-      <Name>foosballv2s.Android.Shared</Name>
+      <Name>foosballv2s.Droid.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

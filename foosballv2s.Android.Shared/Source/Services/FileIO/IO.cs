@@ -6,7 +6,7 @@ using Android.Widget;
 using Newtonsoft.Json;
 using Color = Android.Graphics.Color;
 
-namespace foosballv2s.Source.Services.FileIO
+namespace foosballv2s.Droid.Shared.Source.Services.FileIO
 {
     /// <summary>
     /// A class for writing and reading files

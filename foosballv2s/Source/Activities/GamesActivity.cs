@@ -4,10 +4,10 @@ using Android.App;
 using Android.OS;
 using Android.Support.V7.App;
 using foosballv2s.Droid.Shared;
+using foosballv2s.Droid.Shared.Source.Entities;
+using foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Repository;
 using foosballv2s.Source.Activities.Adapters;
 using foosballv2s.Source.Activities.Helpers;
-using foosballv2s.Source.Entities;
-using foosballv2s.Source.Services.FoosballWebService.Repository;
 using Xamarin.Forms;
 using ListView = Android.Widget.ListView;
 

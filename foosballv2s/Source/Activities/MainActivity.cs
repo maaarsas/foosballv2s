@@ -9,16 +9,16 @@ using Android.Support.V7.App;
 using Android.Widget;
 using foosballv2s.Source.Activities.Adapters;
 using foosballv2s.Source.Activities.Helpers;
-using foosballv2s.Source.Entities;
-using foosballv2s.Source.Services.FileIO;
-using foosballv2s.Source.Services.FoosballWebService.Repository;
-using foosballv2s.Source.Services.TextToSpeech;
 using Java.Interop;
 using Xamarin.Forms;
 using View = Android.Views.View;
 using Android.Media;
 using Android.Views;
 using foosballv2s.Droid.Shared;
+using foosballv2s.Droid.Shared.Source.Entities;
+using foosballv2s.Droid.Shared.Source.Services.FileIO;
+using foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Repository;
+using foosballv2s.Droid.Shared.Source.Services.TextToSpeech;
 
 namespace foosballv2s.Source.Activities
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace foosballv2s.Source.Services.FoosballWebService.Models
+namespace foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Models
 {
     public class RegisterResponse
     {

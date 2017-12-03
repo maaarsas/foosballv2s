@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Emgu.CV.Structure;
-using foosballv2s.Source.Activities.Events;
-using foosballv2s.Source.Entities;
-using foosballv2s.Source.Services.GameLogger;
+using foosballv2s.Droid.Shared.Source.Entities;
+using foosballv2s.Droid.Shared.Source.Events;
+using foosballv2s.Droid.Shared.Source.Services.GameLogger;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(Game))]
-namespace foosballv2s.Source.Entities
+namespace foosballv2s.Droid.Shared.Source.Entities
 {
     public class Game
     {

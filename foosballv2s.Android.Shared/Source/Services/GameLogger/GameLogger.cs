@@ -1,7 +1,7 @@
-﻿using foosballv2s.Source.Activities.Events;
-using foosballv2s.Source.Entities;
+﻿using foosballv2s.Droid.Shared.Source.Entities;
+using foosballv2s.Droid.Shared.Source.Events;
 
-namespace foosballv2s.Source.Services.GameLogger
+namespace foosballv2s.Droid.Shared.Source.Services.GameLogger
 {
     public class GameLogger : IGameLogger
     {

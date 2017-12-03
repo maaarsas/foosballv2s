@@ -1,7 +1,7 @@
 ﻿using System;
 using Emgu.CV;
 
-namespace foosballv2s.Source.Services.GameRecognition
+namespace foosballv2s.Droid.Shared.Source.Services.GameRecognition
 {
     public class VideoLive : IVideo
     {

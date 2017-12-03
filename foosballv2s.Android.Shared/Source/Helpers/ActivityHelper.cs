@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Android.Hardware;
 
-namespace foosballv2s.Droid.Shared.Source.Activities.Helpers
+namespace foosballv2s.Droid.Shared.Source.Helpers
 {
     /// <summary>
     /// Defines small functions that are reused in many activities

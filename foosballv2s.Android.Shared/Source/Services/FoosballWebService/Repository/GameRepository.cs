@@ -1,10 +1,12 @@
 ﻿using System.Threading.Tasks;
-using foosballv2s.Source.Entities;
+using foosballv2s.Droid.Shared.Source.Entities;
+using foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Helpers;
+using foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Repository;
 using Newtonsoft.Json;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(foosballv2s.Source.Services.FoosballWebService.Repository.GameRepository))]
-namespace foosballv2s.Source.Services.FoosballWebService.Repository
+[assembly: Dependency(typeof(GameRepository))]
+namespace foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Repository
 {
     /// <summary>
     /// A class for forming and fetching the requests to the web service about games

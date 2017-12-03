@@ -1,7 +1,7 @@
 ﻿using Android.Graphics;
 using Emgu.CV.Structure;
 
-namespace foosballv2s.Source.Services.GameRecognition
+namespace foosballv2s.Droid.Shared.Source.Services.GameRecognition
 {
     /// <summary>
     /// A class for working with image files and getting a ball color from it

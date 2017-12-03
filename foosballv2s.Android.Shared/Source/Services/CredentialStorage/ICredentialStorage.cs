@@ -1,7 +1,7 @@
 ﻿using System;
-using foosballv2s.Source.Services.CredentialStorage.Models;
+using foosballv2s.Droid.Shared.Source.Services.CredentialStorage.Models;
 
-namespace foosballv2s.Source.Services.CredentialStorage
+namespace foosballv2s.Droid.Shared.Source.Services.CredentialStorage
 {
     public interface ICredentialStorage
     {

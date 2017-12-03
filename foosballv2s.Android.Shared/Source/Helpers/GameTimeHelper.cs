@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace foosballv2s.Source.Activities.Helpers
+namespace foosballv2s.Droid.Shared.Source.Helpers
 {
     /// <summary>
     /// Game timer manipulation and setup class

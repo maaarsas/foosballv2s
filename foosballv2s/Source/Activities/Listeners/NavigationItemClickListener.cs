@@ -6,7 +6,7 @@ using Android.Support.Design.Widget;
 using Android.Support.V4.Widget;
 using Android.Views;
 using foosballv2s.Droid.Shared;
-using foosballv2s.Source.Services.CredentialStorage;
+using foosballv2s.Droid.Shared.Source.Services.CredentialStorage;
 using Xamarin.Forms;
 using Application = Android.App.Application;
 

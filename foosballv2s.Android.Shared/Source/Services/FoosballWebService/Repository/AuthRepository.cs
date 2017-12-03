@@ -1,11 +1,13 @@
 ﻿using System.Threading.Tasks;
-using foosballv2s.Source.Services.CredentialStorage;
-using foosballv2s.Source.Services.FoosballWebService.Models;
+using foosballv2s.Droid.Shared.Source.Services.CredentialStorage;
+using foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Helpers;
+using foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Models;
+using foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Repository;
 using Newtonsoft.Json;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(foosballv2s.Source.Services.FoosballWebService.Repository.AuthRepository))]
-namespace foosballv2s.Source.Services.FoosballWebService.Repository
+[assembly: Dependency(typeof(AuthRepository))]
+namespace foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Repository
 {
     /// <summary>
     /// A class for authenticating the user

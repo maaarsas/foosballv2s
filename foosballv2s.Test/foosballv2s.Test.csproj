@@ -108,7 +108,6 @@
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
     <Compile Include="Source\Activities\Helpers\TestActivityHelper.cs" />
-    <Compile Include="TestSample.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -126,7 +125,7 @@
     <Folder Include="Source\Activities" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\foosballv2s.Droid.Shared\foosballv2s.Droid.Shared.csproj">
+    <ProjectReference Include="..\foosballv2s.Android.Shared\foosballv2s.Android.Shared.csproj">
       <Project>{AD1F922D-1E46-4372-9336-112DDE5590B3}</Project>
       <Name>foosballv2s.Droid.Shared</Name>
     </ProjectReference>

@@ -1,4 +1,4 @@
-﻿namespace foosballv2s.Source.Services.TextToSpeech
+﻿namespace foosballv2s.Droid.Shared.Source.Services.TextToSpeech
 {
     public interface ITextToSpeech
     {

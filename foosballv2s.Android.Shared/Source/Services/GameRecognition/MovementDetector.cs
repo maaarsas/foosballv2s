@@ -3,7 +3,7 @@ using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
 
-namespace foosballv2s.Source.Services.GameRecognition
+namespace foosballv2s.Droid.Shared.Source.Services.GameRecognition
 {
     /// <summary>
     /// Foosball game detection and recognition class

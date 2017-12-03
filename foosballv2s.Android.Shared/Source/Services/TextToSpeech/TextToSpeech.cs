@@ -1,9 +1,9 @@
 ﻿using Android.Speech.Tts;
-using foosballv2s.Source.Services.TextToSpeech;
+using foosballv2s.Droid.Shared.Source.Services.TextToSpeech;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(TextToSpeechImplementation))]
-namespace foosballv2s.Source.Services.TextToSpeech
+namespace foosballv2s.Droid.Shared.Source.Services.TextToSpeech
 {
 
     public class TextToSpeechImplementation : Java.Lang.Object, ITextToSpeech, Android.Speech.Tts.TextToSpeech.IOnInitListener

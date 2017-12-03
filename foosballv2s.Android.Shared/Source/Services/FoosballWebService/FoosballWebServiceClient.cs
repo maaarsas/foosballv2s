@@ -4,15 +4,16 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using foosballv2s.Source.Activities.Helpers;
-using foosballv2s.Source.Services.CredentialStorage;
-using foosballv2s.Source.Services.CredentialStorage.Models;
+using foosballv2s.Droid.Shared.Source.Helpers;
+using foosballv2s.Droid.Shared.Source.Services.CredentialStorage;
+using foosballv2s.Droid.Shared.Source.Services.CredentialStorage.Models;
+using foosballv2s.Droid.Shared.Source.Services.FoosballWebService;
 using ModernHttpClient;
 using Xamarin.Forms;
 using Application = Android.App.Application;
 
-[assembly: Dependency(typeof(foosballv2s.Source.Services.FoosballWebService.FoosballWebServiceClient))]
-namespace foosballv2s.Source.Services.FoosballWebService
+[assembly: Dependency(typeof(FoosballWebServiceClient))]
+namespace foosballv2s.Droid.Shared.Source.Services.FoosballWebService
 {
     /// <summary>
     /// Makes HTTP requests and parses the responses

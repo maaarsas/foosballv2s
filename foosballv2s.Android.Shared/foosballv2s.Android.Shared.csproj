@@ -106,9 +106,9 @@
     <Compile Include="Source\Entities\Team.cs" />
     <Compile Include="Source\Entities\User.cs" />
     <Compile Include="Source\Events\GameEventArgs.cs" />
-    <Compile Include="Source\Helpers\Helpers\ActivityHelper.cs" />
-    <Compile Include="Source\Helpers\Helpers\ConfigHelper.cs" />
-    <Compile Include="Source\Helpers\Helpers\GameTimeHelper.cs" />
+    <Compile Include="Source\Helpers\ActivityHelper.cs" />
+    <Compile Include="Source\Helpers\ConfigHelper.cs" />
+    <Compile Include="Source\Helpers\GameTimeHelper.cs" />
     <Compile Include="Source\Services\CredentialStorage\CredentialStorage.cs" />
     <Compile Include="Source\Services\CredentialStorage\ICredentialStorage.cs" />
     <Compile Include="Source\Services\CredentialStorage\Models\Credential.cs" />

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace foosballv2s.Source.Services.FoosballWebService
+namespace foosballv2s.Droid.Shared.Source.Services.FoosballWebService
 {
     public interface IWebServiceClient
     {

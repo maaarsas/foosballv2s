@@ -3,7 +3,7 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Util;
 
-namespace foosballv2s.Source.Activities.Helpers
+namespace foosballv2s.Droid.Shared.Source.Helpers
 {
     public class ConfigHelper
     {

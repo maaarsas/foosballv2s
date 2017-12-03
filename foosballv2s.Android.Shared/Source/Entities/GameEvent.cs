@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace foosballv2s.Source.Entities
+namespace foosballv2s.Droid.Shared.Source.Entities
 {
     public class GameEvent
     {

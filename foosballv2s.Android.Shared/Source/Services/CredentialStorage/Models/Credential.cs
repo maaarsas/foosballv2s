@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace foosballv2s.Source.Services.CredentialStorage.Models
+namespace foosballv2s.Droid.Shared.Source.Services.CredentialStorage.Models
 {
     public class Credential
     {

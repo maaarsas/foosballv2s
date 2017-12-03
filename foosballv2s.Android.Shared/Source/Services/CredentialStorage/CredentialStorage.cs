@@ -1,11 +1,12 @@
 ﻿using System;
 using Android.Content;
-using foosballv2s.Source.Services.CredentialStorage.Models;
+using foosballv2s.Droid.Shared.Source.Services.CredentialStorage;
+using foosballv2s.Droid.Shared.Source.Services.CredentialStorage.Models;
 using Xamarin.Forms;
 using Application = Android.App.Application;
 
-[assembly: Dependency(typeof(foosballv2s.Source.Services.CredentialStorage.CredentialStorage))]
-namespace foosballv2s.Source.Services.CredentialStorage
+[assembly: Dependency(typeof(CredentialStorage))]
+namespace foosballv2s.Droid.Shared.Source.Services.CredentialStorage
 {
     public class CredentialStorage : ICredentialStorage
     {

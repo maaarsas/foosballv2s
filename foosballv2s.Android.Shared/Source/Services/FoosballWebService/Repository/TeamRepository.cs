@@ -1,10 +1,12 @@
 ﻿using System.Threading.Tasks;
-using foosballv2s.Source.Entities;
+using foosballv2s.Droid.Shared.Source.Entities;
+using foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Helpers;
+using foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Repository;
 using Newtonsoft.Json;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(foosballv2s.Source.Services.FoosballWebService.Repository.TeamRepository))]
-namespace foosballv2s.Source.Services.FoosballWebService.Repository
+[assembly: Dependency(typeof(TeamRepository))]
+namespace foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Repository
 {
     /// <summary>
     /// A class for forming and fetching requests to a web service about teams

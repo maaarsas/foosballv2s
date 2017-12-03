@@ -1,7 +1,7 @@
 ﻿using System;
-using foosballv2s.Source.Entities;
+using foosballv2s.Droid.Shared.Source.Entities;
 
-namespace foosballv2s.Source.Activities.Events
+namespace foosballv2s.Droid.Shared.Source.Events
 {
     public class GameEventArgs : EventArgs
     {

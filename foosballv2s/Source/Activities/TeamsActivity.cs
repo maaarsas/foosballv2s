@@ -13,7 +13,10 @@ using ListView = Android.Widget.ListView;
 using Android.Widget;
 using foosballv2s.Droid.Shared;
 using foosballv2s.Droid.Shared.Source.Entities;
+using foosballv2s.Droid.Shared.Source.Services.CredentialStorage;
+using foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Helpers;
 using foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Repository;
+using foosballv2s.Source.Activities.Fragments;
 
 namespace foosballv2s.Source.Activities
 {

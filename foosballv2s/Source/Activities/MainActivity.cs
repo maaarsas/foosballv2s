@@ -16,7 +16,9 @@ using Android.Media;
 using Android.Views;
 using foosballv2s.Droid.Shared;
 using foosballv2s.Droid.Shared.Source.Entities;
+using foosballv2s.Droid.Shared.Source.Services.CredentialStorage;
 using foosballv2s.Droid.Shared.Source.Services.FileIO;
+using foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Helpers;
 using foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Repository;
 using foosballv2s.Droid.Shared.Source.Services.TextToSpeech;
 

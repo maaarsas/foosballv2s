@@ -1,5 +1,5 @@
 ﻿using System;
-using foosballv2s.Source.Entities;
+using foosballv2s.Droid.Shared.Source.Entities;
 using foosballv2s.Droid.Shared.Source.Services.CredentialStorage.Models;
 
 namespace foosballv2s.Droid.Shared.Source.Services.CredentialStorage

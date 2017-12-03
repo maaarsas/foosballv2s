@@ -1,4 +1,4 @@
-﻿namespace foosballv2s.Source.Services.FoosballWebService
+﻿namespace foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Helpers
 {
     public class UrlParamsFormatter
     {

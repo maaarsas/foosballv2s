@@ -1,6 +1,6 @@
 ﻿using System;
 using Android.Content;
-using foosballv2s.Source.Entities;
+using foosballv2s.Droid.Shared.Source.Entities;
 using foosballv2s.Droid.Shared.Source.Services.CredentialStorage;
 using foosballv2s.Droid.Shared.Source.Services.CredentialStorage.Models;
 using Xamarin.Forms;

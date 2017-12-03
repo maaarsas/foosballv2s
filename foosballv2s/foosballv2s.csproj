@@ -122,8 +122,8 @@
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Source\Activities\Adapters\GameAdapter.cs" />
     <Compile Include="Source\Activities\Adapters\TeamAdapter.cs" />
-      <Compile Include="Source\Activities\Adapters\ViewPagerAdapter.cs" />
-      <Compile Include="Source\Activities\Adapters\TeamAutoCompleteAdapter.cs" />
+    <Compile Include="Source\Activities\Adapters\ViewPagerAdapter.cs" />
+    <Compile Include="Source\Activities\Adapters\TeamAutoCompleteAdapter.cs" />
     <Compile Include="Source\Activities\AuthActivity.cs" />
     <Compile Include="Source\Activities\BallImageActivity.cs" />
     <Compile Include="Source\Activities\ColorPickerActivity.cs" />
@@ -133,7 +133,7 @@
     <Compile Include="Source\Activities\Fragments\RegisterFragment.cs" />
     <Compile Include="Source\Activities\Fragments\TeamListFragment.cs" />
     <Compile Include="Source\Activities\GamesActivity.cs" />
-      <Compile Include="Source\Activities\Helpers\LanguageHelper.cs" />
+    <Compile Include="Source\Activities\Helpers\LanguageHelper.cs" />
     <Compile Include="Source\Activities\Helpers\NavigationHelper.cs" />
     <Compile Include="Source\Activities\Listeners\NavigationItemClickListener.cs" />
     <Compile Include="Source\Activities\MainActivity.cs" />
@@ -160,7 +160,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\" />
     <Folder Include="lib\armeabi-v7a\" />
     <Folder Include="lib\armeabi\" />
     <Folder Include="lib\x86\" />
@@ -175,14 +174,14 @@
     <AndroidResource Include="Resources\drawable\BallDetectionRing.xml" />
     <AndroidResource Include="Resources\drawable\ColorSquare.xml" />
     <AndroidResource Include="Resources\drawable\img_background_foosball.jpg" />
-      <AndroidResource Include="Resources\layout\fragment_game_list.axml" />
-      <AndroidResource Include="Resources\layout\fragment_team_list.axml" />
-      <AndroidResource Include="Resources\layout\Games.axml">
-      <AndroidResource Include="Resources\drawable\Loading.xml" />
-      <AndroidResource Include="Resources\drawable\NewGame.xml" />
-      <AndroidResource Include="Resources\drawable\Process.xml" />
-      <AndroidResource Include="Resources\drawable\splash_background.xml" />
-      <AndroidResource Include="Resources\layout-land\Main.axml">
+    <AndroidResource Include="Resources\layout\fragment_game_list.axml" />
+    <AndroidResource Include="Resources\layout\fragment_team_list.axml" />
+    <AndroidResource Include="Resources\layout\Games.axml" />
+    <AndroidResource Include="Resources\drawable\Loading.xml" />
+    <AndroidResource Include="Resources\drawable\NewGame.xml" />
+    <AndroidResource Include="Resources\drawable\Process.xml" />
+    <AndroidResource Include="Resources\drawable\splash_background.xml" />
+    <AndroidResource Include="Resources\layout-land\Main.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Auth.axml" />
@@ -204,9 +203,9 @@
     <AndroidResource Include="Resources\layout\language_spinner.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-      <AndroidResource Include="Resources\layout\navigation_header.axml" />
-      <AndroidResource Include="Resources\layout\Recording.axml" />
-      <AndroidResource Include="Resources\layout\StatsRow.axml">
+    <AndroidResource Include="Resources\layout\navigation_header.axml" />
+    <AndroidResource Include="Resources\layout\Recording.axml" />
+    <AndroidResource Include="Resources\layout\StatsRow.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ColorSquare.xml" />
@@ -233,7 +232,6 @@
     <AndroidResource Include="Resources\values\styles.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Config\config.json" />
     <AndroidResource Include="Resources\layout\item_team.axml" />
     <AndroidResource Include="Resources\menu\navigation.xml">
       <SubType>Designer</SubType>

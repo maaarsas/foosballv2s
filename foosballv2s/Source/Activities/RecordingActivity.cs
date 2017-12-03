@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Android;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -12,6 +13,7 @@ using Android.Views;
 using Android.Widget;
 using Emgu.CV;
 using Emgu.CV.Structure;
+using foosballv2s.Droid.Shared;
 using foosballv2s.Droid.Shared.Source.Activities.Helpers;
 using foosballv2s.Source.Activities.Events;
 using foosballv2s.Source.Activities.Helpers;

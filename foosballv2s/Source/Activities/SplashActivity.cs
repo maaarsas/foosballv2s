@@ -1,7 +1,9 @@
+using Android;
 using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Widget;
+using foosballv2s.Droid.Shared;
 using foosballv2s.Source.Services.CredentialStorage;
 using Xamarin.Forms;
 using Application = Android.App.Application;

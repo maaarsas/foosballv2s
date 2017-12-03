@@ -117,58 +117,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <!--<Compile Include="Resources\Resource.Designer.cs" />-->
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Source\Activities\Adapters\GameAdapter.cs" />
     <Compile Include="Source\Activities\Adapters\TeamAdapter.cs" />
+    <Compile Include="Source\Activities\Adapters\TeamAutoCompleteAdapter.cs" />
     <Compile Include="Source\Activities\AuthActivity.cs" />
+    <Compile Include="Source\Activities\BallImageActivity.cs" />
     <Compile Include="Source\Activities\ColorPickerActivity.cs" />
     <Compile Include="Source\Activities\Filters\TeamFilter.cs" />
     <Compile Include="Source\Activities\Fragments\LoginFragment.cs" />
     <Compile Include="Source\Activities\Fragments\RegisterFragment.cs" />
     <Compile Include="Source\Activities\GamesActivity.cs" />
-    <Compile Include="Source\Activities\Helpers\GameTimeHelper.cs" />
     <Compile Include="Source\Activities\Helpers\NavigationHelper.cs" />
     <Compile Include="Source\Activities\Listeners\NavigationItemClickListener.cs" />
-    <Compile Include="Resources\Resource.Designer.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Source\Activities\Adapters\TeamAutoCompleteAdapter.cs" />
-    <Compile Include="Source\Activities\BallImageActivity.cs" />
-    <Compile Include="Source\Activities\Helpers\ConfigHelper.cs" />
     <Compile Include="Source\Activities\MainActivity.cs" />
     <Compile Include="Source\Activities\PreviousGamesActivity.cs" />
     <Compile Include="Source\Activities\RecordingActivity.cs" />
     <Compile Include="Source\Activities\SplashActivity.cs" />
     <Compile Include="Source\Activities\TeamsActivity.cs" />
     <Compile Include="Source\Activities\TournamentsActivity.cs" />
-    <Compile Include="Source\Entities\Game.cs" />
-    <Compile Include="Source\Entities\GameEvent.cs" />
-    <Compile Include="Source\Entities\Team.cs" />
-    <Compile Include="Source\Entities\User.cs" />
-    <Compile Include="Source\Events\GameEventArgs.cs" />
     <Compile Include="Source\MyApplication.cs" />
-    <Compile Include="Source\Services\CredentialStorage\CredentialStorage.cs" />
-    <Compile Include="Source\Services\CredentialStorage\ICredentialStorage.cs" />
-    <Compile Include="Source\Services\CredentialStorage\Models\Credential.cs" />
-    <Compile Include="Source\Services\FileIO\IO.cs" />
-    <Compile Include="Source\Services\FileIO\SLSupp.cs" />
-    <Compile Include="Source\Services\FoosballWebService\FoosballWebServiceClient.cs" />
-    <Compile Include="Source\Services\FoosballWebService\Helpers\FoosballJsonConvert.cs" />
-    <Compile Include="Source\Services\FoosballWebService\IWebServiceClient.cs" />
-    <Compile Include="Source\Services\FoosballWebService\Models\LoginResponse.cs" />
-    <Compile Include="Source\Services\FoosballWebService\Models\LoginViewModel.cs" />
-    <Compile Include="Source\Services\FoosballWebService\Models\RegisterResponse.cs" />
-    <Compile Include="Source\Services\FoosballWebService\Models\RegisterViewModel.cs" />
-    <Compile Include="Source\Services\FoosballWebService\Repository\AuthRepository.cs" />
-    <Compile Include="Source\Services\FoosballWebService\Repository\GameRepository.cs" />
-    <Compile Include="Source\Services\FoosballWebService\Repository\TeamRepository.cs" />
-    <Compile Include="Source\Services\GameLogger\GameLogger.cs" />
-    <Compile Include="Source\Services\GameLogger\IGameLogger.cs" />
-    <Compile Include="Source\Services\GameRecognition\BallImage.cs" />
-    <Compile Include="Source\Services\GameRecognition\IVideo.cs" />
-    <Compile Include="Source\Services\GameRecognition\MovementDetector.cs" />
-    <Compile Include="Source\Services\GameRecognition\VideoFile.cs" />
-    <Compile Include="Source\Services\GameRecognition\VideoLive.cs" />
-    <Compile Include="Source\Services\TextToSpeech\ITextToSpeech.cs" />
-    <Compile Include="Source\Services\TextToSpeech\TextToSpeech.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidNativeLibrary Include="libs\armeabi\libcvextern.so">
@@ -180,94 +150,73 @@
     <AndroidNativeLibrary Include="libs\x86\libcvextern.so">
       <Link>lib\x86\libcvextern.so</Link>
     </AndroidNativeLibrary>
-    <AndroidResource Include="Resources\drawable\img_background_foosball.jpg" />
-    <AndroidResource Include="Resources\layout\Games.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\Teams.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\Tournaments.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
     <None Include="packages.config" />
     <None Include="Properties\AndroidManifest.xml">
       <SubType>Designer</SubType>
     </None>
-    <AndroidResource Include="Resources\layout\ColorPicker.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout-land\Main.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ColorSquare.xml" />
-    <AndroidResource Include="Resources\layout\BallImage.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\Main.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\values\Strings.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
     <Folder Include="lib\armeabi-v7a\" />
     <Folder Include="lib\armeabi\" />
     <Folder Include="lib\x86\" />
-    <Folder Include="Resources\image\" />
-    <Folder Include="Source\Activities\Views\" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Loading.xml" />
-    <AndroidResource Include="Resources\drawable\NewGame.xml" />
-    <AndroidResource Include="Resources\drawable\Process.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\Recording.axml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\splash_background.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\values\colors.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\values\styles.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-mdpi\ic_launcher.png" />
-    <AndroidResource Include="Resources\mipmap-xhdpi\ic_launcher.png" />
-    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_launcher.png" />
-    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\BallDetectionRing.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\StatsRow.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Config\config.json" />
-    <AndroidResource Include="Resources\layout\item_team.axml" />
-    <AndroidResource Include="Resources\menu\navigation.xml" />
-    <AndroidResource Include="Resources\layout\Toolbar.axml" />
-    <AndroidResource Include="Resources\layout\Auth.axml" />
-    <AndroidResource Include="Resources\values\dimens.xml" />
-    <AndroidResource Include="Resources\layout\fragment_login.axml" />
-    <AndroidResource Include="Resources\layout\fragment_register.axml" />
-    <AndroidResource Include="Resources\layout\navigation_header.axml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\foosballv2s.Android.Shared\foosballv2s.Android.Shared.csproj">
       <Project>{AD1F922D-1E46-4372-9336-112DDE5590B3}</Project>
       <Name>foosballv2s.Android.Shared</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\BallDetectionRing.xml" />
+    <AndroidResource Include="Resources\drawable\ColorSquare.xml" />
+    <AndroidResource Include="Resources\drawable\img_background_foosball.jpg" />
+    <AndroidResource Include="Resources\drawable\Loading.xml" />
+    <AndroidResource Include="Resources\drawable\NewGame.xml" />
+    <AndroidResource Include="Resources\drawable\Process.xml" />
+    <AndroidResource Include="Resources\drawable\splash_background.xml" />
+    <AndroidResource Include="Resources\layout-land\Main.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Auth.axml" />
+    <AndroidResource Include="Resources\layout\BallImage.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ColorPicker.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_login.axml" />
+    <AndroidResource Include="Resources\layout\fragment_register.axml" />
+    <AndroidResource Include="Resources\layout\Games.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\item_team.axml" />
+    <AndroidResource Include="Resources\layout\Main.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\navigation_header.axml" />
+    <AndroidResource Include="Resources\layout\Recording.axml" />
+    <AndroidResource Include="Resources\layout\StatsRow.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Teams.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Toolbar.axml" />
+    <AndroidResource Include="Resources\layout\Tournaments.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\menu\navigation.xml" />
+    <AndroidResource Include="Resources\mipmap-mdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\values\colors.xml" />
+    <AndroidResource Include="Resources\values\dimens.xml" />
+    <AndroidResource Include="Resources\values\Strings.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\values\styles.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" />

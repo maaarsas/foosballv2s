@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Android;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -7,6 +8,7 @@ using Android.Support.V4.App;
 using Android.Support.V4.View;
 using Android.Views;
 using Android.Widget;
+using foosballv2s.Droid.Shared;
 using foosballv2s.Source.Activities.Fragments;
 using foosballv2s.Source.Services.FoosballWebService.Models;
 using foosballv2s.Source.Services.FoosballWebService.Repository;

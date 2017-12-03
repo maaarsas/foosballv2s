@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Android;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -8,6 +9,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Emgu.CV.Structure;
+using foosballv2s.Droid.Shared;
 using foosballv2s.Droid.Shared.Source.Activities.Helpers;
 using foosballv2s.Source.Activities.Helpers;
 using foosballv2s.Source.Entities;

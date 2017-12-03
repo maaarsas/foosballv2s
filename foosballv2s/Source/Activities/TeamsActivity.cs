@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Android;
 using Android.App;
 using Android.OS;
 using Android.Support.V7.App;
@@ -9,6 +10,7 @@ using foosballv2s.Source.Services.FoosballWebService.Repository;
 using Xamarin.Forms;
 using ListView = Android.Widget.ListView;
 using Android.Widget;
+using foosballv2s.Droid.Shared;
 
 namespace foosballv2s.Source.Activities
 {

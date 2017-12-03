@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Android;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -17,6 +18,7 @@ using Xamarin.Forms;
 using View = Android.Views.View;
 using Android.Media;
 using Android.Views;
+using foosballv2s.Droid.Shared;
 
 namespace foosballv2s.Source.Activities
 {

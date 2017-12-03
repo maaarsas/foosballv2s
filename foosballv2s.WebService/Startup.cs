@@ -34,9 +34,9 @@ namespace foosballv2s.WebService
                 Configuration.GetConnectionString("DbConnectionString")
             ));
 
-            services.AddDbContext<IdentityContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DbConnectionString"))
-            );
+//            services.AddDbContext<IdentityContext>(options =>
+//                options.UseSqlServer(Configuration.GetConnectionString("DbConnectionString"))
+//            );
             
             
             services.AddIdentity<User, UserRole>(cfg =>
@@ -47,7 +47,7 @@ namespace foosballv2s.WebService
                 cfg.Password.RequireUppercase = false;
                 cfg.Password.RequireNonAlphanumeric = false;
                 cfg.Password.RequiredLength = 8;
-            }).AddEntityFrameworkStores<IdentityContext>().AddDefaultTokenProviders(); 
+            }).AddEntityFrameworkStores<WebServiceDbContext>().AddDefaultTokenProviders(); 
             
             services.AddAuthentication(options =>
                 {

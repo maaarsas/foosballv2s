@@ -98,6 +98,7 @@ namespace foosballv2s.WebService.Controllers
                     );
                     return Ok(new
                     {
+                        id = user.Id,
                         token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
                         expiration = jwtSecurityToken.ValidTo
                     });

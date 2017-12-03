@@ -1,7 +1,9 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using foosballv2s.WebService.Params;
 using foosballv2s.WebService.Validators;
 
 namespace foosballv2s.WebService.Models
@@ -22,9 +24,23 @@ namespace foosballv2s.WebService.Models
         /// Gets all teams from the storage
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Team> GetAll()
+        public IEnumerable<Team> GetAll(TeamParams teamParams, SortParams sortParams, User user)
         {
-            return _context.Teams.ToList();
+            IQueryable<Team> teamSet = _context.Teams;
+            if (teamParams.UserId == user.Id)
+            {
+                teamSet = teamSet.Where(t => t.User.Id == user.Id);
+            }
+            else if (teamParams.UserId.Length == 0)
+            {
+                teamSet = teamSet;
+            }
+            else
+            {
+                return null;
+            }
+
+            return sortParams.ApplySortParams<Team>(teamSet.ToList());
         }
 
         /// <summary>

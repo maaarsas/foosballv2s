@@ -4,9 +4,11 @@ namespace foosballv2s.Droid.Shared.Source.Entities
 {
     public class Team
     {
-        public int id;
+        public int Id { get; set; }
         
         public string TeamName { get; set; }
+        
+        public User User { get; set; }
         
         private int gamesPlayed = 0;
         private int gamesWon = 0;

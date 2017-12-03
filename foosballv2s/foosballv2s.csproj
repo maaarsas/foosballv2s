@@ -122,14 +122,18 @@
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Source\Activities\Adapters\GameAdapter.cs" />
     <Compile Include="Source\Activities\Adapters\TeamAdapter.cs" />
-    <Compile Include="Source\Activities\Adapters\TeamAutoCompleteAdapter.cs" />
+      <Compile Include="Source\Activities\Adapters\ViewPagerAdapter.cs" />
+      <Compile Include="Source\Activities\Adapters\TeamAutoCompleteAdapter.cs" />
     <Compile Include="Source\Activities\AuthActivity.cs" />
     <Compile Include="Source\Activities\BallImageActivity.cs" />
     <Compile Include="Source\Activities\ColorPickerActivity.cs" />
     <Compile Include="Source\Activities\Filters\TeamFilter.cs" />
+    <Compile Include="Source\Activities\Fragments\GameListFragment.cs" />
     <Compile Include="Source\Activities\Fragments\LoginFragment.cs" />
     <Compile Include="Source\Activities\Fragments\RegisterFragment.cs" />
+    <Compile Include="Source\Activities\Fragments\TeamListFragment.cs" />
     <Compile Include="Source\Activities\GamesActivity.cs" />
+      <Compile Include="Source\Activities\Helpers\LanguageHelper.cs" />
     <Compile Include="Source\Activities\Helpers\NavigationHelper.cs" />
     <Compile Include="Source\Activities\Listeners\NavigationItemClickListener.cs" />
     <Compile Include="Source\Activities\MainActivity.cs" />
@@ -171,11 +175,14 @@
     <AndroidResource Include="Resources\drawable\BallDetectionRing.xml" />
     <AndroidResource Include="Resources\drawable\ColorSquare.xml" />
     <AndroidResource Include="Resources\drawable\img_background_foosball.jpg" />
-    <AndroidResource Include="Resources\drawable\Loading.xml" />
-    <AndroidResource Include="Resources\drawable\NewGame.xml" />
-    <AndroidResource Include="Resources\drawable\Process.xml" />
-    <AndroidResource Include="Resources\drawable\splash_background.xml" />
-    <AndroidResource Include="Resources\layout-land\Main.axml">
+      <AndroidResource Include="Resources\layout\fragment_game_list.axml" />
+      <AndroidResource Include="Resources\layout\fragment_team_list.axml" />
+      <AndroidResource Include="Resources\layout\Games.axml">
+      <AndroidResource Include="Resources\drawable\Loading.xml" />
+      <AndroidResource Include="Resources\drawable\NewGame.xml" />
+      <AndroidResource Include="Resources\drawable\Process.xml" />
+      <AndroidResource Include="Resources\drawable\splash_background.xml" />
+      <AndroidResource Include="Resources\layout-land\Main.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Auth.axml" />
@@ -194,9 +201,16 @@
     <AndroidResource Include="Resources\layout\Main.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\navigation_header.axml" />
-    <AndroidResource Include="Resources\layout\Recording.axml" />
-    <AndroidResource Include="Resources\layout\StatsRow.axml">
+    <AndroidResource Include="Resources\layout\language_spinner.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+      <AndroidResource Include="Resources\layout\navigation_header.axml" />
+      <AndroidResource Include="Resources\layout\Recording.axml" />
+      <AndroidResource Include="Resources\layout\StatsRow.axml">
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ColorSquare.xml" />
+    <AndroidResource Include="Resources\layout\BallImage.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Teams.axml">
@@ -217,6 +231,24 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\values\styles.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config\config.json" />
+    <AndroidResource Include="Resources\layout\item_team.axml" />
+    <AndroidResource Include="Resources\menu\navigation.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Toolbar.axml" />
+    <AndroidResource Include="Resources\layout\Auth.axml" />
+    <AndroidResource Include="Resources\values\dimens.xml" />
+    <AndroidResource Include="Resources\layout\fragment_login.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_register.axml" />
+    <AndroidResource Include="Resources\layout\navigation_header.axml" />
+    <AndroidResource Include="Resources\values-lt\Strings.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" />

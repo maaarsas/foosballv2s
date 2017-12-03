@@ -34,7 +34,7 @@ namespace foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Repository
             {
                 return false;
             }
-            _credentialStorage.Save(model.Email, loginResponse.Token, loginResponse.Expiration);
+            _credentialStorage.Save(loginResponse.Id, model.Email, loginResponse.Token, loginResponse.Expiration);
             client.AddAuthorizationHeader();
             return true;
         }

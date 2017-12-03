@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using foosballv2s.Droid.Shared.Source.Entities;
+using foosballv2s.Droid.Shared.Source.Services.CredentialStorage;
 using foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Helpers;
 using foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Repository;
 using Newtonsoft.Json;
@@ -15,19 +16,21 @@ namespace foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Repository
     {
         private readonly string endpointUrl = "/game";
         private IWebServiceClient client;
+        private ICredentialStorage storage;
 
         public GameRepository()
         {
             client = DependencyService.Get<IWebServiceClient>();
+            storage = DependencyService.Get<ICredentialStorage>();
         }
        
         /// <summary>
         /// Fetches all games
         /// </summary>
         /// <returns></returns>
-        public async Task<Game[]> GetAll()
+        public async Task<Game[]> GetAll(string urlParams = null)
         {
-            var response = await client.GetAsync(endpointUrl);
+            var response = await client.GetAsync(endpointUrl + "/?" + urlParams);
             Game[] games = FoosballJsonConvert.DeserializeObject<Game[]>(response);
             if (games == null)
             {
@@ -55,6 +58,8 @@ namespace foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Repository
         /// <returns></returns>
         public async Task<Game> Create(Game game)
         {
+            game.User = storage.GetCurrentUser();
+            
             var gameJsonString = JsonConvert.SerializeObject(game);
             var response = await client.PostAsync(endpointUrl, gameJsonString);
             Game createdGame = FoosballJsonConvert.DeserializeObject<Game>(response);
@@ -69,6 +74,8 @@ namespace foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Repository
         /// <returns></returns>
         public async Task<Game> Update(int id, Game game)
         {
+            game.User = storage.GetCurrentUser();
+            
             var gameJsonString = JsonConvert.SerializeObject(game);
             var response = await client.PutAsync(endpointUrl + "/" + id , gameJsonString);
             Game updatedGame = FoosballJsonConvert.DeserializeObject<Game>(response);

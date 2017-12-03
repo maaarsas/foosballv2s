@@ -134,7 +134,7 @@ namespace foosballv2s.Source.Activities
                         infoAlert.Dispose();
                     }
                     else
-                        Toast.MakeText(this, 
+                        Toast.MakeText(Android.App.Application.Context, 
                             System.String.Format(Resources.GetString(Resource.String.team_name_exists2), input.Text), 
                             ToastLength.Short).Show();
                 })
@@ -150,9 +150,9 @@ namespace foosballv2s.Source.Activities
                 {
                     t = await teamRepository.Delete(team.id);
                     if (t != null)
-                        Toast.MakeText(this, System.String.Format(Resources.GetString(Resource.String.notDel), team.TeamName), ToastLength.Short).Show();
+                        Toast.MakeText(Android.App.Application.Context, System.String.Format(Resources.GetString(Resource.String.notDel), team.TeamName), ToastLength.Short).Show();
                     else
-                        Toast.MakeText(this, System.String.Format(Resources.GetString(Resource.String.isDel), team.TeamName), ToastLength.Short).Show();
+                        Toast.MakeText(Android.App.Application.Context, System.String.Format(Resources.GetString(Resource.String.isDel), team.TeamName), ToastLength.Short).Show();
 
                     deleteAlert.Dispose();
                     infoAlert.Dispose();

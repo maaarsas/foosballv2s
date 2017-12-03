@@ -55,53 +55,7 @@ namespace foosballv2s.Source.Activities
         [Export("ChangeLanguage")]
         public async void ChangeLanguage(View view)
         {
-            dialog = new Dialog(this);
-            dialog.SetContentView(Resource.Layout.language_spinner);
-            dialog.SetTitle(Resource.String.choose_lang);
-            dialog.SetCancelable(false);
-            dialog.Show();
-
-            languages = (RadioGroup)dialog.FindViewById(Resource.Id.languages);
-            btnSumbitLanguage = dialog.FindViewById<Android.Widget.Button>(Resource.Id.btnSumbitLanguage);
-            btnSumbitLanguage.Click += btnSumbitLanguage_Click;
-        }
-        private void btnSumbitLanguage_Click(object sender, EventArgs e)
-        {
-            Intent intent = new Intent(this, typeof(AuthActivity));
-            dialog.Dismiss();
-
-            switch (languages.CheckedRadioButtonId)
-            {
-                case Resource.Id.language1:
-                    if (Locale.Default.Language.Equals("lt"))
-                        break;
-                    UpdateResources(this, "lt");
-                    StartActivity(intent);
-                    Finish();
-                    break;
-                case Resource.Id.language2:
-                    if (Locale.Default.Language.Equals("en"))
-                        break;
-                    UpdateResources(this, "en");
-                    StartActivity(intent);
-                    Finish();
-                    break;
-            }
-        }
-
-        private static bool UpdateResources(Context context, string language)
-        {
-            Locale locale = new Locale(language);
-            Locale.Default = locale;
-
-            Resources resources = context.Resources;
-
-            Configuration configuration = resources.Configuration;
-            configuration.Locale = locale;
-
-            resources.UpdateConfiguration(configuration, resources.DisplayMetrics);
-
-            return true;
+            Helpers.LanguageHelper.ChangeLanguage(this, typeof(AuthActivity)); 
         }
 
         [Export("SubmitLogin")]

@@ -126,6 +126,7 @@
     <Compile Include="Source\Activities\Fragments\RegisterFragment.cs" />
     <Compile Include="Source\Activities\GamesActivity.cs" />
     <Compile Include="Source\Activities\Helpers\GameTimeHelper.cs" />
+    <Compile Include="Source\Activities\Helpers\LanguageHelper.cs" />
     <Compile Include="Source\Activities\Helpers\NavigationHelper.cs" />
     <Compile Include="Source\Activities\Listeners\NavigationItemClickListener.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />

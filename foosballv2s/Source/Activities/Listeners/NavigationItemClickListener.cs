@@ -78,15 +78,7 @@ namespace foosballv2s.Source.Activities.Listeners
 
             if (menuItem.ItemId == Resource.Id.nav_language)
             {
-                dialog = new Dialog(currentActivity);
-                dialog.SetContentView(Resource.Layout.language_spinner);
-                dialog.SetTitle(Resource.String.choose_lang);
-                dialog.SetCancelable(false);
-                dialog.Show();
-
-                languages = (RadioGroup)dialog.FindViewById(Resource.Id.languages);
-                btnSumbitLanguage = dialog.FindViewById<Android.Widget.Button>(Resource.Id.btnSumbitLanguage);
-                btnSumbitLanguage.Click += btnSumbitLanguage_Click;
+                Helpers.LanguageHelper.ChangeLanguage(currentActivity, typeof(MainActivity));
             }
             else
             {
@@ -95,44 +87,6 @@ namespace foosballv2s.Source.Activities.Listeners
                 currentActivity.Finish();
             }
             return true;
-        }
-
-        private void btnSumbitLanguage_Click(object sender, EventArgs e)
-        {
-            Intent intent = new Intent(currentActivity, typeof(MainActivity));
-            switch (languages.CheckedRadioButtonId)
-            {
-                case Resource.Id.language1:
-                    if (Locale.Default.Language.Equals("lt"))
-                        break;
-                    UpdateResources(currentActivity, "lt");
-                    break;
-                case Resource.Id.language2:
-                    if (Locale.Default.Language.Equals("en"))
-                        break;
-                    UpdateResources(currentActivity, "en");
-                    break;
-            }
-            dialog.Dismiss();
-            currentActivity.StartActivity(intent);
-            currentActivity.Finish();
-        }
-
-        private static bool UpdateResources(Context context, string language)
-        {
-            Locale locale = new Locale(language);
-            Locale.Default = locale;
-
-            Resources resources = context.Resources;
-
-            Configuration configuration = resources.Configuration;
-            configuration.Locale = locale;
-
-            resources.UpdateConfiguration(configuration, resources.DisplayMetrics);
-
-            return true;
-        }
-        
-        
+        } 
     }
 }

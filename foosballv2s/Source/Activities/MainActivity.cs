@@ -105,7 +105,7 @@ namespace foosballv2s.Source.Activities
                     {
                         string msg = Resources.GetString(Resource.String.team_name_exists);
                         string msg2 = System.String.Format(msg, s);
-                        Toast.MakeText(this, msg2, ToastLength.Short).Show();
+                        Toast.MakeText(Android.App.Application.Context, msg2, ToastLength.Short).Show();
                         return true;
                     }
                 }

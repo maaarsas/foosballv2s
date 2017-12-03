@@ -1,4 +1,5 @@
 ﻿using System;
+using foosballv2s.Source.Entities;
 using foosballv2s.Source.Services.CredentialStorage.Models;
 
 namespace foosballv2s.Source.Services.CredentialStorage
@@ -9,5 +10,6 @@ namespace foosballv2s.Source.Services.CredentialStorage
         Credential Read();
         void Remove();
         bool HasExpired();
+        User GetCurrentUser();
     }
 }

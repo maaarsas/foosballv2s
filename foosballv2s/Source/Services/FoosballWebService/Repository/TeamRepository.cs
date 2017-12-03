@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using foosballv2s.Source.Entities;
+using foosballv2s.Source.Services.CredentialStorage;
 using Newtonsoft.Json;
 using Xamarin.Forms;
 
@@ -13,10 +14,12 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
     {
         private readonly string endpointUrl = "/team";
         private IWebServiceClient client;
+        private ICredentialStorage storage;
 
         public TeamRepository()
         {
             client = DependencyService.Get<IWebServiceClient>();
+            storage = DependencyService.Get<ICredentialStorage>();
         }
        
         /// <summary>
@@ -53,6 +56,8 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
         /// <returns></returns>
         public async Task<Team> Create(Team team)
         {
+            team.User = storage.GetCurrentUser();
+            
             var teamJsonString = JsonConvert.SerializeObject(team);
             var response = await client.PostAsync(endpointUrl, teamJsonString);
             Team createdTeam = FoosballJsonConvert.DeserializeObject<Team>(response);
@@ -67,6 +72,8 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
         /// <returns></returns>
         public async Task<Team> Update(int id, Team team)
         {
+            team.User = storage.GetCurrentUser();
+            
             var teamJsonString = JsonConvert.SerializeObject(team);
             var response = await client.PutAsync(endpointUrl + "/" + id , teamJsonString);
             Team updatedTeam = FoosballJsonConvert.DeserializeObject<Team>(response);

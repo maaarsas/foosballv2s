@@ -1,5 +1,6 @@
 ﻿using System;
 using Android.Content;
+using foosballv2s.Source.Entities;
 using foosballv2s.Source.Services.CredentialStorage.Models;
 using Xamarin.Forms;
 using Application = Android.App.Application;
@@ -66,6 +67,15 @@ namespace foosballv2s.Source.Services.CredentialStorage
                 return true;
             }
             return false;
+        }
+
+        public User GetCurrentUser()
+        {
+            Credential credential = Read();
+            User user = new User();
+            user.Id = credential.Id;
+            user.Email = credential.Email;
+            return user;
         }
     }
 }

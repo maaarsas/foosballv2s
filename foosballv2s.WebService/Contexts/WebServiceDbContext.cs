@@ -46,6 +46,11 @@ namespace foosballv2s.WebService.Models
                 .Entity<GameEvent>()
                 .HasIndex(t => t.Id).IsUnique(true);
         }
+        
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.EnableSensitiveDataLogging();
+        }
 
     }
 }

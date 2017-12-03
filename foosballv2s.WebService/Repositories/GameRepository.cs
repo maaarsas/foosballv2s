@@ -77,6 +77,9 @@ namespace foosballv2s.WebService.Models
             {
                 throw new ArgumentNullException("game");
             }
+            var users = _context.Users.AsNoTracking();
+            game.Team1.User = null;
+            game.Team2.User = null;
             _context.Teams.Attach(game.Team1);
             _context.Teams.Attach(game.Team2);
             _context.Games.Add(game);
@@ -127,6 +130,9 @@ namespace foosballv2s.WebService.Models
             {
                 return false;
             }
+            var users = _context.Users.AsNoTracking();
+            game.Team1.User = null;
+            game.Team2.User = null;
             
             gameToUpdate.Team1 = game.Team1;
             gameToUpdate.Team2 = game.Team2;

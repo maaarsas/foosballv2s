@@ -5,6 +5,7 @@ using Emgu.CV.Structure;
 using foosballv2s.Source.Activities.Events;
 using foosballv2s.Source.Entities;
 using foosballv2s.Source.Services.GameLogger;
+using Newtonsoft.Json;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(Game))]
@@ -22,6 +23,7 @@ namespace foosballv2s.Source.Entities
         private int team1Score = 0;
         private int team2Score = 0;
 
+        [JsonIgnore]
         public Hsv BallColor { get; set; }
         
         public Team Team1 { get; set; } = new Team();
@@ -49,7 +51,10 @@ namespace foosballv2s.Source.Entities
         public DateTime? StartTime { get; set; } = null;
         public DateTime? EndTime { get; set; } = null;
 
+        [JsonIgnore]
         public Team WinningTeam { get; set; }
+        
+        [JsonIgnore]
         public Boolean HasEnded { get; private set; } = false;
         
         public ICollection<GameEvent> GameEvents { get; set; } = new Collection<GameEvent>();

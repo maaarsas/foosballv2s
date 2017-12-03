@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Foosball Commentator</string>
     <string name="openCamera">Open Camera</string>
-    <string name="welcome_text">Welcome to Foosball Commentator</string>
+    <string name="welcome_text">Start a new game</string>
     <string name="enter_team_names">Enter the names of both teams</string>
     <string name="first_team_name">First team name</string>
     <string name="second_team_name">Second team name</string>

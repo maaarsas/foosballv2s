@@ -112,8 +112,9 @@ namespace foosballv2s.Source.Activities
                 }
                 return true;
             };
-
+            
             dialog.Dismiss();
+            
             // first team is not selected from the list, so it is a new one, create it
             if (team1 == null)
             {

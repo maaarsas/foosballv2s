@@ -18,7 +18,8 @@
   <string name="same_team_names">Komandos negali turėti vienodų pavadinimų</string>
   <string name="team_name_exists">Komanda {0} jau yra. Pasirinkite komandą iš sąrašo arba įveskite naują.</string>
   <string name="stats">Stats</string>
-  <string name="retrieving_teams">Įkeliamos komandos. Prašome palaukti.</string>
+  <string name="retrieving_your_teams">Įkeliamos tavo komandos. Prašome palaukti.</string>
+  <string name="retrieving_all_teams">Įkeliamos visos komandos. Prašome palaukti.</string>
   <string name="checking_teams">Tikrinami komandų pavadinimai. Prašome palaukti.</string>
   <string name="game_end_team_won">Komanda {0} laimėjo šį žaidimą!</string>
   <string name="game_end_result">Rezultatas: {0} {2} - {3} {1}</string>
@@ -40,11 +41,15 @@
   <string name="logged_in_as">Prisijungėte kaip</string>
 
   <!--Games-->
-  <string name="retrieving_games">Įkeliami žaidimai. Prašome palaukti.</string>
+  <string name="retrieving_your_games">Įkeliami tavo žaidimai. Prašome palaukti</string>
+  <string name="retrieving_all_games">Įkeliami visi žaidimai. Prašome palaukti</string>
   <string name="time">Laikas</string>
   <string name="name">Komanda</string>
   <string name="score">Rezultatas</string>
-  
+  <string name="my_games">Mano</string>
+  <string name="all_games">Visos</string>
+
+
   <!--Teams-->
   <string name="change_name_hint">Naujas komandos pavadinimas</string>
   <string name="games_won_played_perc">Laimėta: {0}\nSužaista: {1}\nSėkmingumas: {2}%</string>
@@ -59,6 +64,9 @@
   <string name="team_name_exists2">Komanda {0} jau egzistuoja.</string>
   <string name="notDel">{0}  neištrinta.</string>
   <string name="isDel">{0}  ištrinta.</string>
+  <string name="my_teams">Mano</string>
+  <string name="all_teams">Visos</string>
+
 
   <!--Login & registration-->
   <string name="login">Prisijungimas</string>

@@ -16,6 +16,9 @@ using Java.Lang;
 using Xamarin.Forms;
 using Application = Android.App.Application;
 using View = Android.Views.View;
+using Java.Util;
+using Android.Content.Res;
+using System;
 
 namespace foosballv2s.Source.Activities
 {
@@ -27,9 +30,12 @@ namespace foosballv2s.Source.Activities
         private Toolbar toolbar;
         private TabLayout tabLayout;
         private ViewPager viewPager;
-
         private AuthRepository _authRepository;
- 
+
+        private RadioGroup languages;
+        private Android.Widget.Button btnSumbitLanguage;
+        private Dialog dialog;
+
         protected override void OnCreate(Bundle savedInstanceState) 
         {
             base.OnCreate(savedInstanceState);
@@ -45,6 +51,12 @@ namespace foosballv2s.Source.Activities
  
             tabLayout = (TabLayout) FindViewById(Resource.Id.sliding_tabs);
             tabLayout.SetupWithViewPager(viewPager);
+        }
+
+        [Export("ChangeLanguage")]
+        public async void ChangeLanguage(View view)
+        {
+            Helpers.LanguageHelper.ChangeLanguage(this, typeof(AuthActivity)); 
         }
 
         [Export("SubmitLogin")]

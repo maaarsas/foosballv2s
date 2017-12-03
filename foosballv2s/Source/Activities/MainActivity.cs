@@ -95,29 +95,30 @@ namespace foosballv2s.Source.Activities
             Team team2 = ((TeamAutoCompleteAdapter)secondTeamTextView.Adapter).SelectedTeam;
 
             //Example how to use TextToSpeech
-            DependencyService.Get<ITextToSpeech>().Speak("Welcome " + firstTeamTextView.Text + " and " + secondTeamTextView.Text);
+            //DependencyService.Get<ITextToSpeech>().Speak("Welcome " + firstTeamTextView.Text + " and " + secondTeamTextView.Text);
 
-            List<Team> l = new List<Team>(await teamRepository.GetAll());
-            Func<string, bool> d = delegate (string s)
+
+            List<Team> teams = new List<Team>(await teamRepository.GetAll());
+            Func<string, bool> teamExists = delegate (string s)
             {
-                foreach (Team t in l)
+                foreach (Team team in teams)
                 {
-                    if (t.TeamName.Equals(s))
+                    if (team.TeamName.Equals(s))
                     {
                         string msg = Resources.GetString(Resource.String.team_name_exists);
                         string msg2 = System.String.Format(msg, s);
                         Toast.MakeText(Android.App.Application.Context, msg2, ToastLength.Short).Show();
-                        return false;
+                        return true;
                     }
                 }
-                return true;
+                return false;
             };
 
             dialog.Dismiss();
             // first team is not selected from the list, so it is a new one, create it
             if (team1 == null)
             {
-                if (d(firstTeamTextView.Text))
+                if (!teamExists(firstTeamTextView.Text) && !firstTeamTextView.Text.Equals(secondTeamTextView.Text))
                 {
                     team1 = new Team { TeamName = firstTeamTextView.Text };
                     team1 = await teamRepository.Create(team1);
@@ -127,7 +128,7 @@ namespace foosballv2s.Source.Activities
             // second team is not selected from the list, so it is a new one, create it
             if (team2 == null)
             {
-                if (d(secondTeamTextView.Text))
+                if (!teamExists(secondTeamTextView.Text) && !firstTeamTextView.Text.Equals(secondTeamTextView.Text))
                 {
                     team2 = new Team { TeamName = secondTeamTextView.Text };
                     team2 = await teamRepository.Create(team2);

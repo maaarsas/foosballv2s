@@ -1,10 +1,14 @@
 ﻿using Android.App;
 using Android.Content;
+using Android.Content.Res;
 using Android.Support.Design.Internal;
 using Android.Support.Design.Widget;
 using Android.Support.V4.Widget;
 using Android.Views;
+using Android.Widget;
 using foosballv2s.Source.Services.CredentialStorage;
+using Java.Util;
+using System;
 using Xamarin.Forms;
 using Application = Android.App.Application;
 
@@ -17,6 +21,9 @@ namespace foosballv2s.Source.Activities.Listeners
     {
         private Activity currentActivity;
         private NavigationMenuView menu;
+        private RadioGroup languages;
+        private Android.Widget.Button btnSumbitLanguage;
+        private Dialog dialog;
 
         public NavigationItemClickListener(Activity activity)
         {
@@ -68,11 +75,18 @@ namespace foosballv2s.Source.Activities.Listeners
                     break;
                 }
             }
-            Intent intent = new Intent(currentActivity, intentType);
-            intent.AddFlags(ActivityFlags.NoAnimation);
-            currentActivity.StartActivity(intent);
-            currentActivity.Finish();
+
+            if (menuItem.ItemId == Resource.Id.nav_language)
+            {
+                Helpers.LanguageHelper.ChangeLanguage(currentActivity, typeof(MainActivity));
+            }
+            else
+            {
+                Intent intent = new Intent(Application.Context, intentType);
+                currentActivity.StartActivity(intent);
+                currentActivity.Finish();
+            }
             return true;
-        }
+        } 
     }
 }

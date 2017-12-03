@@ -1,62 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Foosball Commentator</string>
-    <string name="openCamera">Open Camera</string>
-    <string name="welcome_text">Welcome to Foosball Commentator</string>
-    <string name="enter_team_names">Enter the names of both teams</string>
-    <string name="first_team_name">First team name</string>
-    <string name="second_team_name">Second team name</string>
-    <string name="submit">Submit</string>
-    <string name="prev">Previous Settings</string>
-    <string name="detected_color">Detected color</string>
-    <string name="detect_color">Detect color</string>
-    <string name="detect_again">Detect again</string>
-    <string name="point_camera_to_ball">The color of the ball is needed. Please point the camera to the ball.</string>
-    <string name="team1_goal">Team 1 goal</string>
-    <string name="team2_goal">Team 2 goal</string>
-    <string name="wrong_team_names">Entered team names are wrong (probably contain disallowed symbols)</string>
-    <string name="same_team_names">Different teams can not have the same name</string>
-    <string name="team_name_exists">The team {0} already exists. Select team from the list or create a new one.</string>
-    <string name="stats">Stats</string>
-    <string name="retrieving_teams">Loading teams. Please wait.</string>
-    <string name="checking_teams">Please wait while your selected teams are being checked</string>
-    <string name="ok">Ok</string>
-    <string name="game_end_team_won">Team {0} has won this game!</string>
-    <string name="game_end_result">Result: {0} {2} - {3} {1}</string>
-    <string name="saving_game">Your game is being saved.</string>
-    
+  <string name="app_name">Foosball Commentator</string>
+  <string name="openCamera">Open Camera</string>
+  <string name="welcome_text">Welcome to Foosball Commentator</string>
+  <string name="enter_team_names">Enter the names of both teams</string>
+  <string name="first_team_name">First team name</string>
+  <string name="second_team_name">Second team name</string>
+  <string name="submit">Submit</string>
+  <string name="prev">Previous Settings</string>
+  <string name="detected_color">Detected color</string>
+  <string name="detect_color">Detect color</string>
+  <string name="detect_again">Detect again</string>
+  <string name="point_camera_to_ball">The color of the ball is needed. Please point the camera to the ball.</string>
+  <string name="team1_goal">Team 1 goal</string>
+  <string name="team2_goal">Team 2 goal</string>
+  <string name="wrong_team_names">Entered team names are wrong (probably contain disallowed symbols)</string>
+  <string name="same_team_names">Different teams can not have the same name</string>
+  <string name="team_name_exists">The team {0} already exists. Select team from the list or create a new one.</string>
+  <string name="stats">Stats</string>
+  <string name="retrieving_teams">Loading teams. Please wait.</string>
+  <string name="checking_teams">Please wait while your selected teams are being checked</string>
+  <string name="game_end_team_won">Team {0} has won this game!</string>
+  <string name="game_end_result">Result: {0} {2} - {3} {1}</string>
+  <string name="saving_game">Your game is being saved.</string>
+  <string name="choose_lang">Choose language</string>
+  <string name="lang_btn">Language</string>
+  <string name="lang_lt">Lithuanian</string>
+  <string name="lang_en">English</string>
+
     <!--Navigation-->
-    <string name="nav_new_game">New game</string>
-    <string name="nav_teams">Teams</string>
-    <string name="nav_games">Games</string>
-    <string name="nav_tournaments">Tournaments</string>
-    <string name="nav_logout">Logout</string>
-    <string name="open_drawer">Open</string>
-    <string name="close_drawer">Close</string>
-    <string name="logged_in_as">Logged in as</string>
-    
-    <!--Games-->
-    <string name="retrieving_games">Loading games. Please wait.</string>
-    
-    <!--Login & registration-->
-    <string name="login">Login</string>
-    <string name="register">Register</string>
-    <string name="hint_login_email">Your email address</string>
-    <string name="hint_login_password">Your password</string>
-    <string name="button_login">Login</string>
-    <string name="not_registered">Not registered in our application?\nClick here to register</string>
-    <string name="please_login">Please log in to your account by entering your email and password</string>
-    <string name="hint_register_email">Email address</string>
-    <string name="hint_register_password">Password</string>
-    <string name="hint_register_repeat_password">Repeat your password</string>
-    <string name="button_register">Register</string>
-    <string name="already_registered">Already registered in our application?\nClick here to log in</string>
-    <string name="please_register">To register in our application please enter your email and create a password</string>
-    <string name="logging_in">Logging in...</string>
-    <string name="login_error">You have entered wrong email or password. Please try again</string>
-    <string name="login_success">You have been successfully logged in</string>
-    <string name="registering">Registering...</string>
-    <string name="register_error">You have entered either wrong email, password or the passwords do not match. Please try again</string>
-    <string name="register_success">Your registration was successful. Now you can log in</string>
-    <string name="auto_logged_in">You have been automatically logged in</string>
+  <string name="nav_new_game">New game</string>
+  <string name="nav_teams">Teams</string>
+  <string name="nav_games">Games</string>
+  <string name="nav_tournaments">Tournaments</string>
+  <string name="nav_logout">Logout</string>
+  <string name="nav_language">Language</string>
+  <string name="open_drawer">Open</string>
+  <string name="close_drawer">Close</string>
+  <string name="logged_in_as">Logged in as</string>
+
+  <!--Games-->
+  <string name="retrieving_games">Loading games. Please wait.</string>
+  <string name="time">Time</string>
+  <string name="name">Name</string>
+  <string name="score">Score</string>
+
+  <!--Teams-->
+  <string name="change_name_hint">New team name</string>
+  <string name="games_won_played_perc">Games won: {0}\nGames played: {1}\nWin percentage: {2}%</string>
+  <string name="edit">Edit</string>
+  <string name="delete">Delete</string>
+  <string name="cancel">Cancel</string>
+  <string name="change">Change team name</string>
+  <string name="ok">Ok</string>
+  <string name="delete2">Delete {0}?</string>
+  <string name="yes">Yes</string>
+  <string name="no">No</string>
+  <string name="team_name_exists2">The team {0} already exists.</string>
+  <string name="notDel">{0}  is not deleted.</string>
+  <string name="isDel">{0}  is deleted.</string>
+  
+  <!--Login & registration-->
+  <string name="login">Login</string>
+  <string name="register">Register</string>
+  <string name="hint_login_email">Your email address</string>
+  <string name="hint_login_password">Your password</string>
+  <string name="button_login">Login</string>
+  <string name="not_registered">Not registered in our application?\nClick here to register</string>
+  <string name="please_login">Please log in to your account by entering your email and password</string>
+  <string name="hint_register_email">Email address</string>
+  <string name="hint_register_password">Password</string>
+  <string name="hint_register_repeat_password">Repeat your password</string>
+  <string name="button_register">Register</string>
+  <string name="already_registered">Already registered in our application?\nClick here to log in</string>
+  <string name="please_register">To register in our application please enter your email and create a password</string>
+  <string name="logging_in">Logging in...</string>
+  <string name="login_error">You have entered wrong email or password. Please try again</string>
+  <string name="login_success">You have been successfully logged in</string>
+  <string name="registering">Registering...</string>
+  <string name="register_error">You have entered either wrong email, password or the passwords do not match. Please try again</string>
+  <string name="register_success">Your registration was successful. Now you can log in</string>
+  <string name="auto_logged_in">You have been automatically logged in</string>
 </resources>

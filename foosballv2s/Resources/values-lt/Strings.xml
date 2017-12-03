@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Foosball Commentator</string>
+  <string name="openCamera">Open Camera</string>
+  <string name="welcome_text">Sveiki atvykę į Foosball Commentator</string>
+  <string name="enter_team_names">Įveskite abiejų komandų pavadinimus</string>
+  <string name="first_team_name">Pirma komanda</string>
+  <string name="second_team_name">Antra komanda</string>
+  <string name="submit">Toliau</string>
+  <string name="prev">Previous Settings</string>
+  <string name="detected_color">Kamuoliuko spalva</string>
+  <string name="detect_color">Gauti spalvą</string>
+  <string name="detect_again">Gauti naują spalvą</string>
+  <string name="point_camera_to_ball">Reikalinga kamuoliuko spalva. Nukreipkite kamerą į kamuoliuką.</string>
+  <string name="team1_goal">I įvartis</string>
+  <string name="team2_goal">II įvartis</string>
+  <string name="wrong_team_names">Komandų pavadinimai yra netinkami (galbūt yra neleistinų simbolių)</string>
+  <string name="same_team_names">Komandos negali turėti vienodų pavadinimų</string>
+  <string name="team_name_exists">Komanda {0} jau yra. Pasirinkite komandą iš sąrašo arba įveskite naują.</string>
+  <string name="stats">Stats</string>
+  <string name="retrieving_your_teams">Įkeliamos tavo komandos. Prašome palaukti.</string>
+  <string name="retrieving_all_teams">Įkeliamos visos komandos. Prašome palaukti.</string>
+  <string name="checking_teams">Tikrinami komandų pavadinimai. Prašome palaukti.</string>
+  <string name="game_end_team_won">Komanda {0} laimėjo šį žaidimą!</string>
+  <string name="game_end_result">Rezultatas: {0} {2} - {3} {1}</string>
+  <string name="saving_game">Žaidimas išsaugomas.</string>
+  <string name="choose_lang">Pasirinkite kalbą</string>
+  <string name="lang_btn">Kalba</string>
+  <string name="lang_lt">lietuvių</string>
+  <string name="lang_en">anglų</string>
+
+  <!--Navigation-->
+  <string name="nav_new_game">Naujas žaidimas</string>
+  <string name="nav_teams">Komandos</string>
+  <string name="nav_games">Žaidimai</string>
+  <string name="nav_tournaments">Turnyrai</string>
+  <string name="nav_logout">Atsijungti</string>
+  <string name="nav_language">Kalba</string>
+  <string name="open_drawer">Atidaryti</string>
+  <string name="close_drawer">Uždaryti</string>
+  <string name="logged_in_as">Prisijungėte kaip</string>
+
+  <!--Games-->
+  <string name="retrieving_your_games">Įkeliami tavo žaidimai. Prašome palaukti</string>
+  <string name="retrieving_all_games">Įkeliami visi žaidimai. Prašome palaukti</string>
+  <string name="time">Laikas</string>
+  <string name="name">Komanda</string>
+  <string name="score">Rezultatas</string>
+  <string name="my_games">Mano</string>
+  <string name="all_games">Visos</string>
+
+
+  <!--Teams-->
+  <string name="change_name_hint">Naujas komandos pavadinimas</string>
+  <string name="games_won_played_perc">Laimėta: {0}\nSužaista: {1}\nSėkmingumas: {2}%</string>
+  <string name="edit">Keisti</string>
+  <string name="delete">Ištrinti</string>
+  <string name="cancel">Atšaukti</string>
+  <string name="change">Keisti komandos pavadinimą</string>
+  <string name="ok">Gerai</string>
+  <string name="delete2">Ištrinti {0}?</string>
+  <string name="yes">Taip</string>
+  <string name="no">Ne</string>
+  <string name="team_name_exists2">Komanda {0} jau egzistuoja.</string>
+  <string name="notDel">{0}  neištrinta.</string>
+  <string name="isDel">{0}  ištrinta.</string>
+  <string name="my_teams">Mano</string>
+  <string name="all_teams">Visos</string>
+
+
+  <!--Login & registration-->
+  <string name="login">Prisijungimas</string>
+  <string name="register">Registracija</string>
+  <string name="hint_login_email">El. pašto adresas</string>
+  <string name="hint_login_password">Slaptažodis</string>
+  <string name="button_login">Prisijungti</string>
+  <string name="not_registered">Nesate užsiregistravę?\nNorėdami užsiregistruoti \nspauskite čia</string>
+  <string name="please_login">Norėdami prisijungti įveskite el. pašto adresą ir slaptažodį</string>
+  <string name="hint_register_email">El. pašto adresas</string>
+  <string name="hint_register_password">Slaptažodis</string>
+  <string name="hint_register_repeat_password">Pakartokite slaptažodį</string>
+  <string name="button_register">Sukurti paskyrą</string>
+  <string name="already_registered">Jau užsiregistravote?\nNorėdami prisijungti spauskite čia</string>
+  <string name="please_register">Norėdami užsiregistruoti įveskite el. pašto adresą ir slaptažodį</string>
+  <string name="logging_in">Prisijungimas...</string>
+  <string name="login_error">Slaptažodis arba el. paštas, kurį įvedėte, yra netinkamas. . Bandykite dar kartą</string>
+  <string name="login_success">Prisijungimas sėkmingas</string>
+  <string name="registering">Registruojama...</string>
+  <string name="register_error">Įvedėte neteisingą el. pašta, slaptažodį arba slaptažodžiai nesutampa. Bandykite dar kartą</string>
+  <string name="register_success">Registracija sėkminga. Galite prisijungti</string>
+  <string name="auto_logged_in">Automatinis prisijungimas</string>
+</resources>

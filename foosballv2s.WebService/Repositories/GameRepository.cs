@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using foosballv2s.WebService.Params;
 using Microsoft.EntityFrameworkCore;
 
 namespace foosballv2s.WebService.Models
@@ -23,14 +24,28 @@ namespace foosballv2s.WebService.Models
         /// Gets all game from the storage
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Game> GetAll()
+        public IEnumerable<Game> GetAll(GameParams gameParams, SortParams sortParams, User user)
         {
-            return _context.Games
+            IQueryable<Game> gameSet = _context.Games;
+            
+            if (gameParams.UserId == user.Id)
+            {
+                gameSet = gameSet.Where(t => t.User.Id == user.Id);
+            }
+            else if (gameParams.UserId.Length == 0)
+            {
+                gameSet = gameSet;
+            }
+            else
+            {
+                return null;
+            }
+
+            return sortParams.ApplySortParams<Game>(gameSet
                 .Include(g => g.Team1)
                 .Include(g => g.Team2)
                 .Include(g => g.GameEvents)
-                .AsNoTracking()
-                .ToList();
+                .AsNoTracking().ToList());
         }
 
         /// <summary>
@@ -40,7 +55,14 @@ namespace foosballv2s.WebService.Models
         /// <returns></returns>
         public Game Get(int id)
         {
-            return _context.Games.Find(id);
+            return _context.Games
+                .Include(g => g.Team1)
+                .Include(g => g.Team2)
+                .Include(g => g.GameEvents)
+                    .ThenInclude(ge => ge.Team)
+                .Include(g => g.User)
+                .AsNoTracking()
+                .SingleOrDefault(g => g.Id == id);
         }
 
         /// <summary>
@@ -55,6 +77,9 @@ namespace foosballv2s.WebService.Models
             {
                 throw new ArgumentNullException("game");
             }
+            var users = _context.Users.AsNoTracking();
+            game.Team1.User = null;
+            game.Team2.User = null;
             _context.Teams.Attach(game.Team1);
             _context.Teams.Attach(game.Team2);
             _context.Games.Add(game);
@@ -105,6 +130,9 @@ namespace foosballv2s.WebService.Models
             {
                 return false;
             }
+            var users = _context.Users.AsNoTracking();
+            game.Team1.User = null;
+            game.Team2.User = null;
             
             gameToUpdate.Team1 = game.Team1;
             gameToUpdate.Team2 = game.Team2;

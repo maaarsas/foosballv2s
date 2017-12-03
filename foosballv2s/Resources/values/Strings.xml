@@ -18,9 +18,10 @@
   <string name="same_team_names">Different teams can not have the same name</string>
   <string name="team_name_exists">The team {0} already exists. Select team from the list or create a new one.</string>
   <string name="stats">Stats</string>
-  <string name="retrieving_teams">Loading teams. Please wait.</string>
-  <string name="checking_teams">Please wait while your selected teams are being checked</string>
-  <string name="game_end_team_won">Team {0} has won this game!</string>
+    <string name="retrieving_your_teams">Loading your teams. Please wait.</string>
+    <string name="retrieving_all_teams">Loading all teams. Please wait.</string>
+  <string name="checking_teams">Checking teams. Please wait.</string>
+    <string name="game_end_team_won">Team {0} has won this game!</string>
   <string name="game_end_result">Result: {0} {2} - {3} {1}</string>
   <string name="saving_game">Your game is being saved.</string>
   <string name="choose_lang">Choose language</string>
@@ -40,10 +41,13 @@
   <string name="logged_in_as">Logged in as</string>
 
   <!--Games-->
-  <string name="retrieving_games">Loading games. Please wait.</string>
-  <string name="time">Time</string>
+    <string name="retrieving_your_games">Loading your games. Please wait.</string>
+    <string name="retrieving_all_games">Loading all games. Please wait.</string>
+    <string name="time">Time</string>
   <string name="name">Name</string>
   <string name="score">Score</string>
+  <string name="my_games">My games</string>
+  <string name="all_games">All games</string>
 
   <!--Teams-->
   <string name="change_name_hint">New team name</string>
@@ -59,6 +63,8 @@
   <string name="team_name_exists2">The team {0} already exists.</string>
   <string name="notDel">{0}  is not deleted.</string>
   <string name="isDel">{0}  is deleted.</string>
+  <string name="my_teams">My teams</string>
+  <string name="all_teams">All teams</string>
   
   <!--Login & registration-->
   <string name="login">Login</string>

@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using foosballv2s.Source.Entities;
+using foosballv2s.Source.Services.CredentialStorage;
 using Newtonsoft.Json;
 using Xamarin.Forms;
 
@@ -13,19 +14,21 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
     {
         private readonly string endpointUrl = "/team";
         private IWebServiceClient client;
+        private ICredentialStorage storage;
 
         public TeamRepository()
         {
             client = DependencyService.Get<IWebServiceClient>();
+            storage = DependencyService.Get<ICredentialStorage>();
         }
        
         /// <summary>
         /// Gets all teams
         /// </summary>
         /// <returns></returns>
-        public async Task<Team[]> GetAll()
+        public async Task<Team[]> GetAll(string urlParams = null)
         {
-            var response = await client.GetAsync(endpointUrl);
+            var response = await client.GetAsync(endpointUrl + "/?" + urlParams);
             Team[] teams = FoosballJsonConvert.DeserializeObject<Team[]>(response);
             if (teams == null)
             {
@@ -53,6 +56,8 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
         /// <returns></returns>
         public async Task<Team> Create(Team team)
         {
+            team.User = storage.GetCurrentUser();
+            
             var teamJsonString = JsonConvert.SerializeObject(team);
             var response = await client.PostAsync(endpointUrl, teamJsonString);
             Team createdTeam = FoosballJsonConvert.DeserializeObject<Team>(response);
@@ -67,6 +72,8 @@ namespace foosballv2s.Source.Services.FoosballWebService.Repository
         /// <returns></returns>
         public async Task<Team> Update(int id, Team team)
         {
+            team.User = storage.GetCurrentUser();
+            
             var teamJsonString = JsonConvert.SerializeObject(team);
             var response = await client.PutAsync(endpointUrl + "/" + id , teamJsonString);
             Team updatedTeam = FoosballJsonConvert.DeserializeObject<Team>(response);

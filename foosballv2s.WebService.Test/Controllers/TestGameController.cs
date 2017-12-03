@@ -4,7 +4,10 @@ using System.Linq;
 using System.Net;
 using foosballv2s.WebService.Controllers;
 using foosballv2s.WebService.Models;
+using foosballv2s.WebService.Params;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Moq;
 using NUnit.Framework;
 using NotFoundResult = Microsoft.AspNetCore.Mvc.NotFoundResult;
 
@@ -13,11 +16,13 @@ namespace foosballv2s.WebService.Test.Controllers
     [TestFixture]
     public class TestGameController
     {
+        private Mock<UserManager<User>> userManager = new Mock<UserManager<User>>();
+        
         [Test]
         public void PostGame_ShouldReturnSameGame()
         {
             var repository = GetGameRepository();
-            var controller = new GameController(repository);
+            var controller = new GameController(repository, userManager.Object);
             var game = GetDemoGames()[0];
             var result = controller.Post(game) as ObjectResult;
             Game resultGame = (Game) result.Value;
@@ -33,7 +38,7 @@ namespace foosballv2s.WebService.Test.Controllers
         public void PostGame_ShouldFail_WrongName(Game game)
         {
             var repository = GetGameRepository();
-            var controller = new GameController(repository);
+            var controller = new GameController(repository, userManager.Object);
             var result = controller.Post(game) as BadRequestObjectResult;
 
             Assert.AreEqual((int) HttpStatusCode.BadRequest, result.StatusCode);
@@ -43,7 +48,7 @@ namespace foosballv2s.WebService.Test.Controllers
         public void PutProduct_ShouldReturnStatusCode()
         {
             var repository = GetGameRepository();
-            var controller = new GameController(repository);
+            var controller = new GameController(repository, userManager.Object);
             var game = GetDemoGames()[1];
             controller.Post(game);
             var result = controller.Put(game.Id, game) as NoContentResult;
@@ -57,7 +62,7 @@ namespace foosballv2s.WebService.Test.Controllers
         public void PutProduct_ShouldFail_WhenDifferentID()
         {
             var repository = GetGameRepository();
-            var controller = new GameController(repository);
+            var controller = new GameController(repository, userManager.Object);
             var game = GetDemoGames()[0];
             controller.Post(game);
             var badResult = controller.Put(999, game);
@@ -72,7 +77,7 @@ namespace foosballv2s.WebService.Test.Controllers
             var game = GetDemoGames()[0];
             repository.Add(game);
 
-            var controller = new GameController(repository);
+            var controller = new GameController(repository, userManager.Object);
             var result = controller.Get(1) as ObjectResult;
             Game resultGame = (Game) result.Value;
 
@@ -92,8 +97,8 @@ namespace foosballv2s.WebService.Test.Controllers
                 repository.Add(game);
             }
 
-            var controller = new GameController(repository);
-            var result = controller.Get() as IEnumerable<Game>;
+            var controller = new GameController(repository, userManager.Object);
+            var result = controller.Get(new GameParams(), new SortParams()) as IEnumerable<Game>;
 
             Assert.IsNotNull(result);
             Assert.AreEqual(3, result.Count());
@@ -106,7 +111,7 @@ namespace foosballv2s.WebService.Test.Controllers
             var game = GetDemoGames()[0];
             repository.Add(game);
 
-            var controller = new GameController(repository);
+            var controller = new GameController(repository, userManager.Object);
             var result = controller.Delete(1) as NoContentResult;
 
             Assert.IsNotNull(result);
@@ -120,7 +125,7 @@ namespace foosballv2s.WebService.Test.Controllers
             var game = GetDemoGames()[0];
             repository.Add(game);
 
-            var controller = new GameController(repository);
+            var controller = new GameController(repository, userManager.Object);
             var result = controller.Delete(2) as NotFoundResult;
 
             Assert.IsNotNull(result);

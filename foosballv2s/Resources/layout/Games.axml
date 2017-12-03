@@ -18,58 +18,20 @@
                 layout="@layout/Toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:id="@+id/listView">
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp">
-                    <TextView
-                        android:text="@string/time"
-                        style="@android:style/TextAppearance.Medium"
-                        android:layout_weight="15"
-                        android:layout_height="50dp"
-                        android:id="@+id/timeTaken"
-                        android:layout_width="0dp"
-                        android:gravity="center" />
-                    <TextView
-                        android:text="@string/name"
-                        style="@android:style/TextAppearance.Medium"
-                        android:layout_weight="35"
-                        android:layout_height="40dp"
-                        android:id="@+id/team1nameWindow"
-                        android:layout_width="0dp"
-                        android:gravity="center" />
-                    <TextView
-                        android:text="@string/score"
-                        style="@android:style/TextAppearance.Medium"
-                        android:layout_weight="15"
-                        android:layout_height="40dp"
-                        android:id="@+id/scoreWindow"
-                        android:layout_width="0dp"
-                        android:gravity="center" />
-                    <TextView
-                        android:text="@string/name"
-                        style="@android:style/TextAppearance.Medium"
-                        android:layout_weight="35"
-                        android:layout_height="40dp"
-                        android:id="@+id/team2nameWindow"
-                        android:layout_width="0dp"
-                        android:gravity="center" />
-                </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?android:attr/listDivider" />
-                <ListView
+
+            <android.support.design.widget.TabLayout
+                    android:id="@+id/sliding_tabs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/Black"
-                    android:id="@+id/game_list_view" />
-            </LinearLayout>
+                    app:tabGravity="fill"
+                    app:tabMode="fixed" />
+
+            <android.support.v4.view.ViewPager
+                    android:id="@+id/viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white" />
+            
         </LinearLayout>
     </FrameLayout>
 <!-- The navigation drawer -->

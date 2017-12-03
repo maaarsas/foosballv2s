@@ -17,6 +17,8 @@ using Xamarin.Forms;
 using View = Android.Views.View;
 using Android.Media;
 using Android.Views;
+using foosballv2s.Source.Services.CredentialStorage;
+using foosballv2s.Source.Services.FoosballWebService;
 
 namespace foosballv2s.Source.Activities
 {
@@ -159,18 +161,23 @@ namespace foosballv2s.Source.Activities
         /// </summary>
         private void SetupTeamDropdownList()
         {
-            FetchAllTeams();
+            FetchUserTeams();
         }
 
         /// <summary>
         /// Retrievies teams and populates the dropdown list
         /// </summary>
-        private async void FetchAllTeams()
+        private async void FetchUserTeams()
         {
             ProgressDialog dialog = ProgressDialog.Show(this, "",
-                Resources.GetString(Resource.String.retrieving_teams), true);
+                Resources.GetString(Resource.String.retrieving_your_teams), true);
 
-            Team[] teams = await teamRepository.GetAll();
+            var credentialStorage = DependencyService.Get<ICredentialStorage>();
+            UrlParamsFormatter urlParams = new UrlParamsFormatter();
+            urlParams.AddParam("userid", credentialStorage.Read().Id);
+            urlParams.AddParam("sortby", "-id");
+            
+            Team[] teams = await teamRepository.GetAll(urlParams.UrlParams);
 
             dialog.Dismiss();
 

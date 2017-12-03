@@ -7,7 +7,9 @@ namespace foosballv2s.WebService.Test
     {
         public DbSet<Game> Games { get; set; }
         public DbSet<Team> Teams { get; set; }
-        
+        public DbSet<GameEvent> GameEvents { get; set; }
+        public DbSet<User> Users { get; set; }
+
         public TestWebServiceDbContext()
         {
             this.Teams = new TestTeamDbSet();

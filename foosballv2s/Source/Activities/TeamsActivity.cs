@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using Android.App;
+using Android.Content.PM;
 using Android.OS;
+using Android.Support.Design.Widget;
+using Android.Support.V4.View;
 using Android.Support.V7.App;
 using foosballv2s.Source.Activities.Adapters;
 using foosballv2s.Source.Activities.Helpers;
@@ -9,53 +12,100 @@ using foosballv2s.Source.Services.FoosballWebService.Repository;
 using Xamarin.Forms;
 using ListView = Android.Widget.ListView;
 using Android.Widget;
+using foosballv2s.Source.Activities.Fragments;
+using foosballv2s.Source.Services.CredentialStorage;
+using foosballv2s.Source.Services.FoosballWebService;
+using Fragment = Android.Support.V4.App.Fragment;
 
 namespace foosballv2s.Source.Activities
 {
     /// <summary>
     /// An activity for displaying all teams
     /// </summary>
-    [Activity(ParentActivity=typeof(MainActivity))]
+    [Activity(ParentActivity=typeof(MainActivity), 
+        ConfigurationChanges = ConfigChanges.KeyboardHidden | ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
     public class TeamsActivity : AppCompatActivity
     {
+        private TabLayout tabLayout;
+        private ViewPager viewPager;
         private TeamRepository teamRepository;
-        private ListView teamListView;
         private List<Team> teamList;
+        private TeamListFragment myTeamsListFragment;
+        private TeamListFragment allTeamsListFragment;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.Teams);
+            
+            myTeamsListFragment = new TeamListFragment();
+            allTeamsListFragment = new TeamListFragment();
+            
+            viewPager = (ViewPager) FindViewById(Resource.Id.viewpager);
+            setupViewPager(viewPager);
+ 
+            tabLayout = (TabLayout) FindViewById(Resource.Id.sliding_tabs);
+            tabLayout.SetupWithViewPager(viewPager);
+            
             NavigationHelper.SetupNavigationListener(this);
             NavigationHelper.SetActionBarNavigationText(this, Resource.String.nav_teams);
-
-            teamRepository = DependencyService.Get<TeamRepository>();
-            teamListView = (ListView) FindViewById(Resource.Id.team_list_view);
             
-            FetchTeams();
+            teamRepository = DependencyService.Get<TeamRepository>();
+        }
+        
+        protected override void OnResume()
+        {
+            base.OnResume();
+            
+            FetchUserTeams();
+            FetchAllTeams();
         }
 
         /// <summary>
         /// Fetches the teams and populates them to a list
         /// </summary>
-        private async void FetchTeams()
+        private async void FetchUserTeams()
         {
             ProgressDialog dialog = ProgressDialog.Show(this, "", 
-                Resources.GetString(Resource.String.retrieving_teams), true);
+                Resources.GetString(Resource.String.retrieving_your_teams), true);
 
             GameRepository gameRepository = DependencyService.Get<GameRepository>();
+            var credentialStorage = DependencyService.Get<ICredentialStorage>();
 
-            Game[] games = await gameRepository.GetAll();
-            Team[] teams = await teamRepository.GetAll();
+            UrlParamsFormatter urlParams = new UrlParamsFormatter();
+            urlParams.AddParam("userid", credentialStorage.Read().Id);
+            urlParams.AddParam("sortby", "-id");
+            
+            Game[] games = await gameRepository.GetAll(urlParams.UrlParams);
+            Team[] teams = await teamRepository.GetAll(urlParams.UrlParams);
 
             teams = SetTeamsWinPercentage(teams, games);
             teamList = new List<Team>(teams);
             dialog.Dismiss();
             
             TeamAdapter teamAdapter = new TeamAdapter(this, teamList);
-            teamListView.Adapter = teamAdapter;
-            teamListView.ItemClick += OnListItemClick;
+            myTeamsListFragment.TeamListView.Adapter = teamAdapter;
+            myTeamsListFragment.TeamListView.ItemClick += OnListItemClick;
+        }
+        
+        /// <summary>
+        /// Fetches all teams and populates them to a list
+        /// </summary>
+        private async void FetchAllTeams()
+        {
+            ProgressDialog dialog = ProgressDialog.Show(this, "", 
+                Resources.GetString(Resource.String.retrieving_all_teams), true);
+
+            UrlParamsFormatter urlParams = new UrlParamsFormatter();
+            urlParams.AddParam("sortby", "-id");
+            
+            Team[] teams = await teamRepository.GetAll(urlParams.UrlParams);
+            
+            dialog.Dismiss();
+            
+            TeamAdapter teamAdapter = new TeamAdapter(this, new List<Team>(teams));
+            allTeamsListFragment.TeamListView.Adapter = teamAdapter;
         }
 
         /// <summary>
@@ -178,6 +228,14 @@ namespace foosballv2s.Source.Activities
                 }
             }
             return false;
+        }
+        
+        private void setupViewPager(ViewPager viewPager)
+        {
+            ViewPagerAdapter adapter = new ViewPagerAdapter(SupportFragmentManager);
+            adapter.addFragment(myTeamsListFragment, Resources.GetString(Resource.String.my_teams));
+            adapter.addFragment(allTeamsListFragment, Resources.GetString(Resource.String.all_teams));
+            viewPager.Adapter = adapter;
         }
     }
 }

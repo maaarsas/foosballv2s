@@ -6,5 +6,5 @@
         android:id="@+id/colorSample"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="" />
+        android:layout_margin="8dp" />
 </LinearLayout>

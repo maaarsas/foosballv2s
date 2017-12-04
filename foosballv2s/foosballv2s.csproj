@@ -112,6 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Source\Activities\Adapters\ColorListAdapter.cs" />
+    <Compile Include="Source\Activities\Adapters\ExpandableGamesAdapter.cs" />
     <Compile Include="Source\Activities\Adapters\GameAdapter.cs" />
     <Compile Include="Source\Activities\Adapters\TeamAdapter.cs" />
     <Compile Include="Source\Activities\AuthActivity.cs" />

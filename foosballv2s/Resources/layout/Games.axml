@@ -64,11 +64,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="?android:attr/listDivider" />
-                <ListView
+                <ExpandableListView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent" 
                     android:background="@color/Black"
-                    android:id="@+id/game_list_view" />
+                    android:id="@+id/game_expList_view" />
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>

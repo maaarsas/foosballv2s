@@ -8,6 +8,7 @@ using foosballv2s.Source.Entities;
 using foosballv2s.Source.Services.FoosballWebService.Repository;
 using Xamarin.Forms;
 using ListView = Android.Widget.ListView;
+using Android.Widget;
 
 namespace foosballv2s.Source.Activities
 {
@@ -18,7 +19,7 @@ namespace foosballv2s.Source.Activities
     public class GamesActivity : AppCompatActivity
     {
         private GameRepository gameRepository;
-        private ListView gameListView;
+        private ExpandableListView gameListView;
         
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -29,7 +30,7 @@ namespace foosballv2s.Source.Activities
             NavigationHelper.SetActionBarNavigationText(this, Resource.String.nav_games);
 
             gameRepository = DependencyService.Get<GameRepository>();
-            gameListView = (ListView) FindViewById(Resource.Id.game_list_view);
+            gameListView = (ExpandableListView) FindViewById(Resource.Id.game_list_view);
 
             FetchGames();
         }

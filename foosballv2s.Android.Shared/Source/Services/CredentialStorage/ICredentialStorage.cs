@@ -11,5 +11,7 @@ namespace foosballv2s.Droid.Shared.Source.Services.CredentialStorage
         void Remove();
         bool HasExpired();
         User GetCurrentUser();
+        void SaveLanguage(string language);
+        string GetSavedLanguage();
     }
 }

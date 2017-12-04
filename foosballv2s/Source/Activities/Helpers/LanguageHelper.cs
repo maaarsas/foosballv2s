@@ -4,7 +4,8 @@ using Android.Content;
 using Android.Widget;
 using Java.Util;
 using Android.Content.Res;
-
+using foosballv2s.Droid.Shared.Source.Services.CredentialStorage;
+using Xamarin.Forms;
 namespace foosballv2s.Source.Activities.Helpers
 {
     public class LanguageHelper
@@ -25,7 +26,7 @@ namespace foosballv2s.Source.Activities.Helpers
             dialog.Show();
 
             languages = (RadioGroup)dialog.FindViewById(Resource.Id.languages);
-            Button btnSumbitLanguage = dialog.FindViewById<Android.Widget.Button>(Resource.Id.btnSumbitLanguage);
+            Android.Widget.Button btnSumbitLanguage = dialog.FindViewById<Android.Widget.Button>(Resource.Id.btnSumbitLanguage);
             btnSumbitLanguage.Click += BtnSumbitLanguage_Click;
         }
 
@@ -33,7 +34,7 @@ namespace foosballv2s.Source.Activities.Helpers
         {
             Intent intent = new Intent(_currentActivity, _newActivity);
             dialog.Dismiss();
-
+            
             switch (languages.CheckedRadioButtonId)
             {
                 case Resource.Id.language1:
@@ -51,8 +52,9 @@ namespace foosballv2s.Source.Activities.Helpers
             _currentActivity.Finish();
         }
 
-        private static bool UpdateResources(Context context, string language)
+        public static bool UpdateResources(Context context, string language)
         {
+            var credentialStorage = DependencyService.Get<ICredentialStorage>();
             Locale locale = new Locale(language);
             Locale.Default = locale;
 
@@ -62,7 +64,7 @@ namespace foosballv2s.Source.Activities.Helpers
             configuration.Locale = locale;
 
             resources.UpdateConfiguration(configuration, resources.DisplayMetrics);
-
+            credentialStorage.SaveLanguage(language);
             return true;
         }
     }

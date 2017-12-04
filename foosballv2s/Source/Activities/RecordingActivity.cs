@@ -59,8 +59,8 @@ namespace foosballv2s.Source.Activities
         {
             VolumeControlStream = Android.Media.Stream.Music;
             base.OnCreate(bundle);
+            Window.AddFlags(WindowManagerFlags.KeepScreenOn);
             global::Xamarin.Forms.Forms.Init(this, bundle);
-
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Recording);
 

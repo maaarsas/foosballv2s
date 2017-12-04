@@ -116,6 +116,7 @@
     <Compile Include="Source\Helpers\TestConfigHelper.cs" />
     <Compile Include="Source\Helpers\TestGameTimeHelper.cs" />
     <Compile Include="Source\Services\CredentialStorage\TestCredentialStorage.cs" />
+    <Compile Include="Source\Services\GameLogger\TestGameLogger.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Icon.png" />

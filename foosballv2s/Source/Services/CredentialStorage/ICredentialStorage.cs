@@ -11,5 +11,7 @@ namespace foosballv2s.Source.Services.CredentialStorage
         void Remove();
         bool HasExpired();
         User GetCurrentUser();
+        void SaveLanguage(string language);
+        string GetSavedLanguage();
     }
 }

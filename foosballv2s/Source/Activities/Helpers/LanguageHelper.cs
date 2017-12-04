@@ -4,7 +4,8 @@ using Android.Content;
 using Android.Widget;
 using Java.Util;
 using Android.Content.Res;
-
+using foosballv2s.Source.Services.CredentialStorage;
+using Xamarin.Forms;
 namespace foosballv2s.Source.Activities.Helpers
 {
     public class LanguageHelper
@@ -25,7 +26,7 @@ namespace foosballv2s.Source.Activities.Helpers
             dialog.Show();
 
             languages = (RadioGroup)dialog.FindViewById(Resource.Id.languages);
-            Button btnSumbitLanguage = dialog.FindViewById<Android.Widget.Button>(Resource.Id.btnSumbitLanguage);
+            Android.Widget.Button btnSumbitLanguage = dialog.FindViewById<Android.Widget.Button>(Resource.Id.btnSumbitLanguage);
             btnSumbitLanguage.Click += BtnSumbitLanguage_Click;
         }
 
@@ -33,25 +34,27 @@ namespace foosballv2s.Source.Activities.Helpers
         {
             Intent intent = new Intent(_currentActivity, _newActivity);
             dialog.Dismiss();
-
+            var credentialStorage = DependencyService.Get<ICredentialStorage>();
             switch (languages.CheckedRadioButtonId)
             {
                 case Resource.Id.language1:
                     if (Locale.Default.Language.Equals("lt"))
                         break;
                     UpdateResources(_currentActivity, "lt");
+                    credentialStorage.SaveLanguage("lt");
                     break;
                 case Resource.Id.language2:
                     if (Locale.Default.Language.Equals("en"))
                         break;
                     UpdateResources(_currentActivity, "en");
+                    credentialStorage.SaveLanguage("en");
                     break;
             }
             _currentActivity.StartActivity(intent);
             _currentActivity.Finish();
         }
 
-        private static bool UpdateResources(Context context, string language)
+        public static bool UpdateResources(Context context, string language)
         {
             Locale locale = new Locale(language);
             Locale.Default = locale;

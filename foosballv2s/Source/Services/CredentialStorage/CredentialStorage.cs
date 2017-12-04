@@ -15,6 +15,7 @@ namespace foosballv2s.Source.Services.CredentialStorage
         private const string USER_EMAIL_SETTING_NAME = "user_email";
         private const string USER_TOKEN_SETTING_NAME = "user_token";
         private const string USER_TOKEN_EXPIRATION_SETTING_NAME = "user_token_expiration";
+        private const string USER_LANGUAGE_SETTING_NAME = "user_language";
 
         private ISharedPreferences _settings;
 
@@ -76,6 +77,19 @@ namespace foosballv2s.Source.Services.CredentialStorage
             user.Id = credential.Id;
             user.Email = credential.Email;
             return user;
+        }
+
+        public void SaveLanguage(string language)
+        {
+            ISharedPreferencesEditor editor = _settings.Edit();
+            editor.Remove(USER_LANGUAGE_SETTING_NAME);
+            editor.PutString(USER_LANGUAGE_SETTING_NAME, language);
+            editor.Commit();
+        }
+
+        public string GetSavedLanguage()
+        {
+            return _settings.GetString(USER_LANGUAGE_SETTING_NAME, null);
         }
     }
 }

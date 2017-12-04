@@ -23,6 +23,10 @@ namespace foosballv2s.Source.Activities
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             
             _credentialStorage = DependencyService.Get<ICredentialStorage>();
+
+            if (_credentialStorage.GetSavedLanguage() != null)
+                Helpers.LanguageHelper.UpdateResources(this, _credentialStorage.GetSavedLanguage());
+
             if (_credentialStorage.HasExpired())
             {
                 // Start auth activity

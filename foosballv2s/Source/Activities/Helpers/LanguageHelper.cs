@@ -4,7 +4,7 @@ using Android.Content;
 using Android.Widget;
 using Java.Util;
 using Android.Content.Res;
-using foosballv2s.Source.Services.CredentialStorage;
+using foosballv2s.Droid.Shared.Source.Services.CredentialStorage;
 using Xamarin.Forms;
 namespace foosballv2s.Source.Activities.Helpers
 {
@@ -34,20 +34,18 @@ namespace foosballv2s.Source.Activities.Helpers
         {
             Intent intent = new Intent(_currentActivity, _newActivity);
             dialog.Dismiss();
-            var credentialStorage = DependencyService.Get<ICredentialStorage>();
+            
             switch (languages.CheckedRadioButtonId)
             {
                 case Resource.Id.language1:
                     if (Locale.Default.Language.Equals("lt"))
                         break;
                     UpdateResources(_currentActivity, "lt");
-                    credentialStorage.SaveLanguage("lt");
                     break;
                 case Resource.Id.language2:
                     if (Locale.Default.Language.Equals("en"))
                         break;
                     UpdateResources(_currentActivity, "en");
-                    credentialStorage.SaveLanguage("en");
                     break;
             }
             _currentActivity.StartActivity(intent);
@@ -56,6 +54,7 @@ namespace foosballv2s.Source.Activities.Helpers
 
         public static bool UpdateResources(Context context, string language)
         {
+            var credentialStorage = DependencyService.Get<ICredentialStorage>();
             Locale locale = new Locale(language);
             Locale.Default = locale;
 
@@ -65,7 +64,7 @@ namespace foosballv2s.Source.Activities.Helpers
             configuration.Locale = locale;
 
             resources.UpdateConfiguration(configuration, resources.DisplayMetrics);
-
+            credentialStorage.SaveLanguage(language);
             return true;
         }
     }

@@ -19,6 +19,7 @@ using foosballv2s.Droid.Shared.Source.Helpers;
 using foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Repository;
 using foosballv2s.Droid.Shared.Source.Services.GameLogger;
 using foosballv2s.Droid.Shared.Source.Services.GameRecognition;
+using foosballv2s.Source.Activities.Dialogs;
 using foosballv2s.Source.Activities.Helpers;
 using Java.Interop;
 using Xamarin.Forms;
@@ -41,6 +42,7 @@ namespace foosballv2s.Source.Activities
         private Camera camera;
         private TextureView textureView;
         private SurfaceView surfaceView;
+        private SurfaceTexture _surfaceTexture;
         private ISurfaceHolder holder;
         private MovementDetector movementDetector;
 
@@ -90,6 +92,36 @@ namespace foosballv2s.Source.Activities
         protected override void OnStart()
         {
             base.OnStart();
+            
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+            DialogFragment dialog = new GameSourceDialogFragment(this);
+            dialog.Show(this.FragmentManager, "game_source");
+        }
+        
+        protected override void OnPause()
+        {
+            base.OnPause();
+            StopCamera();
+        }
+
+        public void AddVideoSource()
+        {
+
+            StartGame();
+        }
+
+        public void AddLiveSource()
+        {
+            StartCamera();
+            StartGame();
+        }
+
+        private void StartGame()
+        {
             game.Start(new GameLogger(game));
             gameDataSent = false;
            
@@ -102,18 +134,6 @@ namespace foosballv2s.Source.Activities
             
             Task.Run(async () => FeedMovementDetector());
             var clockTimer = new Timer(new TimerCallback(UpdateGameTimer), null,  TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(1));
-        }
-
-        protected override void OnResume()
-        {
-            base.OnResume();
-            StartCamera();
-        }
-        
-        protected override void OnPause()
-        {
-            base.OnPause();
-            StopCamera();
         }
 
         /// <summary>
@@ -243,22 +263,7 @@ namespace foosballv2s.Source.Activities
         /// <param name="height"></param>
         public void OnSurfaceTextureAvailable(SurfaceTexture surface, int width, int height)
         {
-            StartCamera();
-            try
-            {
-                camera.SetPreviewTexture(surface);
-                camera.SetPreviewCallback(this);
-            }
-            catch (Java.IO.IOException ex) { }
-
-            Camera.Parameters tmp = camera.GetParameters();
-            Camera.Size bestSize = ActivityHelper.GetBestPreviewSize(camera.GetParameters().SupportedPreviewSizes, textureView.Width, textureView.Height);
-            tmp.SetPreviewSize((int) bestSize.Width, (int) bestSize.Height);
-            tmp.FocusMode = Camera.Parameters.FocusModeContinuousPicture;
-            camera.SetParameters(tmp);
-            camera.StartPreview();
-            movementDetector.SetupBallDetector(textureView.Width, textureView.Height, game.BallColor);
-            this.textureSetup = true;
+            _surfaceTexture = surface;
         }
 
         public void OnSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height)
@@ -283,6 +288,21 @@ namespace foosballv2s.Source.Activities
             {
                 camera = Camera.Open();
             }
+            try
+            {
+                camera.SetPreviewTexture(_surfaceTexture);
+                camera.SetPreviewCallback(this);
+            }
+            catch (Java.IO.IOException ex) { }
+
+            Camera.Parameters tmp = camera.GetParameters();
+            Camera.Size bestSize = ActivityHelper.GetBestPreviewSize(camera.GetParameters().SupportedPreviewSizes, textureView.Width, textureView.Height);
+            tmp.SetPreviewSize((int) bestSize.Width, (int) bestSize.Height);
+            tmp.FocusMode = Camera.Parameters.FocusModeContinuousPicture;
+            camera.SetParameters(tmp);
+            camera.StartPreview();
+            movementDetector.SetupBallDetector(textureView.Width, textureView.Height, game.BallColor);
+            this.textureSetup = true;
         }
 
         /// <summary>

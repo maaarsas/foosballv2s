@@ -88,4 +88,9 @@
   <string name="register_error">You have entered either wrong email, password or the passwords do not match. Please try again</string>
   <string name="register_success">Your registration was successful. Now you can log in</string>
   <string name="auto_logged_in">You have been automatically logged in</string>
+    
+    <!--Source-->
+    <string name="source_choose_title">Choose video input source</string>
+    <string name="source_video">Video file</string>
+    <string name="source_live">Live view from camera</string>
 </resources>

@@ -90,4 +90,9 @@
   <string name="register_error">Įvedėte neteisingą el. pašta, slaptažodį arba slaptažodžiai nesutampa. Bandykite dar kartą</string>
   <string name="register_success">Registracija sėkminga. Galite prisijungti</string>
   <string name="auto_logged_in">Automatinis prisijungimas</string>
+
+  <!--Source-->
+  <string name="source_choose_title">Pasirinkite video šaltinį</string>
+  <string name="source_video">Video failas</string>
+  <string name="source_live">Tiesioginis kameros vaizdas</string>
 </resources>

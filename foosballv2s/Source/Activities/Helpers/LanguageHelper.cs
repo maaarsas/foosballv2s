@@ -5,7 +5,9 @@ using Android.Widget;
 using Java.Util;
 using Android.Content.Res;
 using foosballv2s.Droid.Shared.Source.Services.CredentialStorage;
+using foosballv2s.Source.Activities.Dialogs;
 using Xamarin.Forms;
+
 namespace foosballv2s.Source.Activities.Helpers
 {
     public class LanguageHelper
@@ -19,37 +21,8 @@ namespace foosballv2s.Source.Activities.Helpers
         {
             _currentActivity = currentActivity;
             _newActivity = newActivity;
-            dialog = new Dialog(currentActivity);
-            dialog.SetContentView(Resource.Layout.language_spinner);
-            dialog.SetTitle(Resource.String.choose_lang);
-            dialog.SetCancelable(false);
-            dialog.Show();
-
-            languages = (RadioGroup)dialog.FindViewById(Resource.Id.languages);
-            Android.Widget.Button btnSumbitLanguage = dialog.FindViewById<Android.Widget.Button>(Resource.Id.btnSumbitLanguage);
-            btnSumbitLanguage.Click += BtnSumbitLanguage_Click;
-        }
-
-        private static void BtnSumbitLanguage_Click(object sender, EventArgs e)
-        {
-            Intent intent = new Intent(_currentActivity, _newActivity);
-            dialog.Dismiss();
-            
-            switch (languages.CheckedRadioButtonId)
-            {
-                case Resource.Id.language1:
-                    if (Locale.Default.Language.Equals("lt"))
-                        break;
-                    UpdateResources(_currentActivity, "lt");
-                    break;
-                case Resource.Id.language2:
-                    if (Locale.Default.Language.Equals("en"))
-                        break;
-                    UpdateResources(_currentActivity, "en");
-                    break;
-            }
-            _currentActivity.StartActivity(intent);
-            _currentActivity.Finish();
+            DialogFragment dialog = new LanguageDialogFragment(currentActivity, newActivity);
+            dialog.Show(currentActivity.FragmentManager, "lang");
         }
 
         public static bool UpdateResources(Context context, string language)

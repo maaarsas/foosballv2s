@@ -11,7 +11,7 @@ namespace foosballv2s.Test.Source.Activities.Helpers
     {
         [TestCase(480, 320, 480, 320)]
         [TestCase(1080, 720, 720, 480)]
-        [TestCase(1600, 960, 800, 480)]
+        [TestCase(1600, 960, 1920, 1080)]
         public void GetBestPreviewSizeTest(int previewWidth, int previewHeight, int expectedWidth, int expectedHeight)
         {
             var supportedSizes = GetCameraTestSupportedSizes();

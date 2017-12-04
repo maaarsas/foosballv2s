@@ -5,14 +5,14 @@
     android:orientation="horizontal"
     android:weightSum="100">
     <TextView
-        android:id="@+id/team_item_time"
+        android:id="@+id/item_time"
         android:layout_width="0dp"
         android:layout_weight="15"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:textSize="18dp" />
     <TextView
-        android:id="@+id/team_item_name"
+        android:id="@+id/item_event"
         android:layout_width="0dp"
         android:layout_weight="85"
         android:layout_height="wrap_content"

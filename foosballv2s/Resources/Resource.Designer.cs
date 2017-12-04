@@ -2522,6 +2522,12 @@ namespace foosballv2s
 			// aapt resource value: 0x7f0800c1
 			public const int info = 2131230913;
 			
+			// aapt resource value: 0x7f080097
+			public const int item_event = 2131230871;
+			
+			// aapt resource value: 0x7f080096
+			public const int item_time = 2131230870;
+			
 			// aapt resource value: 0x7f080000
 			public const int item_touch_helper_previous_elevation = 2131230720;
 			
@@ -2881,12 +2887,6 @@ namespace foosballv2s
 			
 			// aapt resource value: 0x7f080093
 			public const int team2nameWindow = 2131230867;
-			
-			// aapt resource value: 0x7f080097
-			public const int team_item_name = 2131230871;
-			
-			// aapt resource value: 0x7f080096
-			public const int team_item_time = 2131230870;
 			
 			// aapt resource value: 0x7f0800d8
 			public const int team_list_view = 2131230936;

@@ -64,17 +64,21 @@ namespace foosballv2s.Source.Activities.Adapters
                 LayoutInflater inflater = (LayoutInflater)context.GetSystemService(Context.LayoutInflaterService);
                 convertView = inflater.Inflate(Resource.Layout.item_team, null);
             }
-            TextView textViewItem = convertView.FindViewById<TextView>(Resource.Id.team_item_name);
-            string content = (string)GetChild(groupPosition, childPosition);
+            TextView viewItemTime = convertView.FindViewById<TextView>(Resource.Id.item_time);
+            TextView viewItemEvent = convertView.FindViewById<TextView>(Resource.Id.item_event);
 
-            textViewItem.Text = content;
+            var eList = new List<Game>();
+            listChild.TryGetValue(listGroup[groupPosition], out eList);
+            Game content = eList[childPosition];
+
+            
 
             return convertView;
         }
 
         public override Object GetGroup(int groupPosition)
         {
-            return listGroup[groupPosition];
+            throw new NotImplementedException();
         }
 
         public override long GetGroupId(int groupPosition)
@@ -89,7 +93,7 @@ namespace foosballv2s.Source.Activities.Adapters
                 LayoutInflater inflater = (LayoutInflater)context.GetSystemService(Context.LayoutInflaterService);
                 convertView = inflater.Inflate(Resource.Layout.Games, null);
             }
-            Game gameGroup = GetGroup(groupPosition);
+            Game gameGroup = listGroup[groupPosition];
             TextView timeViewGroup = convertView.FindViewById<TextView>(Resource.Id.gameTime);
             TextView t1ViewGroup = convertView.FindViewById<TextView>(Resource.Id.statsTeam1);
             TextView t2ViewGroup = convertView.FindViewById<TextView>(Resource.Id.statsTeam2);
@@ -101,6 +105,8 @@ namespace foosballv2s.Source.Activities.Adapters
             t1ViewGroup.Text = gameGroup.Team1Score.ToString();
             t2ViewGroup.Text = gameGroup.Team2Score.ToString();
             timeViewGroup.Text = GameTimeHelper.GetTimeString(gameGroup.StartTime, gameGroup.EndTime);
+
+            return convertView;
         }
 
         public override bool IsChildSelectable(int groupPosition, int childPosition)

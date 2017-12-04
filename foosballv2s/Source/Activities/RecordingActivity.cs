@@ -6,6 +6,7 @@ using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.Graphics;
+using Android.Media;
 using Android.OS;
 using Android.Text.Method;
 using Android.Util;
@@ -22,9 +23,12 @@ using foosballv2s.Droid.Shared.Source.Services.GameRecognition;
 using foosballv2s.Source.Activities.Dialogs;
 using foosballv2s.Source.Activities.Helpers;
 using Java.Interop;
+using Java.IO;
+using Java.Lang;
 using Xamarin.Forms;
 using Camera = Android.Hardware.Camera;
 using Color = Android.Graphics.Color;
+using Uri = Android.Net.Uri;
 using View = Android.Views.View;
 
 namespace foosballv2s.Source.Activities
@@ -39,12 +43,16 @@ namespace foosballv2s.Source.Activities
     )]
     public class RecordingActivity : Activity, TextureView.ISurfaceTextureListener, Camera.IPreviewCallback
     {
+        private readonly int videoIntentReqCode = 10;
+        
         private Camera camera;
         private TextureView textureView;
         private SurfaceView surfaceView;
         private SurfaceTexture _surfaceTexture;
         private ISurfaceHolder holder;
         private MovementDetector movementDetector;
+
+        private MediaPlayer _mediaPlayer;
 
         private TextView team1ScoreView;
         private TextView team2ScoreView;
@@ -107,11 +115,44 @@ namespace foosballv2s.Source.Activities
             base.OnPause();
             StopCamera();
         }
+        
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data) 
+        {
+            if (resultCode == Result.Ok && requestCode == videoIntentReqCode)
+            {
+                Uri videoUri = data.Data;
+                try {
+                    _mediaPlayer = new MediaPlayer();
+                    _mediaPlayer.SetDataSource(this, videoUri);
+                    _mediaPlayer.SetSurface(new Surface(_surfaceTexture));
+                    _mediaPlayer.Prepare();
+//                _mediaPlayer.SetOnBufferingUpdateListener(this);
+//                _mediaPlayer.setOnCompletionListener(this);
+//                _mediaPlayer.setOnPreparedListener(this);
+//                _mediaPlayer.setOnVideoSizeChangedListener(this);
+                    _mediaPlayer.SetAudioStreamType(Stream.Music);
+                    _mediaPlayer.Start();
+                    StartGame();
+                } catch (IllegalArgumentException e) {
+                    // TODO Auto-generated catch block
+                    e.PrintStackTrace();
+                } catch (SecurityException e) {
+                    // TODO Auto-generated catch block
+                    e.PrintStackTrace();
+                } catch (IllegalStateException e) {
+                    // TODO Auto-generated catch block
+                    e.PrintStackTrace();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.PrintStackTrace();
+                }   
+            }
+        }
 
         public void AddVideoSource()
         {
-
-            StartGame();
+            Intent intent = new Intent(Intent.ActionPick, Android.Provider.MediaStore.Video.Media.ExternalContentUri);
+            StartActivityForResult(intent, videoIntentReqCode);
         }
 
         public void AddLiveSource()

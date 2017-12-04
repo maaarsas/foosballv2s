@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Android.Hardware;
 using Android.Test.Mock;
-using foosballv2s.Source.Activities.Helpers;
+using foosballv2s.Droid.Shared.Source.Helpers;
 using NUnit.Framework;
 
 namespace foosballv2s.Test.Source.Activities.Helpers

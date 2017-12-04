@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Android;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
+using foosballv2s.Droid.Shared;
+using foosballv2s.Droid.Shared.Source.Entities;
 using foosballv2s.Source.Activities.Filters;
-using foosballv2s.Source.Entities;
 
 namespace foosballv2s.Source.Activities.Adapters
 {

@@ -1,10 +1,12 @@
-﻿using Android.App;
+﻿using Android;
+using Android.App;
 using Android.Support.Design.Widget;
 using Android.Support.V4.Widget;
 using Android.Support.V7.App;
 using Android.Widget;
+using foosballv2s.Droid.Shared;
+using foosballv2s.Droid.Shared.Source.Services.CredentialStorage;
 using foosballv2s.Source.Activities.Listeners;
-using foosballv2s.Source.Services.CredentialStorage;
 using Xamarin.Forms;
 using V7Toolbar = Android.Support.V7.Widget.Toolbar;
 using View = Android.Views.View;

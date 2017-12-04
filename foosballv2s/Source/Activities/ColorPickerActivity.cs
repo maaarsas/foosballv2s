@@ -1,5 +1,7 @@
-﻿using Android.App;
+﻿using Android;
+using Android.App;
 using Android.OS;
+using foosballv2s.Droid.Shared;
 
 namespace foosballv2s.Source.Activities
 {

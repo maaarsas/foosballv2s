@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Android.Widget;
+using foosballv2s.Droid.Shared.Source.Entities;
 using foosballv2s.Source.Activities.Adapters;
-using foosballv2s.Source.Entities;
 
 namespace foosballv2s.Source.Activities.Filters
 {

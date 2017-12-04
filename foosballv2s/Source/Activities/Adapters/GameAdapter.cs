@@ -1,10 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Android;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
+using foosballv2s.Droid.Shared;
+using foosballv2s.Droid.Shared.Source.Entities;
+using foosballv2s.Droid.Shared.Source.Helpers;
 using foosballv2s.Source.Activities.Helpers;
-using foosballv2s.Source.Entities;
+using Resource = Android.Resource;
 
 namespace foosballv2s.Source.Activities.Adapters
 {

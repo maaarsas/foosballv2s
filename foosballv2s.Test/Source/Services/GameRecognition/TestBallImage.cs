@@ -1,4 +1,6 @@
 ﻿using Android.Graphics;
+using Emgu.CV.Structure;
+using foosballv2s.Droid.Shared.Source.Services.GameRecognition;
 using NUnit.Framework;
 
 namespace foosballv2s.Test.Source.Services.GameRecognition
@@ -7,7 +9,7 @@ namespace foosballv2s.Test.Source.Services.GameRecognition
     public class TestBallImage
     {
         [Test]
-        public void GetColorTest()
+        public void TestGetColor()
         {
             Hsv imageColor = new Hsv(Color.Green.GetHue() / 2, Color.Green.GetSaturation() * 255,
                 Color.Green.GetBrightness() * 255);
@@ -17,9 +19,9 @@ namespace foosballv2s.Test.Source.Services.GameRecognition
             BallImage ballImage = new BallImage(bitmap);
             Hsv detectedColor = ballImage.getColor();
 
-            Assert.True(imageColor.Hue == detectedColor.Hue 
-                        && imageColor.Satuation == detectedColor.Satuation
-                        && imageColor.Value == detectedColor.Value);
+            Assert.AreEqual(imageColor.Hue, detectedColor.Hue);
+            Assert.AreEqual(imageColor.Satuation, detectedColor.Satuation);
+            Assert.AreEqual(imageColor.Value, detectedColor.Value);
         }
     }
 }

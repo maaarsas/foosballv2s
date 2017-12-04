@@ -46,6 +46,9 @@
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Emgu.CV.World.Android, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Emgu.CV.3.2.0.2721\lib\net35\Emgu.CV.World.Android.dll</HintPath>
+    </Reference>
     <Reference Include="FormsViewGroup, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\Xamarin.Forms.2.4.0.280\lib\MonoAndroid10\FormsViewGroup.dll</HintPath>
     </Reference>
@@ -117,6 +120,7 @@
     <Compile Include="Source\Helpers\TestGameTimeHelper.cs" />
     <Compile Include="Source\Services\CredentialStorage\TestCredentialStorage.cs" />
     <Compile Include="Source\Services\GameLogger\TestGameLogger.cs" />
+    <Compile Include="Source\Services\GameRecognition\TestBallImage.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Icon.png" />

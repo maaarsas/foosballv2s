@@ -2,7 +2,7 @@
 <resources>
   <string name="app_name">Foosball Commentator</string>
   <string name="openCamera">Open Camera</string>
-  <string name="welcome_text">Sveiki atvykę į Foosball Commentator</string>
+  <string name="welcome_text">Pradėti naują žaidimą</string>
   <string name="enter_team_names">Įveskite abiejų komandų pavadinimus</string>
   <string name="first_team_name">Pirma komanda</string>
   <string name="second_team_name">Antra komanda</string>

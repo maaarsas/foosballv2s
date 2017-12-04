@@ -41,7 +41,7 @@ namespace foosballv2s.Source.Activities
         ScreenOrientation = ScreenOrientation.Landscape,
         HardwareAccelerated = true
     )]
-    public class RecordingActivity : Activity, TextureView.ISurfaceTextureListener, Camera.IPreviewCallback
+    public class RecordingActivity : Activity, TextureView.ISurfaceTextureListener, Camera.IPreviewCallback, MediaPlayer.IOnPreparedListener
     {
         private readonly int videoIntentReqCode = 10;
         
@@ -100,14 +100,15 @@ namespace foosballv2s.Source.Activities
         protected override void OnStart()
         {
             base.OnStart();
+            DialogFragment dialog = new GameSourceDialogFragment(this);
+            dialog.Cancelable = false;
+            dialog.Show(this.FragmentManager, "game_source");
             
         }
 
         protected override void OnResume()
         {
             base.OnResume();
-            DialogFragment dialog = new GameSourceDialogFragment(this);
-            dialog.Show(this.FragmentManager, "game_source");
         }
         
         protected override void OnPause()
@@ -128,10 +129,9 @@ namespace foosballv2s.Source.Activities
                     _mediaPlayer.Prepare();
 //                _mediaPlayer.SetOnBufferingUpdateListener(this);
 //                _mediaPlayer.setOnCompletionListener(this);
-//                _mediaPlayer.setOnPreparedListener(this);
+                    _mediaPlayer.SetOnPreparedListener(this);
 //                _mediaPlayer.setOnVideoSizeChangedListener(this);
                     _mediaPlayer.SetAudioStreamType(Stream.Music);
-                    _mediaPlayer.Start();
                     StartGame();
                 } catch (IllegalArgumentException e) {
                     // TODO Auto-generated catch block
@@ -479,6 +479,13 @@ namespace foosballv2s.Source.Activities
                     TextView timeTextView = (TextView) FindViewById(Resource.Id.game_time);
                     timeTextView.Text = timeString;
                 });
+            }
+        }
+
+        public void OnPrepared(MediaPlayer mp)
+        {
+            if (!mp.IsPlaying) {
+                mp.Start();     
             }
         }
     }

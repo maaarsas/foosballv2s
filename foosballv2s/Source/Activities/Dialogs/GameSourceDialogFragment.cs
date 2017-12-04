@@ -11,6 +11,11 @@ namespace foosballv2s.Source.Activities.Dialogs
     public class GameSourceDialogFragment : Android.App.DialogFragment
     {
         private RecordingActivity currentActivity;
+
+        public GameSourceDialogFragment() : base()
+        {
+            
+        }
         
         public GameSourceDialogFragment(RecordingActivity activity)
         {

@@ -493,6 +493,8 @@ namespace foosballv2s.Source.Activities
         {
             if (!mp.IsPlaying) {
                 mp.Start();
+                movementDetector.SetupBallDetector(textureView.Width, textureView.Height, game.BallColor);
+                this.textureSetup = true;
                 StartGame();
             }
         }
@@ -504,6 +506,7 @@ namespace foosballv2s.Source.Activities
             if (!game.HasEnded)
             {
                 Toast.MakeText(Android.App.Application.Context, Resource.String.video_ended_not_completed, ToastLength.Long).Show();
+                game.HasEnded = true;
             }
         }
     }

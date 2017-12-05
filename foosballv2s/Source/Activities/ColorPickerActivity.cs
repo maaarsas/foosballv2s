@@ -1,4 +1,3 @@
-﻿using Android.App;
 using Color = Android.Graphics.Color;
 using ListView = Android.Widget.ListView;
 using Android.Graphics;
@@ -12,6 +11,10 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 using Emgu.CV.Structure;
 using Android.Content;
+﻿using Android;
+using Android.App;
+using Android.OS;
+using foosballv2s.Droid.Shared;
 
 namespace foosballv2s.Source.Activities
 {

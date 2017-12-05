@@ -100,7 +100,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:id="@+id/team1_goal"
-                android:onClick="Team1Goal" />
+                android:onClick="Team1GoalClick" />
 
         <TextView
                 android:background="#00000000"
@@ -121,7 +121,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:id="@+id/team2_goal"
-                android:onClick="Team2Goal" />
+                android:onClick="Team2GoalClick" />
 
     </RelativeLayout>
     

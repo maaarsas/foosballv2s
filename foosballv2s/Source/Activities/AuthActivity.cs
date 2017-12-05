@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Android;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -7,14 +8,20 @@ using Android.Support.V4.App;
 using Android.Support.V4.View;
 using Android.Views;
 using Android.Widget;
+using foosballv2s.Source.Activities.Adapters;
 using foosballv2s.Source.Activities.Fragments;
-using foosballv2s.Source.Services.FoosballWebService.Models;
-using foosballv2s.Source.Services.FoosballWebService.Repository;
+using foosballv2s.Droid.Shared;
+using foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Models;
+using foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Repository;
+
 using Java.Interop;
 using Java.Lang;
 using Xamarin.Forms;
 using Application = Android.App.Application;
 using View = Android.Views.View;
+using Java.Util;
+using Android.Content.Res;
+using System;
 
 namespace foosballv2s.Source.Activities
 {
@@ -26,9 +33,12 @@ namespace foosballv2s.Source.Activities
         private Toolbar toolbar;
         private TabLayout tabLayout;
         private ViewPager viewPager;
-
         private AuthRepository _authRepository;
- 
+
+        private RadioGroup languages;
+        private Android.Widget.Button btnSumbitLanguage;
+        private Dialog dialog;
+
         protected override void OnCreate(Bundle savedInstanceState) 
         {
             base.OnCreate(savedInstanceState);
@@ -44,6 +54,12 @@ namespace foosballv2s.Source.Activities
  
             tabLayout = (TabLayout) FindViewById(Resource.Id.sliding_tabs);
             tabLayout.SetupWithViewPager(viewPager);
+        }
+
+        [Export("ChangeLanguage")]
+        public async void ChangeLanguage(View view)
+        {
+            Helpers.LanguageHelper.ChangeLanguage(this, typeof(AuthActivity)); 
         }
 
         [Export("SubmitLogin")]
@@ -110,41 +126,6 @@ namespace foosballv2s.Source.Activities
             adapter.addFragment(new RegisterFragment(), Resources.GetString(Resource.String.register));
             viewPager.Adapter = adapter;
         }
-        
-        
-        
-        private class ViewPagerAdapter : FragmentPagerAdapter
-        {
-            private List<Android.Support.V4.App.Fragment> mFragmentList = new List<Android.Support.V4.App.Fragment>();
-            private List<string> mFragmentTitleList = new List<string>();
- 
-            public ViewPagerAdapter(Android.Support.V4.App.FragmentManager manager) : base(manager)
-            {
-                //base.OnCreate(manager);
-            }
- 
-            public override int Count {
-                get {
-                    return mFragmentList.Count;
-                }
-            }
-            public override Android.Support.V4.App.Fragment GetItem(int postion)
-            {
-                return mFragmentList[postion];
-            }
- 
-            public override ICharSequence GetPageTitleFormatted(int position)
-            {
-             
-                return new Java.Lang.String(mFragmentTitleList[position].ToLower());// display the title
-                //return null;// display only the icon
-            }
- 
-            public void addFragment(Android.Support.V4.App.Fragment fragment, string title)
-            {
-                mFragmentList.Add(fragment);
-                mFragmentTitleList.Add(title);
-            }
-        }
+       
     }
 }

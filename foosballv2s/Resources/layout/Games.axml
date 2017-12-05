@@ -70,6 +70,20 @@
                     android:background="@color/Black"
                     android:id="@+id/game_expList_view" />
             </LinearLayout>
+
+            <android.support.design.widget.TabLayout
+                    android:id="@+id/sliding_tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:tabGravity="fill"
+                    app:tabMode="fixed" />
+
+            <android.support.v4.view.ViewPager
+                    android:id="@+id/viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white" />
+            
         </LinearLayout>
     </FrameLayout>
 <!-- The navigation drawer -->

@@ -41,7 +41,7 @@ namespace foosballv2s.Source.Activities
         ScreenOrientation = ScreenOrientation.Landscape,
         HardwareAccelerated = true
     )]
-    public class RecordingActivity : Activity, TextureView.ISurfaceTextureListener, Camera.IPreviewCallback, MediaPlayer.IOnPreparedListener
+    public class RecordingActivity : Activity, TextureView.ISurfaceTextureListener, Camera.IPreviewCallback, MediaPlayer.IOnPreparedListener, MediaPlayer.IOnCompletionListener
     {
         private readonly int videoIntentReqCode = 10;
         
@@ -53,6 +53,7 @@ namespace foosballv2s.Source.Activities
         private MovementDetector movementDetector;
 
         private MediaPlayer _mediaPlayer;
+        private bool _returnFromVideoPick = false;
 
         private TextView team1ScoreView;
         private TextView team2ScoreView;
@@ -100,9 +101,13 @@ namespace foosballv2s.Source.Activities
         protected override void OnStart()
         {
             base.OnStart();
-            DialogFragment dialog = new GameSourceDialogFragment(this);
-            dialog.Cancelable = false;
-            dialog.Show(this.FragmentManager, "game_source");
+            if (!_returnFromVideoPick)
+            {
+                DialogFragment dialog = new GameSourceDialogFragment(this);
+                dialog.Cancelable = false;
+                dialog.Show(this.FragmentManager, "game_source");
+            }
+            
             
         }
 
@@ -125,14 +130,9 @@ namespace foosballv2s.Source.Activities
                 try {
                     _mediaPlayer = new MediaPlayer();
                     _mediaPlayer.SetDataSource(this, videoUri);
-                    _mediaPlayer.SetSurface(new Surface(_surfaceTexture));
-                    _mediaPlayer.Prepare();
-//                _mediaPlayer.SetOnBufferingUpdateListener(this);
-//                _mediaPlayer.setOnCompletionListener(this);
+                    _mediaPlayer.SetOnCompletionListener(this);
                     _mediaPlayer.SetOnPreparedListener(this);
-//                _mediaPlayer.setOnVideoSizeChangedListener(this);
                     _mediaPlayer.SetAudioStreamType(Stream.Music);
-                    StartGame();
                 } catch (IllegalArgumentException e) {
                     // TODO Auto-generated catch block
                     e.PrintStackTrace();
@@ -153,6 +153,7 @@ namespace foosballv2s.Source.Activities
         {
             Intent intent = new Intent(Intent.ActionPick, Android.Provider.MediaStore.Video.Media.ExternalContentUri);
             StartActivityForResult(intent, videoIntentReqCode);
+            _returnFromVideoPick = true;
         }
 
         public void AddLiveSource()
@@ -305,6 +306,12 @@ namespace foosballv2s.Source.Activities
         public void OnSurfaceTextureAvailable(SurfaceTexture surface, int width, int height)
         {
             _surfaceTexture = surface;
+            if (_returnFromVideoPick)
+            {
+                _mediaPlayer.SetSurface(new Surface(_surfaceTexture));
+                _mediaPlayer.Prepare();
+                _returnFromVideoPick = false;
+            }
         }
 
         public void OnSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height)
@@ -485,7 +492,17 @@ namespace foosballv2s.Source.Activities
         public void OnPrepared(MediaPlayer mp)
         {
             if (!mp.IsPlaying) {
-                mp.Start();     
+                mp.Start();
+                StartGame();
+            }
+        }
+
+        public void OnCompletion(MediaPlayer mp)
+        {
+            mp.Stop();
+            if (!game.HasEnded)
+            {
+                Toast.MakeText(Android.App.Application.Context, Resource.String.video_ended_not_completed, ToastLength.Long).Show();
             }
         }
     }

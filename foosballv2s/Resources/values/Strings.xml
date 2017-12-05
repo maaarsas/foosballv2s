@@ -93,4 +93,5 @@
     <string name="source_choose_title">Choose video input source</string>
     <string name="source_video">Video file</string>
     <string name="source_live">Live view from camera</string>
+    <string name="video_ended_not_completed">Your video has ended, but the end of the game was not reached</string>
 </resources>

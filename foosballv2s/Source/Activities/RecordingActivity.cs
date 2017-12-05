@@ -500,6 +500,7 @@ namespace foosballv2s.Source.Activities
         public void OnCompletion(MediaPlayer mp)
         {
             mp.Stop();
+            mp.Release();
             if (!game.HasEnded)
             {
                 Toast.MakeText(Android.App.Application.Context, Resource.String.video_ended_not_completed, ToastLength.Long).Show();

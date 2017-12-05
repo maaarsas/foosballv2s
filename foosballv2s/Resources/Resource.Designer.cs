@@ -3660,6 +3660,9 @@ namespace foosballv2s
 			// aapt resource value: 0x7f09004f
 			public const int time = 2131296335;
 			
+			// aapt resource value: 0x7f09007a
+			public const int video_ended_not_completed = 2131296378;
+			
 			// aapt resource value: 0x7f090029
 			public const int welcome_text = 2131296297;
 			

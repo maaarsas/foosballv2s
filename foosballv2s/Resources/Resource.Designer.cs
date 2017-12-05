@@ -3627,6 +3627,15 @@ namespace foosballv2s
 			// aapt resource value: 0x7f09002c
 			public const int second_team_name = 2131296300;
 			
+			// aapt resource value: 0x7f090077
+			public const int source_choose_title = 2131296375;
+			
+			// aapt resource value: 0x7f090079
+			public const int source_live = 2131296377;
+			
+			// aapt resource value: 0x7f090078
+			public const int source_video = 2131296376;
+			
 			// aapt resource value: 0x7f090039
 			public const int stats = 2131296313;
 			
@@ -3650,6 +3659,9 @@ namespace foosballv2s
 			
 			// aapt resource value: 0x7f09004f
 			public const int time = 2131296335;
+			
+			// aapt resource value: 0x7f09007a
+			public const int video_ended_not_completed = 2131296378;
 			
 			// aapt resource value: 0x7f090029
 			public const int welcome_text = 2131296297;

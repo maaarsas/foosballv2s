@@ -127,6 +127,7 @@
     <Compile Include="Source\Activities\AuthActivity.cs" />
     <Compile Include="Source\Activities\BallImageActivity.cs" />
     <Compile Include="Source\Activities\ColorPickerActivity.cs" />
+    <Compile Include="Source\Activities\Dialogs\GameSourceDialogFragment.cs" />
     <Compile Include="Source\Activities\Dialogs\LanguageDialog.cs" />
     <Compile Include="Source\Activities\Filters\TeamFilter.cs" />
     <Compile Include="Source\Activities\Fragments\GameListFragment.cs" />

@@ -6,6 +6,7 @@ using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.Graphics;
+using Android.Media;
 using Android.OS;
 using Android.Text.Method;
 using Android.Util;
@@ -19,11 +20,15 @@ using foosballv2s.Droid.Shared.Source.Helpers;
 using foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Repository;
 using foosballv2s.Droid.Shared.Source.Services.GameLogger;
 using foosballv2s.Droid.Shared.Source.Services.GameRecognition;
+using foosballv2s.Source.Activities.Dialogs;
 using foosballv2s.Source.Activities.Helpers;
 using Java.Interop;
+using Java.IO;
+using Java.Lang;
 using Xamarin.Forms;
 using Camera = Android.Hardware.Camera;
 using Color = Android.Graphics.Color;
+using Uri = Android.Net.Uri;
 using View = Android.Views.View;
 
 namespace foosballv2s.Source.Activities
@@ -36,13 +41,19 @@ namespace foosballv2s.Source.Activities
         ScreenOrientation = ScreenOrientation.Landscape,
         HardwareAccelerated = true
     )]
-    public class RecordingActivity : Activity, TextureView.ISurfaceTextureListener, Camera.IPreviewCallback
+    public class RecordingActivity : Activity, TextureView.ISurfaceTextureListener, Camera.IPreviewCallback, MediaPlayer.IOnPreparedListener, MediaPlayer.IOnCompletionListener
     {
+        private readonly int videoIntentReqCode = 10;
+        
         private Camera camera;
         private TextureView textureView;
         private SurfaceView surfaceView;
+        private SurfaceTexture _surfaceTexture;
         private ISurfaceHolder holder;
         private MovementDetector movementDetector;
+
+        private MediaPlayer _mediaPlayer;
+        private bool _returnFromVideoPick = false;
 
         private TextView team1ScoreView;
         private TextView team2ScoreView;
@@ -90,6 +101,69 @@ namespace foosballv2s.Source.Activities
         protected override void OnStart()
         {
             base.OnStart();
+            if (!_returnFromVideoPick)
+            {
+                DialogFragment dialog = new GameSourceDialogFragment(this);
+                dialog.Cancelable = false;
+                dialog.Show(this.FragmentManager, "game_source");
+            }
+            
+            
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+        }
+        
+        protected override void OnPause()
+        {
+            base.OnPause();
+            StopCamera();
+        }
+        
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data) 
+        {
+            if (resultCode == Result.Ok && requestCode == videoIntentReqCode)
+            {
+                Uri videoUri = data.Data;
+                try {
+                    _mediaPlayer = new MediaPlayer();
+                    _mediaPlayer.SetDataSource(this, videoUri);
+                    _mediaPlayer.SetOnCompletionListener(this);
+                    _mediaPlayer.SetOnPreparedListener(this);
+                    _mediaPlayer.SetAudioStreamType(Stream.Music);
+                } catch (IllegalArgumentException e) {
+                    // TODO Auto-generated catch block
+                    e.PrintStackTrace();
+                } catch (SecurityException e) {
+                    // TODO Auto-generated catch block
+                    e.PrintStackTrace();
+                } catch (IllegalStateException e) {
+                    // TODO Auto-generated catch block
+                    e.PrintStackTrace();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.PrintStackTrace();
+                }   
+            }
+        }
+
+        public void AddVideoSource()
+        {
+            Intent intent = new Intent(Intent.ActionPick, Android.Provider.MediaStore.Video.Media.ExternalContentUri);
+            StartActivityForResult(intent, videoIntentReqCode);
+            _returnFromVideoPick = true;
+        }
+
+        public void AddLiveSource()
+        {
+            StartCamera();
+            StartGame();
+        }
+
+        private void StartGame()
+        {
             game.Start(new GameLogger(game));
             gameDataSent = false;
            
@@ -102,18 +176,6 @@ namespace foosballv2s.Source.Activities
             
             Task.Run(async () => FeedMovementDetector());
             var clockTimer = new Timer(new TimerCallback(UpdateGameTimer), null,  TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(1));
-        }
-
-        protected override void OnResume()
-        {
-            base.OnResume();
-            StartCamera();
-        }
-        
-        protected override void OnPause()
-        {
-            base.OnPause();
-            StopCamera();
         }
 
         /// <summary>
@@ -243,22 +305,13 @@ namespace foosballv2s.Source.Activities
         /// <param name="height"></param>
         public void OnSurfaceTextureAvailable(SurfaceTexture surface, int width, int height)
         {
-            StartCamera();
-            try
+            _surfaceTexture = surface;
+            if (_returnFromVideoPick)
             {
-                camera.SetPreviewTexture(surface);
-                camera.SetPreviewCallback(this);
+                _mediaPlayer.SetSurface(new Surface(_surfaceTexture));
+                _mediaPlayer.Prepare();
+                _returnFromVideoPick = false;
             }
-            catch (Java.IO.IOException ex) { }
-
-            Camera.Parameters tmp = camera.GetParameters();
-            Camera.Size bestSize = ActivityHelper.GetBestPreviewSize(camera.GetParameters().SupportedPreviewSizes, textureView.Width, textureView.Height);
-            tmp.SetPreviewSize((int) bestSize.Width, (int) bestSize.Height);
-            tmp.FocusMode = Camera.Parameters.FocusModeContinuousPicture;
-            camera.SetParameters(tmp);
-            camera.StartPreview();
-            movementDetector.SetupBallDetector(textureView.Width, textureView.Height, game.BallColor);
-            this.textureSetup = true;
         }
 
         public void OnSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height)
@@ -283,6 +336,21 @@ namespace foosballv2s.Source.Activities
             {
                 camera = Camera.Open();
             }
+            try
+            {
+                camera.SetPreviewTexture(_surfaceTexture);
+                camera.SetPreviewCallback(this);
+            }
+            catch (Java.IO.IOException ex) { }
+
+            Camera.Parameters tmp = camera.GetParameters();
+            Camera.Size bestSize = ActivityHelper.GetBestPreviewSize(camera.GetParameters().SupportedPreviewSizes, textureView.Width, textureView.Height);
+            tmp.SetPreviewSize((int) bestSize.Width, (int) bestSize.Height);
+            tmp.FocusMode = Camera.Parameters.FocusModeContinuousPicture;
+            camera.SetParameters(tmp);
+            camera.StartPreview();
+            movementDetector.SetupBallDetector(textureView.Width, textureView.Height, game.BallColor);
+            this.textureSetup = true;
         }
 
         /// <summary>
@@ -418,6 +486,28 @@ namespace foosballv2s.Source.Activities
                     TextView timeTextView = (TextView) FindViewById(Resource.Id.game_time);
                     timeTextView.Text = timeString;
                 });
+            }
+        }
+
+        public void OnPrepared(MediaPlayer mp)
+        {
+            if (!mp.IsPlaying) {
+                mp.Start();
+                movementDetector.SetupBallDetector(textureView.Width, textureView.Height, game.BallColor);
+                this.textureSetup = true;
+                StartGame();
+            }
+        }
+
+        public void OnCompletion(MediaPlayer mp)
+        {
+            mp.Stop();
+            mp.Release();
+            if (!game.HasEnded)
+            {
+                Toast.MakeText(Android.App.Application.Context, Resource.String.video_ended_not_completed, ToastLength.Long).Show();
+                game.HasEnded = true;
+                gameDataSent = true;
             }
         }
     }

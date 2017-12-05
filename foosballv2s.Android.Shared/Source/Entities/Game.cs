@@ -55,7 +55,7 @@ namespace foosballv2s.Droid.Shared.Source.Entities
         public Team WinningTeam { get; set; }
         
         [JsonIgnore]
-        public Boolean HasEnded { get; private set; } = false;
+        public Boolean HasEnded { get; set; } = false;
         
         public ICollection<GameEvent> GameEvents { get; set; } = new Collection<GameEvent>();
         

@@ -507,6 +507,7 @@ namespace foosballv2s.Source.Activities
             {
                 Toast.MakeText(Android.App.Application.Context, Resource.String.video_ended_not_completed, ToastLength.Long).Show();
                 game.HasEnded = true;
+                gameDataSent = true;
             }
         }
     }

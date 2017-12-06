@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Foosball Commentator</string>
-  <string name="openCamera">Open Camera</string>
-  <string name="welcome_text">Sveiki atvykę į Foosball Commentator</string>
+  <string name="openCamera">Įjungti kamerą</string>
+  <string name="welcome_text">Pradėti naują žaidimą</string>
   <string name="enter_team_names">Įveskite abiejų komandų pavadinimus</string>
   <string name="first_team_name">Pirma komanda</string>
   <string name="second_team_name">Antra komanda</string>
@@ -10,7 +10,7 @@
   <string name="prev">Previous Settings</string>
   <string name="detected_color">Kamuoliuko spalva</string>
   <string name="detect_color">Gauti spalvą</string>
-  <string name="detect_again">Gauti naują spalvą</string>
+  <string name="detect_again">Iš naujo</string>
   <string name="point_camera_to_ball">Reikalinga kamuoliuko spalva. Nukreipkite kamerą į kamuoliuką.</string>
   <string name="team1_goal">I įvartis</string>
   <string name="team2_goal">II įvartis</string>
@@ -90,4 +90,10 @@
   <string name="register_error">Įvedėte neteisingą el. pašta, slaptažodį arba slaptažodžiai nesutampa. Bandykite dar kartą</string>
   <string name="register_success">Registracija sėkminga. Galite prisijungti</string>
   <string name="auto_logged_in">Automatinis prisijungimas</string>
+
+  <!--Source-->
+  <string name="source_choose_title">Pasirinkite video šaltinį</string>
+  <string name="source_video">Video failas</string>
+  <string name="source_live">Tiesioginis kameros vaizdas</string>
+  <string name="video_ended_not_completed">Video įrašas baigėsi, bet žaidimas nebuvo baigtas</string>
 </resources>

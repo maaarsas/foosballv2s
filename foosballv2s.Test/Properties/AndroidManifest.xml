@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="foosballv2s.Test.foosballv2s.Test" android:versionCode="1" android:versionName="1.0">
+  <uses-sdk android:minSdkVersion="16" />
+  <application android:label="foosballv2s.Test">
+
+    <!-- For config tests -->
+    <meta-data android:name="api_url" android:value="127.0.0.1"/>
+    <meta-data android:name="test_key" android:value="some_value"/>
+    <meta-data android:name="another_key" android:value="another_value"/>
+    
+  </application>
+
+  
+</manifest>

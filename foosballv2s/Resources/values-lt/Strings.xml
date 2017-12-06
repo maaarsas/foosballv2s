@@ -7,7 +7,7 @@
   <string name="first_team_name">Pirma komanda</string>
   <string name="second_team_name">Antra komanda</string>
   <string name="submit">Toliau</string>
-  <string name="prev">Previous Settings</string>
+  <string name="prev">Ankstesnė spalva</string>
   <string name="detected_color">Kamuoliuko spalva</string>
   <string name="detect_color">Gauti spalvą</string>
   <string name="detect_again">Iš naujo</string>
@@ -18,7 +18,7 @@
   <string name="wrong_second_team_name">Antros komandos pavadinimas netinkamas. Pavadinimas privalo būti ilgesnis nei 2 simboliai ir sudarytas tik iš raidžių ar skaitmenų.</string>
   <string name="same_team_names">Komandos negali turėti vienodų pavadinimų</string>
   <string name="team_name_exists">Komanda {0} jau yra. Pasirinkite komandą iš sąrašo arba įveskite naują.</string>
-  <string name="stats">Stats</string>
+  <string name="stats">Statistika</string>
   <string name="retrieving_your_teams">Įkeliamos tavo komandos. Prašome palaukti.</string>
   <string name="retrieving_all_teams">Įkeliamos visos komandos. Prašome palaukti.</string>
   <string name="checking_teams">Tikrinami komandų pavadinimai. Prašome palaukti.</string>

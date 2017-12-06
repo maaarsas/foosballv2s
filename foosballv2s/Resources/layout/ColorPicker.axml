@@ -3,6 +3,12 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <TextView
+        android:layout_height="40dp"
+        android:layout_width="match_parent"
+        android:text="Pick a color from previously used colors"
+        android:gravity="center"
+        style="@android:style/TextAppearance.Medium" />
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

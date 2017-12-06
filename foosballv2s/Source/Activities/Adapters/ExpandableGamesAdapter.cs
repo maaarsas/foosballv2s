@@ -79,11 +79,11 @@ namespace foosballv2s.Source.Activities.Adapters
             var evt = eList.ElementAt(childPosition).EventType.ToString();
             if (evt == "GameStart")
             {
-                viewItemEvent.Text = Resource.String.game_start.ToString();
+                viewItemEvent.Text = context.Resources.GetString(Resource.String.game_start);
             }
             else if (evt == "GameEnd")
             {
-                viewItemEvent.Text = Resource.String.game_end.ToString();
+                viewItemEvent.Text = context.Resources.GetString(Resource.String.game_end);
             }
             else
             {

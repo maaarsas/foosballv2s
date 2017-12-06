@@ -45,6 +45,7 @@ namespace foosballv2s.WebService.Models
                 .Include(g => g.Team1)
                 .Include(g => g.Team2)
                 .Include(g => g.GameEvents)
+                    .ThenInclude(ge => ge.Team)
                 .AsNoTracking().ToList());
         }
 

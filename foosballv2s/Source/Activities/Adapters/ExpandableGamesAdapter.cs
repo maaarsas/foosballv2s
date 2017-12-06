@@ -64,7 +64,8 @@ namespace foosballv2s.Source.Activities.Adapters
             var eList = listGroup[groupPosition].GameEvents;
 
             //listChild.TryGetValue(listGroup[groupPosition], out eList);
-            viewItemTime.Text = eList.ElementAt(childPosition).EventTime.ToString();
+            var eventTime = eList.ElementAt(childPosition).EventTime;
+            viewItemTime.Text = GameTimeHelper.GetTimeString(listGroup[groupPosition].StartTime, eventTime);
             viewItemEvent.Text = eList.ElementAt(childPosition).EventType.ToString();
 
             var team = eList.ElementAt(childPosition).Team;

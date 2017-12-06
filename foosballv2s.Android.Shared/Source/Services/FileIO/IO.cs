@@ -5,6 +5,7 @@ using System.IO;
 using Android.Widget;
 using Newtonsoft.Json;
 using Color = Android.Graphics.Color;
+using Emgu.CV.Structure;
 
 namespace foosballv2s.Droid.Shared.Source.Services.FileIO
 {
@@ -21,7 +22,7 @@ namespace foosballv2s.Droid.Shared.Source.Services.FileIO
         private string team1name, team2name;
         private string data, colordata;
         private SLSupp instance = new SLSupp();
-        private List<Color> colorlist = new List<Color>();
+        private List<Hsv> colorlist = new List<Hsv>();
 
         /// <summary>
         /// Logs the game events
@@ -74,17 +75,19 @@ namespace foosballv2s.Droid.Shared.Source.Services.FileIO
             File.WriteAllText(path, data);
         }
 
-        public void Write_Serialize_Color(Color color)
+        public void Write_Serialize_Color(Hsv color)
         {
-            instance.CheckColor(colorlist, color);
+            //List<Color> cList;
+
+            colorlist = Read_Deserialize_Color();
+            colorlist.Add(color);
 
             colordata = JsonConvert.SerializeObject(colorlist);
 
             File.WriteAllText(path_color, colordata);
-
         }
 
-        public List<Color> Read_Deserialize_Color()
+        public List<Hsv> Read_Deserialize_Color()
         {
             if (!System.IO.File.Exists(path_color))
             {
@@ -94,7 +97,7 @@ namespace foosballv2s.Droid.Shared.Source.Services.FileIO
             else
             {
                 var colordata = File.ReadAllText(path_color);
-                colorlist = JsonConvert.DeserializeObject<List<Color>>(colordata);
+                colorlist = JsonConvert.DeserializeObject<List<Hsv>>(colordata);
             }
 
             return colorlist;

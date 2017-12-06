@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:orientation="horizontal"
+    android:weightSum="100">
     <TextView
-        android:id="@+id/team_item_name"
-        android:layout_width="wrap_content"
+        android:id="@+id/item_time"
+        android:layout_width="0dp"
+        android:layout_weight="20"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:textSize="18dp" />
+        android:layout_marginLeft="10dp"/>
+    <TextView
+        android:id="@+id/item_event"
+        android:layout_width="0dp"
+        android:layout_weight="40"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/item_desc"
+        android:layout_width="0dp"
+        android:layout_weight="40"
+        android:layout_height="wrap_content" />
 </LinearLayout>

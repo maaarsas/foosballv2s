@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
-using Android;
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V4.View;
 using Android.Support.V7.App;
-using foosballv2s.Droid.Shared;
 using foosballv2s.Droid.Shared.Source.Entities;
 using foosballv2s.Droid.Shared.Source.Services.CredentialStorage;
 using foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Helpers;
@@ -15,7 +13,8 @@ using foosballv2s.Source.Activities.Adapters;
 using foosballv2s.Source.Activities.Fragments;
 using foosballv2s.Source.Activities.Helpers;
 using Xamarin.Forms;
-using ListView = Android.Widget.ListView;
+using Android.Widget;
+using System.Linq;
 
 namespace foosballv2s.Source.Activities
 {
@@ -29,6 +28,7 @@ namespace foosballv2s.Source.Activities
         private TabLayout tabLayout;
         private ViewPager viewPager;
         private GameRepository gameRepository;
+        private ExpandableListView gameListView;
         private GameListFragment myGamesListFragment;
         private GameListFragment allGamesListFragment;
         
@@ -51,6 +51,7 @@ namespace foosballv2s.Source.Activities
             NavigationHelper.SetActionBarNavigationText(this, Resource.String.nav_games);
 
             gameRepository = DependencyService.Get<GameRepository>();
+            gameListView = (ExpandableListView) FindViewById(Resource.Id.game_list_view);
         }
 
         protected override void OnResume()
@@ -79,8 +80,8 @@ namespace foosballv2s.Source.Activities
 
             dialog.Dismiss();
             
-            GameAdapter gameAdapter = new GameAdapter(this, new List<Game>(games));
-            myGamesListFragment.GameListView.Adapter = gameAdapter;
+            ExpandableListAdapter gameAdapter = new ExpandableListAdapter(this, new List<Game>(games));
+            myGamesListFragment.GameListView.SetAdapter(gameAdapter);
         }
 
         /// <summary>
@@ -95,11 +96,10 @@ namespace foosballv2s.Source.Activities
             urlParams.AddParam("sortby", "-EndTime");
             
             Game[] games = await gameRepository.GetAll(urlParams.UrlParams);
-
             dialog.Dismiss();
             
-            GameAdapter gameAdapter = new GameAdapter(this, new List<Game>(games));
-            allGamesListFragment.GameListView.Adapter = gameAdapter;
+            ExpandableListAdapter gameAdapter = new ExpandableListAdapter(this, new List<Game>(games));
+            allGamesListFragment.GameListView.SetAdapter(gameAdapter);
         }
         
         private void setupViewPager(ViewPager viewPager)

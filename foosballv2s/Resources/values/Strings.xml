@@ -49,8 +49,8 @@
   <string name="score">Score</string>
   <string name="my_games">My games</string>
   <string name="all_games">All games</string>
-  <string name="game_start">Game started</string>
-  <string name="game_end">Game ended</string>
+  <string name="game_start">Game Started</string>
+  <string name="game_end">Game Ended</string>
 
   <!--Teams-->
   <string name="change_name_hint">New team name</string>

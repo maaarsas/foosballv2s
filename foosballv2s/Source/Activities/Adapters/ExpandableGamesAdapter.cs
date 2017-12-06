@@ -65,7 +65,16 @@ namespace foosballv2s.Source.Activities.Adapters
             var eList = listGroup[groupPosition].GameEvents.OrderBy(e => e.EventTime);
             var eventTime = eList.ElementAt(childPosition).EventTime;
             viewItemTime.Text = GameTimeHelper.GetTimeString(listGroup[groupPosition].StartTime, eventTime);
-            //viewItemEvent.Text = eList.ElementAt(childPosition).EventType.ToString();
+
+            var team = eList.ElementAt(childPosition).Team;
+            if (team != null)
+            {
+                viewItemDesc.Text = eList.ElementAt(childPosition).Team.TeamName;
+            }
+            else
+            {
+                viewItemDesc.Text = "";
+            }
 
             var evt = eList.ElementAt(childPosition).EventType.ToString();
             if (evt == "GameStart")
@@ -81,16 +90,6 @@ namespace foosballv2s.Source.Activities.Adapters
                 viewItemEvent.Text = evt;
             }
 
-            var team = eList.ElementAt(childPosition).Team;
-            if (team != null)
-            {
-                viewItemDesc.Text = eList.ElementAt(childPosition).Team.TeamName;
-            }
-            else
-            {
-                viewItemDesc.Text = "";
-            }
-            
             return convertView;
         }
 

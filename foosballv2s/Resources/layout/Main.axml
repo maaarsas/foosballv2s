@@ -67,7 +67,6 @@
                         android:text="@string/submit"
                         style="@style/primaryButtonStyle"
                         android:id="@+id/submit"
-                        android:onClick="SubmitTeamNames"
                         android:layout_width="match_parent"
                         android:layout_marginLeft="40dp"
                         android:layout_marginRight="40dp" />

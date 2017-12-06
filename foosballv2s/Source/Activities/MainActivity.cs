@@ -54,8 +54,15 @@ namespace foosballv2s.Source.Activities
             firstTeamTextView.ItemClick += AutoCompleteTextView_ItemClicked;
             secondTeamTextView.ItemClick += AutoCompleteTextView_ItemClicked;
 
+            var btnS = FindViewById<Android.Widget.Button>(Resource.Id.submit);
             var btnP = FindViewById<Android.Widget.Button>(Resource.Id.prev);
-            btnP.Click += BtnPrev_Click;
+
+            btnP.Id = 1;
+            btnS.Id = 2;
+
+            btnP.Click += Btn_Click;
+            btnS.Click += Btn_Click;
+
 
             //Window.SetBackgroundDrawable(Android.Resource.Id.);
             NavigationHelper.SetupNavigationListener(this);
@@ -70,18 +77,12 @@ namespace foosballv2s.Source.Activities
         }
 
         /// <summary>
-        /// A function that is called when the "Previous settings" button is clicked
+        /// Called when submit or previous color is clicked
+        /// Checks the teams and starts the game
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        /*private void BtnPrev_Click(object sender, EventArgs e)
-        {
-            Intent intent = new Intent(this, typeof(ColorPickerActivity));
-
-            StartActivity(intent);
-        }*/
-
-        public async void BtnPrev_Click(object sender, EventArgs e)
+        public async void Btn_Click(object sender, EventArgs e)
         {
             VolumeControlStream = Android.Media.Stream.Music;
             ProgressDialog dialog = ProgressDialog.Show(this, "",
@@ -157,93 +158,19 @@ namespace foosballv2s.Source.Activities
             game.Team1 = team1;
             game.Team2 = team2;
 
-            Intent intent = new Intent(this, typeof(ColorPickerActivity));
-            StartActivity(intent);
-        }
-        /// <summary>
-        /// Called when submit is clicked
-        /// Checks the teams and starts the game
-        /// </summary>
-        /// <param name="view"></param>
-        [Export("SubmitTeamNames")]
-        public async void SubmitTeamNames(View view)
-        {
-            VolumeControlStream = Android.Media.Stream.Music;
-            ProgressDialog dialog = ProgressDialog.Show(this, "",
-                Resources.GetString(Resource.String.checking_teams), true);
+            var clicked = sender as Android.Widget.Button;
 
-            Team team1 = ((TeamAutoCompleteAdapter)firstTeamTextView.Adapter).SelectedTeam;
-            Team team2 = ((TeamAutoCompleteAdapter)secondTeamTextView.Adapter).SelectedTeam;
-
-            //Example how to use TextToSpeech
-            //DependencyService.Get<ITextToSpeech>().Speak("Welcome " + firstTeamTextView.Text + " and " + secondTeamTextView.Text);
-
-
-            List<Team> teams = new List<Team>(await teamRepository.GetAll());
-            Func<string, bool> teamExists = delegate (string s)
+            if(clicked.Id == 1)
             {
-                foreach (Team team in teams)
-                {
-                    if (team.TeamName.Equals(s))
-                    {
-                        string msg = Resources.GetString(Resource.String.team_name_exists);
-                        string msg2 = System.String.Format(msg, s);
-                        Toast.MakeText(Android.App.Application.Context, msg2, ToastLength.Short).Show();
-                        return true;
-                    }
-                }
-                return false;
-            };
+                Intent intent = new Intent(this, typeof(ColorPickerActivity));
+                StartActivity(intent);
+            }
+            else
+            {
+                Intent intent = new Intent(this, typeof(BallImageActivity));
+                StartActivity(intent);
+            }          
             
-            dialog.Dismiss();
-            
-            // first team is not selected from the list, so it is a new one, create it
-            if (team1 == null)
-            {
-                if (!teamExists(firstTeamTextView.Text) && !firstTeamTextView.Text.Equals(secondTeamTextView.Text))
-                {
-                    team1 = new Team { TeamName = firstTeamTextView.Text };
-                    team1 = await teamRepository.Create(team1);
-                    if (team1 == null)
-                    {
-                        Toast.MakeText(
-                            Android.App.Application.Context, Resource.String.wrong_first_team_name, ToastLength.Short)
-                            .Show();
-                        return;
-                    }
-                }
-                else return;
-            }
-            // second team is not selected from the list, so it is a new one, create it
-            if (team2 == null)
-            {
-                if (!teamExists(secondTeamTextView.Text) && !firstTeamTextView.Text.Equals(secondTeamTextView.Text))
-                {
-                    team2 = new Team { TeamName = secondTeamTextView.Text };
-                    team2 = await teamRepository.Create(team2);
-                    if (team2 == null)
-                    {
-                        await teamRepository.Delete(team1.Id);
-                        Toast.MakeText(
-                                Android.App.Application.Context, Resource.String.wrong_second_team_name, ToastLength.Short)
-                            .Show();
-                        return;
-                    }
-                }
-                else return;
-            }
-
-            if (team1.TeamName.Equals(team2.TeamName))
-            {
-                Toast.MakeText(Android.App.Application.Context, Resource.String.same_team_names, ToastLength.Short).Show();
-                return;
-            }
-
-            game.Team1 = team1;
-            game.Team2 = team2;
-
-            Intent intent = new Intent(this, typeof(BallImageActivity));
-            StartActivity(intent);
         }
 
         /// <summary>

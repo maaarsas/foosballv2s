@@ -51,7 +51,7 @@ namespace foosballv2s.Source.Activities.Adapters
             
             // Check if an existing view is being reused, otherwise inflate the view
             if (convertView == null) {
-                convertView = LayoutInflater.From(Context).Inflate(Resource.Layout.item_team, parent, false);
+                convertView = LayoutInflater.From(Context).Inflate(Resource.Layout.teamlist_item, parent, false);
             }
             
             // Lookup view for data population

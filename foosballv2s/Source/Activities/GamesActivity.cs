@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
-using Android;
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V4.View;
 using Android.Support.V7.App;
-using foosballv2s.Droid.Shared;
 using foosballv2s.Droid.Shared.Source.Entities;
 using foosballv2s.Droid.Shared.Source.Services.CredentialStorage;
 using foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Helpers;
@@ -15,8 +13,8 @@ using foosballv2s.Source.Activities.Adapters;
 using foosballv2s.Source.Activities.Fragments;
 using foosballv2s.Source.Activities.Helpers;
 using Xamarin.Forms;
-using ListView = Android.Widget.ListView;
 using Android.Widget;
+using System.Linq;
 
 namespace foosballv2s.Source.Activities
 {
@@ -80,9 +78,18 @@ namespace foosballv2s.Source.Activities
             
             Game[] games = await gameRepository.GetAll(urlParams.UrlParams);
 
+            Dictionary<Game, List<GameEvent>> dict = new Dictionary<Game, List<GameEvent>>();
+            List<GameEvent> evList = new List<GameEvent>();
+
+            for (int i = 0; i < games.Length; i++)
+            {
+                evList = games[i].GameEvents.ToList();
+                dict.Add(games[i], evList);
+            }
+
             dialog.Dismiss();
             
-            GameAdapter gameAdapter = new GameAdapter(this, new List<Game>(games));
+            ExpandableListAdapter gameAdapter = new ExpandableListAdapter(this, new List<Game>(games), dict);
             myGamesListFragment.GameListView.Adapter = gameAdapter; //FIX
         }
 
@@ -99,9 +106,17 @@ namespace foosballv2s.Source.Activities
             
             Game[] games = await gameRepository.GetAll(urlParams.UrlParams);
 
+            Dictionary<Game, List<GameEvent>> dict = new Dictionary<Game, List<GameEvent>>();
+            List<GameEvent> evList = new List<GameEvent>();
+            for (int i = 0; i < games.Length; i++)
+            {
+                evList = games[i].GameEvents.ToList();
+                dict.Add(games[i], evList);
+            }
+
             dialog.Dismiss();
             
-            GameAdapter gameAdapter = new GameAdapter(this, new List<Game>(games));
+            ExpandableListAdapter gameAdapter = new ExpandableListAdapter(this, new List<Game>(games), dict);
             allGamesListFragment.GameListView.Adapter = gameAdapter;
         }
         

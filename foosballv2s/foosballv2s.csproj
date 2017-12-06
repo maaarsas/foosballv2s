@@ -160,6 +160,9 @@
     <None Include="Properties\AndroidManifest.xml">
       <SubType>Designer</SubType>
     </None>
+    <AndroidResource Include="Resources\layout\teamlist_item.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="lib\armeabi-v7a\" />
@@ -178,7 +181,9 @@
     <AndroidResource Include="Resources\drawable\img_background_foosball.jpg" />
     <AndroidResource Include="Resources\layout\fragment_game_list.axml" />
     <AndroidResource Include="Resources\layout\fragment_team_list.axml" />
-    <AndroidResource Include="Resources\layout\Games.axml" />
+    <AndroidResource Include="Resources\layout\Games.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\drawable\Loading.xml" />
     <AndroidResource Include="Resources\drawable\NewGame.xml" />
     <AndroidResource Include="Resources\drawable\Process.xml" />
@@ -198,7 +203,9 @@
     <AndroidResource Include="Resources\layout\Games.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\item_team.axml" />
+    <AndroidResource Include="Resources\layout\item_team.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\Main.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -242,7 +249,6 @@
   <ItemGroup>
     <AndroidResource Include="Resources\layout\item_team.axml" />
     <AndroidResource Include="Resources\menu\navigation.xml" />
-=======
     <AndroidResource Include="Resources\menu\navigation.xml">
       <SubType>Designer</SubType>
     </AndroidResource>

@@ -9,10 +9,9 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using foosballv2s.Source.Entities;
-using Java.Lang;
 using Object = Java.Lang.Object;
-using foosballv2s.Source.Activities.Helpers;
+using foosballv2s.Droid.Shared.Source.Helpers;
+using foosballv2s.Droid.Shared.Source.Entities;
 
 namespace foosballv2s.Source.Activities.Adapters
 {
@@ -20,9 +19,9 @@ namespace foosballv2s.Source.Activities.Adapters
     {
         private Context context;
         private List<Game> listGroup;
-        private Dictionary<Game, List<Game>> listChild;
+        private Dictionary<Game, List<GameEvent>> listChild;
 
-        public ExpandableListAdapter(Context context, List<Game> listGroup, Dictionary<Game, List<Game>> listChild)
+        public ExpandableListAdapter(Context context, List<Game> listGroup, Dictionary<Game, List<GameEvent>> listChild)
         {
             this.context = context;
             this.listGroup = listGroup;
@@ -40,9 +39,7 @@ namespace foosballv2s.Source.Activities.Adapters
 
         public override Object GetChild(int groupPosition, int childPosition)
         {
-            var result = new List<Game>();
-            listChild.TryGetValue(listGroup[groupPosition], out result);
-            return result[childPosition];
+            throw new NotImplementedException();
         }
 
         public override long GetChildId(int groupPosition, int childPosition)
@@ -52,26 +49,28 @@ namespace foosballv2s.Source.Activities.Adapters
 
         public override int GetChildrenCount(int groupPosition)
         {
-            var result = new List<Game>();
+            var result = new List<GameEvent>();
             listChild.TryGetValue(listGroup[groupPosition], out result);
             return result.Count;
         }
 
         public override View GetChildView(int groupPosition, int childPosition, bool isLastChild, View convertView, ViewGroup parent)
         {
-            if(convertView == null)
+            if (convertView == null)
             {
                 LayoutInflater inflater = (LayoutInflater)context.GetSystemService(Context.LayoutInflaterService);
                 convertView = inflater.Inflate(Resource.Layout.item_team, null);
             }
             TextView viewItemTime = convertView.FindViewById<TextView>(Resource.Id.item_time);
             TextView viewItemEvent = convertView.FindViewById<TextView>(Resource.Id.item_event);
+            TextView viewItemDesc = convertView.FindViewById<TextView>(Resource.Id.item_desc);
 
-            var eList = new List<Game>();
-            listChild.TryGetValue(listGroup[groupPosition], out eList);
-            Game content = eList[childPosition];
+            var eList = new List<GameEvent>();
 
-            
+            //listChild.TryGetValue(listGroup[groupPosition], out eList);
+            viewItemTime.Text = eList[childPosition].EventTime.ToString();
+            viewItemEvent.Text = eList[childPosition].EventType.ToString();
+            viewItemDesc.Text = eList[childPosition].Team.ToString();
 
             return convertView;
         }
@@ -88,7 +87,7 @@ namespace foosballv2s.Source.Activities.Adapters
 
         public override View GetGroupView(int groupPosition, bool isExpanded, View convertView, ViewGroup parent)
         {
-            if(convertView == null)
+            if (convertView == null)
             {
                 LayoutInflater inflater = (LayoutInflater)context.GetSystemService(Context.LayoutInflaterService);
                 convertView = inflater.Inflate(Resource.Layout.Games, null);
@@ -114,3 +113,4 @@ namespace foosballv2s.Source.Activities.Adapters
             return true;
         }
     }
+}

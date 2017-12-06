@@ -78,19 +78,10 @@ namespace foosballv2s.Source.Activities
             
             Game[] games = await gameRepository.GetAll(urlParams.UrlParams);
 
-            Dictionary<Game, List<GameEvent>> dict = new Dictionary<Game, List<GameEvent>>();
-            List<GameEvent> evList = new List<GameEvent>();
-
-            for (int i = 0; i < games.Length; i++)
-            {
-                evList = games[i].GameEvents.ToList();
-                dict.Add(games[i], evList);
-            }
-
             dialog.Dismiss();
             
-            ExpandableListAdapter gameAdapter = new ExpandableListAdapter(this, new List<Game>(games), dict);
-            myGamesListFragment.GameListView.Adapter = gameAdapter; //FIX
+            ExpandableListAdapter gameAdapter = new ExpandableListAdapter(this, new List<Game>(games));
+            myGamesListFragment.GameListView.SetAdapter(gameAdapter);
         }
 
         /// <summary>
@@ -105,19 +96,10 @@ namespace foosballv2s.Source.Activities
             urlParams.AddParam("sortby", "-EndTime");
             
             Game[] games = await gameRepository.GetAll(urlParams.UrlParams);
-
-            Dictionary<Game, List<GameEvent>> dict = new Dictionary<Game, List<GameEvent>>();
-            List<GameEvent> evList = new List<GameEvent>();
-            for (int i = 0; i < games.Length; i++)
-            {
-                evList = games[i].GameEvents.ToList();
-                dict.Add(games[i], evList);
-            }
-
             dialog.Dismiss();
             
-            ExpandableListAdapter gameAdapter = new ExpandableListAdapter(this, new List<Game>(games), dict);
-            allGamesListFragment.GameListView.Adapter = gameAdapter;
+            ExpandableListAdapter gameAdapter = new ExpandableListAdapter(this, new List<Game>(games));
+            allGamesListFragment.GameListView.SetAdapter(gameAdapter);
         }
         
         private void setupViewPager(ViewPager viewPager)

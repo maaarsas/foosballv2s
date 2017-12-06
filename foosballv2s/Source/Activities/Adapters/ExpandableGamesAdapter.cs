@@ -19,13 +19,11 @@ namespace foosballv2s.Source.Activities.Adapters
     {
         private Context context;
         private List<Game> listGroup;
-        private Dictionary<Game, List<GameEvent>> listChild;
 
-        public ExpandableListAdapter(Context context, List<Game> listGroup, Dictionary<Game, List<GameEvent>> listChild)
+        public ExpandableListAdapter(Context context, List<Game> listGroup)
         {
             this.context = context;
             this.listGroup = listGroup;
-            this.listChild = listChild;
         }
         public override int GroupCount
         {
@@ -49,9 +47,7 @@ namespace foosballv2s.Source.Activities.Adapters
 
         public override int GetChildrenCount(int groupPosition)
         {
-            var result = new List<GameEvent>();
-            listChild.TryGetValue(listGroup[groupPosition], out result);
-            return result.Count;
+            return listGroup[groupPosition].GameEvents.Count;
         }
 
         public override View GetChildView(int groupPosition, int childPosition, bool isLastChild, View convertView, ViewGroup parent)
@@ -65,13 +61,18 @@ namespace foosballv2s.Source.Activities.Adapters
             TextView viewItemEvent = convertView.FindViewById<TextView>(Resource.Id.item_event);
             TextView viewItemDesc = convertView.FindViewById<TextView>(Resource.Id.item_desc);
 
-            var eList = new List<GameEvent>();
+            var eList = listGroup[groupPosition].GameEvents;
 
             //listChild.TryGetValue(listGroup[groupPosition], out eList);
-            viewItemTime.Text = eList[childPosition].EventTime.ToString();
-            viewItemEvent.Text = eList[childPosition].EventType.ToString();
-            viewItemDesc.Text = eList[childPosition].Team.ToString();
+            viewItemTime.Text = eList.ElementAt(childPosition).EventTime.ToString();
+            viewItemEvent.Text = eList.ElementAt(childPosition).EventType.ToString();
 
+            var team = eList.ElementAt(childPosition).Team;
+            if (team != null)
+            {
+                viewItemDesc.Text = eList.ElementAt(childPosition).Team.ToString();
+            }
+            
             return convertView;
         }
 
@@ -87,30 +88,54 @@ namespace foosballv2s.Source.Activities.Adapters
 
         public override View GetGroupView(int groupPosition, bool isExpanded, View convertView, ViewGroup parent)
         {
-            if (convertView == null)
+            View row = convertView;
+            if (row == null)
             {
-                LayoutInflater inflater = (LayoutInflater)context.GetSystemService(Context.LayoutInflaterService);
-                convertView = inflater.Inflate(Resource.Layout.Games, null);
+                row = LayoutInflater.From(context).Inflate(Resource.Layout.StatsRow, parent, false);
             }
-            Game gameGroup = listGroup[groupPosition];
-            TextView timeViewGroup = convertView.FindViewById<TextView>(Resource.Id.gameTime);
-            TextView t1ViewGroup = convertView.FindViewById<TextView>(Resource.Id.statsTeam1);
-            TextView t2ViewGroup = convertView.FindViewById<TextView>(Resource.Id.statsTeam2);
-            TextView g1ViewGroup = convertView.FindViewById<TextView>(Resource.Id.scoreTeam1);
-            TextView g2ViewGroup = convertView.FindViewById<TextView>(Resource.Id.scoreTeam2);
 
-            t1ViewGroup.Text = gameGroup.Team1.TeamName;
-            t2ViewGroup.Text = gameGroup.Team2.TeamName;
-            t1ViewGroup.Text = gameGroup.Team1Score.ToString();
-            t2ViewGroup.Text = gameGroup.Team2Score.ToString();
-            timeViewGroup.Text = GameTimeHelper.GetTimeString(gameGroup.StartTime, gameGroup.EndTime);
+            Game game = listGroup[groupPosition];
+            
+            TextView t1name = row.FindViewById<TextView>(Resource.Id.statsTeam1);
+            TextView t2name = row.FindViewById<TextView>(Resource.Id.statsTeam2);
+            TextView t1score = row.FindViewById<TextView>(Resource.Id.scoreTeam1);
+            TextView t2score = row.FindViewById<TextView>(Resource.Id.scoreTeam2);
+            TextView time = row.FindViewById<TextView>(Resource.Id.gameTime);
 
-            return convertView;
+            t1name.Text = game.Team1.TeamName;
+            t2name.Text = game.Team2.TeamName;
+            t1score.Text = game.Team1Score.ToString();
+            t2score.Text = game.Team2Score.ToString();
+            time.Text = GameTimeHelper.GetTimeString(game.StartTime, game.EndTime);
+            
+            SetTeamBackgroundColor(parent, t1name, game.Team1Score);
+            SetTeamBackgroundColor(parent, t2name, game.Team2Score);
+            return row;
         }
 
         public override bool IsChildSelectable(int groupPosition, int childPosition)
         {
             return true;
+        }
+        
+        /// <summary>
+        /// Sets the background of the team name to seperate winning and losing teams
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name="textView"></param>
+        /// <param name="teamScore"></param>
+        private void SetTeamBackgroundColor(ViewGroup parent, TextView textView, int teamScore)
+        {
+            if (teamScore == Game.MAX_SCORE)
+            {
+                textView.SetBackgroundColor(parent.Resources.GetColor(Resource.Color.winning_background));
+                textView.SetTextColor(parent.Resources.GetColor(Resource.Color.Black));
+            }
+            else
+            {
+                textView.SetBackgroundColor(parent.Resources.GetColor(Resource.Color.losing_background));
+                textView.SetTextColor(parent.Resources.GetColor(Resource.Color.White));
+            }
         }
     }
 }

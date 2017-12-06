@@ -1,6 +1,7 @@
-﻿using Android.App;
+﻿using Android;
 using Android.OS;
 using Android.Views;
+using foosballv2s.Droid.Shared;
 using Fragment = Android.Support.V4.App.Fragment;
 
 namespace foosballv2s.Source.Activities.Fragments

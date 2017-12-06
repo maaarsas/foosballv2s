@@ -1,0 +1,753 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PCLMock</name>
+    </assembly>
+    <members>
+        <member name="T:PCLMock.It">
+            <summary>
+            Facilitates the filtering of arguments when interacting with mocks.
+            </summary>
+            <remarks>
+            <para>
+            This class provides a number of methods that can be used to filter arguments in calls to <see cref="M:PCLMock.MockBase`1.When(System.Linq.Expressions.Expression{System.Action{`0}})"/> or <see cref="M:PCLMock.MockBase`1.Verify(System.Linq.Expressions.Expression{System.Action{`0}})"/>.
+            Consider the following example:
+            </para>
+            <para>
+            <example>
+            <code>
+            <![CDATA[
+            someMock
+                .When(x => x.SomeMethod("abc", It.IsAny<int>(), It.IsNotNull()))
+                .Return(50);
+            ]]>
+            </code>
+            </example>
+            </para>
+            <para>
+            In this case, the specification will only match if the first argument to <c>SomeMethod</c> is <c>"abc"</c> and the third argument is not <see langword="null"/>.
+            The second argument can be anything.
+            </para>
+            <para>
+            Note that the implementation of all <c>public</c> methods is simply to return a default instance of <c>T</c>. The actual implementation is resolved and applied
+            at run-time.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:PCLMock.It.IsAny``1">
+            <summary>
+            Specifies that any object of type <typeparamref name="T"/> is valid.
+            </summary>
+            <typeparam name="T">
+            The type of object.
+            </typeparam>
+            <returns>
+            A default instance of type <c>T</c>.
+            </returns>
+        </member>
+        <member name="M:PCLMock.It.Is``1(``0)">
+            <summary>
+            Specifies that only values that equate to <paramref name="expected"/> are to be accepted.
+            </summary>
+            <typeparam name="T">
+            The type of the expected value.
+            </typeparam>
+            <param name="expected">
+            The expected value.
+            </param>
+            <returns>
+            A default instance of type <c>T</c>.
+            </returns>
+        </member>
+        <member name="M:PCLMock.It.IsNot``1(``0)">
+            <summary>
+            Specifies that only values that do not equate to <paramref name="notExpected"/> are to be accepted.
+            </summary>
+            <typeparam name="T">
+            The type of the unexpected value.
+            </typeparam>
+            <param name="notExpected">
+            The value that is not expected.
+            </param>
+            <returns>
+            A default instance of type <c>T</c>.
+            </returns>
+        </member>
+        <member name="M:PCLMock.It.IsBetween``1(``0,``0)">
+            <summary>
+            Specifies that only values between <paramref name="first"/> and <paramref name="second"/> are to be accepted.
+            </summary>
+            <typeparam name="T">
+            The type of the value.
+            </typeparam>
+            <param name="first">
+            An inclusive value representing one end of the range of values accepted.
+            </param>
+            <param name="second">
+            An inclusive value representing the other end of the range of values accepted.
+            </param>
+            <returns>
+            A default instance of type <c>T</c>.
+            </returns>
+        </member>
+        <member name="M:PCLMock.It.IsNotBetween``1(``0,``0)">
+            <summary>
+            Specifies that only values not between <paramref name="first"/> and <paramref name="second"/> are to be accepted.
+            </summary>
+            <typeparam name="T">
+            The type of the value.
+            </typeparam>
+            <param name="first">
+            An inclusive value representing one end of the range of values not accepted.
+            </param>
+            <param name="second">
+            An inclusive value representing the other end of the range of values not accepted.
+            </param>
+            <returns>
+            A default instance of type <c>T</c>.
+            </returns>
+        </member>
+        <member name="M:PCLMock.It.IsGreaterThan``1(``0)">
+            <summary>
+            Specifies that only values greater than <paramref name="value"/> are to be accepted.
+            </summary>
+            <typeparam name="T">
+            The type of the value.
+            </typeparam>
+            <param name="value">
+            The exclusive minimum expected value.
+            </param>
+            <returns>
+            A default instance of type <c>T</c>.
+            </returns>
+        </member>
+        <member name="M:PCLMock.It.IsLessThan``1(``0)">
+            <summary>
+            Specifies that only values less than <paramref name="value"/> are to be accepted.
+            </summary>
+            <typeparam name="T">
+            The type of the value.
+            </typeparam>
+            <param name="value">
+            The exclusive maximum expected value.
+            </param>
+            <returns>
+            A default instance of type <c>T</c>.
+            </returns>
+        </member>
+        <member name="M:PCLMock.It.IsGreaterThanOrEqualTo``1(``0)">
+            <summary>
+            Specifies that only values greater than or equal to <paramref name="value"/> are to be accepted.
+            </summary>
+            <typeparam name="T">
+            The type of the value.
+            </typeparam>
+            <param name="value">
+            The inclusive minimum expected value.
+            </param>
+            <returns>
+            A default instance of type <c>T</c>.
+            </returns>
+        </member>
+        <member name="M:PCLMock.It.IsLessThanOrEqualTo``1(``0)">
+            <summary>
+            Specifies that only values less than or equal to <paramref name="value"/> are to be accepted.
+            </summary>
+            <typeparam name="T">
+            The type of the value.
+            </typeparam>
+            <param name="value">
+            The inclusive maximum expected value.
+            </param>
+            <returns>
+            A default instance of type <c>T</c>.
+            </returns>
+        </member>
+        <member name="M:PCLMock.It.IsIn``1(``0[])">
+            <summary>
+            Specifies that only values that are within <paramref name="expected"/> are to be accepted.
+            </summary>
+            <typeparam name="T">
+            The type of the expected value.
+            </typeparam>
+            <param name="expected">
+            The set of expected values.
+            </param>
+            <returns>
+            A default instance of type <c>T</c>.
+            </returns>
+        </member>
+        <member name="M:PCLMock.It.IsLike(System.String)">
+            <summary>
+            Specifies that only values that are like <paramref name="pattern"/> (a regular expression) are to be accepted.
+            </summary>
+            <param name="pattern">
+            The regular expression pattern used to match values.
+            </param>
+            <returns>
+            <see langword="null"/>.
+            </returns>
+        </member>
+        <member name="M:PCLMock.It.IsLike(System.String,System.Text.RegularExpressions.RegexOptions)">
+            <summary>
+            Specifies that only values that are like <paramref name="pattern"/> (a regular expression) are to be accepted.
+            </summary>
+            <param name="pattern">
+            The regular expression pattern used to match values.
+            </param>
+            <param name="options">
+            Optional options for the regular expression used when matching.
+            </param>
+            <returns>
+            <see langword="null"/>.
+            </returns>
+        </member>
+        <member name="M:PCLMock.It.IsNotLike(System.String)">
+            <summary>
+            Specifies that only values that are not like <paramref name="pattern"/> (a regular expression) are to be accepted.
+            </summary>
+            <param name="pattern">
+            The regular expression pattern used to match values.
+            </param>
+            <returns>
+            <see langword="null"/>.
+            </returns>
+        </member>
+        <member name="M:PCLMock.It.IsNotLike(System.String,System.Text.RegularExpressions.RegexOptions)">
+            <summary>
+            Specifies that only values that are not like <paramref name="pattern"/> (a regular expression) are to be accepted.
+            </summary>
+            <param name="pattern">
+            The regular expression pattern used to match values.
+            </param>
+            <param name="options">
+            Optional options for the regular expression used when matching.
+            </param>
+            <returns>
+            <see langword="null"/>.
+            </returns>
+        </member>
+        <member name="M:PCLMock.It.IsNull``1">
+            <summary>
+            Specifies that only <see langword="null"/> values are to be accepted.
+            </summary>
+            <typeparam name="T">
+            The type of the expected value.
+            </typeparam>
+            <returns>
+            A default instance of type <c>T</c>.
+            </returns>
+        </member>
+        <member name="M:PCLMock.It.IsNotNull``1">
+            <summary>
+            Specifies that only non-<see langword="null"/> values are to be accepted.
+            </summary>
+            <typeparam name="T">
+            The type of the expected value.
+            </typeparam>
+            <returns>
+            A default instance of type <c>T</c>.
+            </returns>
+        </member>
+        <member name="M:PCLMock.It.IsOfType``1">
+            <summary>
+            Specifies that only values of type <typeparamref name="T"/> are to be accepted.
+            </summary>
+            <typeparam name="T">
+            The expected type.
+            </typeparam>
+            <returns>
+            A default instance of type <c>T</c>.
+            </returns>
+        </member>
+        <member name="M:PCLMock.It.IsNotOfType``1">
+            <summary>
+            Specifies that only values not of type <typeparamref name="T"/> are to be accepted.
+            </summary>
+            <typeparam name="T">
+            The unexpected type.
+            </typeparam>
+            <returns>
+            A default instance of type <c>T</c>.
+            </returns>
+        </member>
+        <member name="M:PCLMock.It.Matches``1(System.Func{``0,System.Boolean})">
+            <summary>
+            Specifies that only values for which the given predicate returns <see langword="true"/> are to be accepted.
+            </summary>
+            <typeparam name="T">
+            The type of the expected value.
+            </typeparam>
+            <param name="predicate">
+            The predicate that will be invoked to check the value.
+            </param>
+            <returns>
+            A default instance of type <c>T</c>.
+            </returns>
+        </member>
+        <member name="T:PCLMock.MockBase`1">
+            <summary>
+            A base class from which mock objects must be derived.
+            </summary>
+            <remarks>
+            <para>
+            Mock objects should derive from this base class. Typically, you will want to mock an interface. Please see the online documentation for more information.
+            </para>
+            </remarks>
+            <typeparam name="TMock">
+            The type being mocked.
+            </typeparam>
+        </member>
+        <member name="M:PCLMock.MockBase`1.#ctor(PCLMock.MockBehavior)">
+            <summary>
+            Initializes a new instance of the MockBase class.
+            </summary>
+            <param name="behavior">
+            The behavior to be used by this mock.
+            </param>
+        </member>
+        <member name="P:PCLMock.MockBase`1.Behavior">
+            <summary>
+            Gets the behavior of this mock.
+            </summary>
+        </member>
+        <member name="P:PCLMock.MockBase`1.MockedObject">
+            <summary>
+            Gets the mocked object.
+            </summary>
+            <remarks>
+            It is not typically necessary to override this property unless mocking a class.
+            </remarks>
+        </member>
+        <member name="M:PCLMock.MockBase`1.When(System.Linq.Expressions.Expression{System.Action{`0}})">
+            <summary>
+            Begins the specification of what the mock should do when a given member is accessed.
+            </summary>
+            <param name="selector">
+            An expression that resolves to the member.
+            </param>
+            <returns>
+            A continuation object with which the actions to be performed can be configured.
+            </returns>
+        </member>
+        <member name="M:PCLMock.MockBase`1.When``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Begins the specification of what the mock should do when a given member is accessed.
+            </summary>
+            <param name="selector">
+            An expression that resolves to the member.
+            </param>
+            <returns>
+            A continuation object with which the actions to be performed can be configured.
+            </returns>
+        </member>
+        <member name="M:PCLMock.MockBase`1.WhenPropertySet``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>
+            Begins the specification of what the mock should do when a given property is set.
+            </summary>
+            <typeparam name="TMember">
+            The type of the property.
+            </typeparam>
+            <param name="propertySelector">
+            An expression that resolves the property.
+            </param>
+            <param name="valueFilterSelector">
+            An optional expression that can provide filtering against the property value being set.
+            </param>
+            <returns>
+            A continuation object with which the actions to be performed can be configured.
+            </returns>
+        </member>
+        <member name="M:PCLMock.MockBase`1.Verify(System.Linq.Expressions.Expression{System.Action{`0}})">
+            <summary>
+            Begins a verification specification.
+            </summary>
+            <param name="selector">
+            An expression that resolves to the member being verified.
+            </param>
+            <returns>
+            A continuation object with which the verification can be specified.
+            </returns>
+        </member>
+        <member name="M:PCLMock.MockBase`1.Verify``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Begins a verification specification.
+            </summary>
+            <typeparam name="TMember"></typeparam>
+            <param name="selector">
+            An expression that resolves to the member being verified.
+            </param>
+            <returns>
+            A continuation object with which the verification can be specified.
+            </returns>
+        </member>
+        <member name="M:PCLMock.MockBase`1.VerifyPropertySet``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>
+            Begins a verification specification for a property set.
+            </summary>
+            <typeparam name="TMember">
+            The type of the property.
+            </typeparam>
+            <param name="propertySelector">
+            An expression that resolves to the property being verified.
+            </param>
+            <param name="valueFilterSelector">
+            An optional expression that can provide filtering against the property value being set.
+            </param>
+            <returns>
+            A continuation object with which the verification can be specified.
+            </returns>
+        </member>
+        <member name="M:PCLMock.MockBase`1.Apply(System.Linq.Expressions.Expression{System.Action{`0}})">
+            <summary>
+            Applies any specifications configured via <see cref="M:PCLMock.MockBase`1.When(System.Linq.Expressions.Expression{System.Action{`0}})"/> for a given member.
+            </summary>
+            <param name="selector">
+            An expression that resolves to the member.
+            </param>
+        </member>
+        <member name="M:PCLMock.MockBase`1.Apply``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Applies any specifications configured via <see cref="M:PCLMock.MockBase`1.When(System.Linq.Expressions.Expression{System.Action{`0}})"/> for a given member.
+            </summary>
+            <param name="selector">
+            An expression that resolves to the member.
+            </param>
+        </member>
+        <member name="M:PCLMock.MockBase`1.ApplyPropertySet``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Object)">
+            <summary>
+            Applies any specifications configured via <see cref="M:PCLMock.MockBase`1.WhenPropertySet``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{``0}})"/> for a given property setter.
+            </summary>
+            <param name="selector">
+            An expression that resolves to the property being set.
+            </param>
+            <param name="value">
+            The value being assigned to the property.
+            </param>
+        </member>
+        <member name="M:PCLMock.MockBase`1.GetOutParameterValue``1(System.Linq.Expressions.Expression{System.Action{`0}},System.Int32)">
+            <summary>
+            Gets the value for an <c>out</c> parameter for a given method at a given parameter index.
+            </summary>
+            <typeparam name="T">
+            The type of the <c>out</c> parameter.
+            </typeparam>
+            <param name="selector">
+            An expression that resolves to the method.
+            </param>
+            <param name="parameterIndex">
+            The zero-based index of the parameter.
+            </param>
+            <returns>
+            The value assigned to that <c>out</c> parameter.
+            </returns>
+        </member>
+        <member name="M:PCLMock.MockBase`1.GetRefParameterValue``1(System.Linq.Expressions.Expression{System.Action{`0}},System.Int32,``0)">
+            <summary>
+            Gets the value for a <c>ref</c> parameter for a given method at a given parameter index.
+            </summary>
+            <typeparam name="T">
+            The type of the <c>ref</c> parameter.
+            </typeparam>
+            <param name="selector">
+            An expression that resolves to the method.
+            </param>
+            <param name="parameterIndex">
+            The zero-based index of the parameter.
+            </param>
+            <param name="defaultValue">
+            An optional default value for the <c>ref</c> parameter, which defaults to the default value of type <typeparamref name="T"/>.
+            </param>
+            <returns>
+            The value assigned to that <c>ref</c> parameter.
+            </returns>
+        </member>
+        <member name="T:PCLMock.MockBehavior">
+            <summary>
+            Defines possible mock behaviors.
+            </summary>
+        </member>
+        <member name="F:PCLMock.MockBehavior.Strict">
+            <summary>
+            Any invocation against the mock must have a specification (configured via <see cref="M:PCLMock.MockBase`1.When(System.Linq.Expressions.Expression{System.Action{`0}})"/>). If a member of the mock
+            is invoked and it does not have a specification, an exception is thrown.
+            </summary>
+        </member>
+        <member name="F:PCLMock.MockBehavior.Loose">
+            <summary>
+            Invocations against the mock are not required to have specifications. If a member of the mock is invoked and it does not have a specification
+            and that member needs to return a value, the default value for the member's type is returned.
+            </summary>
+        </member>
+        <member name="T:PCLMock.VerificationException">
+            <summary>
+            The exception type used to indicate a verification failure.
+            </summary>
+        </member>
+        <member name="M:PCLMock.VerificationException.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:PCLMock.VerificationException.#ctor(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PCLMock.VerificationException.#ctor(System.String,System.Exception)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PCLMock.VerifyContinuation">
+            <summary>
+            Facilitates the expression of verifications against a member in a <see cref="T:PCLMock.MockBase`1"/>.
+            </summary>
+        </member>
+        <member name="M:PCLMock.VerifyContinuation.WasNotCalled">
+            <summary>
+            Verifies that the member was not called.
+            </summary>
+        </member>
+        <member name="M:PCLMock.VerifyContinuation.WasCalledExactlyOnce">
+            <summary>
+            Verifies that the member was called exactly one time.
+            </summary>
+        </member>
+        <member name="M:PCLMock.VerifyContinuation.WasCalledAtLeastOnce">
+            <summary>
+            Verifies that the member was called one or more times.
+            </summary>
+        </member>
+        <member name="M:PCLMock.VerifyContinuation.WasCalledAtMostOnce">
+            <summary>
+            Verifies that the member was either not called, or only called once.
+            </summary>
+        </member>
+        <member name="M:PCLMock.VerifyContinuation.WasCalledExactly(System.Int32)">
+            <summary>
+            Verifies that the member was called exactly <paramref name="times"/> time.
+            </summary>
+            <param name="times">
+            The number of times the member must have been called.
+            </param>
+        </member>
+        <member name="M:PCLMock.VerifyContinuation.WasCalledAtLeast(System.Int32)">
+            <summary>
+            Verifies that the member was called <paramref name="times"/> or more times.
+            </summary>
+            <param name="times">
+            The minimum number of times the member must have been called.
+            </param>
+        </member>
+        <member name="M:PCLMock.VerifyContinuation.WasCalledAtMost(System.Int32)">
+            <summary>
+            Verifies that the member called <paramref name="times"/> or fewer times.
+            </summary>
+            <param name="times">
+            The maximum number of times the member must have been called.
+            </param>
+        </member>
+        <member name="T:PCLMock.WhenContinuation">
+            <summary>
+            Facilitates the expression of specifications for what a <see cref="T:PCLMock.MockBase`1"/> should do when a given member is invoked.
+            </summary>
+        </member>
+        <member name="M:PCLMock.WhenContinuation.Equals(PCLMock.WhenContinuation)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PCLMock.WhenContinuation.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PCLMock.WhenContinuation.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:PCLMock.WhenContinuation.AssignOutOrRefParameter(System.Int32,System.Object)">
+            <summary>
+            Assigns a specified value to an <c>out</c> or <c>ref</c> parameter, so that invocations against the member being specified will result in
+            the corresponding <c>out</c> or <c>ref</c> parameter being set to the specified value.
+            </summary>
+            <param name="parameterIndex">
+            The zero-based index of the parameter.
+            </param>
+            <param name="value">
+            The value to assign to the <c>out</c> or <c>ref</c> parameter.
+            </param>
+        </member>
+        <member name="T:PCLMock.WhenContinuation`1">
+            <summary>
+            Facilitates the expression of specifications for what a <see cref="T:PCLMock.MockBase`1"/> should do when a given member is invoked.
+            </summary>
+            <typeparam name="TMock">
+            The type of the object being mocked.
+            </typeparam>
+        </member>
+        <member name="M:PCLMock.WhenContinuation`1.Throw">
+            <summary>
+            Requests that an exception be thrown if the member is accessed.
+            </summary>
+            <remarks>
+            This overload simply throws an <see cref="T:System.InvalidOperationException"/>.
+            </remarks>
+        </member>
+        <member name="M:PCLMock.WhenContinuation`1.Throw(System.Exception)">
+            <summary>
+            Requests that an exception be thrown if the member is accessed.
+            </summary>
+            <param name="exception">
+            The exception to be thrown.
+            </param>
+        </member>
+        <member name="M:PCLMock.WhenContinuation`1.AssignOutOrRefParameter(System.Int32,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:PCLMock.WhenContinuation`1.Do(System.Action)">
+            <summary>
+            Requests that an action be invoked if the member is accessed.
+            </summary>
+            <param name="doAction">
+            The action to be invoked.
+            </param>
+            <returns>
+            A continuation object so that the specification can be resumed.
+            </returns>
+        </member>
+        <member name="M:PCLMock.WhenContinuation`1.Do``1(System.Action{``0})">
+            <summary>
+            Requests that an action be invoked if the member is accessed.
+            </summary>
+            <param name="doAction">
+            The action to be invoked.
+            </param>
+            <returns>
+            A continuation object so that the specification can be resumed.
+            </returns>
+        </member>
+        <member name="M:PCLMock.WhenContinuation`1.Do``2(System.Action{``0,``1})">
+            <summary>
+            Requests that an action be invoked if the member is accessed.
+            </summary>
+            <param name="doAction">
+            The action to be invoked.
+            </param>
+            <returns>
+            A continuation object so that the specification can be resumed.
+            </returns>
+        </member>
+        <member name="M:PCLMock.WhenContinuation`1.Do``3(System.Action{``0,``1,``2})">
+            <summary>
+            Requests that an action be invoked if the member is accessed.
+            </summary>
+            <param name="doAction">
+            The action to be invoked.
+            </param>
+            <returns>
+            A continuation object so that the specification can be resumed.
+            </returns>
+        </member>
+        <member name="M:PCLMock.WhenContinuation`1.Do``4(System.Action{``0,``1,``2,``3})">
+            <summary>
+            Requests that an action be invoked if the member is accessed.
+            </summary>
+            <param name="doAction">
+            The action to be invoked.
+            </param>
+            <returns>
+            A continuation object so that the specification can be resumed.
+            </returns>
+        </member>
+        <member name="M:PCLMock.WhenContinuation`1.Do``5(System.Action{``0,``1,``2,``3,``4})">
+            <summary>
+            Requests that an action be invoked if the member is accessed.
+            </summary>
+            <param name="doAction">
+            The action to be invoked.
+            </param>
+            <returns>
+            A continuation object so that the specification can be resumed.
+            </returns>
+        </member>
+        <member name="T:PCLMock.WhenContinuation`2">
+            <summary>
+            Facilitates the expression of specifications for what a <see cref="T:PCLMock.MockBase`1"/> should do when a given member is invoked.
+            </summary>
+            <typeparam name="TMock">
+            The type of the object being mocked.
+            </typeparam>
+            <typeparam name="TMember">
+            The type being returned by the member being specified.
+            </typeparam>
+        </member>
+        <member name="M:PCLMock.WhenContinuation`2.AssignOutOrRefParameter(System.Int32,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:PCLMock.WhenContinuation`2.Do(System.Action)">
+            <inheritdoc />
+        </member>
+        <member name="M:PCLMock.WhenContinuation`2.Do``1(System.Action{``0})">
+            <inheritdoc />
+        </member>
+        <member name="M:PCLMock.WhenContinuation`2.Do``2(System.Action{``0,``1})">
+            <inheritdoc />
+        </member>
+        <member name="M:PCLMock.WhenContinuation`2.Do``3(System.Action{``0,``1,``2})">
+            <inheritdoc />
+        </member>
+        <member name="M:PCLMock.WhenContinuation`2.Do``4(System.Action{``0,``1,``2,``3})">
+            <inheritdoc />
+        </member>
+        <member name="M:PCLMock.WhenContinuation`2.Do``5(System.Action{``0,``1,``2,``3,``4})">
+            <inheritdoc />
+        </member>
+        <member name="M:PCLMock.WhenContinuation`2.Return(`1)">
+            <summary>
+            Requests that a specified value be returned if the member is accessed.
+            </summary>
+            <param name="value">
+            The value to return.
+            </param>
+        </member>
+        <member name="M:PCLMock.WhenContinuation`2.Return(System.Func{`1})">
+            <summary>
+            Requests that a <c>Func</c> be invoked to obtain a return value if the member is accessed.
+            </summary>
+            <param name="returnAction">
+            The <c>Func</c> that will be invoked to obtain the return value.
+            </param>
+        </member>
+        <member name="M:PCLMock.WhenContinuation`2.Return``1(System.Func{``0,`1})">
+            <summary>
+            Requests that a <c>Func</c> be invoked to obtain a return value if the member is accessed.
+            </summary>
+            <param name="returnAction">
+            The <c>Func</c> that will be invoked to obtain the return value.
+            </param>
+        </member>
+        <member name="M:PCLMock.WhenContinuation`2.Return``2(System.Func{``0,``1,`1})">
+            <summary>
+            Requests that a <c>Func</c> be invoked to obtain a return value if the member is accessed.
+            </summary>
+            <param name="returnAction">
+            The <c>Func</c> that will be invoked to obtain the return value.
+            </param>
+        </member>
+        <member name="M:PCLMock.WhenContinuation`2.Return``3(System.Func{``0,``1,``2,`1})">
+            <summary>
+            Requests that a <c>Func</c> be invoked to obtain a return value if the member is accessed.
+            </summary>
+            <param name="returnAction">
+            The <c>Func</c> that will be invoked to obtain the return value.
+            </param>
+        </member>
+        <member name="M:PCLMock.WhenContinuation`2.Return``4(System.Func{``0,``1,``2,``3,`1})">
+            <summary>
+            Requests that a <c>Func</c> be invoked to obtain a return value if the member is accessed.
+            </summary>
+            <param name="returnAction">
+            The <c>Func</c> that will be invoked to obtain the return value.
+            </param>
+        </member>
+        <member name="M:PCLMock.WhenContinuation`2.Return``5(System.Func{``0,``1,``2,``3,``4,`1})">
+            <summary>
+            Requests that a <c>Func</c> be invoked to obtain a return value if the member is accessed.
+            </summary>
+            <param name="returnAction">
+            The <c>Func</c> that will be invoked to obtain the return value.
+            </param>
+        </member>
+    </members>
+</doc>

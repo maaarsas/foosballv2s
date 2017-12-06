@@ -31,36 +31,23 @@ namespace foosballv2s.WebService
             services.AddScoped(typeof(IGameRepository), typeof(GameRepository));
             services.AddScoped(typeof(ITeamRepository), typeof(TeamRepository));
             services.AddDbContext<WebServiceDbContext>(opt => opt.UseSqlServer(
-                //Configuration.GetConnectionString("DbConnectionString")
-                "Server=mssql1.gear.host;Database=foosballv2s;User ID=foosballv2s;Password=Ew7f-_w63PCx;"
+                Configuration.GetConnectionString("DbConnectionString")
             ));
 
-            services.AddDbContext<IdentityContext>(options =>
-                //options.UseSqlServer(Configuration.GetConnectionString("SecurityConnection"), sqlOptions
-                options.UseSqlServer("Server=mssql1.gear.host;Database=foosballv2s;User ID=foosballv2s;Password=Ew7f-_w63PCx;"));
+//            services.AddDbContext<IdentityContext>(options =>
+//                options.UseSqlServer(Configuration.GetConnectionString("DbConnectionString"))
+//            );
             
             
             services.AddIdentity<User, UserRole>(cfg =>
             {
-               
-//                cfg.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents
-//                {
-//                    OnRedirectToLogin = context =>
-//                    {
-//                        if (context.Request.Path.StartsWithSegments("/api"))
-//                        {
-//                            context.Response.StatusCode = (int) System.Net.HttpStatusCode.Unauthorized;
-//                        }
-//                        return Task.FromResult(0);
-//                    }
-//                };
                 // configure identity options
                 cfg.Password.RequireDigit = false;
                 cfg.Password.RequireLowercase = false;
                 cfg.Password.RequireUppercase = false;
                 cfg.Password.RequireNonAlphanumeric = false;
                 cfg.Password.RequiredLength = 8;
-            }).AddEntityFrameworkStores<IdentityContext>().AddDefaultTokenProviders(); 
+            }).AddEntityFrameworkStores<WebServiceDbContext>().AddDefaultTokenProviders(); 
             
             services.AddAuthentication(options =>
                 {

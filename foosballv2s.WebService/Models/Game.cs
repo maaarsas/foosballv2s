@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace foosballv2s.WebService.Models
 {
@@ -8,9 +12,9 @@ namespace foosballv2s.WebService.Models
 
         public int Id { get; set; }
         
-        public Team Team1 { get; set; } = new Team();
+        public Team Team1 { get; set; }
          
-        public Team Team2 { get; set; } = new Team();
+        public Team Team2 { get; set; }
         
         public int Team1Score { get; set; }
 
@@ -18,5 +22,10 @@ namespace foosballv2s.WebService.Models
         
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
+
+        public ICollection<GameEvent> GameEvents { get; set; }
+        
+        [Required]
+        public virtual User User { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Android;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
@@ -8,10 +9,12 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Emgu.CV.Structure;
+using foosballv2s.Droid.Shared;
+using foosballv2s.Droid.Shared.Source.Entities;
+using foosballv2s.Droid.Shared.Source.Helpers;
+using foosballv2s.Droid.Shared.Source.Services.FileIO;
+using foosballv2s.Droid.Shared.Source.Services.GameRecognition;
 using foosballv2s.Source.Activities.Helpers;
-using foosballv2s.Source.Entities;
-using foosballv2s.Source.Services.FileIO;
-using foosballv2s.Source.Services.GameRecognition;
 using Java.Interop;
 using Xamarin.Forms;
 using Button = Android.Widget.Button;
@@ -36,6 +39,7 @@ namespace foosballv2s.Source.Activities
         private Camera mCamera;
         private TextureView textureView;
         private Color detectedRGBColor;
+        private Hsv hsvColor;
 
         private int viewWidth = 0;
         private int viewHeight = 0;
@@ -70,7 +74,7 @@ namespace foosballv2s.Source.Activities
             Bitmap b = textureView.Bitmap;
             
             BallImage ballImage = new BallImage(b);
-            Hsv hsvColor = ballImage.getColor();
+            hsvColor = ballImage.getColor();
             
             detectedRGBColor = Color.HSVToColor(new float[]{
                 (float) hsvColor.Hue * 2, 
@@ -100,7 +104,7 @@ namespace foosballv2s.Source.Activities
         [Export("SubmitBallPhoto")]
         public void SubmitBallPhoto(View view)
         {
-            instance.Write_Serialize_Color(detectedRGBColor);
+            instance.Write_Serialize_Color(hsvColor);
 
             Intent intent = new Intent(this, typeof(RecordingActivity));
             StartActivity(intent);
@@ -120,7 +124,7 @@ namespace foosballv2s.Source.Activities
                 Log.Error(TAG + "-ERROR", e.StackTrace);
             }
             Camera.Parameters tmp = mCamera.GetParameters();
-            Xamarin.Forms.Size bestSize = ActivityHelper.GetBestPreviewSize(mCamera.GetParameters(), textureView.Width, textureView.Height);
+            Camera.Size bestSize = ActivityHelper.GetBestPreviewSize(mCamera.GetParameters().SupportedPreviewSizes, textureView.Width, textureView.Height);
             tmp.SetPreviewSize((int) bestSize.Width, (int) bestSize.Height);
             tmp.FocusMode = Camera.Parameters.FocusModeContinuousPicture;
             mCamera.SetParameters(tmp);
@@ -152,7 +156,8 @@ namespace foosballv2s.Source.Activities
         public void OnSurfaceTextureSizeChanged(SurfaceTexture surfacetexture, int i, int j) {
             if (mCamera != null) {
                 Camera.Parameters tmp = mCamera.GetParameters();
-                tmp.SetPreviewSize(tmp.SupportedPreviewSizes[0].Width, tmp.SupportedPreviewSizes[0].Height);
+                Camera.Size bestSize = ActivityHelper.GetBestPreviewSize(mCamera.GetParameters().SupportedPreviewSizes, textureView.Width, textureView.Height);
+                tmp.SetPreviewSize((int) bestSize.Width, (int) bestSize.Height);
                 mCamera.SetParameters(tmp);
                 mCamera.StartPreview();
             }

@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Android;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
+using foosballv2s.Droid.Shared;
+using foosballv2s.Droid.Shared.Source.Entities;
 using foosballv2s.Source.Activities.Filters;
-using foosballv2s.Source.Entities;
 
 namespace foosballv2s.Source.Activities.Adapters
 {
@@ -49,7 +51,7 @@ namespace foosballv2s.Source.Activities.Adapters
             
             // Check if an existing view is being reused, otherwise inflate the view
             if (convertView == null) {
-                convertView = LayoutInflater.From(Context).Inflate(Resource.Layout.item_team, parent, false);
+                convertView = LayoutInflater.From(Context).Inflate(Resource.Layout.teamlist_item, parent, false);
             }
             
             // Lookup view for data population

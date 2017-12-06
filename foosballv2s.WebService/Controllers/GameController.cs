@@ -1,6 +1,10 @@
-﻿using Http = System.Web.Http;
+﻿using System;
+using Http = System.Web.Http;
 using System.Collections.Generic;
+using System.Linq;
 using foosballv2s.WebService.Models;
+using foosballv2s.WebService.Params;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,18 +14,21 @@ namespace foosballv2s.WebService.Controllers
     public class GameController : Controller
     {
         private readonly IGameRepository _repository;
+        private readonly Microsoft.AspNetCore.Identity.UserManager<User> _userManager;
 
-        public GameController(IGameRepository repository)
+        public GameController(IGameRepository repository, Microsoft.AspNetCore.Identity.UserManager<User> userManager)
         {
             _repository = repository;
+            _userManager = userManager;
         }
         
         // GET api/game/
         [Authorize]
         [HttpGet]
-        public IEnumerable<Game> Get()
+        public IEnumerable<Game> Get(GameParams gameParams, SortParams sortParams)
         {
-            return _repository.GetAll();
+            var user = _userManager.Users.FirstOrDefault(u => u.Email == User.Identity.GetUserId());
+            return _repository.GetAll(gameParams, sortParams, user);
         }
 
         // GET api/game/5
@@ -46,6 +53,13 @@ namespace foosballv2s.WebService.Controllers
             {
                 return new BadRequestResult();
             }
+            
+            var user = _userManager.Users.FirstOrDefault(u => u.Email == User.Identity.GetUserId());
+            if (user.Id != game.User.Id)
+            {
+                return new UnauthorizedResult();
+            }
+            
             Game updatedGame =_repository.Add(game);
             if (updatedGame == null)
             {
@@ -63,6 +77,13 @@ namespace foosballv2s.WebService.Controllers
             {
                 return BadRequest();
             }
+            
+            var user = _userManager.Users.FirstOrDefault(u => u.Email == User.Identity.GetUserId());
+            if (user.Id != game.User.Id)
+            {
+                return new UnauthorizedResult();
+            }
+            
             if (_repository.Update(id, game))
             {
                 return new NoContentResult();
@@ -75,6 +96,13 @@ namespace foosballv2s.WebService.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
+            var game = _repository.Get(id);
+            var user = _userManager.Users.FirstOrDefault(u => u.Email == User.Identity.GetUserId());
+            if (game != null && user.Id != game.User.Id)
+            {
+                return new UnauthorizedResult();
+            }
+            
             if (_repository.Remove(id))
             {    
                 return new NoContentResult();

@@ -1,5 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using foosballv2s.WebService.Models;
+using foosballv2s.WebService.Params;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,18 +13,21 @@ namespace foosballv2s.WebService.Controllers
     public class TeamController : Controller
     {
         private readonly ITeamRepository _repository;
-
-        public TeamController(ITeamRepository repository)
+        private readonly Microsoft.AspNetCore.Identity.UserManager<User> _userManager;
+        
+        public TeamController(ITeamRepository repository, Microsoft.AspNetCore.Identity.UserManager<User> userManager)
         {
             _repository = repository;
+            _userManager = userManager;
         }
         
         // GET api/team/
         [Authorize]
         [HttpGet]
-        public IEnumerable<Team> Get()
+        public IEnumerable<Team> Get(TeamParams teamParams, SortParams sortParams)
         {
-            return _repository.GetAll();
+            var user = _userManager.Users.FirstOrDefault(u => u.Email == User.Identity.GetUserId());
+            return _repository.GetAll(teamParams, sortParams, user);
         }
 
         // GET api/team/5
@@ -41,10 +48,18 @@ namespace foosballv2s.WebService.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Team team)
         {
+           
             if (team == null)
             {
                 return new BadRequestResult();
             }
+            
+            var user = _userManager.Users.FirstOrDefault(u => u.Email == User.Identity.GetUserId());
+            if (user.Id != team.User.Id)
+            {
+                return new UnauthorizedResult();
+            }
+            
             Team updatedTeam =_repository.Add(team);
             return new ObjectResult(updatedTeam);
         }
@@ -58,6 +73,13 @@ namespace foosballv2s.WebService.Controllers
             {
                 return BadRequest();
             }
+            
+            var user = _userManager.Users.FirstOrDefault(u => u.Email == User.Identity.GetUserId());
+            if (user.Id != team.User.Id)
+            {
+                return new UnauthorizedResult();
+            }
+            
             if (_repository.Update(id, team))
             {
                 return new NoContentResult();
@@ -70,6 +92,13 @@ namespace foosballv2s.WebService.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
+            var team = _repository.Get(id);
+            var user = _userManager.Users.FirstOrDefault(u => u.Email == User.Identity.GetUserId());
+            if (team != null && user.Id != team.User.Id)
+            {
+                return new UnauthorizedResult();
+            }
+            
             if (_repository.Remove(id))
             {    
                 return new NoContentResult();

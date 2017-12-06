@@ -73,6 +73,10 @@ namespace foosballv2s.Source.Activities.Adapters
             {
                 viewItemDesc.Text = eList.ElementAt(childPosition).Team.TeamName;
             }
+            else
+            {
+                viewItemDesc.Text = "";
+            }
             
             return convertView;
         }

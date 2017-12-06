@@ -57,9 +57,6 @@ namespace foosballv2s.Source.Activities
             var btnS = FindViewById<Android.Widget.Button>(Resource.Id.submit);
             var btnP = FindViewById<Android.Widget.Button>(Resource.Id.prev);
 
-            btnP.Id = 1;
-            btnS.Id = 2;
-
             btnP.Click += Btn_Click;
             btnS.Click += Btn_Click;
 
@@ -160,12 +157,12 @@ namespace foosballv2s.Source.Activities
 
             var clicked = sender as Android.Widget.Button;
 
-            if(clicked.Id == 1)
+            if(clicked.Id == Resource.Id.prev)
             {
                 Intent intent = new Intent(this, typeof(ColorPickerActivity));
                 StartActivity(intent);
             }
-            else
+            else if (clicked.Id == Resource.Id.submit)
             {
                 Intent intent = new Intent(this, typeof(BallImageActivity));
                 StartActivity(intent);

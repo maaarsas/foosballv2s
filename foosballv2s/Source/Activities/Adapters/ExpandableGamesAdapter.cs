@@ -61,7 +61,7 @@ namespace foosballv2s.Source.Activities.Adapters
             TextView viewItemEvent = convertView.FindViewById<TextView>(Resource.Id.item_event);
             TextView viewItemDesc = convertView.FindViewById<TextView>(Resource.Id.item_desc);
 
-            var eList = listGroup[groupPosition].GameEvents;
+            var eList = listGroup[groupPosition].GameEvents.OrderBy(e => e.EventTime);
 
             //listChild.TryGetValue(listGroup[groupPosition], out eList);
             var eventTime = eList.ElementAt(childPosition).EventTime;
@@ -71,7 +71,7 @@ namespace foosballv2s.Source.Activities.Adapters
             var team = eList.ElementAt(childPosition).Team;
             if (team != null)
             {
-                viewItemDesc.Text = eList.ElementAt(childPosition).Team.ToString();
+                viewItemDesc.Text = eList.ElementAt(childPosition).Team.TeamName;
             }
             
             return convertView;

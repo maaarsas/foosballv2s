@@ -151,6 +151,12 @@ namespace foosballv2s.Source.Activities
                 Toast.MakeText(Android.App.Application.Context, Resource.String.same_team_names, ToastLength.Short).Show();
                 return;
             }
+            else
+            {
+                //Example how to use TextToSpeech
+                DependencyService.Get<ITextToSpeech>().Welcome(firstTeamTextView.Text, secondTeamTextView.Text);
+            }
+
 
             game.Team1 = team1;
             game.Team2 = team2;

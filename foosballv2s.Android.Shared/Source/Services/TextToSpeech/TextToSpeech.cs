@@ -1,4 +1,5 @@
 ﻿using Android.Speech.Tts;
+using foosballv2s.Droid.Shared.Source.Services.CredentialStorage;
 using foosballv2s.Droid.Shared.Source.Services.TextToSpeech;
 using Xamarin.Forms;
 
@@ -11,14 +12,38 @@ namespace foosballv2s.Droid.Shared.Source.Services.TextToSpeech
         Android.Speech.Tts.TextToSpeech speaker;
         string toSpeak;
 
-        public void Speak(string text)
+        public void Welcome(string team1Name, string team2Name)
         {
-            toSpeak = text;
+            toSpeak = "Welcome " + team1Name + " and " + team2Name;
+
+            CheckSpeaker(toSpeak);
+        }
+
+        public void OnGoal(string scoredTeam)
+        {
+            toSpeak = scoredTeam + " scored a goal";
+
+            CheckSpeaker(toSpeak);
+        }
+
+        public void OnFinish(string winningTeam)
+        {
+            toSpeak = winningTeam + " has won!";
+
+            CheckSpeaker(toSpeak);
+        }
+
+        public void CheckSpeaker(string toSpeak)
+        {
             if (speaker == null)
             {
                 speaker = new Android.Speech.Tts.TextToSpeech(Forms.Context, this);
+                speaker.Speak(toSpeak, QueueMode.Flush, null, null);
             }
-            speaker.Speak(toSpeak, QueueMode.Flush, null, null);
+            else
+            {
+                speaker.Speak(toSpeak, QueueMode.Flush, null, null);
+            }
         }
 
         public void OnInit(OperationResult status)
@@ -28,5 +53,6 @@ namespace foosballv2s.Droid.Shared.Source.Services.TextToSpeech
                 speaker.Speak(toSpeak, QueueMode.Flush, null, null);
             }
         }
+
     }
 }

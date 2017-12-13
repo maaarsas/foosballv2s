@@ -42,6 +42,15 @@
     <Reference Include="FormsViewGroup, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\Xamarin.Forms.2.4.0.280\lib\MonoAndroid10\FormsViewGroup.dll</HintPath>
     </Reference>
+    <Reference Include="InstabugAndroidCoreSDK">
+      <HintPath>..\Components\instabug-for-android-4.1.6\lib\android\InstabugAndroidCoreSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="InstabugAndroidCrashSDK">
+      <HintPath>..\Components\instabug-for-android-4.1.6\lib\android\InstabugAndroidCrashSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="InstabugAndroidSurveySDK">
+      <HintPath>..\Components\instabug-for-android-4.1.6\lib\android\InstabugAndroidSurveySDK.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="ModernHttpClient, Version=2.4.2.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\modernhttpclient.2.4.2\lib\MonoAndroid\ModernHttpClient.dll</HintPath>
@@ -148,6 +157,17 @@
     <AndroidNativeLibrary Include="libs\x86\libcvextern.so">
       <Link>lib\x86\libcvextern.so</Link>
     </AndroidNativeLibrary>
+  </ItemGroup>
+  <ItemGroup>
+    <XamarinComponentReference Include="instabug-for-android">
+      <Visible>False</Visible>
+      <Version>4.1.6</Version>
+    </XamarinComponentReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="lib\armeabi-v7a\" />
+    <Folder Include="lib\armeabi\" />
+    <Folder Include="lib\x86\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />

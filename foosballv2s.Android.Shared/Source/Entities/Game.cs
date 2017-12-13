@@ -7,6 +7,7 @@ using foosballv2s.Droid.Shared.Source.Events;
 using foosballv2s.Droid.Shared.Source.Services.GameLogger;
 using Newtonsoft.Json;
 using Xamarin.Forms;
+using foosballv2s.Droid.Shared.Source.Services.TextToSpeech;
 
 [assembly: Dependency(typeof(Game))]
 namespace foosballv2s.Droid.Shared.Source.Entities
@@ -93,7 +94,7 @@ namespace foosballv2s.Droid.Shared.Source.Entities
                 OnGoal(this, new GameEventArgs(this, Team1));
             }
             Team1Score++;
-            CheckGameEnd();
+            CheckGameEnd(Team1.TeamName);
         }
         
         public void AddTeam2Goal()
@@ -107,20 +108,25 @@ namespace foosballv2s.Droid.Shared.Source.Entities
                 OnGoal(this, new GameEventArgs(this, Team2));
             }
             Team2Score++;
-            CheckGameEnd();
+            CheckGameEnd(Team2.TeamName);
         }
         
         /// <summary>
         /// Checks if the end of the game is reached
         /// </summary>
-        private void CheckGameEnd()
+        private void CheckGameEnd(string scoredTeamName)
         {
             if (Team1Score == MAX_SCORE || Team2Score == MAX_SCORE)
             {
                 End();
             }
+            else
+            {
+                DependencyService.Get<ITextToSpeech>().OnGoal(scoredTeamName);
+            }
+
         }
-        
+
         /// <summary>
         /// Ends the game timer and saves the winning team
         /// </summary>
@@ -137,6 +143,9 @@ namespace foosballv2s.Droid.Shared.Source.Entities
             {
                 WinningTeam = Team2;
             }
+
+            DependencyService.Get<ITextToSpeech>().OnFinish(WinningTeam.TeamName);
+
             if (OnFinish != null)
             {
                 OnFinish(this, new GameEventArgs(this, WinningTeam));

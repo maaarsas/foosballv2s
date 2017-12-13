@@ -35,12 +35,12 @@ namespace foosballv2s.Droid.Shared.Source.Services.TextToSpeech
 
         public void CheckSpeaker(string toSpeak)
         {
-            if (speaker == null && (DependencyService.Get<ICredentialStorage>().GetSavedLanguage().Equals(null) || DependencyService.Get<ICredentialStorage>().GetSavedLanguage() == "en"))
+            if (speaker == null)
             {
                 speaker = new Android.Speech.Tts.TextToSpeech(Forms.Context, this);
                 speaker.Speak(toSpeak, QueueMode.Flush, null, null);
             }
-            else if (DependencyService.Get<ICredentialStorage>().GetSavedLanguage() == "en" || DependencyService.Get<ICredentialStorage>().GetSavedLanguage().Equals(null))
+            else
             {
                 speaker.Speak(toSpeak, QueueMode.Flush, null, null);
             }

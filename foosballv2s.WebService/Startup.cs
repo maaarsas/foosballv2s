@@ -30,6 +30,7 @@ namespace foosballv2s.WebService
             
             services.AddScoped(typeof(IGameRepository), typeof(GameRepository));
             services.AddScoped(typeof(ITeamRepository), typeof(TeamRepository));
+            services.AddScoped(typeof(ITournamentRepository), typeof(TournamentRepository));
             services.AddDbContext<WebServiceDbContext>(opt => opt.UseSqlServer(
                 Configuration.GetConnectionString("DbConnectionString")
             ));

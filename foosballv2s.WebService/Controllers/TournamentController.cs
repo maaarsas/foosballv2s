@@ -48,7 +48,7 @@ namespace foosballv2s.WebService.Controllers
             return new ObjectResult(tournament);
         }
 
-        // POST api/game
+        // POST api/tournament/
         [Authorize]
         [HttpPost]
         public IActionResult Post([FromBody] Tournament tournament)
@@ -64,6 +64,41 @@ namespace foosballv2s.WebService.Controllers
                 return NotFound();
             }
             return new ObjectResult(newTournament);
+        }
+
+        // PUT api/tournament/1
+        [Authorize]
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, [FromBody] Tournament tournament)
+        {
+            if (tournament == null || id != tournament.Id)
+            {
+                return BadRequest();
+            }
+
+            if (_repository.Update(id, tournament))
+            {
+                return new NoContentResult();
+            }
+            return NotFound();
+        }
+
+        // DELETE api/tournament/1
+        [Authorize]
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var tournament = _repository.Get(id);
+            if (tournament == null)
+            {
+                return new UnauthorizedResult();
+            }
+
+            if (_repository.Remove(id))
+            {
+                return new NoContentResult();
+            }
+            return NotFound();
         }
     }
 }

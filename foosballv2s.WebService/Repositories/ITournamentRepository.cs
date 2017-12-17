@@ -8,8 +8,7 @@ namespace foosballv2s.WebService.Models
         IEnumerable<Tournament> GetAll();
         Tournament Get(int id);
         Tournament Add(Tournament tournament);
-        /*    Game Add(Game game);
-            bool Remove(int id);
-            bool Update(int id, Game game);*/
+        bool Remove(int id);
+        bool Update(int id, Tournament tournament);
     }
 }

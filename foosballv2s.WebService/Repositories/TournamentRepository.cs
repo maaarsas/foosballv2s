@@ -29,7 +29,7 @@ namespace foosballv2s.WebService.Models
         }
 
         /// <summary>
-        /// Gets a game by a id from the storage
+        /// Gets a tournament by a id from the storage
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -43,7 +43,7 @@ namespace foosballv2s.WebService.Models
         }
 
         /// <summary>
-        /// Creates a game in the storage
+        /// Creates a tournament in the storage
         /// </summary>
         /// <param name="tournament"></param>
         /// <returns></returns>
@@ -72,5 +72,55 @@ namespace foosballv2s.WebService.Models
             return tournament;
         }
 
+        /// <summary>
+        /// Deletes a tournament
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool Remove(int id)
+        {
+            Tournament tournament = Get(id);
+            if (tournament == null)
+            {
+                return false;
+            }
+            _context.Tournaments.Remove(tournament);
+            _context.SaveChanges();
+            return true;
+        }
+
+        /// <summary>
+        /// Updates a tournament by an id in the storage
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="game"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public bool Update(int id, Tournament tournament)
+        {
+            if (tournament == null)
+            {
+                throw new ArgumentNullException("tournament");
+            }
+            Tournament tournamentToUpdate = Get(id);
+            if (tournamentToUpdate == null)
+            {
+                return false;
+            }
+            /*var users = _context.Users.AsNoTracking();
+            game.Team1.User = null;
+            game.Team2.User = null;
+
+            gameToUpdate.Team1 = game.Team1;
+            gameToUpdate.Team2 = game.Team2;
+            gameToUpdate.Team1Score = game.Team1Score;
+            gameToUpdate.Team2Score = game.Team2Score;
+            gameToUpdate.StartTime = game.StartTime;
+            gameToUpdate.EndTime = game.EndTime;*/
+
+            _context.Tournaments.Update(tournament);
+            _context.SaveChanges();
+            return true;
+        }
     }
 }

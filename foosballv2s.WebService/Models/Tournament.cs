@@ -11,17 +11,38 @@ namespace foosballv2s.WebService.Models
 
         public int CurrentStage { get; set; } = 1;
 
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public DateTime StartTime { get; set; } = DateTime.Now;
+        public DateTime EndTime { get; set; } = null;
+
+        private int numberOfPairs;
+        public int NumberOfPairs
+        {
+            get
+            {
+                return numberOfPairs;
+            }
+            set
+            {
+                if (isValidNumberOfPairs(value))
+                {
+                    numberOfPairs = value;
+                    NumberOfStages = CalculateNumberOfStages(value);
+                }
+            }
+        }
+        public int NumberOfStages { get; set; }
 
         public ICollection<TournamentGame> TournamentGames { get; set; }
 
-        public int NumberOfStages { get; set; }
-        public int NumberOfPairs { get; set; }
-
-        public int CalculateNumberOfStages()
+        public static int CalculateNumberOfStages(int numberOfPairs)
         {
-            return (int)Math.Log(NumberOfPairs, 2) + 1;
+            return (int)Math.Log(numberOfPairs, 2) + 1;
+        }
+
+        private bool isValidNumberOfPairs(int numberOfPairs)
+        {
+            //Is a whole number?
+            return (Math.Log(numberOfPairs, 2.0) % 1) == 0;
         }
     }
 }

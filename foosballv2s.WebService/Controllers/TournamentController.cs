@@ -37,5 +37,23 @@ namespace foosballv2s.WebService.Controllers
             //return _repository.GetAll(gameParams, sortParams, user);
             return new ObjectResult(":DDDD");
         }
+
+        // POST api/game
+        [Authorize]
+        [HttpPost]
+        public IActionResult Post([FromBody] Tournament tournament)
+        {
+            if (tournament == null)
+            {
+                return new BadRequestResult();
+            }
+
+            Tournament newTournament = _repository.Add(tournament);
+            if (newTournament == null)
+            {
+                return NotFound();
+            }
+            return new ObjectResult(newTournament);
+        }
     }
 }

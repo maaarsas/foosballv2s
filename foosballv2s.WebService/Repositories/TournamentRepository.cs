@@ -38,7 +38,9 @@ namespace foosballv2s.WebService.Models
         {
             return _context.Tournaments
                 .Include(t => t.Pairs)
-                    .ThenInclude(tg => tg.Game)
+                    .ThenInclude(tg => tg.Team1)
+                .Include(t => t.Pairs)
+                    .ThenInclude(tg => tg.Team2)
                 .AsNoTracking()
                 .SingleOrDefault(g => g.Id == id);
         }
@@ -61,6 +63,7 @@ namespace foosballv2s.WebService.Models
             {
                 return null;
             }
+
             _context.Tournaments.Add(tournament);
             try
             {

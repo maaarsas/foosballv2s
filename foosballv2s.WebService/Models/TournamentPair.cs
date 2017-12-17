@@ -16,9 +16,12 @@ namespace foosballv2s.WebService.Models
         public int StageNumber { get; set; } = 1;
 
         public Team Team1 { get; set; }
+        public int Team1Id { get; set; }
         public Team Team2 { get; set; }
+        public int Team2Id { get; set; }
 
         public Game Game { get; set; }
+        public int GameId { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember]

@@ -17,7 +17,7 @@ namespace foosballv2s.WebService.Models
         public DbSet<Team> Teams { get; set; }
         public DbSet<GameEvent> GameEvents { get; set; }
         public DbSet<Tournament> Tournaments { get; set; }
-        public DbSet<TournamentGame> TournamentGames { get; set; }
+        public DbSet<TournamentPair> TournamentGames { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -36,6 +36,23 @@ namespace foosballv2s.WebService.Models
             builder
                 .Entity<Game>()
                 .HasOne(c => c.User);
+
+            builder
+                .Entity<Tournament>()
+                .HasIndex(g => g.Id).IsUnique(true);
+
+            builder
+                .Entity<Tournament>()
+                .HasMany(c => c.Pairs)
+                .WithOne(e => e.Tournament);
+
+            builder
+                .Entity<TournamentPair>()
+                .HasIndex(g => g.Id).IsUnique(true);
+
+            builder
+                .Entity<TournamentPair>()
+                .HasOne(c => c.Game);
             
             builder
                 .Entity<Team>()

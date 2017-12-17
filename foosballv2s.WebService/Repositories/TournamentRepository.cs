@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Collections;
 
 namespace foosballv2s.WebService.Models
 {
@@ -23,7 +24,7 @@ namespace foosballv2s.WebService.Models
         public IEnumerable<Tournament> GetAll()
         {
             return _context.Tournaments
-                .Include(t => t.TournamentGames)
+                .Include(t => t.Pairs)
                     .ThenInclude(tg => tg.Game)
                 .AsNoTracking().ToList();
         }
@@ -36,7 +37,7 @@ namespace foosballv2s.WebService.Models
         public Tournament Get(int id)
         {
             return _context.Tournaments
-                .Include(t => t.TournamentGames)
+                .Include(t => t.Pairs)
                     .ThenInclude(tg => tg.Game)
                 .AsNoTracking()
                 .SingleOrDefault(g => g.Id == id);

@@ -11,9 +11,10 @@ using System;
 namespace foosballv2s.WebService.Migrations
 {
     [DbContext(typeof(WebServiceDbContext))]
-    partial class WebServiceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171217135619_tournaments-v2-renamed-field")]
+    partial class tournamentsv2renamedfield
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

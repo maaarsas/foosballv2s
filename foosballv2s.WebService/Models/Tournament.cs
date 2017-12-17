@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace foosballv2s.WebService.Models
 {
@@ -12,22 +10,19 @@ namespace foosballv2s.WebService.Models
         public int CurrentStage { get; set; } = 1;
 
         public DateTime StartTime { get; set; } = DateTime.Now;
-        public DateTime EndTime { get; set; } = null;
+        public DateTime EndTime { get; set; }
 
-        private int numberOfPairs;
-        public int NumberOfPairs
+        private int numberOfTeams;
+        public int NumberOfTeams
         {
             get
             {
-                return numberOfPairs;
+                return numberOfTeams;
             }
             set
             {
-                if (isValidNumberOfPairs(value))
-                {
-                    numberOfPairs = value;
-                    NumberOfStages = CalculateNumberOfStages(value);
-                }
+                numberOfTeams = value;
+                NumberOfStages = CalculateNumberOfStages(value);
             }
         }
         public int NumberOfStages { get; set; }
@@ -37,12 +32,6 @@ namespace foosballv2s.WebService.Models
         public static int CalculateNumberOfStages(int numberOfPairs)
         {
             return (int)Math.Log(numberOfPairs, 2) + 1;
-        }
-
-        private bool isValidNumberOfPairs(int numberOfPairs)
-        {
-            //Is a whole number?
-            return (Math.Log(numberOfPairs, 2.0) % 1) == 0;
         }
     }
 }

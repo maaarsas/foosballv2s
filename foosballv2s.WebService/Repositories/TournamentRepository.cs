@@ -1,4 +1,5 @@
-﻿using System;
+﻿using foosballv2s.WebService.Validators;
+using System;
 using System.Data.SqlClient;
 
 namespace foosballv2s.WebService.Models
@@ -23,6 +24,12 @@ namespace foosballv2s.WebService.Models
             if (tournament == null)
             {
                 throw new ArgumentNullException("tournament");
+            }
+
+            IValidator validator = new TournamentValidator(tournament);
+            if (!validator.Validate())
+            {
+                return null;
             }
             _context.Tournaments.Add(tournament);
             try

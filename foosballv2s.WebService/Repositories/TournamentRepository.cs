@@ -1,6 +1,9 @@
 ﻿using foosballv2s.WebService.Validators;
 using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace foosballv2s.WebService.Models
 {
@@ -11,6 +14,32 @@ namespace foosballv2s.WebService.Models
         public TournamentRepository(IWebServiceDbContext context)
         {
             _context = context;
+        }
+
+        /// <summary>
+        /// Gets all tournaments from the storage
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Tournament> GetAll()
+        {
+            return _context.Tournaments
+                .Include(t => t.TournamentGames)
+                    .ThenInclude(tg => tg.Game)
+                .AsNoTracking().ToList();
+        }
+
+        /// <summary>
+        /// Gets a game by a id from the storage
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Tournament Get(int id)
+        {
+            return _context.Tournaments
+                .Include(t => t.TournamentGames)
+                    .ThenInclude(tg => tg.Game)
+                .AsNoTracking()
+                .SingleOrDefault(g => g.Id == id);
         }
 
         /// <summary>

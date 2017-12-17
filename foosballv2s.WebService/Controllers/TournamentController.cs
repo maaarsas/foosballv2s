@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
@@ -24,18 +25,27 @@ namespace foosballv2s.WebService.Controllers
         public TournamentController(ITournamentRepository repository/*, Microsoft.AspNetCore.Identity.UserManager<User> userManager*/)
         {
             _repository = repository;
-            //_userManager = userManager;
         }
 
         // GET api/tournament/
         [Authorize]
         [HttpGet]
-        //public IEnumerable<Game> Get(GameParams gameParams, SortParams sortParams)
-        public IActionResult Get()
+        public IEnumerable<Tournament> Get()
         {
-            //var user = _userManager.Users.FirstOrDefault(u => u.Email == User.Identity.GetUserId());
-            //return _repository.GetAll(gameParams, sortParams, user);
-            return new ObjectResult(":DDDD");
+            return _repository.GetAll();
+        }
+
+        // GET api/tournament/1
+        [Authorize]
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            Tournament tournament = _repository.Get(id);
+            if (tournament == null)
+            {
+                return NotFound();
+            }
+            return new ObjectResult(tournament);
         }
 
         // POST api/game

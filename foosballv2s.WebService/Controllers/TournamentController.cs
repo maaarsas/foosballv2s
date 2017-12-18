@@ -108,21 +108,35 @@ namespace foosballv2s.WebService.Controllers
 
         // put api/tournament/team/1
         [Authorize]
-        [HttpPost("team/{teamId}")]
-        public IActionResult AddTeam(int teamId, [FromBody] TournamentTeam tournamentTeam)
+        [HttpPost("team/{tournamentId}")]
+        public IActionResult AddTeam(int tournamentId, [FromBody] TournamentTeam tournamentTeam)
         {
             if (tournamentTeam == null)
             {
                 return new BadRequestResult();
             }
 
-            AddTournamentTeamResponseViewModel newTeamInTournament =_repository.AddTeam(teamId, tournamentTeam);
+            AddTournamentTeamResponseViewModel newTeamInTournament = _repository.AddTeam(tournamentId, tournamentTeam);
             if (newTeamInTournament == null)
             {
                 return NotFound();
+            } 
+            else if (newTeamInTournament.IsEnoughTeamsToStartTournament)
+            {
+                Console.WriteLine("Generating pairs");
             }
             return new ObjectResult(newTeamInTournament);
         }
+        
+        // GET api/pair
+        [Authorize]
+        [HttpGet("pair/{tournamentId}")]
+        public void GetAllPairs(int tournamentId)
+        {
+            Console.WriteLine("GENERATING ");
+            _repository.GeneratePairs(tournamentId);
+        }
+
 
         // DELETE api/tournament/team/1
         [Authorize]
@@ -154,6 +168,7 @@ namespace foosballv2s.WebService.Controllers
 
             AddTournamentPairResponseViewModel newPairResponse =
                 _repository.AddPair(tournamentId, tournamentPair);
+            
             if (newPairResponse == null || newPairResponse.TournamentPair == null)
             {
                 return NotFound();

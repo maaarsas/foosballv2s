@@ -153,15 +153,9 @@ namespace foosballv2s.WebService.Models
             }
 
             Tournament tournament = Get(tournamentId);
-            if (!tournament.IsEnoughTeams)
-            {
-                tournament.Pairs.Add(tournamentPair);
-                _context.Tournaments.Update(tournament);
-            }
-            else
-            {
-                return null;
-            }
+            tournament.Pairs.Add(tournamentPair);
+            _context.Tournaments.Update(tournament);
+
             try
             {
                 _context.SaveChanges();
@@ -172,7 +166,7 @@ namespace foosballv2s.WebService.Models
             }
 
             int pairsCount = tournament.Pairs.Count;
-            bool isEnoughPairs = (2*pairsCount).Equals(tournament.NumberOfTeamsRequired);
+            bool isEnoughPairs = (2 * pairsCount).Equals(tournament.NumberOfTeamsRequired);
             return new AddTournamentPairResponseViewModel(isEnoughPairs,
                                                         pairsCount,
                                                         tournamentPair);
@@ -219,7 +213,11 @@ namespace foosballv2s.WebService.Models
             {
                 throw new ArgumentNullException("tournamentTeam");
             }
+
+            int teamsCount;
+            bool isEnoughTeams;
             Tournament tournament = Get(tournamentId);
+
             if (!tournament.IsEnoughTeams)
             {
                 tournament.Teams.Add(tournamentTeam);
@@ -227,7 +225,11 @@ namespace foosballv2s.WebService.Models
             }
             else
             {
-                return null;
+                teamsCount = tournament.Teams.Count;
+                isEnoughTeams = teamsCount.Equals(tournament.NumberOfTeamsRequired);
+                return new AddTournamentTeamResponseViewModel(true,
+                                                        teamsCount,
+                                                        tournamentTeam);
             }
 
             try
@@ -239,8 +241,8 @@ namespace foosballv2s.WebService.Models
                 return null;
             }
 
-            int teamsCount = tournament.Teams.Count;
-            bool isEnoughTeams = teamsCount.Equals(tournament.NumberOfTeamsRequired);
+            teamsCount = tournament.Teams.Count;
+            isEnoughTeams = teamsCount.Equals(tournament.NumberOfTeamsRequired);
             return new AddTournamentTeamResponseViewModel(isEnoughTeams,
                                                         teamsCount,
                                                         tournamentTeam);
@@ -274,6 +276,49 @@ namespace foosballv2s.WebService.Models
                 .Include(tt => tt.Team)
                 .AsNoTracking()
                 .SingleOrDefault(t => t.Id == teamId);
+        }
+
+        public void GeneratePairs(int tournamentId)
+        {
+            Console.WriteLine("------tourney ID --- " + tournamentId + " ---");
+            Tournament tournament = Get(tournamentId);
+            
+            Random rng = new Random();
+            int n = tournament.Teams.Count;
+            Console.WriteLine("COUNT " + n + " xD");
+            bool firstTeamDetermined = false;
+            int firstTeamNumberInList = -1;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                if (!firstTeamDetermined)
+                {
+                    firstTeamNumberInList = k;
+                    firstTeamDetermined = true;
+                }
+                else
+                {
+                    TournamentPair tournamentPair = new TournamentPair();
+                    tournamentPair.Team1Id = 
+                        tournament.Teams.ElementAt(firstTeamNumberInList).TeamId;
+                    tournamentPair.Team2Id =
+                        tournament.Teams.ElementAt(k).TeamId;
+                    Console.WriteLine("+ " + tournamentPair.Team1Id + " +");
+                    Console.WriteLine("+ " + tournamentPair.Team2Id + " +");
+                    Console.WriteLine("<<------>>");
+                    tournament.Pairs.Add(tournamentPair);
+                    firstTeamDetermined = false;
+                }
+            }
+
+            _context.Tournaments.Update(tournament);
+
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (SqlException e) {}
         }
     }
 }

@@ -19,5 +19,7 @@ namespace foosballv2s.WebService.Models
         AddTournamentTeamResponseViewModel AddTeam(int teamId, TournamentTeam tournamentTeam);
         bool RemoveTeam(int teamId);
         TournamentTeam GetTeam(int teamId);
+
+        void GeneratePairs(int tournamentId);
     }
 }

@@ -31,22 +31,22 @@ namespace foosballv2s.WebService.Models
         public bool IsEnoughTeams {
             get
             {
-                return CheckIfEnoughTeamsJoined(NumberOfTeamsRequired, Pairs.Count);
+                return CheckIfEnoughTeamsJoined(NumberOfTeamsRequired, Teams.Count);
             }
-        } 
+        }
 
+        public ICollection<TournamentTeam> Teams { get; set; } = new List<TournamentTeam>();
         public ICollection<TournamentPair> Pairs { get; set; } = new List<TournamentPair>();
-
-
+        
 
         public static int CalculateNumberOfStages(int numberOfPairs)
         {
             return (int)Math.Log(numberOfPairs, 2) + 1;
         }
 
-        public static bool CheckIfEnoughTeamsJoined(int numberOfTeamsRequired, int actualNumberOfPairs)
+        public static bool CheckIfEnoughTeamsJoined(int numberOfTeamsRequired, int actualNumberOfTeams)
         {
-            return (2 * actualNumberOfPairs) == numberOfTeamsRequired;
+            return actualNumberOfTeams == numberOfTeamsRequired;
         }
     }
 }

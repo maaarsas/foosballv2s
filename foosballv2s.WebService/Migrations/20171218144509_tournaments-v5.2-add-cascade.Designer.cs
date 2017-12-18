@@ -11,9 +11,10 @@ using System;
 namespace foosballv2s.WebService.Migrations
 {
     [DbContext(typeof(WebServiceDbContext))]
-    partial class WebServiceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171218144509_tournaments-v5.2-add-cascade")]
+    partial class tournamentsv52addcascade
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -160,7 +161,7 @@ namespace foosballv2s.WebService.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("TeamId");
+                    b.Property<int>("TeamId");
 
                     b.Property<int?>("TournamentId");
 
@@ -168,8 +169,6 @@ namespace foosballv2s.WebService.Migrations
 
                     b.HasIndex("Id")
                         .IsUnique();
-
-                    b.HasIndex("TeamId");
 
                     b.HasIndex("TournamentId");
 
@@ -393,10 +392,6 @@ namespace foosballv2s.WebService.Migrations
 
             modelBuilder.Entity("foosballv2s.WebService.Models.TournamentTeam", b =>
                 {
-                    b.HasOne("foosballv2s.WebService.Models.Team", "Team")
-                        .WithMany()
-                        .HasForeignKey("TeamId");
-
                     b.HasOne("foosballv2s.WebService.Models.Tournament", "Tournament")
                         .WithMany("Teams")
                         .HasForeignKey("TournamentId");

@@ -168,7 +168,6 @@ namespace foosballv2s.WebService.Models
             }
 
             int pairsCount = tournament.Pairs.Count;
-            Console.WriteLine(2*pairsCount + " == " + tournament.NumberOfTeamsRequired);
             bool isEnoughPairs = (2*pairsCount).Equals(tournament.NumberOfTeamsRequired);
             return new AddTournamentPairResponseViewModel(isEnoughPairs,
                                                         pairsCount,
@@ -202,6 +201,75 @@ namespace foosballv2s.WebService.Models
             return _context.TournamentPairs
                 .AsNoTracking()
                 .SingleOrDefault(p => p.Id == pairId);
+        }
+
+        /// <summary>
+        /// Adds a team to tournament, team is waiting for pair in the storage
+        /// </summary>
+        /// <param name="tournamentPair"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public AddTournamentTeamResponseViewModel AddTeam(int tournamentId, TournamentTeam tournamentTeam)
+        {
+            if (tournamentTeam == null)
+            {
+                throw new ArgumentNullException("tournamentTeam");
+            }
+            Tournament tournament = Get(tournamentId);
+            if (!tournament.IsEnoughTeams)
+            {
+                tournament.Teams.Add(tournamentTeam);
+                _context.Tournaments.Update(tournament);
+            }
+            else
+            {
+                return null;
+            }
+
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (SqlException e) // happens when, for example, non existing tournaments are provided
+            {
+                return null;
+            }
+
+            int teamsCount = tournament.Teams.Count;
+            bool isEnoughTeams = teamsCount.Equals(tournament.NumberOfTeamsRequired);
+            return new AddTournamentTeamResponseViewModel(isEnoughTeams,
+                                                        teamsCount,
+                                                        tournamentTeam);
+        }
+
+        /// <summary>
+        /// Deletes a team from tournament
+        /// </summary>
+        /// <param name="teamId"></param>
+        /// <returns></returns>
+        public bool RemoveTeam(int teamId)
+        {
+            TournamentTeam tournamentTeam = GetTeam(teamId);
+            if (tournamentTeam == null)
+            {
+                return false;
+            }
+            _context.TournamentTeams.Remove(tournamentTeam);
+            _context.SaveChanges();
+            return true;
+        }
+
+        /// <summary>
+        /// Gets a team that would like to join tournament by a id from the storage
+        /// </summary>
+        /// <param name="teamId"></param>
+        /// <returns></returns>
+        public TournamentTeam GetTeam(int teamId)
+        {
+            return _context.TournamentTeams
+                .Include(tt => tt.Team)
+                .AsNoTracking()
+                .SingleOrDefault(t => t.Id == teamId);
         }
     }
 }

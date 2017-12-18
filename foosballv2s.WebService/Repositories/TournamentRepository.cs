@@ -149,8 +149,15 @@ namespace foosballv2s.WebService.Models
             }
 
             Tournament tournament = Get(tournamentId);
-            tournament.Pairs.Add(tournamentPair);
-            _context.Tournaments.Update(tournament);
+            if (!tournament.IsEnoughTeams)
+            {
+                tournament.Pairs.Add(tournamentPair);
+                _context.Tournaments.Update(tournament);
+            }
+            else
+            {
+                return null;
+            }
             try
             {
                 _context.SaveChanges();
@@ -161,8 +168,8 @@ namespace foosballv2s.WebService.Models
             }
 
             int pairsCount = tournament.Pairs.Count;
-            Console.WriteLine(2*pairsCount + " == " + tournament.NumberOfTeams);
-            bool isEnoughPairs = (2*pairsCount).Equals(tournament.NumberOfTeams);
+            Console.WriteLine(2*pairsCount + " == " + tournament.NumberOfTeamsRequired);
+            bool isEnoughPairs = (2*pairsCount).Equals(tournament.NumberOfTeamsRequired);
             return new AddTournamentPairResponseViewModel(isEnoughPairs,
                                                         pairsCount,
                                                         tournamentPair);

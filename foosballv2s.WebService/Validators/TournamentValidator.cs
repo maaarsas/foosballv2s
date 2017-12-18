@@ -19,7 +19,7 @@ namespace foosballv2s.WebService.Validators
         /// <returns></returns>
         private bool ValidateNumberOfTeams()
         {
-            if ((Math.Log(tournament.NumberOfTeams, 2.0) % 1) != 0)
+            if ((Math.Log(tournament.NumberOfTeamsRequired, 2.0) % 1) != 0)
             {
                 return false;
             }

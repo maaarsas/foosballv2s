@@ -79,7 +79,7 @@ namespace foosballv2s.WebService.Controllers
 
             if (_repository.Update(id, tournament))
             {
-                return new NoContentResult();
+                return Get(id);
             }
             return NotFound();
         }
@@ -114,7 +114,7 @@ namespace foosballv2s.WebService.Controllers
 
             AddTournamentPairResponseViewModel newPairResponse =
                 _repository.AddPair(tournamentId, tournamentPair);
-            if (newPairResponse.TournamentPair == null)
+            if (newPairResponse == null || newPairResponse.TournamentPair == null)
             {
                 return NotFound();
             }

@@ -1,9 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Threading.Tasks;
 
 namespace foosballv2s.WebService.Models
 {
@@ -15,13 +11,13 @@ namespace foosballv2s.WebService.Models
 
         public int StageNumber { get; set; } = 1;
 
-        public Team Team1 { get; set; }
-        public int Team1Id { get; set; }
-        public Team Team2 { get; set; }
-        public int Team2Id { get; set; }
+        public virtual Team Team1 { get; set; }
+        public int? Team1Id { get; set; }
+        public virtual Team Team2 { get; set; }
+        public int? Team2Id { get; set; }
 
-        public Game Game { get; set; }
-        public int GameId { get; set; }
+        public virtual Game Game { get; set; }
+        public int? GameId { get; set; }
 
         [JsonIgnore]
         [IgnoreDataMember]

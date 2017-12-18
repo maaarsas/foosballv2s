@@ -9,7 +9,7 @@ namespace foosballv2s.WebService.Models
         DbSet<GameEvent> GameEvents { get; set; }
         DbSet<User> Users { get; set; }
         DbSet<Tournament> Tournaments { get; set; }
-        DbSet<TournamentPair> TournamentGames { get; set; }
+        DbSet<TournamentPair> TournamentPairs { get; set; }
         int SaveChanges();
         //void MarkAsModified(Team item); 
     }

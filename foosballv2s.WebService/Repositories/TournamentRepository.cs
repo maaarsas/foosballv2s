@@ -78,6 +78,7 @@ namespace foosballv2s.WebService.Models
             }
             catch (SqlException e) // happens when, for example, non existing tournaments are provided
             {
+                Console.WriteLine("xDDDDD");
                 return null;
             }
             return tournament;
@@ -132,6 +133,35 @@ namespace foosballv2s.WebService.Models
             _context.Tournaments.Update(tournament);
             _context.SaveChanges();
             return true;
+        }
+
+        /// <summary>
+        /// Adds a pair to tournament in the storage
+        /// </summary>
+        /// <param name="tournamentPair"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public TournamentPair AddPair(int tournamentId, TournamentPair tournamentPair)
+        {
+            if (tournamentPair == null)
+            {
+                throw new ArgumentNullException("tournamentPair");
+            }
+
+            Console.WriteLine("-------" + tournamentId);
+            Tournament tournament = Get(tournamentId);
+            tournament.Pairs.Add(tournamentPair);
+            _context.Tournaments.Update(tournament);
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (SqlException e) // happens when, for example, non existing tournaments are provided
+            {
+                Console.WriteLine("xDDDDD");
+                return null;
+            }
+            return tournamentPair;
         }
     }
 }

@@ -27,7 +27,7 @@ namespace foosballv2s.WebService.Models
         }
         public int NumberOfStages { get; set; }
 
-        public ICollection<TournamentPair> Pairs { get; set; }
+        public ICollection<TournamentPair> Pairs { get; set; } = new List<TournamentPair>();
 
         public static int CalculateNumberOfStages(int numberOfPairs)
         {

@@ -10,5 +10,7 @@ namespace foosballv2s.WebService.Models
         Tournament Add(Tournament tournament);
         bool Remove(int id);
         bool Update(int id, Tournament tournament);
+
+        TournamentPair AddPair(int tournamentId, TournamentPair tournamentPair);
     }
 }

@@ -100,5 +100,23 @@ namespace foosballv2s.WebService.Controllers
             }
             return NotFound();
         }
+
+        // put api/tournament/pair/1
+        [Authorize]
+        [HttpPut("pair/{tournamentId}")]
+        public IActionResult AddPair(int tournamentId, [FromBody] TournamentPair tournamentPair)
+        {
+            if (tournamentPair == null)
+            {
+                return new BadRequestResult();
+            }
+
+            TournamentPair newPair = _repository.AddPair(tournamentId, tournamentPair);
+            if (newPair == null)
+            {
+                return NotFound();
+            }
+            return new ObjectResult(newPair);
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace foosballv2s.WebService.Models
         public DbSet<Team> Teams { get; set; }
         public DbSet<GameEvent> GameEvents { get; set; }
         public DbSet<Tournament> Tournaments { get; set; }
-        public DbSet<TournamentPair> TournamentGames { get; set; }
+        public DbSet<TournamentPair> TournamentPairs { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)

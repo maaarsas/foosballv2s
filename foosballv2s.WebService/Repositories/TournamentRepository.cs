@@ -280,35 +280,35 @@ namespace foosballv2s.WebService.Models
 
         public void GeneratePairs(int tournamentId)
         {
-            Console.WriteLine("------tourney ID --- " + tournamentId + " ---");
             Tournament tournament = Get(tournamentId);
             
             Random rng = new Random();
             int n = tournament.Teams.Count;
-            Console.WriteLine("COUNT " + n + " xD");
             bool firstTeamDetermined = false;
             int firstTeamNumberInList = -1;
-            while (n > 1)
+            List<int> teamsAlreadyInPair = new List<int>();
+            int b = 0;
+            while (teamsAlreadyInPair.Count != n)
             {
-                n--;
-                int k = rng.Next(n + 1);
-                if (!firstTeamDetermined)
+                int k = rng.Next(0, n);
+                if (!teamsAlreadyInPair.Contains(k))
                 {
-                    firstTeamNumberInList = k;
-                    firstTeamDetermined = true;
-                }
-                else
-                {
-                    TournamentPair tournamentPair = new TournamentPair();
-                    tournamentPair.Team1Id = 
-                        tournament.Teams.ElementAt(firstTeamNumberInList).TeamId;
-                    tournamentPair.Team2Id =
-                        tournament.Teams.ElementAt(k).TeamId;
-                    Console.WriteLine("+ " + tournamentPair.Team1Id + " +");
-                    Console.WriteLine("+ " + tournamentPair.Team2Id + " +");
-                    Console.WriteLine("<<------>>");
-                    tournament.Pairs.Add(tournamentPair);
-                    firstTeamDetermined = false;
+                    if (!firstTeamDetermined)
+                    {
+                        firstTeamNumberInList = k;
+                        firstTeamDetermined = true;
+                    }
+                    else
+                    {
+                        TournamentPair tournamentPair = new TournamentPair();
+                        tournamentPair.Team1Id =
+                            tournament.Teams.ElementAt(firstTeamNumberInList).TeamId;
+                        tournamentPair.Team2Id =
+                            tournament.Teams.ElementAt(k).TeamId;
+                        tournament.Pairs.Add(tournamentPair);
+                        firstTeamDetermined = false;
+                    }
+                    teamsAlreadyInPair.Add(k);
                 }
             }
 

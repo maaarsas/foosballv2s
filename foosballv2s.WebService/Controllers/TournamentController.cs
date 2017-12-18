@@ -1,4 +1,5 @@
 ﻿using foosballv2s.WebService.Models;
+using foosballv2s.WebService.Models.View;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -111,12 +112,31 @@ namespace foosballv2s.WebService.Controllers
                 return new BadRequestResult();
             }
 
-            TournamentPair newPair = _repository.AddPair(tournamentId, tournamentPair);
-            if (newPair == null)
+            AddTournamentPairResponseViewModel newPairResponse =
+                _repository.AddPair(tournamentId, tournamentPair);
+            if (newPairResponse.TournamentPair == null)
             {
                 return NotFound();
             }
-            return new ObjectResult(newPair);
+            return new ObjectResult(newPairResponse);
+        }
+
+        // DELETE api/tournament/pair/1
+        [Authorize]
+        [HttpDelete("pair/{pairId}")]
+        public IActionResult DeletePair(int pairId)
+        {
+            var tournamentPair = _repository.GetPair(pairId);
+            if (tournamentPair == null)
+            {
+                return new UnauthorizedResult();
+            }
+
+            if (_repository.RemovePair(pairId))
+            {
+                return new NoContentResult();
+            }
+            return NotFound();
         }
     }
 }

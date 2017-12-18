@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Collections;
+using foosballv2s.WebService.Models.View;
 
 namespace foosballv2s.WebService.Models
 {
@@ -78,7 +79,6 @@ namespace foosballv2s.WebService.Models
             }
             catch (SqlException e) // happens when, for example, non existing tournaments are provided
             {
-                Console.WriteLine("xDDDDD");
                 return null;
             }
             return tournament;
@@ -141,14 +141,13 @@ namespace foosballv2s.WebService.Models
         /// <param name="tournamentPair"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public TournamentPair AddPair(int tournamentId, TournamentPair tournamentPair)
+        public AddTournamentPairResponseViewModel AddPair(int tournamentId, TournamentPair tournamentPair)
         {
             if (tournamentPair == null)
             {
                 throw new ArgumentNullException("tournamentPair");
             }
 
-            Console.WriteLine("-------" + tournamentId);
             Tournament tournament = Get(tournamentId);
             tournament.Pairs.Add(tournamentPair);
             _context.Tournaments.Update(tournament);
@@ -158,10 +157,44 @@ namespace foosballv2s.WebService.Models
             }
             catch (SqlException e) // happens when, for example, non existing tournaments are provided
             {
-                Console.WriteLine("xDDDDD");
                 return null;
             }
-            return tournamentPair;
+
+            int pairsCount = tournament.Pairs.Count;
+            Console.WriteLine(2*pairsCount + " == " + tournament.NumberOfTeams);
+            bool isEnoughPairs = (2*pairsCount).Equals(tournament.NumberOfTeams);
+            return new AddTournamentPairResponseViewModel(isEnoughPairs,
+                                                        pairsCount,
+                                                        tournamentPair);
+        }
+
+        /// <summary>
+        /// Deletes a pair from tournament
+        /// </summary>
+        /// <param name="pairId"></param>
+        /// <returns></returns>
+        public bool RemovePair(int pairId)
+        {
+            TournamentPair tournamentPair = GetPair(pairId);
+            if (tournamentPair == null)
+            {
+                return false;
+            }
+            _context.TournamentPairs.Remove(tournamentPair);
+            _context.SaveChanges();
+            return true;
+        }
+
+        /// <summary>
+        /// Gets a tournament pair by a id from the storage
+        /// </summary>
+        /// <param name="pairId"></param>
+        /// <returns></returns>
+        public TournamentPair GetPair(int pairId)
+        {
+            return _context.TournamentPairs
+                .AsNoTracking()
+                .SingleOrDefault(p => p.Id == pairId);
         }
     }
 }

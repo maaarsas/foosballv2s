@@ -1,4 +1,5 @@
 ﻿
+using foosballv2s.WebService.Models.View;
 using System.Collections.Generic;
 
 namespace foosballv2s.WebService.Models
@@ -11,6 +12,8 @@ namespace foosballv2s.WebService.Models
         bool Remove(int id);
         bool Update(int id, Tournament tournament);
 
-        TournamentPair AddPair(int tournamentId, TournamentPair tournamentPair);
+        AddTournamentPairResponseViewModel AddPair(int tournamentId, TournamentPair tournamentPair);
+        bool RemovePair(int pairId);
+        TournamentPair GetPair(int pairId);
     }
 }

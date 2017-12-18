@@ -54,20 +54,16 @@ namespace foosballv2s.WebService.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Tournament tournament)
         {
-            Console.WriteLine("Post");
             if (tournament == null)
             {
-                Console.WriteLine("null");
                 return new BadRequestResult();
             }
 
             Tournament newTournament = _repository.Add(tournament);
             if (newTournament == null)
             {
-                Console.WriteLine("dar null");
                 return NotFound();
             }
-            Console.WriteLine("ne null ((;;");
             return new ObjectResult(newTournament);
         }
 
@@ -121,10 +117,10 @@ namespace foosballv2s.WebService.Controllers
             {
                 return NotFound();
             } 
-            else if (newTeamInTournament.IsEnoughTeamsToStartTournament)
+            /*else if (newTeamInTournament.IsEnoughTeamsToStartTournament)
             {
                 Console.WriteLine("Generating pairs");
-            }
+            }*/
             return new ObjectResult(newTeamInTournament);
         }
         
@@ -133,7 +129,6 @@ namespace foosballv2s.WebService.Controllers
         [HttpGet("pair/{tournamentId}")]
         public void GetAllPairs(int tournamentId)
         {
-            Console.WriteLine("GENERATING ");
             _repository.GeneratePairs(tournamentId);
         }
 

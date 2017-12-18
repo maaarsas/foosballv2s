@@ -17,6 +17,5 @@ namespace foosballv2s.WebService.Models
         [JsonIgnore]
         [IgnoreDataMember]
         public Tournament Tournament { get; set; } = null;
-
     }
 }

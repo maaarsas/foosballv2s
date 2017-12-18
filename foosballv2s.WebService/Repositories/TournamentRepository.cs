@@ -31,6 +31,8 @@ namespace foosballv2s.WebService.Models
                     .ThenInclude(tg => tg.Team2)
                 .Include(t => t.Pairs)
                     .ThenInclude(tg => tg.Game)
+                .Include(t => t.Teams)
+                    .ThenInclude(tt => tt.Team)
                 .AsNoTracking()
                 .ToList();
         }
@@ -49,6 +51,8 @@ namespace foosballv2s.WebService.Models
                     .ThenInclude(tg => tg.Team2)
                 .Include(t => t.Pairs)
                     .ThenInclude(tg => tg.Game)
+                .Include(t => t.Teams)
+                    .ThenInclude(tt => tt.Team)
                 .AsNoTracking()
                 .SingleOrDefault(g => g.Id == id);
         }

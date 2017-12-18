@@ -22,6 +22,12 @@ namespace foosballv2s.WebService.Migrations
                 {
                     table.PrimaryKey("PK_TournamentTeams", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_TournamentTeams_Teams_TeamId",
+                        column: x => x.TeamId,
+                        principalTable: "Teams",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_TournamentTeams_Tournaments_TournamentId",
                         column: x => x.TournamentId,
                         principalTable: "Tournaments",
@@ -34,6 +40,11 @@ namespace foosballv2s.WebService.Migrations
                 table: "TournamentTeams",
                 column: "Id",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TournamentTeams_TeamId",
+                table: "TournamentTeams",
+                column: "TeamId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TournamentTeams_TournamentId",

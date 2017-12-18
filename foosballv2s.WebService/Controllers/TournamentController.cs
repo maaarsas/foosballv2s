@@ -54,16 +54,20 @@ namespace foosballv2s.WebService.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Tournament tournament)
         {
+            Console.WriteLine("Post");
             if (tournament == null)
             {
+                Console.WriteLine("null");
                 return new BadRequestResult();
             }
 
             Tournament newTournament = _repository.Add(tournament);
             if (newTournament == null)
             {
+                Console.WriteLine("dar null");
                 return NotFound();
             }
+            Console.WriteLine("ne null ((;;");
             return new ObjectResult(newTournament);
         }
 

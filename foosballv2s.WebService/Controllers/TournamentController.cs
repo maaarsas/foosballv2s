@@ -131,8 +131,7 @@ namespace foosballv2s.WebService.Controllers
         {
             _repository.GeneratePairs(tournamentId);
         }
-
-
+        
         // DELETE api/tournament/team/1
         [Authorize]
         [HttpDelete("team/{teamId}")]

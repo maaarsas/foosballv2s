@@ -137,6 +137,12 @@ namespace foosballv2s.WebService.Test.Controllers
                 new Team() {Id = 1, TeamName = "TestName1"},
                 new Team() {Id = 2, TeamName = "TestName2"},
                 new Team() {Id = 3, TeamName = "TestName3"},
+                new Team() {Id = 4, TeamName = "TestName4"},
+                new Team() {Id = 5, TeamName = "TestName5"},
+                new Team() {Id = 6, TeamName = "TestName6"},
+                new Team() {Id = 7, TeamName = "TestName7"},
+                new Team() {Id = 8, TeamName = "TestName8"},
+                new Team() {Id = 9, TeamName = "TestName9"},
             };
         }
         

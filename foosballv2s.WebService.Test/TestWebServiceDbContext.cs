@@ -2,13 +2,17 @@
 using foosballv2s.WebService.Models;
 
 namespace foosballv2s.WebService.Test
-{                
-    public class TestWebServiceDbContext : IWebServiceDbContext 
+{
+    public class TestWebServiceDbContext : IWebServiceDbContext
     {
         public DbSet<Game> Games { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<GameEvent> GameEvents { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Tournament> Tournaments { get; set; }
+        public DbSet<TournamentPair> TournamentPairs { get; set; }
+        public DbSet<TournamentTeam> TournamentTeams { get; set; }
+
 
         public TestWebServiceDbContext()
         {

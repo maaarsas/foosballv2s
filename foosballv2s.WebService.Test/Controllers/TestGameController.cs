@@ -167,6 +167,47 @@ namespace foosballv2s.WebService.Test.Controllers
                     StartTime = new DateTime(1998, 12, 1, 23, 59, 2), 
                     EndTime = new DateTime(1998, 12, 2, 0, 3, 3),
                 },
+                //-----------For tourneys------------------------------
+                new Game()
+                {
+                    Id = 4,
+                    Team1 = TestTeamController.GetDemoTeams()[0],
+                    Team2 = TestTeamController.GetDemoTeams()[1],
+                    Team1Score = 7,
+                    Team2Score = 2,
+                    StartTime = new DateTime(1998, 12, 1, 23, 59, 2),
+                    EndTime = new DateTime(1998, 12, 2, 0, 3, 3),
+                },
+                new Game()
+                {
+                    Id = 5,
+                    Team1 = TestTeamController.GetDemoTeams()[2],
+                    Team2 = TestTeamController.GetDemoTeams()[3],
+                    Team1Score = 7,
+                    Team2Score = 2,
+                    StartTime = new DateTime(1998, 12, 1, 23, 59, 2),
+                    EndTime = new DateTime(1998, 12, 2, 0, 3, 3),
+                },
+                new Game()
+                {
+                    Id = 6,
+                    Team1 = TestTeamController.GetDemoTeams()[4],
+                    Team2 = TestTeamController.GetDemoTeams()[5],
+                    Team1Score = 7,
+                    Team2Score = 2,
+                    StartTime = new DateTime(1998, 12, 1, 23, 59, 2),
+                    EndTime = new DateTime(1998, 12, 2, 0, 3, 3),
+                },
+                new Game()
+                {
+                    Id = 7,
+                    Team1 = TestTeamController.GetDemoTeams()[6],
+                    Team2 = TestTeamController.GetDemoTeams()[7],
+                    Team1Score = 7,
+                    Team2Score = 2,
+                    StartTime = new DateTime(1998, 12, 1, 23, 59, 2),
+                    EndTime = new DateTime(1998, 12, 2, 0, 3, 3),
+                }
             };
         }
         

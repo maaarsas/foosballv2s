@@ -123,6 +123,7 @@
     <Compile Include="Source\Services\FoosballWebService\Models\RegisterResponse.cs" />
     <Compile Include="Source\Services\FoosballWebService\Models\RegisterViewModel.cs" />
     <Compile Include="Source\Services\FoosballWebService\Repository\AuthRepository.cs" />
+    <Compile Include="Source\Services\FoosballWebService\Repository\TournamentsRepository.cs" />
     <Compile Include="Source\Services\FoosballWebService\Repository\GameRepository.cs" />
     <Compile Include="Source\Services\FoosballWebService\Repository\TeamRepository.cs" />
     <Compile Include="Source\Services\GameLogger\GameLogger.cs" />
@@ -148,6 +149,11 @@
     <AndroidNativeLibrary Include="libs\x86\libcvextern.so">
       <Link>lib\x86\libcvextern.so</Link>
     </AndroidNativeLibrary>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="lib\armeabi-v7a\" />
+    <Folder Include="lib\armeabi\" />
+    <Folder Include="lib\x86\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />

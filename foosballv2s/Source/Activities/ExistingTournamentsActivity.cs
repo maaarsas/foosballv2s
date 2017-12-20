@@ -47,26 +47,23 @@ namespace foosballv2s.Source.Activities
         protected override void OnResume()
         {
             base.OnResume();
-            
-            FetchAllGames();
+
+            FetchAllTournaments();
         }
 
         /// <summary>
         /// Retrieves a list of games from a web service and populates a list
         /// </summary>
-        private async void FetchAllGames()
+        private async void FetchAllTournaments()
         {
             ProgressDialog dialog = ProgressDialog.Show(this, "", 
-                Resources.GetString(Resource.String.retrieving_all_games), true);
-            
-            UrlParamsFormatter urlParams = new UrlParamsFormatter();
-            urlParams.AddParam("sortby", "-EndTime");
-            
-            Game[] games = await gameRepository.GetAll(urlParams.UrlParams);
+                Resources.GetString(Resource.String.retrieving_all_tournaments), true);
+
+            Tournament[] tournaments = await tournamentRepository.GetAll();
             dialog.Dismiss();
             
-            ExpandableListAdapter gameAdapter = new ExpandableListAdapter(this, new List<Game>(games));
-            allGamesListFragment.GameListView.SetAdapter(gameAdapter);
+            ExpandableListAdapter tournamentAdapter = new ExpandableListAdapter(this, new List<Tournament>(tournaments));
+            myTournamentsListFragment.TournamentListView.SetAdapter(tournamentAdapter);
         }
     }
 }

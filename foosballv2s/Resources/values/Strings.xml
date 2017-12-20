@@ -21,6 +21,7 @@
     <string name="stats">Stats</string>
     <string name="retrieving_your_teams">Loading your teams. Please wait.</string>
     <string name="retrieving_all_teams">Loading all teams. Please wait.</string>
+    <string name="retrieving_all_tournaments">Loading all tournaments. Please wait.</string>
   <string name="checking_teams">Checking teams. Please wait.</string>
     <string name="game_end_team_won">Team {0} has won this game!</string>
   <string name="game_end_result">Result: {0} {2} - {3} {1}</string>

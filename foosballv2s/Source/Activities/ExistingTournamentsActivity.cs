@@ -62,7 +62,7 @@ namespace foosballv2s.Source.Activities
             Tournament[] tournaments = await tournamentRepository.GetAll();
             dialog.Dismiss();
             
-            ExpandableListAdapter tournamentAdapter = new ExpandableListAdapter(this, new List<Tournament>(tournaments));
+            ExpandableTournamentsAdapter tournamentAdapter = new ExpandableTournamentsAdapter(this, new List<Tournament>(tournaments));
             myTournamentsListFragment.TournamentListView.SetAdapter(tournamentAdapter);
         }
     }

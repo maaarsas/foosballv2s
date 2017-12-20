@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Android.Util;
 using foosballv2s.Droid.Shared.Source.Entities;
 using foosballv2s.Droid.Shared.Source.Services.CredentialStorage;
 using foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Helpers;
@@ -31,6 +32,7 @@ namespace foosballv2s.Droid.Shared.Source.Services.FoosballWebService.Repository
         public async Task<Game[]> GetAll(string urlParams = null)
         {
             var response = await client.GetAsync(endpointUrl + "/?" + urlParams);
+            Log.Info("xD", response);
             Game[] games = FoosballJsonConvert.DeserializeObject<Game[]>(response);
             if (games == null)
             {

@@ -5,48 +5,17 @@
     android:orientation="horizontal"
     android:weightSum="100">
     <TextView
-        android:text="Time"
-        android:layout_weight="15"
-        android:layout_height="50dp"
-        android:id="@+id/gameTime"
-        android:layout_width="0dp"
-        android:gravity="center" />
-    <TextView
-        android:text="Team 1"
+        android:text="teams count"
         android:layout_weight="35"
         android:layout_height="50dp"
-        android:id="@+id/statsTeam1"
+        android:id="@+id/rowTeamsCount"
         android:layout_width="0dp"
-        android:gravity="center" />
-    <TextView
-        android:text="T1Score"
-        android:layout_weight="5"
-        android:layout_height="50dp"
-        android:id="@+id/scoreTeam1"
-        android:layout_width="0dp"
-        android:textSize="18sp"
-        android:gravity="center" />
-    <TextView
-        android:text="-"
-        android:layout_weight="5"
-        android:layout_height="50dp"
-        android:id="@+id/scoreSeparator"
-        android:layout_width="0dp"
-        android:textSize="18sp"
-        android:gravity="center" />
-    <TextView
-        android:text="T2Score"
-        android:layout_weight="5"
-        android:layout_height="50dp"
-        android:id="@+id/scoreTeam2"
-        android:layout_width="0dp"
-        android:textSize="18sp"
         android:gravity="center" />
     <TextView
         android:text="Team 2"
         android:layout_weight="35"
         android:layout_height="50dp"
-        android:id="@+id/statsTeam2"
+        android:id="@+id/rowCurrentStage"
         android:layout_width="0dp"
         android:gravity="center" />
 </LinearLayout>

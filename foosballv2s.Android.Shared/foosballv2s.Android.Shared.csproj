@@ -104,6 +104,9 @@
     <Compile Include="Source\Entities\Game.cs" />
     <Compile Include="Source\Entities\GameEvent.cs" />
     <Compile Include="Source\Entities\Team.cs" />
+    <Compile Include="Source\Entities\Tournament.cs" />
+    <Compile Include="Source\Entities\TournamentPair.cs" />
+    <Compile Include="Source\Entities\TournamentTeam.cs" />
     <Compile Include="Source\Entities\User.cs" />
     <Compile Include="Source\Events\GameEventArgs.cs" />
     <Compile Include="Source\Helpers\ActivityHelper.cs" />
@@ -123,7 +126,7 @@
     <Compile Include="Source\Services\FoosballWebService\Models\RegisterResponse.cs" />
     <Compile Include="Source\Services\FoosballWebService\Models\RegisterViewModel.cs" />
     <Compile Include="Source\Services\FoosballWebService\Repository\AuthRepository.cs" />
-    <Compile Include="Source\Services\FoosballWebService\Repository\TournamentsRepository.cs" />
+    <Compile Include="Source\Services\FoosballWebService\Repository\TournamentRepository.cs" />
     <Compile Include="Source\Services\FoosballWebService\Repository\GameRepository.cs" />
     <Compile Include="Source\Services\FoosballWebService\Repository\TeamRepository.cs" />
     <Compile Include="Source\Services\GameLogger\GameLogger.cs" />

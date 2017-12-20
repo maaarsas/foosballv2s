@@ -118,6 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Source\Activities\Adapters\ColorListAdapter.cs" />
+    <Compile Include="Source\Activities\Adapters\ExpandableTournamentsAdapter.cs" />
     <Compile Include="Source\Activities\Adapters\ExpandableGamesAdapter.cs" />
     <!--<Compile Include="Resources\Resource.Designer.cs" />-->
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -173,6 +174,8 @@
     <AndroidResource Include="Resources\layout\fragment_tournament_list.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\item_pair.axml" />
+    <AndroidResource Include="Resources\layout\PairRow.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="lib\armeabi-v7a\" />

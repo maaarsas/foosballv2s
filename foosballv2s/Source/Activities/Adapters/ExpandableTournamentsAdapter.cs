@@ -16,12 +16,12 @@ using Android.Content.Res;
 
 namespace foosballv2s.Source.Activities.Adapters
 {
-    public class ExpandableListAdapter : BaseExpandableListAdapter
+    public class ExpandableTournamentsAdapter : BaseExpandableListAdapter
     {
         private Context context;
-        private List<Game> listGroup;
+        private List<Tournament> listGroup;
 
-        public ExpandableListAdapter(Context context, List<Game> listGroup)
+        public ExpandableTournamentsAdapter(Context context, List<Tournament> listGroup)
         {
             this.context = context;
             this.listGroup = listGroup;
@@ -48,7 +48,10 @@ namespace foosballv2s.Source.Activities.Adapters
 
         public override int GetChildrenCount(int groupPosition)
         {
-            return listGroup[groupPosition].GameEvents.Count;
+            if (listGroup[groupPosition].CurrentStage == 1)
+                return listGroup[groupPosition].NumberOfTeamsRequired / 2;
+            else
+                return listGroup[groupPosition].Pairs.Count;
         }
 
         public override View GetChildView(int groupPosition, int childPosition, bool isLastChild, View convertView, ViewGroup parent)
@@ -56,38 +59,45 @@ namespace foosballv2s.Source.Activities.Adapters
             if (convertView == null)
             {
                 LayoutInflater inflater = (LayoutInflater)context.GetSystemService(Context.LayoutInflaterService);
-                convertView = inflater.Inflate(Resource.Layout.item_team, null);
+                convertView = inflater.Inflate(Resource.Layout.item_pair, null);
             }
-            TextView viewItemTime = convertView.FindViewById<TextView>(Resource.Id.item_time);
-            TextView viewItemEvent = convertView.FindViewById<TextView>(Resource.Id.item_event);
-            TextView viewItemDesc = convertView.FindViewById<TextView>(Resource.Id.item_desc);
+            TextView viewItemNumber = convertView.FindViewById<TextView>(Resource.Id.item_number);
+            TextView viewItemTeam1 = convertView.FindViewById<TextView>(Resource.Id.item_team_1);
+            TextView viewItemTeam2 = convertView.FindViewById<TextView>(Resource.Id.item_team_2);
+            TextView viewItemStatus = convertView.FindViewById<TextView>(Resource.Id.item_status);
 
-            var eList = listGroup[groupPosition].GameEvents.OrderBy(e => e.EventTime);
-            var eventTime = eList.ElementAt(childPosition).EventTime;
-            viewItemTime.Text = GameTimeHelper.GetTimeString(listGroup[groupPosition].StartTime, eventTime);
+            //var eList = listGroup[groupPosition].GameEvents.OrderBy(e => e.EventTime);
+            //var eventTime = eList.ElementAt(childPosition).EventTime;
+            //viewItemTime.Text = GameTimeHelper.GetTimeString(listGroup[groupPosition].StartTime, eventTime);
 
-            var team = eList.ElementAt(childPosition).Team;
-            if (team != null)
+            var pair = listGroup[groupPosition].Pairs.ElementAt(childPosition);
+            if (pair.Team1 != null)
             {
-                viewItemDesc.Text = eList.ElementAt(childPosition).Team.TeamName;
+                viewItemTeam1.Text = pair.Team1.TeamName;
             }
             else
             {
-                viewItemDesc.Text = "";
+                viewItemTeam1.Text = "";
             }
 
-            var evt = eList.ElementAt(childPosition).EventType.ToString();
-            if (evt == "GameStart")
+            if (pair.Team2 != null)
             {
-                viewItemEvent.Text = context.Resources.GetString(Resource.String.game_start);
-            }
-            else if (evt == "GameEnd")
-            {
-                viewItemEvent.Text = context.Resources.GetString(Resource.String.game_end);
+                viewItemTeam2.Text = pair.Team2.TeamName;
             }
             else
             {
-                viewItemEvent.Text = evt;
+                viewItemTeam2.Text = "";
+            }
+
+            viewItemNumber.Text = childPosition.ToString();
+
+            if (pair.Game != null)
+            {
+                viewItemStatus.Text = "started/finished";
+            }
+            else
+            {
+                viewItemStatus.Text = "Not started";
             }
 
             return convertView;
@@ -111,48 +121,20 @@ namespace foosballv2s.Source.Activities.Adapters
                 row = LayoutInflater.From(context).Inflate(Resource.Layout.StatsRow, parent, false);
             }
 
-            Game game = listGroup[groupPosition];
+            Tournament tournament = listGroup[groupPosition];
             
-            TextView t1name = row.FindViewById<TextView>(Resource.Id.statsTeam1);
-            TextView t2name = row.FindViewById<TextView>(Resource.Id.statsTeam2);
-            TextView t1score = row.FindViewById<TextView>(Resource.Id.scoreTeam1);
-            TextView t2score = row.FindViewById<TextView>(Resource.Id.scoreTeam2);
-            TextView time = row.FindViewById<TextView>(Resource.Id.gameTime);
+            TextView numberOfTeams = row.FindViewById<TextView>(Resource.Id.rowTeamsCount);
+            TextView currentStage = row.FindViewById<TextView>(Resource.Id.rowCurrentStage);
 
-            t1name.Text = game.Team1.TeamName;
-            t2name.Text = game.Team2.TeamName;
-            t1score.Text = game.Team1Score.ToString();
-            t2score.Text = game.Team2Score.ToString();
-            time.Text = GameTimeHelper.GetTimeString(game.StartTime, game.EndTime);
+            numberOfTeams.Text = tournament.Teams.Count.ToString();
+            currentStage.Text = tournament.CurrentStage.ToString();
             
-            SetTeamBackgroundColor(parent, t1name, game.Team1Score);
-            SetTeamBackgroundColor(parent, t2name, game.Team2Score);
             return row;
         }
 
         public override bool IsChildSelectable(int groupPosition, int childPosition)
         {
             return true;
-        }
-        
-        /// <summary>
-        /// Sets the background of the team name to seperate winning and losing teams
-        /// </summary>
-        /// <param name="parent"></param>
-        /// <param name="textView"></param>
-        /// <param name="teamScore"></param>
-        private void SetTeamBackgroundColor(ViewGroup parent, TextView textView, int teamScore)
-        {
-            if (teamScore == Game.MAX_SCORE)
-            {
-                textView.SetBackgroundColor(parent.Resources.GetColor(Resource.Color.winning_background));
-                textView.SetTextColor(parent.Resources.GetColor(Resource.Color.Black));
-            }
-            else
-            {
-                textView.SetBackgroundColor(parent.Resources.GetColor(Resource.Color.losing_background));
-                textView.SetTextColor(parent.Resources.GetColor(Resource.Color.White));
-            }
         }
     }
 }

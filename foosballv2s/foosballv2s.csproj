@@ -136,6 +136,8 @@
     <Compile Include="Source\Activities\Fragments\LoginFragment.cs" />
     <Compile Include="Source\Activities\Fragments\RegisterFragment.cs" />
     <Compile Include="Source\Activities\Fragments\TeamListFragment.cs" />
+    <Compile Include="Source\Activities\ExistingTournamentsActivity.cs" />
+    <Compile Include="Source\Activities\Fragments\TournamentListFragment.cs" />
     <Compile Include="Source\Activities\GamesActivity.cs" />
     <Compile Include="Source\Activities\Helpers\LanguageHelper.cs" />
     <Compile Include="Source\Activities\Helpers\NavigationHelper.cs" />
@@ -163,6 +165,12 @@
       <SubType>Designer</SubType>
     </None>
     <AndroidResource Include="Resources\layout\teamlist_item.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\existing_tournaments_activity.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_tournament_list.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

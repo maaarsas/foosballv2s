@@ -4,35 +4,56 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<!-- The main content view -->
-    <FrameLayout
-        android:id="@+id/content_frame"
+  <!-- The main content view -->
+  <FrameLayout
+      android:id="@+id/content_frame"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+      <include
+          android:id="@+id/toolbar_container"
+          layout="@layout/Toolbar" />
+      <android.support.design.widget.TabLayout
+          android:id="@+id/tab_layout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/toolbar"
+          android:background="?attr/colorPrimary"
+          android:elevation="6dp"
+          android:minHeight="?attr/actionBarSize"
+          android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+      <RelativeLayout
+          android:layout_height="wrap_content"
+          android:layout_width="fill_parent"
+          android:gravity="center">
+        <Button
+            android:text="Existing tournaments"
+            style="@style/primaryButtonStyle"
+            android:id="@+id/see_tounaments"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
-            <include
-                android:id="@+id/toolbar_container"
-                layout="@layout/Toolbar" />
-            <android.support.design.widget.TabLayout
-                android:id="@+id/tab_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/toolbar"
-                android:background="?attr/colorPrimary"
-                android:elevation="6dp"
-                android:minHeight="?attr/actionBarSize"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
-        </LinearLayout>
-    </FrameLayout>
-<!-- The navigation drawer -->
-    <android.support.design.widget.NavigationView
-        android:id="@+id/navigation"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:menu="@menu/navigation" />
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp" />
+        <Button
+            android:text="Create new tournament"
+            style="@style/primaryButtonStyle"
+            android:id="@+id/new_tournament"
+            android:layout_below="@id/see_tounaments"
+            android:layout_width="match_parent"
+            android:layout_marginRight="40dp"
+            android:layout_marginStart="40dp" />
+      </RelativeLayout>
+
+    </LinearLayout>
+  </FrameLayout>
+  <!-- The navigation drawer -->
+  <android.support.design.widget.NavigationView
+      android:id="@+id/navigation"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_gravity="start"
+      app:menu="@menu/navigation" />
 </android.support.v4.widget.DrawerLayout>
